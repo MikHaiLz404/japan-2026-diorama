@@ -1,5 +1,5 @@
 import { haversineKm } from "../lib/geo";
-import { toDateKey } from "../lib/dates";
+import { shiftDateKey, toDateKey } from "../lib/dates";
 import { rollupStatus, statusForDate } from "../lib/visit";
 import type {
   CityBlock,
@@ -111,9 +111,21 @@ export function nearestCityId(lat: number, lng: number): string {
   return best.id;
 }
 
+function lodgingEndDate(stay: TripLodging, timeZone: string): string {
+  const end = toDateKey(stay.ends_at, timeZone);
+  const hour = Number(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      hour: "2-digit",
+      hourCycle: "h23",
+    }).format(new Date(stay.ends_at)),
+  );
+  return hour < 6 ? shiftDateKey(end, -1) : end;
+}
+
 function lodgingOverlapsDate(stay: TripLodging, dateKey: string, timeZone: string): boolean {
   const start = toDateKey(stay.starts_at, timeZone);
-  const end = toDateKey(stay.ends_at, timeZone);
+  const end = lodgingEndDate(stay, timeZone);
   return dateKey >= start && dateKey <= end;
 }
 

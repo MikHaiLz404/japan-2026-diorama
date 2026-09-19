@@ -18,8 +18,8 @@ export function platformSize(size: CityBlock["size"]): { w: number; d: number; h
 function mat(color: number, extras: THREE.MeshStandardMaterialParameters = {}) {
   return new THREE.MeshStandardMaterial({
     color,
-    roughness: 0.72,
-    metalness: 0.04,
+    roughness: 0.68,
+    metalness: 0.06,
     ...extras,
   });
 }
@@ -53,27 +53,33 @@ export function makeTray(): THREE.Group {
   const mossDeep = mat(palette.mossDeep, { roughness: 0.96 });
   const sand = mat(palette.sand, { roughness: 0.9 });
 
+  const table = new THREE.Mesh(geo.box, mat(0x2a1b12, { roughness: 0.92 }));
+  table.scale.set(16, 0.2, 13);
+  table.position.y = -0.48;
+  table.receiveShadow = true;
+  group.add(table);
+
   const base = new THREE.Mesh(geo.box, wood);
-  base.scale.set(11.4, 0.38, 9.2);
-  base.position.y = -0.22;
+  base.scale.set(11.6, 0.42, 9.4);
+  base.position.y = -0.24;
   base.receiveShadow = true;
   group.add(base);
 
   const lip = (w: number, d: number, x: number, z: number) => {
     const wall = new THREE.Mesh(geo.box, rim);
-    wall.scale.set(w, 0.42, d);
-    wall.position.set(x, 0.12, z);
+    wall.scale.set(w, 0.58, d);
+    wall.position.set(x, 0.18, z);
     wall.castShadow = true;
     wall.receiveShadow = true;
     group.add(wall);
   };
-  lip(11.4, 0.38, 0, -4.41);
-  lip(11.4, 0.38, 0, 4.41);
-  lip(0.38, 9.2, -5.51, 0);
-  lip(0.38, 9.2, 5.51, 0);
+  lip(11.6, 0.55, 0, -4.48);
+  lip(11.6, 0.55, 0, 4.48);
+  lip(0.55, 9.4, -5.58, 0);
+  lip(0.55, 9.4, 5.58, 0);
 
   const felt = new THREE.Mesh(geo.box, moss);
-  felt.scale.set(10.5, 0.08, 8.3);
+  felt.scale.set(10.1, 0.08, 7.9);
   felt.position.y = 0.02;
   felt.receiveShadow = true;
   group.add(felt);
@@ -241,10 +247,29 @@ export function makeDayPlate(
       emissiveIntensity: status === "today" ? 0.12 : 0,
     }),
   );
-  const pw = date === "2026-09-18" ? 0.5 : 0.4;
-  const pd = date === "2026-09-18" ? 0.28 : 0.22;
-  plate.scale.set(pw, 0.06, pd);
-  plate.position.set(-w * 0.36 + col * 0.46, h + 0.06, d * 0.4 - row * 0.28);
+  const pw = date === "2026-09-18" ? 0.52 : 0.42;
+  const pd = date === "2026-09-18" ? 0.34 : 0.26;
+  const canvas = document.createElement("canvas");
+  canvas.width = 128;
+  canvas.height = 80;
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.fillStyle = status === "upcoming" ? "#d5c8b3" : "#f7efe2";
+    ctx.fillRect(0, 0, 128, 80);
+    ctx.fillStyle = status === "today" ? "#b8432a" : "#5a4332";
+    ctx.font = "700 28px 'DM Sans', sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(date.slice(5), 64, 40);
+  }
+  plate.material = new THREE.MeshStandardMaterial({
+    map: new THREE.CanvasTexture(canvas),
+    roughness: 0.45,
+    emissive: status === "today" ? 0x5a1c10 : 0x000000,
+    emissiveIntensity: status === "today" ? 0.16 : 0,
+  });
+  plate.scale.set(pw, 0.07, pd);
+  plate.position.set(-w * 0.36 + col * 0.48, h + 0.08, d * 0.42 - row * 0.32);
   plate.castShadow = true;
   plate.receiveShadow = true;
   plate.name = `plate:${city.id}:${date}`;

@@ -1,9 +1,9 @@
 import type { VisitStatus } from "../data/types";
 
 export const palette = {
-  wood: 0x6b4a32,
-  woodLight: 0x8a6244,
-  woodRim: 0x4a3122,
+  wood: 0x8a5a38,
+  woodLight: 0xc08a54,
+  woodRim: 0x5c3a24,
   moss: 0x73825a,
   mossDeep: 0x5c6948,
   sand: 0xd7c4a3,

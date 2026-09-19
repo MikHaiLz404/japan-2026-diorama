@@ -12,21 +12,33 @@ function trayPoint(cityId: string): THREE.Vector3 {
   return new THREE.Vector3(city.tray[0], 0.12, city.tray[1]);
 }
 
-export function makeRoute(route: RoutePath): THREE.Line {
+export function makeRoute(route: RoutePath): THREE.Mesh {
   const from = trayPoint(route.fromCityId);
   const to = trayPoint(route.toCityId);
+  if (route.fromCityId === ORIGIN_TOKEN.id) {
+    to.x -= 0.85;
+    to.z += 0.35;
+  }
   const mid = from.clone().lerp(to, 0.5);
   const lift = route.type === "airplane" ? 1.55 : 0.28;
   mid.y += lift;
   const curve = new THREE.QuadraticBezierCurve3(from, mid, to);
-  const points = curve.getPoints(route.type === "airplane" ? 28 : 16);
-  const geometry = new THREE.BufferGeometry().setFromPoints(points);
-  const material = new THREE.LineBasicMaterial({
+  const geometry = new THREE.TubeGeometry(
+    curve,
+    route.type === "airplane" ? 28 : 18,
+    route.type === "airplane" ? 0.03 : 0.045,
+    6,
+    false,
+  );
+  const material = new THREE.MeshStandardMaterial({
     color: pathColor(route.status, route.type),
     transparent: true,
-    opacity: route.status === "upcoming" ? 0.35 : 0.85,
+    opacity: route.status === "upcoming" ? 0.42 : 0.95,
+    roughness: 0.35,
+    metalness: route.type === "airplane" ? 0.15 : 0.45,
   });
-  const line = new THREE.Line(geometry, material);
-  line.name = `route:${route.id}`;
-  return line;
+  const tube = new THREE.Mesh(geometry, material);
+  tube.castShadow = true;
+  tube.name = `route:${route.id}`;
+  return tube;
 }

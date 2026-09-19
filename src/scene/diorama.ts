@@ -8,8 +8,8 @@ import { makeRoute } from "./paths";
 import { PetalField } from "./petals";
 
 const OVERVIEW = {
-  position: new THREE.Vector3(0.35, 7.6, 7.4),
-  target: new THREE.Vector3(0.1, 0.1, -0.15),
+  position: new THREE.Vector3(0.15, 11.2, 12.1),
+  target: new THREE.Vector3(0.05, 0.2, -0.05),
 };
 
 export class Diorama {
@@ -68,9 +68,9 @@ export class Diorama {
       this.goalTarget.copy(this.controls.target);
     });
 
-    this.scene.fog = new THREE.Fog(0x2b1d14, 10, 22);
-    this.scene.add(new THREE.HemisphereLight(0xfff1dd, 0x3d4a32, 1.05));
-    const key = new THREE.DirectionalLight(0xffe6c7, 1.15);
+    this.scene.fog = new THREE.Fog(0x2b1d14, 14, 28);
+    this.scene.add(new THREE.HemisphereLight(0xfff4e4, 0x3d4a32, 0.95));
+    const key = new THREE.DirectionalLight(0xffe6c7, 1.45);
     key.position.set(4.5, 8, 3.2);
     key.castShadow = !small;
     key.shadow.mapSize.set(1024, 1024);
@@ -134,9 +134,10 @@ export class Diorama {
     if (!city) return;
     const world = new THREE.Vector3();
     city.getWorldPosition(world);
-    const lift = selection.date ? 2.7 : 3.4;
+    const compact = isSmallScreen();
+    const lift = selection.date ? (compact ? 4.4 : 2.7) : compact ? 5.4 : 3.4;
     this.goalTarget.set(world.x, 0.15, world.z);
-    this.goalPos.set(world.x + 1.15, lift, world.z + 2.35);
+    this.goalPos.set(world.x + (compact ? 0.55 : 1.15), lift, world.z + (compact ? 4.1 : 2.35));
     this.animating = true;
   }
 

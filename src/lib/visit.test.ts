@@ -41,5 +41,8 @@ describe("city assignment", () => {
     const asakusa = tokyo?.plates.find((plate) => plate.date === "2026-09-18");
     expect(asakusa?.activities.some((item) => item.name.includes("Senso-ji"))).toBe(true);
     expect(asakusa?.lodging.some((stay) => stay.name.includes("Asakusa"))).toBe(true);
+    const todayPlate = tokyo?.plates.find((plate) => plate.date === "2026-09-19");
+    expect(todayPlate?.lodging.some((stay) => stay.name.includes("AIRSTAY"))).toBe(true);
+    expect(todayPlate?.lodging.some((stay) => stay.name.includes("Asakusa"))).toBe(false);
   });
 });

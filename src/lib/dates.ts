@@ -25,6 +25,13 @@ export function compareDateKeys(a: string, b: string): number {
   return a.localeCompare(b);
 }
 
+export function shiftDateKey(dateKey: string, days: number): string {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  const cursor = new Date(Date.UTC(year, month - 1, day));
+  cursor.setUTCDate(cursor.getUTCDate() + days);
+  return cursor.toISOString().slice(0, 10);
+}
+
 export function formatDayLabel(dateKey: string, timeZone: string): string {
   const date = new Date(`${dateKey}T12:00:00Z`);
   return new Intl.DateTimeFormat("en-US", {
