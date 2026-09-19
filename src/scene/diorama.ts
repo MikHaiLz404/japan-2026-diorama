@@ -1,0 +1,217 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import type { Selection } from "../data/types";
+import type { PreparedTrip } from "../data/loadTrip";
+import { isSmallScreen, prefersReducedMotion } from "../lib/platform";
+import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
+import { makeRoute } from "./paths";
+import { PetalField } from "./petals";
+
+const OVERVIEW = {
+  position: new THREE.Vector3(0.15, 11.2, 12.1),
+  target: new THREE.Vector3(0.05, 0.2, -0.05),
+};
+
+export class Diorama {
+  readonly renderer: THREE.WebGLRenderer;
+  private readonly scene = new THREE.Scene();
+  private readonly camera: THREE.PerspectiveCamera;
+  private readonly controls: OrbitControls;
+  private readonly raycaster = new THREE.Raycaster();
+  private readonly pointer = new THREE.Vector2();
+  private readonly clock = new THREE.Clock();
+  private readonly pickables: THREE.Object3D[] = [];
+  private readonly goalPos = OVERVIEW.position.clone();
+  private readonly goalTarget = OVERVIEW.target.clone();
+  private readonly petals: PetalField | null;
+  private readonly reduced = prefersReducedMotion();
+  private pointerDown: { x: number; y: number } | null = null;
+  private raf = 0;
+  private disposed = false;
+  private animating = false;
+  private onPick: (selection: Selection | null) => void;
+
+  constructor(
+    host: HTMLElement,
+    prepared: PreparedTrip,
+    onPick: (selection: Selection | null) => void,
+  ) {
+    this.onPick = onPick;
+    const small = isSmallScreen();
+    this.renderer = new THREE.WebGLRenderer({ antialias: !small, alpha: false });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, small ? 1.5 : 2));
+    this.renderer.setSize(host.clientWidth, host.clientHeight);
+    this.renderer.setClearColor(0x2b1d14, 1);
+    this.renderer.shadowMap.enabled = !small;
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMappingExposure = 1.08;
+    host.appendChild(this.renderer.domElement);
+
+    this.camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 80);
+    this.camera.position.copy(OVERVIEW.position);
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.08;
+    this.controls.enablePan = false;
+    this.controls.minDistance = 2.4;
+    this.controls.maxDistance = 14;
+    this.controls.maxPolarAngle = Math.PI * 0.46;
+    this.controls.target.copy(OVERVIEW.target);
+    this.controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_ROTATE,
+    };
+    this.controls.addEventListener("start", () => {
+      this.animating = false;
+      this.goalPos.copy(this.camera.position);
+      this.goalTarget.copy(this.controls.target);
+    });
+
+    this.scene.fog = new THREE.Fog(0x2b1d14, 14, 28);
+    this.scene.add(new THREE.HemisphereLight(0xfff4e4, 0x3d4a32, 0.95));
+    const key = new THREE.DirectionalLight(0xffe6c7, 1.45);
+    key.position.set(4.5, 8, 3.2);
+    key.castShadow = !small;
+    key.shadow.mapSize.set(1024, 1024);
+    key.shadow.camera.left = -7;
+    key.shadow.camera.right = 7;
+    key.shadow.camera.top = 6;
+    key.shadow.camera.bottom = -6;
+    this.scene.add(key);
+    const fill = new THREE.DirectionalLight(0xb7d2e0, 0.28);
+    fill.position.set(-5, 3, -4);
+    this.scene.add(fill);
+
+    this.scene.add(makeTray());
+    this.scene.add(makeOriginToken());
+
+    for (const city of prepared.cities) {
+      const block = makeCityBlock(city);
+      this.scene.add(block);
+      const hit = block.getObjectByName(`hit:${city.id}`);
+      if (hit) this.pickables.push(hit);
+
+      if (city.id === "tokyo") {
+        city.plates.forEach((plate, index) => {
+          const tile = makeDayPlate(city, plate.date, index, plate.status);
+          block.add(tile);
+          this.pickables.push(tile);
+        });
+      }
+
+      const { d } = platformSize(city.size);
+      const label = makeLabel(
+        city.name,
+        city.id,
+        city.status === "upcoming",
+      );
+      label.position.set(0, city.size === "lg" ? 1.55 : 0.95, d * 0.02);
+      block.add(label);
+    }
+
+    for (const route of prepared.routes) {
+      this.scene.add(makeRoute(route));
+    }
+
+    this.petals = this.reduced ? null : new PetalField(small ? 22 : 70);
+    if (this.petals) this.scene.add(this.petals.points);
+
+    this.renderer.domElement.addEventListener("pointerdown", this.onPointerDown);
+    this.renderer.domElement.addEventListener("pointerup", this.onPointerUp);
+    window.addEventListener("resize", this.onResize);
+    this.tick();
+  }
+
+  focus(selection: Selection | null) {
+    if (!selection) {
+      this.goalPos.copy(OVERVIEW.position);
+      this.goalTarget.copy(OVERVIEW.target);
+      this.animating = true;
+      return;
+    }
+    const city = this.scene.getObjectByName(`city:${selection.cityId}`);
+    if (!city) return;
+    const world = new THREE.Vector3();
+    city.getWorldPosition(world);
+    const compact = isSmallScreen();
+    const lift = selection.date ? (compact ? 4.4 : 2.7) : compact ? 5.4 : 3.4;
+    this.goalTarget.set(world.x, 0.15, world.z);
+    this.goalPos.set(world.x + (compact ? 0.55 : 1.15), lift, world.z + (compact ? 4.1 : 2.35));
+    this.animating = true;
+  }
+
+  nudgeZoom(direction: number) {
+    const next = this.camera.position.distanceTo(this.controls.target) - direction * 0.85;
+    const clamped = THREE.MathUtils.clamp(next, this.controls.minDistance, this.controls.maxDistance);
+    const offset = this.camera.position.clone().sub(this.controls.target).setLength(clamped);
+    this.goalPos.copy(this.controls.target).add(offset);
+    this.animating = true;
+  }
+
+  private onPointerDown = (event: PointerEvent) => {
+    this.pointerDown = { x: event.clientX, y: event.clientY };
+  };
+
+  private onPointerUp = (event: PointerEvent) => {
+    if (!this.pointerDown) return;
+    const dx = event.clientX - this.pointerDown.x;
+    const dy = event.clientY - this.pointerDown.y;
+    this.pointerDown = null;
+    if (Math.hypot(dx, dy) > 10) return;
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    this.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    this.raycaster.setFromCamera(this.pointer, this.camera);
+    const hits = this.raycaster.intersectObjects(this.pickables, false);
+    const hit = hits[0];
+    if (!hit) {
+      this.onPick(null);
+      return;
+    }
+    const data = hit.object.userData as { kind?: string; cityId?: string; date?: string };
+    if (data.kind === "plate" && data.cityId && data.date) {
+      this.onPick({ cityId: data.cityId, date: data.date });
+      return;
+    }
+    if (data.cityId) this.onPick({ cityId: data.cityId });
+  };
+
+  private onResize = () => {
+    const host = this.renderer.domElement.parentElement;
+    if (!host) return;
+    const { clientWidth: w, clientHeight: h } = host;
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w, h);
+  };
+
+  private tick = () => {
+    if (this.disposed) return;
+    this.raf = requestAnimationFrame(this.tick);
+    const delta = Math.min(this.clock.getDelta(), 0.05);
+    if (this.animating && !this.reduced) {
+      this.camera.position.lerp(this.goalPos, 0.08);
+      this.controls.target.lerp(this.goalTarget, 0.1);
+      if (this.camera.position.distanceTo(this.goalPos) < 0.04) this.animating = false;
+    } else if (this.animating && this.reduced) {
+      this.camera.position.copy(this.goalPos);
+      this.controls.target.copy(this.goalTarget);
+      this.animating = false;
+    }
+    this.petals?.update(delta);
+    this.controls.update();
+    this.renderer.render(this.scene, this.camera);
+  };
+
+  dispose() {
+    this.disposed = true;
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener("resize", this.onResize);
+    this.renderer.domElement.removeEventListener("pointerdown", this.onPointerDown);
+    this.renderer.domElement.removeEventListener("pointerup", this.onPointerUp);
+    this.controls.dispose();
+    this.renderer.dispose();
+    this.renderer.domElement.remove();
+  }
+}
