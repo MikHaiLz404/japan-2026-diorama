@@ -123,7 +123,7 @@ function lodgingEndDate(stay: TripLodging, timeZone: string): string {
   return hour < 6 ? shiftDateKey(end, -1) : end;
 }
 
-function lodgingOverlapsDate(stay: TripLodging, dateKey: string, timeZone: string): boolean {
+export function lodgingOverlapsDate(stay: TripLodging, dateKey: string, timeZone: string): boolean {
   const start = toDateKey(stay.starts_at, timeZone);
   const end = lodgingEndDate(stay, timeZone);
   return dateKey >= start && dateKey <= end;
