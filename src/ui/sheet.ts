@@ -93,7 +93,7 @@ export function renderSheet(
     <p class="sheet-lead">${date ? escapeHtml(formatDayLabel(date, tz)) : "แผ่นวันนี้"} · วันที่ ${(date ? tripDays.indexOf(date) + 1 : 0) || "—"} / ${tripDays.length}</p>
     <div class="day-tabs" role="tablist">${dayTabs}</div>
     ${stays || `<article class="card"><p class="card-kicker">ที่พัก · Lodging</p><p class="muted">${escapeHtml(overnightStayLabel(trip, date))}</p></article>`}
-    <h3 class="list-title">บนแผ่นนี้ · On this plate</h3>
+    <h3 class="list-title">จุดวันนี้</h3>
     <ul class="activity-list">${items || "<li class='muted'>ยังไม่มีจุดในวันนี้</li>"}</ul>
   `;
 }

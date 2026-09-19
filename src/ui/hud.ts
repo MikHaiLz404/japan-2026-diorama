@@ -6,7 +6,7 @@ export function renderHudMeta(el: HTMLElement, trip: TripFixture, today: string)
   const index = days.indexOf(today);
   const label =
     index >= 0
-      ? `Day ${index + 1} of ${days.length} · ${formatDayLabel(today, trip.timezone)} · live`
+      ? `วันที่ ${index + 1} / ${days.length} · สด`
       : today < trip.starts_at
         ? `Starts ${formatDayLabel(trip.starts_at, trip.timezone)}`
         : `Wrapped ${formatDayLabel(trip.ends_at, trip.timezone)}`;
