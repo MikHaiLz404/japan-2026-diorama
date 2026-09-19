@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -9,14 +9,14 @@
     <meta name="theme-color" content="#3d2a1c" />
     <meta
       name="description"
-      content="Japan 2026 trip recap — a tiny miniature diorama of the itinerary."
+      content="ถาดทริป Japan 2026 — a tiny miniature diorama of the itinerary."
     />
     <title>Japan 2026 · Diorama</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=Shippori+Mincho:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=Noto+Sans+Thai:wght@400;600&family=Shippori+Mincho:wght@500;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -26,25 +26,27 @@
 
       <header class="hud">
         <div class="hud-title">
-          <p class="eyebrow">Miniature tray</p>
+          <p class="eyebrow">ถาดทริป · <span lang="en">Trip tray</span></p>
           <h1>Japan 2026</h1>
           <p id="hud-meta" class="hud-meta"></p>
         </div>
         <div class="hud-tools">
-          <button type="button" id="zoom-out" class="icon-btn" aria-label="Zoom out">−</button>
-          <button type="button" id="zoom-in" class="icon-btn" aria-label="Zoom in">+</button>
-          <button type="button" id="reset-view" class="text-btn">Tray</button>
+          <button type="button" id="zoom-out" class="icon-btn" aria-label="ซูมออก / Zoom out">−</button>
+          <button type="button" id="zoom-in" class="icon-btn" aria-label="ซูมเข้า / Zoom in">+</button>
+          <button type="button" id="reset-view" class="text-btn" aria-label="มุมถาด — Reset tray">
+            มุมถาด
+          </button>
         </div>
       </header>
 
-      <nav id="city-chips" class="city-chips" aria-label="Cities"></nav>
+      <nav id="city-chips" class="city-chips" aria-label="เมือง / Cities"></nav>
 
-      <p id="hint" class="hint">Tap a city block · drag to orbit</p>
+      <p id="hint" class="hint">แตะเมือง · ลากหมุน · <span lang="en">Tap · orbit</span></p>
 
       <section id="sheet" class="sheet" aria-live="polite" hidden>
         <div class="sheet-handle" aria-hidden="true"></div>
-        <button type="button" id="sheet-close" class="sheet-close" aria-label="Close">
-          Close
+        <button type="button" id="sheet-close" class="sheet-close" aria-label="ปิด / Close">
+          ปิด
         </button>
         <div id="sheet-body"></div>
       </section>
