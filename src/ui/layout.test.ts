@@ -43,4 +43,16 @@ describe("mobile chrome overflow containment", () => {
   it("preserves one-finger orbit on the canvas", () => {
     expect(firstRule("#stage canvas")).toMatch(/touch-action:\s*none/);
   });
+
+  it("pins the HUD title and มุมถาด cluster to opposite screen corners", () => {
+    expect(firstRule(".hud")).not.toMatch(/overflow-x:\s*auto/);
+    expect(firstRule(".hud")).not.toMatch(/flex-wrap:\s*wrap/);
+    const title = firstRule(".hud-title");
+    expect(title).toMatch(/position:\s*absolute/);
+    expect(title).toMatch(/left:\s*0/);
+    const tools = firstRule(".hud-tools");
+    expect(tools).toMatch(/position:\s*absolute/);
+    expect(tools).toMatch(/right:\s*0/);
+    expect(tools).toMatch(/flex-wrap:\s*nowrap/);
+  });
 });

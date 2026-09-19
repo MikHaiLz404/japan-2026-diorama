@@ -57,30 +57,24 @@ body {
   top: calc(12px + var(--safe-top));
   left: 12px;
   right: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
   max-width: 100%;
-  min-width: 0;
+  min-height: 40px;
   pointer-events: none;
 }
 
-.hud-title,
-.hud-tools {
-  pointer-events: auto;
-}
-
 .hud-title {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
   padding: 12px 16px;
   background: var(--wood-soft);
   border: 1px solid rgba(244, 234, 216, 0.12);
   border-radius: 18px;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
-  flex: 1 1 8rem;
   min-width: 0;
-  max-width: min(100%, 420px);
+  max-width: min(420px, calc(100% - 11.5rem));
 }
 
 .eyebrow {
@@ -123,11 +117,14 @@ h1 {
 }
 
 .hud-tools {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   gap: 8px;
-  max-width: 100%;
 }
 
 .icon-btn,
