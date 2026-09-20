@@ -1,6 +1,7 @@
 import { lodgingOverlapsDate } from "../data/cities";
 import type { CityBlock, DayPlate, Selection, TripFixture, TripLodging, VisitStatus } from "../data/types";
 import { eachDateKey, formatDayLabel, formatRange, formatTime } from "../lib/dates";
+import { COPY, dayCountLabel, jaEn, stayingLabel } from "./copy";
 
 function escapeHtml(value: string): string {
   return value
@@ -15,9 +16,9 @@ function typeLabel(type: string): string {
 }
 
 export function statusLabel(status: VisitStatus): string {
-  if (status === "visited") return "ไปแล้ว";
-  if (status === "today") return "วันนี้";
-  return "ยังไม่ถึง";
+  if (status === "visited") return jaEn(COPY.visited);
+  if (status === "today") return jaEn(COPY.today);
+  return jaEn(COPY.upcoming);
 }
 
 export function lodgingAreaName(stay: TripLodging): string {
@@ -34,7 +35,7 @@ export function overnightStayLabel(trip: TripFixture, date?: string): string {
     : trip.lodging;
   const source = covering.length ? covering : trip.lodging;
   const places = [...new Set(source.map(lodgingAreaName))];
-  return `ค้างคืนที่ ${places.join(" / ")}`;
+  return stayingLabel(places.join(" / "));
 }
 
 function plateFor(city: CityBlock, date?: string): DayPlate | undefined {
@@ -65,7 +66,7 @@ export function renderSheet(
   const stays = lodging
     .map((stay) => {
       return `<article class="card">
-        <p class="card-kicker">ที่พัก · Lodging</p>
+        <p class="card-kicker">${escapeHtml(jaEn(COPY.lodging))}</p>
         <h3>${escapeHtml(stay.name)}</h3>
         <p>${escapeHtml(formatRange(stay.starts_at, stay.ends_at, stay.timezone || tz))}</p>
         ${stay.address ? `<p class="muted">${escapeHtml(stay.address)}</p>` : ""}
@@ -90,10 +91,10 @@ export function renderSheet(
   host.innerHTML = `
     <p class="sheet-kicker status-${city.status}">${escapeHtml(city.nameJa)} · ${statusLabel(city.status)}</p>
     <h2>${escapeHtml(city.name)}</h2>
-    <p class="sheet-lead">${date ? escapeHtml(formatDayLabel(date, tz)) : "แผ่นวันนี้"} · วันที่ ${(date ? tripDays.indexOf(date) + 1 : 0) || "—"} / ${tripDays.length}</p>
+    <p class="sheet-lead">${date ? escapeHtml(formatDayLabel(date, tz)) : escapeHtml(jaEn(COPY.todayPlate))} · ${dayCountLabel((date ? tripDays.indexOf(date) + 1 : 0) || "—", tripDays.length)}</p>
     <div class="day-tabs" role="tablist">${dayTabs}</div>
-    ${stays || `<article class="card"><p class="card-kicker">ที่พัก · Lodging</p><p class="muted">${escapeHtml(overnightStayLabel(trip, date))}</p></article>`}
-    <h3 class="list-title">จุดวันนี้</h3>
-    <ul class="activity-list">${items || "<li class='muted'>ยังไม่มีจุดในวันนี้</li>"}</ul>
+    ${stays || `<article class="card"><p class="card-kicker">${escapeHtml(jaEn(COPY.lodging))}</p><p class="muted">${escapeHtml(overnightStayLabel(trip, date))}</p></article>`}
+    <h3 class="list-title">${escapeHtml(jaEn(COPY.todayStops))}</h3>
+    <ul class="activity-list">${items || `<li class='muted'>${escapeHtml(jaEn(COPY.noStops))}</li>`}</ul>
   `;
 }
