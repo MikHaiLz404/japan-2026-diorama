@@ -4,6 +4,7 @@ import type { Selection } from "../data/types";
 import type { PreparedTrip } from "../data/loadTrip";
 import { isSmallScreen, prefersReducedMotion } from "../lib/platform";
 import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
+import { disposeObject3D, hydrateGltfModels } from "./models";
 import { makeRoute } from "./paths";
 import { PetalField } from "./petals";
 
@@ -29,6 +30,7 @@ export class Diorama {
   private raf = 0;
   private disposed = false;
   private animating = false;
+  private readonly modelAbort = new AbortController();
   private onPick: (selection: Selection | null) => void;
 
   constructor(
@@ -116,6 +118,15 @@ export class Diorama {
 
     this.petals = this.reduced ? null : new PetalField(small ? 22 : 70);
     if (this.petals) this.scene.add(this.petals.points);
+
+    void hydrateGltfModels({
+      scene: this.scene,
+      cities: prepared.cities,
+      shadows: !small,
+      signal: this.modelAbort.signal,
+    }).catch(() => {
+      /* Procedural tray/blocks stay in the scene. */
+    });
 
     this.renderer.domElement.addEventListener("pointerdown", this.onPointerDown);
     this.renderer.domElement.addEventListener("pointerup", this.onPointerUp);
@@ -206,11 +217,13 @@ export class Diorama {
 
   dispose() {
     this.disposed = true;
+    this.modelAbort.abort();
     cancelAnimationFrame(this.raf);
     window.removeEventListener("resize", this.onResize);
     this.renderer.domElement.removeEventListener("pointerdown", this.onPointerDown);
     this.renderer.domElement.removeEventListener("pointerup", this.onPointerUp);
     this.controls.dispose();
+    disposeObject3D(this.scene);
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

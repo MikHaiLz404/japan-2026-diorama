@@ -9,6 +9,13 @@ const geo = {
   sphere: new THREE.SphereGeometry(0.5, 10, 8),
 };
 
+const sharedGeometries = new Set<THREE.BufferGeometry>(Object.values(geo));
+
+/** Shared unit geometries used by procedural meshes — do not GPU-dispose these. */
+export function isSharedGeometry(geometry: THREE.BufferGeometry): boolean {
+  return sharedGeometries.has(geometry);
+}
+
 export function platformSize(size: CityBlock["size"]): { w: number; d: number; h: number } {
   if (size === "lg") return { w: 2.35, d: 1.85, h: 0.16 };
   if (size === "md") return { w: 1.35, d: 1.15, h: 0.13 };
@@ -193,6 +200,10 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
   hit.name = `hit:${city.id}`;
   hit.userData = { kind: "city", cityId: city.id };
 
+  const visuals = new THREE.Group();
+  visuals.name = `procedural:${city.id}`;
+  group.add(visuals);
+
   const body = mat(colors.body, {
     emissive: colors.emissive,
     emissiveIntensity: colors.emissiveIntensity,
@@ -219,13 +230,13 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
         ];
 
   for (const [x, z, bw, bh, bd] of footprint) {
-    box(group, body, bw, bh, bd, x, h, z);
-    box(group, roof, bw + 0.06, 0.06, bd + 0.06, x, h + bh, z);
+    box(visuals, body, bw, bh, bd, x, h, z);
+    box(visuals, roof, bw + 0.06, 0.06, bd + 0.06, x, h + bh, z);
   }
 
-  addLandmark(group, city, colors);
-  addTree(group, -w * 0.38, d * 0.32, city.id === "tokyo" || city.id === "kamakura");
-  if (city.size === "lg") addTree(group, 0.85, 0.55, true);
+  addLandmark(visuals, city, colors);
+  addTree(visuals, -w * 0.38, d * 0.32, city.id === "tokyo" || city.id === "kamakura");
+  if (city.size === "lg") addTree(visuals, 0.85, 0.55, true);
 
   return group;
 }
