@@ -14,8 +14,16 @@ export const TRAY_Y_MIN = -0.58;
 
 export const TRAY_MODEL_URL = "/models/tray.glb";
 
+const GLB_MAGIC = "glTF";
+
 type GltfLoader = InstanceType<typeof import("three/addons/loaders/GLTFLoader.js").GLTFLoader>;
 let gltfLoader: GltfLoader | undefined;
+
+function isGlbBuffer(buffer: ArrayBuffer): boolean {
+  if (buffer.byteLength < 12) return false;
+  const magic = new TextDecoder().decode(new Uint8Array(buffer, 0, 4));
+  return magic === GLB_MAGIC;
+}
 
 export type GltfLoadFn = (
   url: string,
@@ -105,8 +113,10 @@ export async function tryLoadGltf(
     if (options.signal?.aborted) return null;
     const response = await fetchImpl(url, { signal: options.signal });
     if (!response.ok) return null;
+    const contentType = response.headers.get("content-type") ?? "";
+    if (contentType.includes("text/html")) return null;
     const buffer = await response.arrayBuffer();
-    if (options.signal?.aborted || buffer.byteLength < 4) return null;
+    if (options.signal?.aborted || !isGlbBuffer(buffer)) return null;
     const slash = url.lastIndexOf("/");
     const path = slash >= 0 ? url.slice(0, slash + 1) : "/";
     if (options.parse) return await options.parse(buffer, path);

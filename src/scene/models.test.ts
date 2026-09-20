@@ -76,6 +76,21 @@ describe("tryLoadGltf", () => {
     expect(parse).not.toHaveBeenCalled();
   });
 
+  it("returns null for a 200 payload that is not a glb", async () => {
+    const parse = vi.fn();
+    const fetchImpl = vi.fn(
+      async () =>
+        new Response("<!doctype html>", {
+          status: 200,
+          headers: { "content-type": "application/octet-stream" },
+        }),
+    );
+    await expect(
+      tryLoadGltf("/models/tokyo.glb", { fetchImpl: fetchImpl as unknown as typeof fetch, parse }),
+    ).resolves.toBeNull();
+    expect(parse).not.toHaveBeenCalled();
+  });
+
   it("returns null when fetch or parse throws", async () => {
     const fetchImpl = vi.fn(async () => {
       throw new Error("network");
@@ -87,7 +102,13 @@ describe("tryLoadGltf", () => {
     const badParse = vi.fn(async () => {
       throw new Error("invalid glb");
     });
-    const okFetch = vi.fn(async () => new Response(new Uint8Array([103, 108, 84, 70]), { status: 200 }));
+    const okFetch = vi.fn(
+      async () =>
+        new Response(new Uint8Array([103, 108, 84, 70, 2, 0, 0, 0, 12, 0, 0, 0]), {
+          status: 200,
+          headers: { "content-type": "model/gltf-binary" },
+        }),
+    );
     await expect(
       tryLoadGltf("/models/tokyo.glb", {
         fetchImpl: okFetch as unknown as typeof fetch,
@@ -99,7 +120,13 @@ describe("tryLoadGltf", () => {
   it("parses a successful payload", async () => {
     const group = new THREE.Group();
     const parse = vi.fn(async () => group);
-    const fetchImpl = vi.fn(async () => new Response(new Uint8Array([103, 108, 84, 70]), { status: 200 }));
+    const fetchImpl = vi.fn(
+      async () =>
+        new Response(new Uint8Array([103, 108, 84, 70, 2, 0, 0, 0, 12, 0, 0, 0]), {
+          status: 200,
+          headers: { "content-type": "model/gltf-binary" },
+        }),
+    );
     await expect(
       tryLoadGltf("/models/tokyo.glb", { fetchImpl: fetchImpl as unknown as typeof fetch, parse }),
     ).resolves.toBe(group);
