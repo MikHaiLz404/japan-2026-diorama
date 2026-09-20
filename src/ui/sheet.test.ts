@@ -27,6 +27,10 @@ describe("EN/JP overlay copy", () => {
     expect(host.innerHTML).toContain("今日のスポット");
     expect(host.innerHTML).toContain("Today's stops");
     expect(host.innerHTML).toContain("宿泊 · Lodging");
+    expect(host.innerHTML).toContain("日程 2 / 11 · Day 2 / 11");
+    expect(host.innerHTML).not.toContain("今日のプレート");
+    expect(host.innerHTML).not.toContain("Today's plate");
+    expect(host.innerHTML).not.toContain("訪問済");
     expect(host.innerHTML).not.toContain("บนแผ่นนี้");
     expect(host.innerHTML).not.toContain("On this plate");
   });

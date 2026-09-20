@@ -12,7 +12,7 @@ export const COPY = {
   visited: { ja: "行った", en: "Visited" },
   today: { ja: "今日", en: "Today" },
   upcoming: { ja: "これから", en: "Upcoming" },
-  todayPlate: { ja: "今日のプレート", en: "Today's plate" },
+  todayPlate: { ja: "今日の日程", en: "Today's plan" },
   todayStops: { ja: "今日のスポット", en: "Today's stops" },
   noStops: { ja: "今日のスポットはまだない", en: "No stops today" },
   lodging: { ja: "宿泊", en: "Lodging" },
@@ -36,12 +36,16 @@ export function stayingLabel(place: string): string {
   return `${place}に宿泊 · Staying in ${place}`;
 }
 
+function scheduleCountJa(index: number | string, total: number): string {
+  return `日程 ${index} / ${total}`;
+}
+
 export function liveDayLabel(index: number, total: number): string {
-  return `Day ${index} / ${total} · ${COPY.live.ja}`;
+  return `${scheduleCountJa(index, total)} · ${COPY.live.ja}`;
 }
 
 export function dayCountLabel(index: number | string, total: number): string {
-  return `Day ${index} / ${total}`;
+  return `${scheduleCountJa(index, total)} · Day ${index} / ${total}`;
 }
 
 export function startsLabel(date: string): string {
