@@ -1,6 +1,14 @@
 import * as THREE from "three";
 import { palette } from "./palette";
 
+/** Aide/Vodka style 2: tiny Liberogic dust. Not realistic petals, not off. */
+export const SAKURA_LOOK = {
+  size: 0.024,
+  opacity: 0.42,
+  mobileCount: 12,
+  desktopCount: 28,
+} as const;
+
 export class PetalField {
   readonly points: THREE.Points;
   private readonly velocities: Float32Array;
@@ -19,9 +27,9 @@ export class PetalField {
     geometry.setAttribute("position", new THREE.BufferAttribute(this.positions, 3));
     const material = new THREE.PointsMaterial({
       color: palette.blossom,
-      size: 0.07,
+      size: SAKURA_LOOK.size,
       transparent: true,
-      opacity: 0.75,
+      opacity: SAKURA_LOOK.opacity,
       depthWrite: false,
     });
     this.points = new THREE.Points(geometry, material);
