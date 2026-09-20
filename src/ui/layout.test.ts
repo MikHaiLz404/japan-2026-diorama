@@ -67,7 +67,7 @@ describe("mobile chrome overflow containment", () => {
     expect(firstRule("#stage canvas")).toMatch(/touch-action:\s*none/);
   });
 
-  it("pins the HUD title and มุมถาด cluster to opposite screen corners", () => {
+  it("pins the HUD title and reset cluster to opposite screen corners", () => {
     expect(firstRule(".hud")).not.toMatch(/overflow-x:\s*auto/);
     expect(firstRule(".hud")).not.toMatch(/flex-wrap:\s*wrap/);
     const title = firstRule(".hud-title");
@@ -99,16 +99,37 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(css).not.toMatch(/--visited:\s*#d56b48/);
   });
 
-  it("keeps HUD thin translucent white with sharp black type and a JP/Thai stack", () => {
+  it("keeps HUD thin translucent white with sharp black type and a JP stack", () => {
     const title = firstRule(".hud-title");
     expect(title).toMatch(/rgba\(\s*255\s*,\s*255\s*,\s*255/);
     expect(title).toMatch(/backdrop-filter:\s*blur\(/);
     expect(firstRule("body")).toMatch(/Noto Sans JP/);
-    expect(firstRule("body")).toMatch(/Noto Sans Thai/);
+    expect(firstRule("body")).not.toMatch(/Noto Sans Thai/);
     expect(html).toMatch(/Noto\+Sans\+JP/);
-    expect(html).toMatch(/Noto\+Sans\+Thai/);
+    expect(html).not.toMatch(/Noto\+Sans\+Thai/);
     expect(html).toMatch(/Shippori\+Mincho/);
     expect(css).toMatch(/font-family:\s*"Shippori Mincho"/);
+  });
+
+  it("keeps overlay chrome in EN/JP only — no Thai UI copy or Thai font", () => {
+    expect(html).toMatch(/lang="ja"/);
+    expect(html).not.toMatch(/[\u0E00-\u0E7F]/);
+    expect(html).toContain("旅トレイ");
+    expect(html).toContain("リセット");
+    expect(html).toContain("閉じる");
+    expect(html).toContain("街をタップ");
+    expect(firstRule(".eyebrow")).not.toMatch(/text-transform:\s*uppercase/);
+    expect(firstRule(".sheet-kicker")).not.toMatch(/text-transform:\s*uppercase/);
+  });
+
+  it("sizes zoom icon buttons to at least 44px on both axes", () => {
+    const icon = firstRule(".icon-btn");
+    const minHeight = icon.match(/min-height:\s*(\d+)px/);
+    const minWidth = icon.match(/min-width:\s*(\d+)px/) ?? icon.match(/width:\s*(\d+)px/);
+    expect(minHeight).toBeTruthy();
+    expect(minWidth).toBeTruthy();
+    expect(Number(minHeight![1])).toBeGreaterThanOrEqual(44);
+    expect(Number(minWidth![1])).toBeGreaterThanOrEqual(44);
   });
 
   it("fills chips and the sheet with white plus thin borders, not dark wood chrome", () => {
