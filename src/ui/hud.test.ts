@@ -56,8 +56,8 @@ describe("city picker", () => {
     expect(el.innerHTML).toContain('class="city-chips"');
     expect(el.innerHTML).toContain('id="city-menu-toggle"');
     expect(el.innerHTML).toContain('id="city-menu-list"');
-    expect(el.innerHTML).toContain(`<span>${tokyo!.name}</span>`);
-    expect(closedCityLabel(tokyo)).toBe("Tokyo");
+    expect(el.innerHTML).toContain("Tokyo · 東京");
+    expect(closedCityLabel(tokyo)).toBe("Tokyo · 東京");
     expect(el.innerHTML).toContain(cityRowMeta(tokyo!));
     expect(el.innerHTML).toContain(cityRowMeta(yokohama!));
     expect(cityRowMeta({ ...tokyo!, status: "visited" })).toBe("東京 · 行った");

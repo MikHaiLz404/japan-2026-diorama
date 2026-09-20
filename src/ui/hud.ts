@@ -14,8 +14,8 @@ export function renderHudMeta(el: HTMLElement, trip: TripFixture, today: string)
   el.textContent = `${formatDayLabel(trip.starts_at, trip.timezone)} – ${formatDayLabel(trip.ends_at, trip.timezone)} · ${label}`;
 }
 
-export function closedCityLabel(city?: Pick<CityBlock, "name">): string {
-  return city ? city.name : jaEn(COPY.cities);
+export function closedCityLabel(city?: Pick<CityBlock, "name" | "nameJa">): string {
+  return city ? `${city.name} · ${city.nameJa}` : jaEn(COPY.cities);
 }
 
 export function cityRowMeta(city: Pick<CityBlock, "nameJa" | "status">): string {
