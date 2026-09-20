@@ -120,10 +120,7 @@ export class Diorama {
         city.status === "upcoming",
       );
       label.position.set(0, city.size === "lg" ? 1.55 : 0.95, d * 0.02);
-      if (mobile) {
-        label.scale.multiplyScalar(0.72);
-        if (city.status === "upcoming") label.visible = false;
-      }
+      if (mobile) label.scale.multiplyScalar(0.72);
       block.add(label);
     }
 
