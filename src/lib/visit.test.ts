@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { rollupStatus, statusForDate } from "./visit";
-import { buildCityBlocks, nearestCityId } from "../data/cities";
+import { buildCityBlocks, buildRoutePaths, nearestCityId } from "../data/cities";
 import { trip } from "../data/loadTrip";
 
 describe("visit status", () => {
@@ -44,5 +44,43 @@ describe("city assignment", () => {
     const todayPlate = tokyo?.plates.find((plate) => plate.date === "2026-09-19");
     expect(todayPlate?.lodging.some((stay) => stay.name.includes("AIRSTAY"))).toBe(true);
     expect(todayPlate?.lodging.some((stay) => stay.name.includes("Asakusa"))).toBe(false);
+  });
+});
+
+describe("route status", () => {
+  const undated = {
+    ...trip,
+    transportations: [
+      {
+        id: "return-leg",
+        type: "train" as const,
+        name: null,
+        transport_number: null,
+        departure_at: null,
+        arrival_at: null,
+        departure: { name: "Landmark Tower", latitude: 35.4546, longitude: 139.6317 },
+        arrival: { name: "AIRSTAY Aoto", latitude: 35.7492, longitude: 139.8584 },
+      },
+    ],
+  };
+
+  it("leaves a hop with no departure or arrival time dim", () => {
+    const [route] = buildRoutePaths(undated, "2026-09-20");
+    expect(route.fromCityId).toBe("yokohama");
+    expect(route.toCityId).toBe("tokyo");
+    expect(route.status).toBe("upcoming");
+  });
+
+  it("does not report a day-trip return as travelled before its outbound leg", () => {
+    const routes = buildRoutePaths(trip, "2026-09-20");
+    for (const route of routes) {
+      if (route.status !== "visited") continue;
+      const outbound = routes.find(
+        (other) =>
+          other.fromCityId === route.toCityId && other.toCityId === route.fromCityId,
+      );
+      if (!outbound) continue;
+      expect(outbound.status).toBe("visited");
+    }
   });
 });
