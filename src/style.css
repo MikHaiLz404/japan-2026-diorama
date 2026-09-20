@@ -164,7 +164,8 @@ h1 {
 .icon-btn:focus-visible,
 .text-btn:focus-visible,
 .chip:focus-visible,
-.city-select:focus-visible,
+.city-menu-toggle:focus-visible,
+.city-menu-item:focus-visible,
 .day-tab:focus-visible,
 .sheet-close:focus-visible {
   outline: 2px solid var(--accent);
@@ -239,35 +240,102 @@ h1 {
   pointer-events: auto;
 }
 
-.city-select-wrap {
+.city-menu {
   display: block;
+  position: relative;
   width: 100%;
   pointer-events: auto;
 }
 
-#app:has(#sheet:not([hidden])) .city-select-wrap {
+#app:has(#sheet:not([hidden])) .city-menu {
   visibility: hidden;
 }
 
-.city-select {
-  display: block;
+.city-menu-toggle,
+.city-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
   min-height: 44px;
-  padding: 10px 42px 10px 16px;
+  padding: 8px 16px;
   border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.city-menu-toggle {
+  min-height: 44px;
+  padding-right: 42px;
   border-radius: 16px;
-  background-color: var(--paper);
+  box-shadow: var(--shadow);
   background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
     linear-gradient(135deg, var(--muted) 50%, transparent 50%);
   background-position: calc(100% - 18px) calc(50% - 3px), calc(100% - 12px) calc(50% - 3px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
-  color: var(--ink);
-  font: inherit;
-  line-height: 1.25;
+}
+
+.city-menu-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  max-height: 38vh;
+  margin: 0 0 8px;
+  padding: 8px;
+  list-style: none;
+  overflow-x: clip;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px 18px 16px 16px;
   box-shadow: var(--shadow);
-  appearance: none;
-  cursor: pointer;
+}
+
+.city-menu-list[hidden] {
+  display: none;
+}
+
+.city-menu-item {
+  min-height: 44px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.city-menu-item small,
+.city-menu-toggle small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.city-menu-item.status-today,
+.city-menu-item.status-today small {
+  color: var(--today);
+}
+
+.city-menu-item.is-selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.city-menu-item.is-selected small {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.city-menu-item.is-selected.status-today {
+  background: var(--today);
+  border-color: var(--today);
+  color: #fff;
 }
 
 .chip {
@@ -501,7 +569,7 @@ h1 {
     display: flex;
   }
 
-  .city-select-wrap {
+  .city-menu {
     display: none;
   }
 

@@ -48,14 +48,16 @@ describe("mobile chrome overflow containment", () => {
     expect(chips).toMatch(/overscroll-behavior-x:\s*contain/);
   });
 
-  it("hides the wrapping chip row on small screens in favor of a compact select", () => {
+  it("hides the wrapping chip row on small screens in favor of a low-anchored city menu", () => {
     expect(firstRule(".city-chips")).toMatch(/display:\s*none/);
-    expect(firstRule(".city-select-wrap")).toMatch(/display:\s*block/);
+    expect(firstRule(".city-menu")).toMatch(/display:\s*block/);
     expect(css).toMatch(/@media \(min-width: 860px\)[\s\S]*\.city-chips[\s\S]*display:\s*flex/);
-    expect(css).toMatch(/@media \(min-width: 860px\)[\s\S]*\.city-select-wrap[\s\S]*display:\s*none/);
-    const select = firstRule(".city-select");
-    expect(select).toMatch(/min-height:\s*44px/);
-    expect(select).toMatch(/appearance:\s*none/);
+    expect(css).toMatch(/@media \(min-width: 860px\)[\s\S]*\.city-menu[\s\S]*display:\s*none/);
+    expect(firstRule(".city-menu-toggle")).toMatch(/min-height:\s*44px/);
+    expect(firstRule(".city-menu-item")).toMatch(/min-height:\s*44px/);
+    const list = firstRule(".city-menu-list");
+    expect(list).toMatch(/bottom:\s*100%/);
+    expect(list).toMatch(/max-height:\s*38vh/);
   });
 
   it("wraps day tabs inside the sheet without a horizontal menu scroller", () => {
@@ -73,7 +75,7 @@ describe("mobile chrome overflow containment", () => {
     expect(sheet).toMatch(/overflow-y:\s*auto/);
     expect(sheet).toMatch(/z-index:\s*3/);
     expect(firstRule(".city-nav")).toMatch(/z-index:\s*1/);
-    expect(css).toMatch(/#app:has\(#sheet:not\(\[hidden\]\)\)\s*\.city-select-wrap[\s\S]*visibility:\s*hidden/);
+    expect(css).toMatch(/#app:has\(#sheet:not\(\[hidden\]\)\)\s*\.city-menu[\s\S]*visibility:\s*hidden/);
   });
 
   it("preserves one-finger orbit on the canvas", () => {

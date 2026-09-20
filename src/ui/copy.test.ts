@@ -26,6 +26,7 @@ describe("bilingual copy helpers", () => {
     expect(jaEn(COPY.todayPlate)).toBe("今日の日程 · Today's plan");
     expect(jaEn(COPY.todayStops)).toBe("今日のスポット · Today's stops");
     expect(jaEn(COPY.noStops)).toBe("今日のスポットはまだない · No stops today");
+    expect(jaEn(COPY.cities)).toBe("都市 · Cities");
     expect(jaEn(COPY.visited)).toBe("行った · Visited");
     expect(COPY.visited.ja).toBe("行った");
     expect(COPY.today.ja).toBe("今日");

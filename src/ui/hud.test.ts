@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildCityBlocks } from "../data/cities";
 import { trip } from "../data/loadTrip";
-import { cityOptionLabel, renderCityChips, renderHudMeta } from "./hud";
+import { cityRowMeta, closedCityLabel, renderCityChips, renderHudMeta } from "./hud";
 
 function host(): HTMLElement {
   return { textContent: "" } as HTMLElement;
@@ -39,24 +39,33 @@ describe("HUD meta copy", () => {
 });
 
 describe("city picker", () => {
-  it("renders desktop chips and a mobile select with EN/JP status labels", () => {
+  it("renders desktop chips and a mobile menu with locked Aide dropdown copy", () => {
     const cities = buildCityBlocks(trip, "2026-09-20");
     const tokyo = cities.find((city) => city.id === "tokyo");
     const yokohama = cities.find((city) => city.id === "yokohama");
     expect(tokyo && yokohama).toBeTruthy();
 
-    const el = { innerHTML: "" } as HTMLElement;
+    const empty = { innerHTML: "", classList: { toggle() {}, remove() {} } } as unknown as HTMLElement;
+    renderCityChips(empty, cities);
+    expect(empty.innerHTML).toContain("都市 · Cities");
+    expect(closedCityLabel()).toBe("都市 · Cities");
+
+    const el = { innerHTML: "", classList: { toggle() {}, remove() {} } } as unknown as HTMLElement;
     renderCityChips(el, cities, "tokyo");
 
     expect(el.innerHTML).toContain('class="city-chips"');
-    expect(el.innerHTML).toContain('id="city-select"');
+    expect(el.innerHTML).toContain('id="city-menu-toggle"');
+    expect(el.innerHTML).toContain('id="city-menu-list"');
+    expect(el.innerHTML).toContain(`<span>${tokyo!.name}</span>`);
+    expect(closedCityLabel(tokyo)).toBe("Tokyo");
+    expect(el.innerHTML).toContain(cityRowMeta(tokyo!));
+    expect(el.innerHTML).toContain(cityRowMeta(yokohama!));
+    expect(cityRowMeta({ ...tokyo!, status: "visited" })).toBe("東京 · 行った");
     expect(el.innerHTML).toContain("今日");
     expect(el.innerHTML).toContain("これから");
-    expect(cityOptionLabel({ ...tokyo!, status: "visited" })).toContain("行った");
     expect(el.innerHTML).toMatch(/chip status-today is-selected/);
-    expect(el.innerHTML).toContain(cityOptionLabel(tokyo!));
-    expect(el.innerHTML).toContain(cityOptionLabel(yokohama!));
-    expect(el.innerHTML).toMatch(/<option value="tokyo"[^>]*selected/);
+    expect(el.innerHTML).toMatch(/city-menu-item status-today is-selected/);
+    expect(el.innerHTML).not.toContain("<select");
     expect(el.innerHTML).not.toMatch(/[\u0E00-\u0E7F]/);
   });
 });
