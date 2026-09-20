@@ -16,9 +16,10 @@ export const TRAY_Y_MIN = -0.58;
 export const TRAY_MODEL_URL = "/models/tray.glb";
 
 /**
- * Unindexed triangle soup is ~1/3; Three `BoxGeometry` is ~0.5; healthy remeshed
- * cities are ~2 triangles/vertex. Corrupt tokyo/yokohama GLBs are ~0.1 and render
- * as scattered points, so anything far below this floor is rejected.
+ * Unindexed triangle soup is ~1/3; Three `BoxGeometry` is ~0.5; healthy city
+ * GLBs are ~2 triangles/vertex. Point-cloud / truncated-index exports sit
+ * around ~0.1 and render as scattered points, so anything far below this
+ * floor is rejected even if the file is otherwise valid glTF.
  */
 export const MIN_CITY_TRIANGLE_VERTEX_RATIO = 0.25;
 
@@ -75,7 +76,7 @@ export function meshTopology(root: THREE.Object3D): MeshTopology {
 /**
  * True when a city GLB can replace the procedural block. Rejects empty scenes,
  * collapsed bounds, and meshes whose triangle count is far too low vs vertices
- * (the tokyo.glb / yokohama.glb remesh failure).
+ * (the old tokyo/yokohama truncated-index failure).
  */
 export function isRenderableCityModel(root: THREE.Object3D): boolean {
   const { vertices, triangles } = meshTopology(root);

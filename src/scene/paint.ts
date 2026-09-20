@@ -30,7 +30,18 @@ const CITY_PAINT: Record<string, MiniaturePalette> = {
   tray: { wall: palette.wood, roof: palette.woodRim, ground: palette.moss, wood: palette.wood, accent: palette.sand },
 };
 
-const MAP_KEYS = ["map", "emissiveMap", "lightMap"] as const;
+const MAP_KEYS = [
+  "map",
+  "normalMap",
+  "roughnessMap",
+  "metalnessMap",
+  "aoMap",
+  "emissiveMap",
+  "bumpMap",
+  "displacementMap",
+  "alphaMap",
+  "lightMap",
+] as const;
 
 export function hasAlbedoTexture(material: THREE.Material): boolean {
   const record = material as THREE.Material & Record<string, unknown>;
@@ -129,8 +140,9 @@ function paintGeometry(geometry: THREE.BufferGeometry, kind: MiniatureKind): voi
 }
 
 /**
- * Remeshed city GLBs ship as one gray matte mesh with no maps.
- * Paint vertex colors + ceramic PBR so they read as miniatures without new textures.
+ * Untextured city GLBs ship as one gray matte mesh with no maps.
+ * Paint vertex colors + ceramic PBR so they read as miniatures. If any PBR map
+ * is already on the material (Tripo albedo / UV textures), leave it alone.
  */
 export function stylizeUntexturedModel(root: THREE.Object3D, kind: MiniatureKind): void {
   root.traverse((node) => {

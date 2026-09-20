@@ -16,6 +16,18 @@ describe("miniature paint", () => {
     expect(textured.vertexColors).toBe(false);
   });
 
+  it("skips vertex paint when any PBR map is present, not only albedo", () => {
+    const normalMap = new THREE.Texture();
+    const material = new THREE.MeshStandardMaterial({ normalMap });
+    expect(hasAlbedoTexture(material)).toBe(true);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    stylizeUntexturedModel(new THREE.Mesh(geometry, material), "kamakura");
+    expect(geometry.getAttribute("color")).toBeUndefined();
+    expect(material.vertexColors).toBe(false);
+    expect(material.normalMap).toBe(normalMap);
+  });
+
   it("paints vertex colors onto an untextured gray remesh", () => {
     const geometry = new THREE.BoxGeometry(1, 2, 1);
     const material = new THREE.MeshStandardMaterial({ color: 0x9ea8b2 });
