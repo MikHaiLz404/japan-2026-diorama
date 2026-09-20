@@ -7,7 +7,7 @@ import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, plat
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
 import { makeRoute } from "./paths";
-import { PetalField } from "./petals";
+import { PetalField, SAKURA_LOOK } from "./petals";
 
 const OVERVIEW = {
   position: new THREE.Vector3(0.15, 11.2, 12.1),
@@ -125,7 +125,7 @@ export class Diorama {
       this.scene.add(makeRoute(route));
     }
 
-    this.petals = this.reduced ? null : new PetalField(small ? 22 : 70);
+    this.petals = this.reduced ? null : new PetalField(small ? SAKURA_LOOK.mobileCount : SAKURA_LOOK.desktopCount);
     if (this.petals) this.scene.add(this.petals.points);
 
     void hydrateGltfModels({

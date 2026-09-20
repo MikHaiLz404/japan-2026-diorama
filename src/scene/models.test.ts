@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
 import { CITY_CATALOG } from "../data/cities";
 import type { CityBlock } from "../data/types";
@@ -12,10 +13,56 @@ import {
   disposeObject3D,
   fitModelToBox,
   hydrateGltfModels,
+  isRenderableCityModel,
+  meshTopology,
+  MIN_CITY_TRIANGLE_VERTEX_RATIO,
   modelFitSize,
   prepareLoadedModel,
   tryLoadGltf,
 } from "./models";
+
+/** Mimic tokyo.glb / yokohama.glb: tens of thousands of verts, ~10% as many triangles. */
+function sparseCityLikeMesh(vertices = 30_000, triangles = 3_000): THREE.Mesh {
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(vertices * 3);
+  for (let i = 0; i < vertices; i++) {
+    positions[i * 3] = (i % 120) * 0.01;
+    positions[i * 3 + 1] = ((Math.floor(i / 120) % 40) * 0.01);
+    positions[i * 3 + 2] = (Math.floor(i / 4800) % 80) * 0.01;
+  }
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const indices = new Uint32Array(triangles * 3);
+  for (let i = 0; i < indices.length; i++) indices[i] = i % vertices;
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+  return new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
+}
+
+function catalogGlbTopology(id: string): { vertices: number; triangles: number } | null {
+  const file = new URL(`../../public/models/${id}.glb`, import.meta.url).pathname;
+  if (!existsSync(file)) return null;
+  const data = readFileSync(file);
+  if (data.byteLength < 20 || data.toString("ascii", 0, 4) !== "glTF") return null;
+  const jsonLength = data.readUInt32LE(12);
+  const json = JSON.parse(data.toString("utf8", 20, 20 + jsonLength).replace(/\0+$/, "")) as {
+    accessors?: Array<{ count: number }>;
+    meshes?: Array<{
+      primitives: Array<{ attributes: { POSITION?: number }; indices?: number; mode?: number }>;
+    }>;
+  };
+  let vertices = 0;
+  let triangles = 0;
+  for (const mesh of json.meshes ?? []) {
+    for (const prim of mesh.primitives) {
+      const pos = prim.attributes.POSITION;
+      if (pos != null) vertices += json.accessors?.[pos]?.count ?? 0;
+      const mode = prim.mode ?? 4;
+      if (mode !== 4) continue;
+      if (prim.indices != null) triangles += Math.floor((json.accessors?.[prim.indices]?.count ?? 0) / 3);
+      else if (pos != null) triangles += Math.floor((json.accessors?.[pos]?.count ?? 0) / 3);
+    }
+  }
+  return { vertices, triangles };
+}
 
 function stubCity(id: CityBlock["id"], size: CityBlock["size"] = "sm"): CityBlock {
   return {
@@ -196,6 +243,59 @@ describe("prepareLoadedModel", () => {
   });
 });
 
+describe("city glb topology guard", () => {
+  it("accepts a normal mesh (box / dense remesh)", () => {
+    const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1));
+    const dense = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 3));
+    expect(isRenderableCityModel(box)).toBe(true);
+    expect(isRenderableCityModel(dense)).toBe(true);
+    for (const mesh of [box, dense]) {
+      const stats = meshTopology(mesh);
+      expect(stats.triangles).toBeGreaterThan(0);
+      expect(stats.triangles / stats.vertices).toBeGreaterThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+    }
+  });
+
+  it("rejects tokyo/yokohama-like meshes with far too few triangles", () => {
+    const sparse = sparseCityLikeMesh();
+    const stats = meshTopology(sparse);
+    expect(stats.vertices).toBe(30_000);
+    expect(stats.triangles).toBe(3_000);
+    expect(stats.triangles / stats.vertices).toBeCloseTo(0.1, 5);
+    expect(isRenderableCityModel(sparse)).toBe(false);
+  });
+
+  it("rejects empty, point-only, or collapsed geometry", () => {
+    expect(isRenderableCityModel(new THREE.Group())).toBe(false);
+    expect(isRenderableCityModel(new THREE.Points(new THREE.BufferGeometry()))).toBe(false);
+
+    const emptyMesh = new THREE.Mesh(new THREE.BufferGeometry());
+    expect(isRenderableCityModel(emptyMesh)).toBe(false);
+
+    const collapsed = new THREE.BufferGeometry();
+    collapsed.setAttribute("position", new THREE.BufferAttribute(new Float32Array(9), 3));
+    collapsed.setIndex([0, 1, 2]);
+    expect(isRenderableCityModel(new THREE.Mesh(collapsed))).toBe(false);
+  });
+
+  it("would skip the committed tokyo/yokohama remeshes and keep the other city glbs", () => {
+    const skip = new Set(["tokyo", "yokohama"]);
+    let seen = 0;
+    for (const id of CITY_MODEL_IDS) {
+      const stats = catalogGlbTopology(id);
+      if (!stats || stats.vertices <= 0) continue;
+      seen += 1;
+      const ratio = stats.triangles / stats.vertices;
+      if (skip.has(id)) {
+        expect(ratio, id).toBeLessThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+      } else {
+        expect(ratio, id).toBeGreaterThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+      }
+    }
+    expect(seen).toBe(CITY_MODEL_IDS.length);
+  });
+});
+
 describe("hydrateGltfModels", () => {
   it("keeps procedural meshes when loads fail", async () => {
     const scene = new THREE.Scene();
@@ -301,5 +401,29 @@ describe("hydrateGltfModels", () => {
     expect(scene.getObjectByName("procedural:tokyo")).toBeFalsy();
     expect(scene.getObjectByName("gltf:yokohama")).toBeFalsy();
     expect(scene.getObjectByName("procedural:yokohama")).toBeTruthy();
+  });
+
+  it("keeps the procedural block when a city glb has unusable topology", async () => {
+    const scene = new THREE.Scene();
+    scene.add(makeCityBlock(stubCity("tokyo", "lg")));
+    scene.add(makeCityBlock(stubCity("kamakura", "md")));
+    const sparse = sparseCityLikeMesh();
+    const geoSpy = vi.spyOn(sparse.geometry, "dispose");
+
+    await hydrateGltfModels({
+      scene,
+      cities: [stubCity("tokyo", "lg"), stubCity("kamakura", "md")],
+      shadows: false,
+      load: async (url) =>
+        url.includes("tokyo")
+          ? sparse
+          : new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial()),
+    });
+
+    expect(scene.getObjectByName("gltf:tokyo")).toBeFalsy();
+    expect(scene.getObjectByName("procedural:tokyo")).toBeTruthy();
+    expect(geoSpy).toHaveBeenCalledOnce();
+    expect(scene.getObjectByName("gltf:kamakura")).toBeTruthy();
+    expect(scene.getObjectByName("procedural:kamakura")).toBeFalsy();
   });
 });

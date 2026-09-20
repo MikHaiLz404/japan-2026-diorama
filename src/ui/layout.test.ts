@@ -194,4 +194,9 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(diorama).toMatch(/AmbientLight/);
     expect(diorama).toMatch(/HemisphereLight/);
   });
+
+  it("locks sakura to sparse Liberogic dust instead of a petal blizzard", () => {
+    expect(diorama).toMatch(/SAKURA_LOOK/);
+    expect(diorama).toMatch(/new PetalField\(small \? SAKURA_LOOK\.mobileCount : SAKURA_LOOK\.desktopCount\)/);
+  });
 });

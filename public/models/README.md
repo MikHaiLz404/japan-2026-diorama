@@ -2,7 +2,9 @@
 
 Optional glTF 2.0 binaries (`.glb`) for the Japan 2026 tray. The scene still builds from the procedural meshes in `src/scene/` — these files are overlays.
 
-**Missing, empty, or invalid files fall back to the procedural mesh.** Do not commit placeholder binaries.
+**Missing, empty, or invalid files fall back to the procedural mesh.** Invalid includes corrupt topology (far too few triangles vs vertices, or collapsed/empty geometry). Do not commit placeholder binaries.
+
+`tokyo.glb` and `yokohama.glb` currently fail that check (~30k vertices, ~3k triangles) and stay on the procedural city block until textured re-exports land. The files remain in this folder; the loader skips them instead of showing scattered points.
 
 ## Expected filenames
 
