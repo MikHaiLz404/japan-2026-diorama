@@ -5,7 +5,7 @@
   "starts_at": "2026-09-17",
   "ends_at": "2026-09-27",
   "timezone": "Asia/Tokyo",
-  "fetched_at": "2026-09-19T13:32:39Z",
+  "fetched_at": "2026-09-20T13:50:27.590Z",
   "activities": [
     {
       "id": "4037975",
@@ -17,7 +17,7 @@
       "longitude": 139.7964442,
       "address": "111-0032, Tokyo Taito, 1-36-3, Asakusa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "",
       "website": "http://asakusa-nakamise.jp"
     },
     {
@@ -43,7 +43,7 @@
       "longitude": 139.7967499,
       "address": "111-0032, 東京都 台東区, 浅草2丁目3-1, 日本",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "",
       "website": "https://www.senso-ji.jp"
     },
     {
@@ -57,7 +57,7 @@
       "address": "3 Chome-4-3 Asakusa, Taito City, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ไอติมชาเขียว 550¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4042844",
@@ -69,8 +69,8 @@
       "longitude": 139.8107,
       "address": "1 Chome-1-2 Oshiage, Sumida City, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4043034",
@@ -82,7 +82,7 @@
       "longitude": 139.8112,
       "address": "Tokyo Solamachi 4F East Yard, 1 Chome-1-2 Oshiage, Sumida City, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "",
       "website": "https://en.www.tokyo-solamachi.jp/shop/483/"
     },
     {
@@ -96,7 +96,7 @@
       "address": "2F Matsushimaya Sonemura Bldg, 2-18-16 Kaminarimon, Taito-ku, Tokyo",
       "timezone": "Asia/Tokyo",
       "notes": "บุฟเฟต์มอนจายากิ + เครื่องดื่ม 90 นาที คนละ 3,800¥ (เฉพาะส่วน Jojo+แฟน 2 คน เท่านั้น รวม 7,600¥)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045093",
@@ -109,7 +109,7 @@
       "address": "1-43-10 Asakusa, Taito-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "คนละ 877.4¥ x 2 คน = 1,754.8¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4048182",
@@ -122,7 +122,7 @@
       "address": "2 Chome-3-1 Asakusa, Taito City, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Check-out แล้วฝากกระเป๋าไว้ที่โรงแรมก่อน แวะวัดอีกรอบระหว่างรอ ทำบุญ 400¥ + เซี่ยงเซียมซี (โอมิคจิ) 200¥ ได้ใบที่ 50 กิจ + ซื้อโมจิถั่วแดงสตอเร์เบอร์รี่ 400¥ + ขนมคัสเตล่า 500¥ ระหว่างทาง",
-      "website": null
+      "website": ""
     },
     {
       "id": "4048672",
@@ -135,7 +135,7 @@
       "address": "1-3-4 Asakusa, Taito-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "หยอดกาชาปอง 800¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4048807",
@@ -148,7 +148,7 @@
       "address": "1F Tosei Hotel Cocone Asakusa, 3-26-10 Asakusa, Taito-ku, Tokyo",
       "timezone": "Asia/Tokyo",
       "notes": "กาแฟ + ชาเขียวเย็น 1,900¥ (ร้านอยู่ชั้น 1 ตึกเดียวกับโรงแรม TOSEI HOTEL COCONE Asakusa)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4049222",
@@ -164,6 +164,19 @@
       "website": null
     },
     {
+      "id": "4052921",
+      "name": "ぶんぐ屋 EBINUMA presents (Your Elm Aoto)",
+      "type": "shopping",
+      "starts_at": "2026-09-19T05:38:00Z",
+      "ends_at": "2026-09-19T05:40:00Z",
+      "latitude": 35.749917,
+      "longitude": 139.847934,
+      "address": "東京都葛飾区青戸3-36-1",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อเครื่องเขียน (ตัวจับสมุด x2 + fortune sticker) ก่อนไปกินราเมงที่เดียวกัน (Your Elm Aoto)",
+      "website": null
+    },
+    {
       "id": "4048991",
       "name": "Aoto Station",
       "type": "publicTransport",
@@ -173,8 +186,8 @@
       "longitude": 139.8563263,
       "address": "Tokyo Katsushika, Aoto, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4049530",
@@ -238,72 +251,137 @@
       "longitude": 139.766,
       "address": "〒104-0061 東京都中央区銀座5丁目7-7 銀座ワシントンビル",
       "timezone": "Asia/Tokyo",
-      "notes": "ร้านเสื้อผ้าราคาประหยัด 5 ชั้น ใกล้ทางออก A2 สถานี Ginza",
+      "notes": "ซื้อกระโปรงมิดี 1 ตัว (1,290¥) + เสื้อยืดกราฟิก 3 ตัว (1,490¥ x3) รวม 5,760¥ หักภาษีคืนเหลือ 5,237¥",
       "website": null
     },
     {
-      "id": "4045114",
-      "name": "Toyosu / Senkyaku Banrai",
+      "id": "4051253",
+      "name": "マツモトキヨシ 銀座5th店 (Matsumoto Kiyoshi Ginza)",
       "type": "shopping",
-      "starts_at": "2026-09-20T01:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6455,
-      "longitude": 139.7822,
-      "address": "Toyosu, Koto-ku, Tokyo, Japan",
+      "starts_at": "2026-09-19T11:15:00Z",
+      "ends_at": "2026-09-19T11:35:00Z",
+      "latitude": 35.6706,
+      "longitude": 139.7649,
+      "address": "〒104-0061 東京都中央区銀座5丁目5-1",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "นั่งเก้าอี้นวด (急速時間) 932¥",
       "website": null
     },
     {
-      "id": "4045116",
-      "name": "Azabudai Hills",
+      "id": "4051256",
+      "name": "セブン-イレブン 青砂駅前店 (7-Eleven Aoto)",
       "type": "shopping",
-      "starts_at": "2026-09-20T07:30:00Z",
-      "ends_at": null,
-      "latitude": 35.662,
-      "longitude": 139.7388,
-      "address": "Azabudai, Minato-ku, Tokyo, Japan",
+      "starts_at": "2026-09-19T12:20:00Z",
+      "ends_at": "2026-09-19T12:35:00Z",
+      "latitude": 35.749917,
+      "longitude": 139.847934,
+      "address": "東京都葛飾区青戸2-1-1",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "น้ำ สลัด แซนวิช เครื่องดื่ม 1,270¥",
       "website": null
     },
     {
-      "id": "4045115",
-      "name": "teamLab Planets",
-      "type": "museum",
-      "starts_at": "2026-09-20T10:00:00Z",
-      "ends_at": "2026-09-20T13:00:00Z",
-      "latitude": 35.6465,
-      "longitude": 139.793,
-      "address": "6 Chome-1-16 Toyosu, Koto-ku, Tokyo, Japan",
+      "id": "4057163",
+      "name": "Zetteria ゼッテリア ユアエルム青戸",
+      "type": "restaurant",
+      "starts_at": "2026-09-20T04:19:00Z",
+      "ends_at": null,
+      "latitude": 35.749917,
+      "longitude": 139.847934,
+      "address": "東京都葛飾区青戸3丁目36-1 ユアエルム青戸",
       "timezone": "Asia/Tokyo",
-      "notes": "✅ Confirmed — นัดกับเล็ก (เพื่อน) เวลา 19:00-22:00 เวลาญี่ปุ่น วันที่ 20 ก.ย.",
+      "notes": "มื้อแรกของวัน ก่อนขึ้นรถ (จ่ายเงินสด): 月見バーガー 590¥ + タルタルチキンバーガー 440¥ + メロンソーダ M 180¥ + ポテト M 170¥ รวม 1,380¥",
       "website": null
     },
     {
-      "id": "4045118",
-      "name": "Tokyo Tower (night view)",
-      "type": "tour",
-      "starts_at": "2026-09-20T10:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6586,
-      "longitude": 139.7454,
-      "address": "4 Chome-2-8 Shibakoen, Minato-ku, Tokyo, Japan",
+      "id": "4045135",
+      "name": "Shimokitazawa",
+      "type": "shopping",
+      "starts_at": "2026-09-20T06:19:00Z",
+      "ends_at": "2026-09-20T07:24:00Z",
+      "latitude": 35.6613,
+      "longitude": 139.6676,
+      "address": "Shimokitazawa, Setagaya, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
+      "notes": "",
+      "website": ""
+    },
+    {
+      "id": "4057761",
+      "name": "TSUTAYA BOOKSTORE 下北沢",
+      "type": "shopping",
+      "starts_at": "2026-09-20T06:31:00Z",
+      "ends_at": "2026-09-20T06:45:00Z",
+      "latitude": 35.6613,
+      "longitude": 139.6676,
+      "address": "Shimokitazawa, Setagaya, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อร่มกันแดด 2 คัน (日傘折遮光エアライトユニセックス 4,290¥ + 日傘折遮光ドームワイドスカラ 4,400¥) รวม 8,690¥ ทักช์ฟรีเหลือจ่าย 7,900¥",
       "website": null
     },
     {
-      "id": "4045119",
-      "name": "Tokyo Game Show @ Makuhari Messe",
-      "type": "event",
-      "starts_at": "2026-09-21T01:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6478,
-      "longitude": 140.0328,
-      "address": "2 Chome-1 Nakase, Mihama Ward, Chiba, Japan",
+      "id": "4057762",
+      "name": "OGAWA COFFEE LABORATORY 下北沢店",
+      "type": "cafe",
+      "starts_at": "2026-09-20T07:03:00Z",
+      "ends_at": "2026-09-20T07:20:00Z",
+      "latitude": 35.6613,
+      "longitude": 139.6676,
+      "address": "〒155-0031 東京都世田谷区北沢3丁目19-20 reload1-1",
       "timezone": "Asia/Tokyo",
-      "notes": "⚠️ ยังไม่ได้ confirm ตั๋ว",
+      "notes": "อิส抹茶ラテ (Iced Matcha Latte) 880¥ + コールドブリュー (Cold Brew) 850¥",
+      "website": null
+    },
+    {
+      "id": "4057860",
+      "name": "OGAWA COFFEE LABORATORY 下北沢店 (ซื้อเมล็ดกาแฟ)",
+      "type": "shopping",
+      "starts_at": "2026-09-20T07:42:00Z",
+      "ends_at": "2026-09-20T07:50:00Z",
+      "latitude": 35.6613,
+      "longitude": 139.6676,
+      "address": "〒155-0031 東京都世田谷区北沢3丁目19-20 reload1-1",
+      "timezone": "Asia/Tokyo",
+      "notes": "เมล็ดกาแฟ ブラジル ハイーニャ 100g 1,180¥ + ถุงกระดาษ (เล็ก) 20¥",
+      "website": null
+    },
+    {
+      "id": "4056558",
+      "name": "SHOLAYERED Shibuya Scramble Square (5F) - ซื้อน้ำหอม",
+      "type": "shopping",
+      "starts_at": "2026-09-20T09:00:00Z",
+      "ends_at": null,
+      "latitude": 35.658,
+      "longitude": 139.7016,
+      "address": "Shibuya Scramble Square, 5F, Shibuya, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อน้ำหอม SHOLAYERED (กลิ่น BEIGE) x2 + ถุงกระดาษ ที่ชั้น 5F ตึก Shibuya Scramble Square รวม ¥27,820 (ราคา tax-free แล้ว) - ซื้อเสร็จแล้ว",
+      "website": ""
+    },
+    {
+      "id": "4058391",
+      "name": "มื้อเย็น - Gourmand Market KINOKUNIYA 紀ノ国屋 (B1F) Shibuya Scramble Square",
+      "type": "foodMarket",
+      "starts_at": "2026-09-20T10:30:00Z",
+      "ends_at": null,
+      "latitude": 35.658,
+      "longitude": 139.7022,
+      "address": "東京都渋谷区渋谷2丁目24-12 渋谷スクランブルスクエア B1F",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซูเปอร์มาร์เก็ตหรูใน B1F ตึก Shibuya Scramble Square มีเบเกอรี่/คาเฟ่/แซนด์วิช/ข้าวกล่อง/ซูชิ (งดชาบู Tsukada/Momo แล้ว) | มื้อเย็น 19:30 น. ใบเสร็จ #4028 ยอดสุทธิ ¥2,219 (รวมภาษี 8% ¥164) 5 ชิ้น | 白須丼 ¥648 (ลด 20% -¥130) | 紀ノ国屋玉子焼 ¥378 | 1/2日分の野菜が… ¥1,289 (ลด 30% -¥387) | マスカット100% ¥205 | 青森リンゴストレー ¥216",
+      "website": "https://www.super-kinokuniya.jp"
+    },
+    {
+      "id": "4058936",
+      "name": "7-Eleven 青砂駅前店 (แวะก่อนเข้าบ้าน)",
+      "type": "shopping",
+      "starts_at": "2026-09-20T12:33:00Z",
+      "ends_at": null,
+      "latitude": 35.749917,
+      "longitude": 139.847934,
+      "address": "Aoto 2-1-1, Katsushika, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อก่อนเข้าที่พัก: ขนมซานริโอ 180¥ + ลิ้นที่ปิ้งเกลือเค็ม 338¥ + ชาเอิร์ลเกรย์ไม่หวาน 600ml 108¥ + เครื่องดื่มชูกำลัง Monster Guava 213¥ + ข้าวกล่องไก่ทอด 648¥ + ข้าวปั้นสาหร่ายวากาเม 148¥ + กรรไกรตัดเล็บ M 648¥ รวม ¥2,477",
       "website": null
     },
     {
@@ -317,7 +395,7 @@
       "address": "2 Chome-3-4 Shinko, Naka Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Greater Tokyo Pass — Day 1",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045121",
@@ -329,8 +407,8 @@
       "longitude": 139.6469,
       "address": "Yamashitacho, Naka Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045122",
@@ -342,8 +420,8 @@
       "longitude": 139.6503,
       "address": "279 Yamashitacho, Naka Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045123",
@@ -355,8 +433,8 @@
       "longitude": 139.6425,
       "address": "1-1 Shinko, Naka Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045125",
@@ -368,8 +446,21 @@
       "longitude": 139.6317,
       "address": "2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
+    },
+    {
+      "id": "4045115",
+      "name": "teamLab Planets",
+      "type": "museum",
+      "starts_at": "2026-09-22T10:00:00Z",
+      "ends_at": "2026-09-22T13:00:00Z",
+      "latitude": 35.6465,
+      "longitude": 139.793,
+      "address": "6 Chome-1-16 Toyosu, Koto-ku, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "✅ Confirmed — นัดกับเล็ก (เพื่อน) เวลา 19:00-22:00 เวลาญี่ปุ่น (ย้ายจาก 20 ก.ย. เพราะฝนตก มาเป็นวันที่ 22 ก.ย. แทน)",
+      "website": ""
     },
     {
       "id": "4045126",
@@ -382,7 +473,7 @@
       "address": "Kamakura, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Greater Tokyo Pass — Day 2. วันหยุดญี่ปุ่น คนอาจเยอะ",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045127",
@@ -394,8 +485,8 @@
       "longitude": 139.4803,
       "address": "Enoshima, Fujisawa, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045128",
@@ -408,7 +499,7 @@
       "address": "Takaomachi, Hachioji, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Greater Tokyo Pass — Day 3",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045129",
@@ -421,7 +512,7 @@
       "address": "1 Chome-1-83 Simorenjaku, Mitaka, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "⚠️ ไปได้เฉพาะถ้ามี timed ticket",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045130",
@@ -433,8 +524,8 @@
       "longitude": 139.5798,
       "address": "Kichijoji, Musashino, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045131",
@@ -447,7 +538,7 @@
       "address": "Kawagoe, Saitama, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Greater Tokyo Pass — Day 4",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045132",
@@ -460,7 +551,7 @@
       "address": "1 Chome-1-7 Toshimaen, Nerima, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "✅ Confirmed — Booking Reference 2661205, 2 adult tickets, 25 Sep 2026 14:00, ¥14,000 (จากอีเมลยืนยันการจอง)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045133",
@@ -473,59 +564,46 @@
       "address": "2 Chome-24-7 Gotokuji, Setagaya, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Greater Tokyo Pass — Day 5",
-      "website": null
+      "website": ""
     },
     {
-      "id": "4045135",
-      "name": "Shimokitazawa",
+      "id": "4045114",
+      "name": "Toyosu / Senkyaku Banrai",
       "type": "shopping",
-      "starts_at": "2026-09-26T02:00:00Z",
+      "starts_at": "2026-09-26T01:00:00Z",
       "ends_at": null,
-      "latitude": 35.6613,
-      "longitude": 139.6676,
-      "address": "Shimokitazawa, Setagaya, Tokyo, Japan",
+      "latitude": 35.6455,
+      "longitude": 139.7822,
+      "address": "Toyosu, Koto-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
-      "id": "4045136",
-      "name": "Harajuku / Omotesando",
+      "id": "4045116",
+      "name": "Azabudai Hills",
       "type": "shopping",
-      "starts_at": "2026-09-26T04:00:00Z",
+      "starts_at": "2026-09-26T07:30:00Z",
       "ends_at": null,
-      "latitude": 35.6702,
-      "longitude": 139.7027,
-      "address": "Jingumae, Shibuya, Tokyo, Japan",
+      "latitude": 35.662,
+      "longitude": 139.7388,
+      "address": "Azabudai, Minato-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
-      "id": "4045137",
-      "name": "Shibuya / Miyashita Park",
-      "type": "shopping",
-      "starts_at": "2026-09-26T06:00:00Z",
+      "id": "4045118",
+      "name": "Tokyo Tower (night view)",
+      "type": "tour",
+      "starts_at": "2026-09-26T10:00:00Z",
       "ends_at": null,
-      "latitude": 35.6598,
-      "longitude": 139.7016,
-      "address": "Jinnan, Shibuya, Tokyo, Japan",
+      "latitude": 35.6586,
+      "longitude": 139.7454,
+      "address": "4 Chome-2-8 Shibakoen, Minato-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
-    },
-    {
-      "id": "4045138",
-      "name": "Nakameguro",
-      "type": "shopping",
-      "starts_at": "2026-09-26T08:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6443,
-      "longitude": 139.6989,
-      "address": "Kamimeguro, Meguro, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045139",
@@ -537,8 +615,8 @@
       "longitude": 139.8583691,
       "address": "Aoto, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     },
     {
       "id": "4045140",
@@ -551,7 +629,7 @@
       "address": "Narita International Airport, Chiba, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ตามตั๋วที่จองไว้เดิม เผื่อเวลาเก็บกระเป๋า + เดินทางไป Narita",
-      "website": null
+      "website": ""
     }
   ],
   "lodging": [
@@ -562,7 +640,7 @@
       "ends_at": "2026-09-18T15:00:01Z",
       "latitude": 35.7166134,
       "longitude": 139.7982815,
-      "address": "111-0032 東京都 台東区 浅草3丁目26-10 日本",
+      "address": "111-0032, 東京都 台東区, 浅草3丁目26-10, 日本",
       "timezone": "Asia/Tokyo",
       "notes": "Drop luggage after arrival and come back to check-in again",
       "website": "https://tosei-hotel.co.jp/asakusa/"
@@ -584,7 +662,7 @@
     {
       "id": "3573242",
       "type": "airplane",
-      "name": null,
+      "name": "",
       "transport_number": "NH850",
       "departure_at": "2026-09-17T14:35:00Z",
       "arrival_at": "2026-09-17T21:00:00Z",
@@ -602,8 +680,8 @@
     {
       "id": "3578271",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-17T21:30:00Z",
       "arrival_at": "2026-09-17T22:15:00Z",
       "departure": {
@@ -620,8 +698,8 @@
     {
       "id": "3581197",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-17T22:45:01Z",
       "arrival_at": "2026-09-18T01:10:24Z",
       "departure": {
@@ -638,8 +716,8 @@
     {
       "id": "3581198",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T01:40:24Z",
       "arrival_at": "2026-09-18T02:00:00Z",
       "departure": {
@@ -656,8 +734,8 @@
     {
       "id": "3581199",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T02:30:00Z",
       "arrival_at": "2026-09-18T02:30:00Z",
       "departure": {
@@ -674,8 +752,8 @@
     {
       "id": "3578273",
       "type": "bus",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T02:45:00Z",
       "arrival_at": "2026-09-18T03:00:00Z",
       "departure": {
@@ -692,8 +770,8 @@
     {
       "id": "3581200",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T04:00:00Z",
       "arrival_at": "2026-09-18T04:00:00Z",
       "departure": {
@@ -710,8 +788,8 @@
     {
       "id": "3578276",
       "type": "bus",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T05:00:00Z",
       "arrival_at": "2026-09-18T05:15:00Z",
       "departure": {
@@ -728,8 +806,8 @@
     {
       "id": "3581201",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-18T05:15:00Z",
       "arrival_at": "2026-09-18T10:00:00Z",
       "departure": {
@@ -746,8 +824,8 @@
     {
       "id": "3581276",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T05:10:00Z",
       "arrival_at": "2026-09-19T05:25:00Z",
       "departure": {
@@ -764,8 +842,8 @@
     {
       "id": "3581410",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T06:50:00Z",
       "arrival_at": "2026-09-19T07:29:00Z",
       "departure": {
@@ -782,8 +860,8 @@
     {
       "id": "3581138",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T06:52:51Z",
       "arrival_at": "2026-09-19T07:00:01Z",
       "departure": {
@@ -800,8 +878,8 @@
     {
       "id": "3581464",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T07:55:00Z",
       "arrival_at": "2026-09-19T08:00:00Z",
       "departure": {
@@ -818,8 +896,8 @@
     {
       "id": "3581514",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T07:55:00Z",
       "arrival_at": "2026-09-19T08:00:00Z",
       "departure": {
@@ -836,8 +914,8 @@
     {
       "id": "3581560",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T08:40:00Z",
       "arrival_at": "2026-09-19T08:55:00Z",
       "departure": {
@@ -854,8 +932,8 @@
     {
       "id": "3581608",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-19T09:53:00Z",
       "arrival_at": "2026-09-19T10:08:00Z",
       "departure": {
@@ -870,28 +948,118 @@
       }
     },
     {
-      "id": "3581211",
-      "type": "train",
-      "name": null,
-      "transport_number": null,
-      "departure_at": "2026-09-20T13:00:00Z",
-      "arrival_at": "2026-09-20T14:04:56Z",
+      "id": "3582133",
+      "type": "walk",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-19T11:08:00Z",
+      "arrival_at": "2026-09-19T11:10:00Z",
       "departure": {
-        "name": "teamLab Planets",
-        "latitude": 35.6465,
-        "longitude": 139.793
+        "name": "GU 銀座店 (GU Ginza)",
+        "latitude": 35.6712,
+        "longitude": 139.766
       },
       "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
+        "name": "マツモトキヨシ 銀座5th店",
+        "latitude": 35.6706,
+        "longitude": 139.7649
+      }
+    },
+    {
+      "id": "3582134",
+      "type": "train",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-19T11:40:00Z",
+      "arrival_at": "2026-09-19T12:15:00Z",
+      "departure": {
+        "name": "Ginza Station",
+        "latitude": 35.6716,
+        "longitude": 139.7638
+      },
+      "arrival": {
+        "name": "Aoto Station",
+        "latitude": 35.7502,
+        "longitude": 139.8481
+      }
+    },
+    {
+      "id": "3582135",
+      "type": "walk",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-19T12:15:00Z",
+      "arrival_at": "2026-09-19T12:20:00Z",
+      "departure": {
+        "name": "Aoto Station",
+        "latitude": 35.7502,
+        "longitude": 139.8481
+      },
+      "arrival": {
+        "name": "セブン-イレブン 青砂駅前店",
+        "latitude": 35.749917,
+        "longitude": 139.847934
+      }
+    },
+    {
+      "id": "3582136",
+      "type": "walk",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-19T12:35:00Z",
+      "arrival_at": "2026-09-19T12:45:00Z",
+      "departure": {
+        "name": "セブン-イレブン 青砂駅前店",
+        "latitude": 35.749917,
+        "longitude": 139.847934
+      },
+      "arrival": {
+        "name": "AIRSTAY Aoto #201",
         "latitude": 35.749227,
         "longitude": 139.8583691
       }
     },
     {
+      "id": "3585524",
+      "type": "train",
+      "name": "ที่พัก (Aoto) → Shimokitazawa",
+      "transport_number": "",
+      "departure_at": "2026-09-20T04:55:00Z",
+      "arrival_at": "2026-09-20T06:00:00Z",
+      "departure": {
+        "name": "AIRSTAY Aoto #201",
+        "latitude": 35.749917,
+        "longitude": 139.847934
+      },
+      "arrival": {
+        "name": "Shimokitazawa",
+        "latitude": 35.6613,
+        "longitude": 139.6676
+      }
+    },
+    {
+      "id": "3585529",
+      "type": "train",
+      "name": "ขากลับ: Shibuya → ที่พัก (Aoto)",
+      "transport_number": "",
+      "departure_at": "2026-09-20T11:15:00Z",
+      "arrival_at": "2026-09-20T12:30:00Z",
+      "departure": {
+        "name": "Shibuya Station",
+        "latitude": 35.658,
+        "longitude": 139.7016
+      },
+      "arrival": {
+        "name": "AIRSTAY Aoto #201",
+        "latitude": 35.749917,
+        "longitude": 139.847934
+      }
+    },
+    {
       "id": "3581237",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": "2026-09-27T01:00:00Z",
       "arrival_at": "2026-09-27T06:00:00Z",
       "departure": {
@@ -908,8 +1076,8 @@
     {
       "id": "3581153",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -926,8 +1094,8 @@
     {
       "id": "3581194",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -944,8 +1112,8 @@
     {
       "id": "3581202",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-18T13:00:00Z",
       "departure": {
@@ -962,8 +1130,8 @@
     {
       "id": "3581203",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-19T01:00:00Z",
       "departure": {
@@ -980,8 +1148,8 @@
     {
       "id": "3581204",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-19T02:00:00Z",
       "departure": {
@@ -998,8 +1166,8 @@
     {
       "id": "3581205",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-19T02:46:00Z",
       "departure": {
@@ -1016,8 +1184,8 @@
     {
       "id": "3581206",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1032,82 +1200,10 @@
       }
     },
     {
-      "id": "3581207",
-      "type": "train",
-      "name": null,
-      "transport_number": null,
-      "departure_at": null,
-      "arrival_at": "2026-09-20T01:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Toyosu / Senkyaku Banrai",
-        "latitude": 35.6455,
-        "longitude": 139.7822
-      }
-    },
-    {
-      "id": "3581208",
-      "type": "train",
-      "name": null,
-      "transport_number": null,
-      "departure_at": null,
-      "arrival_at": "2026-09-20T03:00:00Z",
-      "departure": {
-        "name": "Toyosu / Senkyaku Banrai",
-        "latitude": 35.6455,
-        "longitude": 139.7822
-      },
-      "arrival": {
-        "name": "つじ半 日本橋本店",
-        "latitude": 35.6807447,
-        "longitude": 139.7715989
-      }
-    },
-    {
-      "id": "3581209",
-      "type": "train",
-      "name": null,
-      "transport_number": null,
-      "departure_at": null,
-      "arrival_at": "2026-09-20T07:30:00Z",
-      "departure": {
-        "name": "つじ半 日本橋本店",
-        "latitude": 35.6807447,
-        "longitude": 139.7715989
-      },
-      "arrival": {
-        "name": "Azabudai Hills",
-        "latitude": 35.662,
-        "longitude": 139.7388
-      }
-    },
-    {
-      "id": "3581210",
-      "type": "train",
-      "name": null,
-      "transport_number": null,
-      "departure_at": null,
-      "arrival_at": "2026-09-20T10:00:00Z",
-      "departure": {
-        "name": "Azabudai Hills",
-        "latitude": 35.662,
-        "longitude": 139.7388
-      },
-      "arrival": {
-        "name": "teamLab Planets",
-        "latitude": 35.6465,
-        "longitude": 139.793
-      }
-    },
-    {
       "id": "3581212",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-21T01:00:00Z",
       "departure": {
@@ -1124,8 +1220,8 @@
     {
       "id": "3581213",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1142,8 +1238,8 @@
     {
       "id": "3581214",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-22T01:00:00Z",
       "departure": {
@@ -1160,8 +1256,8 @@
     {
       "id": "3581215",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-22T03:30:00Z",
       "departure": {
@@ -1178,8 +1274,8 @@
     {
       "id": "3581216",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-22T05:00:00Z",
       "departure": {
@@ -1196,8 +1292,8 @@
     {
       "id": "3581217",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-22T07:00:00Z",
       "departure": {
@@ -1214,8 +1310,8 @@
     {
       "id": "3581218",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-22T09:30:00Z",
       "departure": {
@@ -1232,8 +1328,8 @@
     {
       "id": "3581219",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1250,8 +1346,8 @@
     {
       "id": "3581220",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-23T00:00:00Z",
       "departure": {
@@ -1268,8 +1364,8 @@
     {
       "id": "3581221",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-23T05:00:00Z",
       "departure": {
@@ -1286,8 +1382,8 @@
     {
       "id": "3581222",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1304,8 +1400,8 @@
     {
       "id": "3581223",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-23T23:00:00Z",
       "departure": {
@@ -1322,8 +1418,8 @@
     {
       "id": "3581224",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-24T05:00:00Z",
       "departure": {
@@ -1340,8 +1436,8 @@
     {
       "id": "3581225",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-24T09:00:00Z",
       "departure": {
@@ -1358,8 +1454,8 @@
     {
       "id": "3581226",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1376,8 +1472,8 @@
     {
       "id": "3581227",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-25T00:00:00Z",
       "departure": {
@@ -1394,8 +1490,8 @@
     {
       "id": "3581228",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-25T05:00:00Z",
       "departure": {
@@ -1412,8 +1508,8 @@
     {
       "id": "3581229",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {
@@ -1430,8 +1526,8 @@
     {
       "id": "3581230",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-26T00:00:00Z",
       "departure": {
@@ -1448,8 +1544,8 @@
     {
       "id": "3581231",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-26T02:00:00Z",
       "departure": {
@@ -1466,8 +1562,8 @@
     {
       "id": "3581233",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-26T04:00:00Z",
       "departure": {
@@ -1484,8 +1580,8 @@
     {
       "id": "3581234",
       "type": "walk",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-26T06:00:00Z",
       "departure": {
@@ -1502,8 +1598,8 @@
     {
       "id": "3581235",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": "2026-09-26T08:00:00Z",
       "departure": {
@@ -1520,8 +1616,8 @@
     {
       "id": "3581236",
       "type": "train",
-      "name": null,
-      "transport_number": null,
+      "name": "",
+      "transport_number": "",
       "departure_at": null,
       "arrival_at": null,
       "departure": {

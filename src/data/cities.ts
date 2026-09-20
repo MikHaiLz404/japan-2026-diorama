@@ -200,8 +200,12 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
     if (seen.has(key)) continue;
     seen.add(key);
 
+    // Some Tripsy hops (mostly the return legs of a day trip) carry no times at
+    // all. Dating those to trip.starts_at used to light them up as "visited" on
+    // day one, so a return ribbon could read as travelled while its outbound leg
+    // was still dim. An undated hop is unknown, not done: leave it upcoming.
     const when = hop.departure_at ?? hop.arrival_at;
-    const date = when ? toDateKey(when, tz) : trip.starts_at;
+    const status = when ? statusForDate(toDateKey(when, tz), today) : "upcoming";
     const label = hop.transport_number
       ? `${hop.type} ${hop.transport_number}`
       : hop.type === "airplane"
@@ -213,7 +217,7 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
       type: hop.type,
       fromCityId: fromCity,
       toCityId: toCity,
-      status: statusForDate(date, today),
+      status,
       label,
     });
   }
