@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { CITY_CATALOG } from "../data/cities";
 import type { CityBlock } from "../data/types";
 import { isSharedGeometry, platformSize } from "./meshes";
+import { stylizeUntexturedModel } from "./paint";
 
 /** Catalog city ids → `/models/{id}.glb`. */
 export const CITY_MODEL_IDS = CITY_CATALOG.map((city) => city.id);
@@ -217,6 +218,7 @@ export async function hydrateGltfModels(options: {
       fitted.name = "tray";
       fitted.position.y = TRAY_Y_MIN;
       prepareLoadedModel(fitted, shadows);
+      stylizeUntexturedModel(fitted, "tray");
       if (signal?.aborted) {
         disposeObject3D(fitted);
       } else {
@@ -240,6 +242,7 @@ export async function hydrateGltfModels(options: {
         const fitted = fitModelToBox(loaded, modelFitSize(city.size));
         fitted.name = `gltf:${city.id}`;
         prepareLoadedModel(fitted, shadows);
+        stylizeUntexturedModel(fitted, city.id);
         const block = scene.getObjectByName(`city:${city.id}`);
         if (!block || signal?.aborted) {
           disposeObject3D(fitted);

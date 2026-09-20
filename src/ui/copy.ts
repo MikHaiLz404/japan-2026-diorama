@@ -1,3 +1,5 @@
+import type { VisitStatus } from "../data/types";
+
 export type Bilingual = {
   ja: string;
   en: string;
@@ -23,6 +25,12 @@ export const COPY = {
   starts: { ja: "開始", en: "Starts" },
   wrapped: { ja: "終了", en: "Wrapped" },
 } as const satisfies Record<string, Bilingual>;
+
+export function statusShort(status: VisitStatus): Bilingual {
+  if (status === "visited") return COPY.visited;
+  if (status === "today") return COPY.today;
+  return COPY.upcoming;
+}
 
 export function jaEn(pair: Bilingual, sep = " · "): string {
   return `${pair.ja}${sep}${pair.en}`;

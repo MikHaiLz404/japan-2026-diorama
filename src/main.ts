@@ -52,6 +52,16 @@ chipsEl.addEventListener("click", (event) => {
   applySelection({ cityId: button.dataset.city ?? "" });
 });
 
+chipsEl.addEventListener("change", (event) => {
+  const select = event.target;
+  if (!(select instanceof HTMLSelectElement) || select.id !== "city-select") return;
+  if (!select.value) {
+    applySelection(null);
+    return;
+  }
+  applySelection({ cityId: select.value });
+});
+
 sheetBodyEl.addEventListener("click", (event) => {
   const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-date]");
   if (!button?.dataset.city || !button.dataset.date) return;

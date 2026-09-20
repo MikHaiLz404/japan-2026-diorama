@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { buildCityBlocks } from "../data/cities";
 import { trip } from "../data/loadTrip";
-import { renderHudMeta } from "./hud";
+import { cityOptionLabel, renderCityChips, renderHudMeta } from "./hud";
 
 function host(): HTMLElement {
   return { textContent: "" } as HTMLElement;
@@ -34,5 +35,28 @@ describe("HUD meta copy", () => {
     expect(after.textContent).toContain("Wrapped");
     expect(after.textContent).toContain("終了");
     expect(after.textContent).not.toMatch(/[\u0E00-\u0E7F]/);
+  });
+});
+
+describe("city picker", () => {
+  it("renders desktop chips and a mobile select with EN/JP status labels", () => {
+    const cities = buildCityBlocks(trip, "2026-09-20");
+    const tokyo = cities.find((city) => city.id === "tokyo");
+    const yokohama = cities.find((city) => city.id === "yokohama");
+    expect(tokyo && yokohama).toBeTruthy();
+
+    const el = { innerHTML: "" } as HTMLElement;
+    renderCityChips(el, cities, "tokyo");
+
+    expect(el.innerHTML).toContain('class="city-chips"');
+    expect(el.innerHTML).toContain('id="city-select"');
+    expect(el.innerHTML).toContain("今日");
+    expect(el.innerHTML).toContain("これから");
+    expect(cityOptionLabel({ ...tokyo!, status: "visited" })).toContain("行った");
+    expect(el.innerHTML).toMatch(/chip status-today is-selected/);
+    expect(el.innerHTML).toContain(cityOptionLabel(tokyo!));
+    expect(el.innerHTML).toContain(cityOptionLabel(yokohama!));
+    expect(el.innerHTML).toMatch(/<option value="tokyo"[^>]*selected/);
+    expect(el.innerHTML).not.toMatch(/[\u0E00-\u0E7F]/);
   });
 });

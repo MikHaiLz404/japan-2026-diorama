@@ -48,6 +48,16 @@ describe("mobile chrome overflow containment", () => {
     expect(chips).toMatch(/overscroll-behavior-x:\s*contain/);
   });
 
+  it("hides the wrapping chip row on small screens in favor of a compact select", () => {
+    expect(firstRule(".city-chips")).toMatch(/display:\s*none/);
+    expect(firstRule(".city-select-wrap")).toMatch(/display:\s*block/);
+    expect(css).toMatch(/@media \(min-width: 860px\)[\s\S]*\.city-chips[\s\S]*display:\s*flex/);
+    expect(css).toMatch(/@media \(min-width: 860px\)[\s\S]*\.city-select-wrap[\s\S]*display:\s*none/);
+    const select = firstRule(".city-select");
+    expect(select).toMatch(/min-height:\s*44px/);
+    expect(select).toMatch(/appearance:\s*none/);
+  });
+
   it("wraps day tabs inside the sheet without a horizontal menu scroller", () => {
     const tabs = firstRule(".day-tabs");
     expect(tabs).toMatch(/flex-wrap:\s*wrap/);
@@ -158,10 +168,10 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(hud).toMatch(/var\(--safe-top\)/);
     expect(hud).toMatch(/var\(--safe-left\)/);
     expect(hud).toMatch(/var\(--safe-right\)/);
-    const chips = firstRule(".city-chips");
-    expect(chips).toMatch(/var\(--safe-bottom\)/);
-    expect(chips).toMatch(/var\(--safe-left\)/);
-    expect(chips).toMatch(/var\(--safe-right\)/);
+    const nav = firstRule(".city-nav");
+    expect(nav).toMatch(/var\(--safe-bottom\)/);
+    expect(nav).toMatch(/var\(--safe-left\)/);
+    expect(nav).toMatch(/var\(--safe-right\)/);
   });
 
   it("keeps the navy accent on today only, not on every selected chip or kicker", () => {
@@ -172,9 +182,11 @@ describe("Liberogic / Vodka chrome design system", () => {
   });
 
   it("softens the WebGL clear color onto the cream canvas without touching the GLTF loader", () => {
-    expect(diorama).toMatch(/setClearColor\(\s*0xf[0-9a-f]{5}/i);
+    expect(diorama).toMatch(/setClearColor\(\s*(SCENE_LOOK\.clearColor|0xf[0-9a-f]{5})/i);
     expect(diorama).not.toMatch(/setClearColor\(\s*0x2b1d14/);
     expect(diorama).toMatch(/hydrateGltfModels/);
     expect(diorama).toMatch(/shadowMap\.enabled\s*=\s*!small/);
+    expect(diorama).toMatch(/AmbientLight/);
+    expect(diorama).toMatch(/HemisphereLight/);
   });
 });

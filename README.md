@@ -35,7 +35,7 @@ No API keys are required. The app reads the committed fixture at `src/data/japan
 ## Interaction
 
 - One-finger orbit, pinch or `+` / `−` to zoom, **リセット / Reset** to reset
-- Tap a city block, day tile, or chip (no hover-only targets)
+- Tap a city block, day tile, desktop chip, or the mobile city dropdown (no hover-only targets)
 - Mobile: detail opens as a bottom sheet
 - Small screens: fewer blossom particles, no shadow maps, capped pixel ratio
 
