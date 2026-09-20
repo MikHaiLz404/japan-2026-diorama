@@ -60,7 +60,7 @@ export function makeTray(): THREE.Group {
   const mossDeep = mat(palette.mossDeep, { roughness: 0.96 });
   const sand = mat(palette.sand, { roughness: 0.9 });
 
-  const table = new THREE.Mesh(geo.box, mat(0x2a1b12, { roughness: 0.92 }));
+  const table = new THREE.Mesh(geo.box, mat(0xe7e2d8, { roughness: 0.92 }));
   table.scale.set(16, 0.2, 13);
   table.position.y = -0.48;
   table.receiveShadow = true;
@@ -253,9 +253,9 @@ export function makeDayPlate(
   const row = Math.floor(index / cols);
   const plate = new THREE.Mesh(
     geo.box,
-    mat(status === "upcoming" ? 0xcfc3b0 : palette.ceramic, {
-      emissive: status === "today" ? 0x5a1c10 : 0x000000,
-      emissiveIntensity: status === "today" ? 0.12 : 0,
+    mat(status === "upcoming" ? 0xd8dbe0 : palette.ceramic, {
+      emissive: status === "today" ? 0x1a2448 : 0x000000,
+      emissiveIntensity: status === "today" ? 0.08 : 0,
     }),
   );
   const pw = date === "2026-09-18" ? 0.52 : 0.42;
@@ -265,10 +265,10 @@ export function makeDayPlate(
   canvas.height = 80;
   const ctx = canvas.getContext("2d");
   if (ctx) {
-    ctx.fillStyle = status === "upcoming" ? "#d5c8b3" : "#f7efe2";
+    ctx.fillStyle = status === "upcoming" ? "#e4e6ea" : "#f7f6f3";
     ctx.fillRect(0, 0, 128, 80);
-    ctx.fillStyle = status === "today" ? "#b8432a" : "#5a4332";
-    ctx.font = "700 28px 'DM Sans', sans-serif";
+    ctx.fillStyle = status === "today" ? "#2a3a66" : "#5c6370";
+    ctx.font = "700 28px 'Noto Sans JP', sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(date.slice(5), 64, 40);
@@ -276,8 +276,8 @@ export function makeDayPlate(
   plate.material = new THREE.MeshStandardMaterial({
     map: new THREE.CanvasTexture(canvas),
     roughness: 0.45,
-    emissive: status === "today" ? 0x5a1c10 : 0x000000,
-    emissiveIntensity: status === "today" ? 0.16 : 0,
+    emissive: status === "today" ? 0x1a2448 : 0x000000,
+    emissiveIntensity: status === "today" ? 0.1 : 0,
   });
   plate.scale.set(pw, 0.07, pd);
   plate.position.set(-w * 0.36 + col * 0.48, h + 0.08, d * 0.42 - row * 0.32);
@@ -307,12 +307,12 @@ export function makeLabel(text: string, cityId: string, dim: boolean): THREE.Spr
   const ctx = canvas.getContext("2d");
   if (ctx) {
     ctx.clearRect(0, 0, 256, 96);
-    ctx.fillStyle = dim ? "rgba(70, 56, 44, 0.55)" : "rgba(44, 33, 24, 0.82)";
+    ctx.fillStyle = dim ? "rgba(255, 255, 255, 0.62)" : "rgba(255, 255, 255, 0.88)";
     ctx.beginPath();
     ctx.roundRect(18, 22, 220, 52, 16);
     ctx.fill();
-    ctx.fillStyle = dim ? "#ddd4c6" : "#f7efe3";
-    ctx.font = "600 28px 'DM Sans', sans-serif";
+    ctx.fillStyle = dim ? "#8a8f98" : "#12141a";
+    ctx.font = "600 28px 'Noto Sans JP', sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(text, 128, 48);

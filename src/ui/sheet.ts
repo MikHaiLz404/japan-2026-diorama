@@ -58,7 +58,7 @@ export function renderSheet(
   const dayTabs = city.plates
     .map((item) => {
       const active = item.date === date ? " is-active" : "";
-      return `<button type="button" class="day-tab${active}" data-city="${city.id}" data-date="${item.date}">${escapeHtml(item.date.slice(5))}</button>`;
+      return `<button type="button" class="day-tab status-${item.status}${active}" data-city="${city.id}" data-date="${item.date}">${escapeHtml(item.date.slice(5))}</button>`;
     })
     .join("");
 
@@ -88,7 +88,7 @@ export function renderSheet(
     .join("");
 
   host.innerHTML = `
-    <p class="sheet-kicker">${escapeHtml(city.nameJa)} · ${statusLabel(city.status)}</p>
+    <p class="sheet-kicker status-${city.status}">${escapeHtml(city.nameJa)} · ${statusLabel(city.status)}</p>
     <h2>${escapeHtml(city.name)}</h2>
     <p class="sheet-lead">${date ? escapeHtml(formatDayLabel(date, tz)) : "แผ่นวันนี้"} · วันที่ ${(date ? tripDays.indexOf(date) + 1 : 0) || "—"} / ${tripDays.length}</p>
     <div class="day-tabs" role="tablist">${dayTabs}</div>

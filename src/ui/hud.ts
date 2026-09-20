@@ -8,8 +8,8 @@ export function renderHudMeta(el: HTMLElement, trip: TripFixture, today: string)
     index >= 0
       ? `วันที่ ${index + 1} / ${days.length} · สด`
       : today < trip.starts_at
-        ? `Starts ${formatDayLabel(trip.starts_at, trip.timezone)}`
-        : `Wrapped ${formatDayLabel(trip.ends_at, trip.timezone)}`;
+        ? `เริ่ม ${formatDayLabel(trip.starts_at, trip.timezone)}`
+        : `จบแล้ว ${formatDayLabel(trip.ends_at, trip.timezone)}`;
   el.textContent = `${formatDayLabel(trip.starts_at, trip.timezone)} – ${formatDayLabel(trip.ends_at, trip.timezone)} · ${label}`;
 }
 

@@ -28,4 +28,19 @@ describe("locked Thai overlay copy", () => {
     expect(host.innerHTML).not.toContain("บนแผ่นนี้");
     expect(host.innerHTML).not.toContain("On this plate");
   });
+
+  it("marks day tabs and the kicker with visit status so today can keep the only accent", () => {
+    const tokyo = buildCityBlocks(trip, "2026-09-20").find((city) => city.id === "tokyo");
+    const yokohama = buildCityBlocks(trip, "2026-09-20").find((city) => city.id === "yokohama");
+    expect(tokyo && yokohama).toBeTruthy();
+    const host = { innerHTML: "" } as HTMLElement;
+    renderSheet(host, trip, tokyo!, { cityId: "tokyo", date: "2026-09-20" });
+    expect(host.innerHTML).toMatch(/sheet-kicker status-today/);
+    expect(host.innerHTML).toMatch(/day-tab status-today is-active/);
+    expect(host.innerHTML).toMatch(/day-tab status-visited"/);
+
+    renderSheet(host, trip, yokohama!, { cityId: "yokohama", date: "2026-09-22" });
+    expect(host.innerHTML).toMatch(/sheet-kicker status-upcoming/);
+    expect(host.innerHTML).toMatch(/day-tab status-upcoming is-active/);
+  });
 });
