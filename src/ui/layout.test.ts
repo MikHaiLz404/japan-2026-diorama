@@ -57,7 +57,7 @@ describe("mobile chrome overflow containment", () => {
     expect(firstRule(".city-menu-item")).toMatch(/min-height:\s*44px/);
     const list = firstRule(".city-menu-list");
     expect(list).toMatch(/bottom:\s*100%/);
-    expect(list).toMatch(/max-height:\s*38vh/);
+    expect(list).toMatch(/max-height:\s*28vh/);
   });
 
   it("wraps day tabs inside the sheet without a horizontal menu scroller", () => {

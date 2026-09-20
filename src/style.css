@@ -224,7 +224,7 @@ h1 {
   z-index: 1;
   left: calc(12px + var(--safe-left));
   right: calc(12px + var(--safe-right));
-  bottom: calc(72px + var(--safe-bottom));
+  bottom: calc(16px + var(--safe-bottom));
   max-width: 100%;
   pointer-events: none;
 }
@@ -269,6 +269,8 @@ h1 {
 }
 
 .city-menu-toggle {
+  position: relative;
+  z-index: 5;
   min-height: 44px;
   padding-right: 42px;
   border-radius: 16px;
@@ -288,12 +290,11 @@ h1 {
   z-index: 4;
   display: flex;
   flex-direction: column;
-  max-height: 38vh;
+  max-height: 28vh;
   margin: 0 0 8px;
   padding: 8px;
   list-style: none;
-  overflow-x: clip;
-  overflow-y: auto;
+  overflow: auto;
   overscroll-behavior: contain;
   background: var(--paper);
   border: 1px solid var(--line);
@@ -405,9 +406,13 @@ h1 {
   position: absolute;
   left: calc(16px + var(--safe-left));
   right: calc(16px + var(--safe-right));
-  bottom: calc(28px + var(--safe-bottom));
+  bottom: calc(68px + var(--safe-bottom));
   max-width: calc(100% - 32px);
   opacity: 0.9;
+}
+
+.city-nav.is-menu-open ~ .hint {
+  visibility: hidden;
 }
 
 .hint .lang-en {
@@ -575,5 +580,6 @@ h1 {
 
   .hint {
     left: calc(20px + var(--safe-left));
+    bottom: calc(28px + var(--safe-bottom));
   }
 }
