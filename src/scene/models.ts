@@ -15,6 +15,13 @@ export const TRAY_Y_MIN = -0.58;
 
 export const TRAY_MODEL_URL = "/models/tray.glb";
 
+/**
+ * Unindexed triangle soup is ~1/3; Three `BoxGeometry` is ~0.5; healthy remeshed
+ * cities are ~2 triangles/vertex. Corrupt tokyo/yokohama GLBs are ~0.1 and render
+ * as scattered points, so anything far below this floor is rejected.
+ */
+export const MIN_CITY_TRIANGLE_VERTEX_RATIO = 0.25;
+
 const GLB_MAGIC = "glTF";
 
 type GltfLoader = InstanceType<typeof import("three/addons/loaders/GLTFLoader.js").GLTFLoader>;
@@ -33,6 +40,55 @@ export type GltfLoadFn = (
 
 export function cityModelUrl(cityId: string): string {
   return `/models/${cityId}.glb`;
+}
+
+export type MeshTopology = {
+  vertices: number;
+  triangles: number;
+};
+
+function geometryTriangleCount(geometry: THREE.BufferGeometry): number {
+  const position = geometry.getAttribute("position");
+  if (!position || position.count <= 0) return 0;
+  const drawStart = geometry.drawRange.start;
+  const drawCount = geometry.drawRange.count;
+  const indexed = geometry.index;
+  const total = indexed ? indexed.count : position.count;
+  const available = Math.max(total - drawStart, 0);
+  const count = Number.isFinite(drawCount) ? Math.min(drawCount, available) : available;
+  return Math.floor(Math.max(count, 0) / 3);
+}
+
+/** Vertex / triangle totals for Mesh nodes (Points and Lines are ignored). */
+export function meshTopology(root: THREE.Object3D): MeshTopology {
+  let vertices = 0;
+  let triangles = 0;
+  root.traverse((node) => {
+    if (!(node instanceof THREE.Mesh)) return;
+    const position = node.geometry.getAttribute("position");
+    if (position) vertices += position.count;
+    triangles += geometryTriangleCount(node.geometry);
+  });
+  return { vertices, triangles };
+}
+
+/**
+ * True when a city GLB can replace the procedural block. Rejects empty scenes,
+ * collapsed bounds, and meshes whose triangle count is far too low vs vertices
+ * (the tokyo.glb / yokohama.glb remesh failure).
+ */
+export function isRenderableCityModel(root: THREE.Object3D): boolean {
+  const { vertices, triangles } = meshTopology(root);
+  if (vertices <= 0 || triangles <= 0) return false;
+  if (triangles / vertices < MIN_CITY_TRIANGLE_VERTEX_RATIO) return false;
+
+  root.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(root);
+  if (box.isEmpty()) return false;
+  const size = box.getSize(new THREE.Vector3());
+  if (![size.x, size.y, size.z].every(Number.isFinite)) return false;
+  if (size.x < 1e-6 && size.y < 1e-6 && size.z < 1e-6) return false;
+  return true;
 }
 
 /** Target box for a city glb — same layout footprint as the procedural block. */
@@ -239,6 +295,10 @@ export async function hydrateGltfModels(options: {
       try {
         const loaded = await loadIfActive(load, cityModelUrl(city.id), signal);
         if (!loaded) return;
+        if (!isRenderableCityModel(loaded)) {
+          disposeObject3D(loaded);
+          return;
+        }
         const fitted = fitModelToBox(loaded, modelFitSize(city.size));
         fitted.name = `gltf:${city.id}`;
         prepareLoadedModel(fitted, shadows);
