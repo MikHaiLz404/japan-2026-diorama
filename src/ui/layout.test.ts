@@ -71,6 +71,9 @@ describe("mobile chrome overflow containment", () => {
     expect(sheet).toMatch(/max-width:\s*100%/);
     expect(sheet).toMatch(/overflow-x:\s*(clip|hidden)/);
     expect(sheet).toMatch(/overflow-y:\s*auto/);
+    expect(sheet).toMatch(/z-index:\s*3/);
+    expect(firstRule(".city-nav")).toMatch(/z-index:\s*1/);
+    expect(css).toMatch(/#app:has\(#sheet:not\(\[hidden\]\)\)\s*\.city-select-wrap[\s\S]*visibility:\s*hidden/);
   });
 
   it("preserves one-finger orbit on the canvas", () => {

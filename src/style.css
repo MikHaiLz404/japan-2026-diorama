@@ -220,6 +220,7 @@ h1 {
 
 .city-nav {
   position: absolute;
+  z-index: 1;
   left: calc(12px + var(--safe-left));
   right: calc(12px + var(--safe-right));
   bottom: calc(72px + var(--safe-bottom));
@@ -242,6 +243,10 @@ h1 {
   display: block;
   width: 100%;
   pointer-events: auto;
+}
+
+#app:has(#sheet:not([hidden])) .city-select-wrap {
+  visibility: hidden;
 }
 
 .city-select {
@@ -345,6 +350,7 @@ h1 {
 
 .sheet {
   position: absolute;
+  z-index: 3;
   left: 0;
   right: 0;
   bottom: 0;
