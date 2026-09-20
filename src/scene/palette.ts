@@ -13,7 +13,8 @@ export const palette = {
   blossom: 0xf2b6c6,
   water: 0x7ea8b0,
   brass: 0xc4a15a,
-  flight: 0xd9c7a1,
+  flight: 0x2a3a66,
+  rail: 0xc45c3e,
   ink: 0x2c2118,
 };
 
@@ -52,6 +53,7 @@ export function cityColors(status: VisitStatus): {
 }
 
 export function pathColor(status: VisitStatus, kind: string): number {
-  if (kind === "airplane") return status === "upcoming" ? 0xc5c8ce : 0x8a90a0;
-  return status === "upcoming" ? 0xb4b8c0 : 0x8a8f98;
+  const upcoming = status === "upcoming";
+  if (kind === "airplane") return upcoming ? 0x6d7aa3 : palette.flight;
+  return upcoming ? 0xd98a72 : palette.rail;
 }

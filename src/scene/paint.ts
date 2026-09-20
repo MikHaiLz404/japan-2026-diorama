@@ -41,54 +41,52 @@ export function paletteForKind(kind: MiniatureKind): MiniaturePalette {
   return CITY_PAINT[kind] ?? DEFAULT_CITY;
 }
 
-function stroke(x: number, z: number): number {
-  return (Math.sin(x * 13.7 + z * 9.1) + Math.sin(x * 3.3 - z * 5.8)) * 0.035;
-}
-
 function mixHex(target: THREE.Color, hex: number, amount: number): void {
-  target.lerp(new THREE.Color(hex), amount);
+  if (amount <= 0) return;
+  target.lerp(new THREE.Color(hex), THREE.MathUtils.clamp(amount, 0, 1));
 }
 
-/** Height + slope heuristic that reads as a painted ceramic miniature. */
+function ramp(value: number, edge0: number, edge1: number): number {
+  return THREE.MathUtils.smoothstep(value, edge0, edge1);
+}
+
+/** Height + slope ramps that read as a painted ceramic miniature (no spatial grain). */
 export function paintColor(
   y01: number,
   ny: number,
-  x: number,
-  z: number,
+  _x: number,
+  _z: number,
   kind: MiniatureKind,
   out = new THREE.Color(),
 ): THREE.Color {
   const swatch = paletteForKind(kind);
   const up = THREE.MathUtils.clamp(ny, -1, 1);
-  const roofish = up > 0.52 && y01 > 0.28;
-  const groundish = up > 0.42 && y01 < 0.16;
-  const under = up < -0.35;
-  const base = y01 < 0.22 && Math.abs(up) < 0.55;
+  const height = THREE.MathUtils.clamp(y01, 0, 1);
 
   if (kind === "tray") {
-    if (groundish || (up > 0.7 && y01 < 0.55)) out.setHex(swatch.ground);
-    else if (y01 > 0.72) out.setHex(swatch.roof);
-    else out.setHex(swatch.wood);
-  } else if (roofish) {
-    out.setHex(swatch.roof);
-    if (y01 > 0.82) mixHex(out, swatch.accent, 0.12);
-  } else if (groundish) {
-    out.setHex(swatch.ground);
-  } else if (under) {
+    const moss = ramp(up, 0.45, 0.92) * (1 - ramp(height, 0.42, 0.72));
+    const rim = ramp(height, 0.62, 0.9);
     out.setHex(swatch.wood);
-    out.multiplyScalar(0.72);
-  } else if (base) {
-    out.setHex(swatch.wood);
-    mixHex(out, swatch.wall, 0.28);
-  } else {
-    out.setHex(swatch.wall);
-    if (y01 > 0.62) mixHex(out, swatch.roof, 0.08);
-    if (kind === "takao") mixHex(out, swatch.ground, 0.22);
-    if (kind === "enoshima" && y01 < 0.4) mixHex(out, swatch.accent, 0.18);
+    mixHex(out, swatch.ground, moss);
+    mixHex(out, swatch.roof, rim);
+    return out;
   }
 
-  const grain = stroke(x, z);
-  out.offsetHSL(grain * 0.15, grain * 0.4, grain);
+  const roofAmt = ramp(up, 0.28, 0.82) * ramp(height, 0.22, 0.74);
+  const groundAmt = ramp(up, 0.22, 0.88) * (1 - ramp(height, 0.05, 0.3));
+  const underAmt = ramp(-up, 0.12, 0.72);
+  const baseAmt = (1 - ramp(height, 0.08, 0.36)) * (1 - Math.abs(up)) * 0.55;
+
+  out.setHex(swatch.wall);
+  mixHex(out, swatch.roof, roofAmt);
+  mixHex(out, swatch.ground, groundAmt * (1 - roofAmt));
+  mixHex(out, swatch.wood, underAmt * 0.72 + baseAmt);
+  mixHex(out, swatch.accent, roofAmt * ramp(height, 0.68, 0.96) * 0.14);
+
+  if (kind === "takao") mixHex(out, swatch.ground, 0.22 * (1 - roofAmt));
+  if (kind === "enoshima") mixHex(out, swatch.accent, (1 - ramp(height, 0.22, 0.52)) * 0.18);
+
+  out.multiplyScalar(THREE.MathUtils.lerp(0.96, 1.05, height));
   return out;
 }
 
@@ -105,6 +103,10 @@ function paintGeometry(geometry: THREE.BufferGeometry, kind: MiniatureKind): voi
   if (geometry.getAttribute("color")) return;
   const position = geometry.getAttribute("position");
   if (!position) return;
+  // Remeshed city GLBs are geometrically faceted; vertex paint cannot restore lost
+  // triangles. A later textured Tripo export is the real mesh fix. Averaged normals
+  // only smooth lighting and color ramps on the existing vertices.
+  geometry.computeVertexNormals();
   geometry.computeBoundingBox();
   const box = geometry.boundingBox ?? new THREE.Box3(new THREE.Vector3(-1, 0, -1), new THREE.Vector3(1, 1, 1));
   const span = Math.max(box.max.y - box.min.y, 1e-6);

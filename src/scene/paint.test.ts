@@ -47,4 +47,27 @@ describe("miniature paint", () => {
     expect(moss.g).toBeGreaterThan(moss.r);
     expect(roof.r).toBeGreaterThan(roof.b);
   });
+
+  it("does not sprinkle high-frequency xz noise that speckles a surface", () => {
+    const a = paintColor(0.48, 0.2, 0, 0, "tokyo");
+    const b = paintColor(0.48, 0.2, 0.37, -0.81, "tokyo");
+    const c = paintColor(0.48, 0.2, 1.14, 0.22, "tokyo");
+    expect(a.getHex()).toBe(b.getHex());
+    expect(b.getHex()).toBe(c.getHex());
+  });
+
+  it("ramps roof and ground hues gradually instead of hard banding", () => {
+    const dist = (left: THREE.Color, right: THREE.Color) =>
+      Math.hypot(left.r - right.r, left.g - right.g, left.b - right.b);
+
+    const lowRoof = paintColor(0.42, 0.9, 0, 0, "tokyo");
+    const midRoof = paintColor(0.66, 0.9, 0, 0, "tokyo");
+    const highRoof = paintColor(0.92, 0.95, 0, 0, "tokyo");
+    expect(dist(midRoof, highRoof)).toBeLessThan(dist(lowRoof, highRoof));
+    expect(dist(lowRoof, midRoof)).toBeGreaterThan(0.02);
+
+    const belowThreshold = paintColor(0.5, 0.5, 0, 0, "tokyo");
+    const aboveThreshold = paintColor(0.5, 0.54, 0, 0, "tokyo");
+    expect(dist(belowThreshold, aboveThreshold)).toBeLessThan(0.12);
+  });
 });
