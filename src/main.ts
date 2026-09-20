@@ -1,7 +1,7 @@
 import "./style.css";
 import { prepareTrip } from "./data/loadTrip";
 import { Diorama } from "./scene/diorama";
-import { renderCityChips, renderHudMeta } from "./ui/hud";
+import { renderCityChips, renderHudMeta, setCityMenuOpen } from "./ui/hud";
 import { renderSheet } from "./ui/sheet";
 import type { Selection } from "./data/types";
 
@@ -47,9 +47,25 @@ function applySelection(next: Selection | null) {
 const diorama = new Diorama(stageEl, prepared, applySelection);
 
 chipsEl.addEventListener("click", (event) => {
+  const toggle = (event.target as HTMLElement).closest<HTMLButtonElement>("#city-menu-toggle");
+  if (toggle) {
+    const list = chipsEl.querySelector<HTMLElement>("#city-menu-list");
+    setCityMenuOpen(chipsEl, Boolean(list?.hidden));
+    return;
+  }
   const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-city]");
   if (!button) return;
   applySelection({ cityId: button.dataset.city ?? "" });
+});
+
+document.addEventListener("pointerdown", (event) => {
+  if (!chipsEl.classList.contains("is-menu-open")) return;
+  if (chipsEl.contains(event.target as Node)) return;
+  setCityMenuOpen(chipsEl, false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setCityMenuOpen(chipsEl, false);
 });
 
 sheetBodyEl.addEventListener("click", (event) => {

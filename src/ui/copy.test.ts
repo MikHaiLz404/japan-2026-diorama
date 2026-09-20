@@ -7,6 +7,7 @@ import {
   jaEn,
   liveDayLabel,
   startsLabel,
+  statusShort,
   stayingLabel,
   wrappedLabel,
 } from "./copy";
@@ -25,8 +26,14 @@ describe("bilingual copy helpers", () => {
     expect(jaEn(COPY.todayPlate)).toBe("今日の日程 · Today's plan");
     expect(jaEn(COPY.todayStops)).toBe("今日のスポット · Today's stops");
     expect(jaEn(COPY.noStops)).toBe("今日のスポットはまだない · No stops today");
+    expect(jaEn(COPY.cities)).toBe("都市 · Cities");
     expect(jaEn(COPY.visited)).toBe("行った · Visited");
     expect(COPY.visited.ja).toBe("行った");
+    expect(COPY.today.ja).toBe("今日");
+    expect(COPY.upcoming.ja).toBe("これから");
+    expect(statusShort("visited").ja).toBe("行った");
+    expect(statusShort("today").ja).toBe("今日");
+    expect(statusShort("upcoming").ja).toBe("これから");
     expect(jaEn(COPY.visited)).not.toContain("訪問済");
     expect(ariaLabel(COPY.reset)).toBe("リセット / Reset");
     expect(ariaLabel(COPY.close)).toBe("閉じる / Close");

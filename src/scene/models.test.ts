@@ -260,6 +260,12 @@ describe("hydrateGltfModels", () => {
     const fit = modelFitSize("lg");
     expect(citySize.x).toBeLessThanOrEqual(fit.w + 1e-4);
     expect(citySize.z).toBeLessThanOrEqual(fit.d + 1e-4);
+
+    let painted = false;
+    gltf!.traverse((node) => {
+      if (node instanceof THREE.Mesh && node.geometry.getAttribute("color")) painted = true;
+    });
+    expect(painted).toBe(true);
   });
 
   it("does not swap after abort", async () => {

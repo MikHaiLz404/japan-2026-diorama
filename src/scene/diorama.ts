@@ -4,6 +4,7 @@ import type { Selection } from "../data/types";
 import type { PreparedTrip } from "../data/loadTrip";
 import { isSmallScreen, prefersReducedMotion } from "../lib/platform";
 import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
+import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
 import { makeRoute } from "./paths";
 import { PetalField } from "./petals";
@@ -43,11 +44,11 @@ export class Diorama {
     this.renderer = new THREE.WebGLRenderer({ antialias: !small, alpha: false });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, small ? 1.5 : 2));
     this.renderer.setSize(host.clientWidth, host.clientHeight);
-    this.renderer.setClearColor(0xf3f0ea, 1);
+    this.renderer.setClearColor(SCENE_LOOK.clearColor, 1);
     this.renderer.shadowMap.enabled = !small;
     if (!small) this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.02;
+    this.renderer.toneMappingExposure = SCENE_LOOK.exposure;
     host.appendChild(this.renderer.domElement);
 
     this.camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 80);
@@ -71,21 +72,27 @@ export class Diorama {
       this.goalTarget.copy(this.controls.target);
     });
 
-    this.scene.fog = new THREE.Fog(0xf3f0ea, 16, 32);
-    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xd4d0c8, 0.88));
-    const key = new THREE.DirectionalLight(0xfff6ec, 1.12);
+    this.scene.fog = new THREE.Fog(SCENE_LOOK.clearColor, SCENE_LOOK.fogNear, SCENE_LOOK.fogFar);
+    this.scene.add(new THREE.AmbientLight(SCENE_LOOK.ambient, SCENE_LOOK.ambientIntensity));
+    this.scene.add(
+      new THREE.HemisphereLight(SCENE_LOOK.hemiSky, SCENE_LOOK.hemiGround, SCENE_LOOK.hemiIntensity),
+    );
+    const key = new THREE.DirectionalLight(SCENE_LOOK.keyColor, SCENE_LOOK.keyIntensity);
     key.position.set(4.5, 8, 3.2);
     key.castShadow = !small;
     key.shadow.mapSize.set(1024, 1024);
-    key.shadow.radius = 4;
+    key.shadow.radius = 6;
     key.shadow.camera.left = -7;
     key.shadow.camera.right = 7;
     key.shadow.camera.top = 6;
     key.shadow.camera.bottom = -6;
     this.scene.add(key);
-    const fill = new THREE.DirectionalLight(0xc5d0e6, 0.38);
-    fill.position.set(-5, 3, -4);
+    const fill = new THREE.DirectionalLight(SCENE_LOOK.fillColor, SCENE_LOOK.fillIntensity);
+    fill.position.set(-5, 3.4, -4);
     this.scene.add(fill);
+    const rim = new THREE.DirectionalLight(SCENE_LOOK.rimColor, SCENE_LOOK.rimIntensity);
+    rim.position.set(-1.2, 5.4, 6.2);
+    this.scene.add(rim);
 
     this.scene.add(makeTray());
     this.scene.add(makeOriginToken());
