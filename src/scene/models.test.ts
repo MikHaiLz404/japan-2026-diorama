@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
 import { CITY_CATALOG } from "../data/cities";
 import type { CityBlock } from "../data/types";
@@ -34,6 +35,33 @@ function sparseCityLikeMesh(vertices = 30_000, triangles = 3_000): THREE.Mesh {
   for (let i = 0; i < indices.length; i++) indices[i] = i % vertices;
   geometry.setIndex(new THREE.BufferAttribute(indices, 1));
   return new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
+}
+
+function catalogGlbTopology(id: string): { vertices: number; triangles: number } | null {
+  const file = new URL(`../../public/models/${id}.glb`, import.meta.url).pathname;
+  if (!existsSync(file)) return null;
+  const data = readFileSync(file);
+  if (data.byteLength < 20 || data.toString("ascii", 0, 4) !== "glTF") return null;
+  const jsonLength = data.readUInt32LE(12);
+  const json = JSON.parse(data.toString("utf8", 20, 20 + jsonLength).replace(/\0+$/, "")) as {
+    accessors?: Array<{ count: number }>;
+    meshes?: Array<{
+      primitives: Array<{ attributes: { POSITION?: number }; indices?: number; mode?: number }>;
+    }>;
+  };
+  let vertices = 0;
+  let triangles = 0;
+  for (const mesh of json.meshes ?? []) {
+    for (const prim of mesh.primitives) {
+      const pos = prim.attributes.POSITION;
+      if (pos != null) vertices += json.accessors?.[pos]?.count ?? 0;
+      const mode = prim.mode ?? 4;
+      if (mode !== 4) continue;
+      if (prim.indices != null) triangles += Math.floor((json.accessors?.[prim.indices]?.count ?? 0) / 3);
+      else if (pos != null) triangles += Math.floor((json.accessors?.[pos]?.count ?? 0) / 3);
+    }
+  }
+  return { vertices, triangles };
 }
 
 function stubCity(id: CityBlock["id"], size: CityBlock["size"] = "sm"): CityBlock {
@@ -248,6 +276,23 @@ describe("city glb topology guard", () => {
     collapsed.setAttribute("position", new THREE.BufferAttribute(new Float32Array(9), 3));
     collapsed.setIndex([0, 1, 2]);
     expect(isRenderableCityModel(new THREE.Mesh(collapsed))).toBe(false);
+  });
+
+  it("would skip the committed tokyo/yokohama remeshes and keep the other city glbs", () => {
+    const skip = new Set(["tokyo", "yokohama"]);
+    let seen = 0;
+    for (const id of CITY_MODEL_IDS) {
+      const stats = catalogGlbTopology(id);
+      if (!stats || stats.vertices <= 0) continue;
+      seen += 1;
+      const ratio = stats.triangles / stats.vertices;
+      if (skip.has(id)) {
+        expect(ratio, id).toBeLessThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+      } else {
+        expect(ratio, id).toBeGreaterThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+      }
+    }
+    expect(seen).toBe(CITY_MODEL_IDS.length);
   });
 });
 
