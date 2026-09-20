@@ -74,7 +74,7 @@ export interface CityCatalogEntry {
   nameJa: string;
   lat: number;
   lng: number;
-  /** Stylized tray coordinates (x, z). Not GIS. */
+  /** Stylized tray coordinates (x, z), projected from lat/lng. */
   tray: [number, number];
   size: "lg" | "md" | "sm";
   landmark: "skytree" | "tower" | "torii" | "island" | "hall" | "peak" | "kura";
@@ -109,6 +109,14 @@ export interface RoutePath {
   toCityId: string;
   status: VisitStatus;
   label: string;
+}
+
+export interface GroundPathSegment {
+  id: string;
+  type: TransportKind;
+  fromCityId: string;
+  toCityId: string;
+  status: VisitStatus;
 }
 
 export interface Selection {

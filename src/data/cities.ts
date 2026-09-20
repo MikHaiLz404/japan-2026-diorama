@@ -1,25 +1,25 @@
-import { haversineKm } from "../lib/geo";
+import { haversineKm, projectGeoToTray } from "../lib/geo";
 import { shiftDateKey, toDateKey } from "../lib/dates";
 import { rollupStatus, statusForDate } from "../lib/visit";
 import type {
   CityBlock,
   CityCatalogEntry,
   DayPlate,
+  GroundPathSegment,
   RoutePath,
   TripActivity,
   TripFixture,
   TripLodging,
+  VisitStatus,
 } from "./types";
 
-/** Stylized tray layout — not a GIS map of Japan. */
-export const CITY_CATALOG: CityCatalogEntry[] = [
+const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
   {
     id: "tokyo",
     name: "Tokyo",
     nameJa: "東京",
     lat: 35.6812,
     lng: 139.7671,
-    tray: [0.55, 0.15],
     size: "lg",
     landmark: "skytree",
   },
@@ -29,7 +29,6 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "横浜",
     lat: 35.4437,
     lng: 139.638,
-    tray: [-0.55, -1.85],
     size: "md",
     landmark: "tower",
   },
@@ -39,7 +38,6 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "鎌倉",
     lat: 35.3193,
     lng: 139.5466,
-    tray: [0.45, -2.85],
     size: "sm",
     landmark: "torii",
   },
@@ -49,7 +47,6 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "江の島",
     lat: 35.2989,
     lng: 139.4803,
-    tray: [-1.65, -2.95],
     size: "sm",
     landmark: "island",
   },
@@ -59,7 +56,6 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "千葉",
     lat: 35.6478,
     lng: 140.0328,
-    tray: [3.15, 0.35],
     size: "md",
     landmark: "hall",
   },
@@ -69,7 +65,6 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "高尾",
     lat: 35.6253,
     lng: 139.2431,
-    tray: [-3.15, 0.45],
     size: "sm",
     landmark: "peak",
   },
@@ -79,11 +74,18 @@ export const CITY_CATALOG: CityCatalogEntry[] = [
     nameJa: "川越",
     lat: 35.9251,
     lng: 139.4858,
-    tray: [-0.15, 2.35],
     size: "sm",
     landmark: "kura",
   },
 ];
+
+const TRAY_BY_ID = projectGeoToTray(CITY_DEFINITIONS);
+
+/** Stylized tray layout — lat/lng projected onto the felt, not a GIS basemap. */
+export const CITY_CATALOG: CityCatalogEntry[] = CITY_DEFINITIONS.map((city) => ({
+  ...city,
+  tray: TRAY_BY_ID.get(city.id) ?? [0, 0],
+}));
 
 export const ORIGIN_TOKEN = {
   id: "bangkok",
@@ -127,6 +129,25 @@ export function lodgingOverlapsDate(stay: TripLodging, dateKey: string, timeZone
   const start = toDateKey(stay.starts_at, timeZone);
   const end = lodgingEndDate(stay, timeZone);
   return dateKey >= start && dateKey <= end;
+}
+
+function hopStatus(hop: TripFixture["transportations"][number], tz: string, today: string): VisitStatus {
+  const when = hop.departure_at ?? hop.arrival_at;
+  return when ? statusForDate(toDateKey(when, tz), today) : "upcoming";
+}
+
+function hopCities(hop: TripFixture["transportations"][number]): { fromCity: string; toCity: string } | null {
+  const fromLat = hop.departure.latitude;
+  const fromLng = hop.departure.longitude;
+  const toLat = hop.arrival.latitude;
+  const toLng = hop.arrival.longitude;
+  if (fromLat == null || fromLng == null || toLat == null || toLng == null) return null;
+
+  const fromIsBkk = fromLat < 20;
+  const fromCity = fromIsBkk ? ORIGIN_TOKEN.id : nearestCityId(fromLat, fromLng);
+  const toCity = nearestCityId(toLat, toLng);
+  if (fromCity === toCity) return null;
+  return { fromCity, toCity };
 }
 
 export function buildCityBlocks(trip: TripFixture, today: string): CityBlock[] {
@@ -185,27 +206,14 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
 
   for (const hop of trip.transportations) {
     if (hop.type === "walk") continue;
-    const fromLat = hop.departure.latitude;
-    const fromLng = hop.departure.longitude;
-    const toLat = hop.arrival.latitude;
-    const toLng = hop.arrival.longitude;
-    if (fromLat == null || fromLng == null || toLat == null || toLng == null) continue;
+    const cities = hopCities(hop);
+    if (!cities) continue;
 
-    const fromIsBkk = fromLat < 20;
-    const fromCity = fromIsBkk ? ORIGIN_TOKEN.id : nearestCityId(fromLat, fromLng);
-    const toCity = nearestCityId(toLat, toLng);
-    if (fromCity === toCity) continue;
-
-    const key = `${fromCity}->${toCity}:${hop.type}`;
+    const key = `${cities.fromCity}->${cities.toCity}:${hop.type}`;
     if (seen.has(key)) continue;
     seen.add(key);
 
-    // Some Tripsy hops (mostly the return legs of a day trip) carry no times at
-    // all. Dating those to trip.starts_at used to light them up as "visited" on
-    // day one, so a return ribbon could read as travelled while its outbound leg
-    // was still dim. An undated hop is unknown, not done: leave it upcoming.
-    const when = hop.departure_at ?? hop.arrival_at;
-    const status = when ? statusForDate(toDateKey(when, tz), today) : "upcoming";
+    const status = hopStatus(hop, tz, today);
     const label = hop.transport_number
       ? `${hop.type} ${hop.transport_number}`
       : hop.type === "airplane"
@@ -215,12 +223,40 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
     routes.push({
       id: hop.id,
       type: hop.type,
-      fromCityId: fromCity,
-      toCityId: toCity,
+      fromCityId: cities.fromCity,
+      toCityId: cities.toCity,
       status,
       label,
     });
   }
 
   return routes;
+}
+
+/** Flat sand/rail segments on the felt — inter-city links only, walks skipped. */
+export function buildGroundPathSegments(trip: TripFixture, today: string): GroundPathSegment[] {
+  const tz = trip.timezone;
+  const seen = new Set<string>();
+  const segments: GroundPathSegment[] = [];
+
+  for (const hop of trip.transportations) {
+    if (hop.type === "walk" || hop.type === "airplane") continue;
+    const cities = hopCities(hop);
+    if (!cities) continue;
+    if (cities.fromCity === ORIGIN_TOKEN.id) continue;
+
+    const pairKey = [cities.fromCity, cities.toCity].sort().join("<->");
+    if (seen.has(pairKey)) continue;
+    seen.add(pairKey);
+
+    segments.push({
+      id: `ground:${pairKey}`,
+      type: hop.type,
+      fromCityId: cities.fromCity,
+      toCityId: cities.toCity,
+      status: hopStatus(hop, tz, today),
+    });
+  }
+
+  return segments;
 }

@@ -3,10 +3,10 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Selection } from "../data/types";
 import type { PreparedTrip } from "../data/loadTrip";
 import { isMobileLayout, isSmallScreen, prefersReducedMotion } from "../lib/platform";
-import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
+import { makeCityBlock, makeDayPlate, makeGroundPaths, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
-import { makeRoute } from "./paths";
+import { makeRoute, routeParallelMeta } from "./paths";
 import { PetalField, SAKURA_LOOK } from "./petals";
 
 const OVERVIEW = {
@@ -95,6 +95,7 @@ export class Diorama {
     this.scene.add(rim);
 
     this.scene.add(makeTray());
+    this.scene.add(makeGroundPaths(prepared.groundPaths));
     this.scene.add(makeOriginToken());
 
     const mobile = isMobileLayout();
@@ -122,13 +123,13 @@ export class Diorama {
       label.position.set(0, city.size === "lg" ? 1.55 : 0.95, d * 0.02);
       if (mobile) {
         label.scale.multiplyScalar(0.72);
-        if (city.status === "upcoming") label.visible = false;
       }
       block.add(label);
     }
 
-    for (const route of prepared.routes) {
-      this.scene.add(makeRoute(route));
+    const routeMeta = routeParallelMeta(prepared.routes);
+    for (let i = 0; i < prepared.routes.length; i += 1) {
+      this.scene.add(makeRoute(prepared.routes[i], routeMeta[i]));
     }
 
     this.petals = this.reduced ? null : new PetalField(small ? SAKURA_LOOK.mobileCount : SAKURA_LOOK.desktopCount);
