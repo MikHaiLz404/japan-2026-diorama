@@ -22,4 +22,16 @@ describe("HUD meta copy", () => {
     expect(el.textContent).toMatch(/Sep 17/);
     expect(el.textContent).toMatch(/Sep 27/);
   });
+
+  it("uses Thai เริ่ม / จบแล้ว instead of Starts / Wrapped", () => {
+    const before = host();
+    renderHudMeta(before, trip, "2026-09-01");
+    expect(before.textContent).toContain("เริ่ม");
+    expect(before.textContent).not.toContain("Starts");
+
+    const after = host();
+    renderHudMeta(after, trip, "2026-09-30");
+    expect(after.textContent).toContain("จบแล้ว");
+    expect(after.textContent).not.toContain("Wrapped");
+  });
 });

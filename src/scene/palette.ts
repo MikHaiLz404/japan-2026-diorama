@@ -26,32 +26,32 @@ export function cityColors(status: VisitStatus): {
 } {
   if (status === "today") {
     return {
-      body: 0xd56b48,
-      roof: 0x8d2f22,
-      emissive: 0x5a1c10,
-      emissiveIntensity: 0.22,
+      body: 0x2a3a66,
+      roof: 0x1c2748,
+      emissive: 0x1a2448,
+      emissiveIntensity: 0.1,
       opacity: 1,
     };
   }
   if (status === "visited") {
     return {
-      body: 0xc45c3e,
-      roof: 0x7a3328,
+      body: 0x8a8f98,
+      roof: 0x6e7380,
       emissive: 0x000000,
       emissiveIntensity: 0,
       opacity: 1,
     };
   }
   return {
-    body: 0x9b8d7c,
-    roof: 0x6d645a,
+    body: 0xb4b8c0,
+    roof: 0x9aa0a8,
     emissive: 0x000000,
     emissiveIntensity: 0,
-    opacity: 0.78,
+    opacity: 0.82,
   };
 }
 
 export function pathColor(status: VisitStatus, kind: string): number {
-  if (kind === "airplane") return status === "upcoming" ? 0xb7aa94 : 0xf0d9a8;
-  return status === "upcoming" ? 0x8a7b64 : 0xc4a15a;
+  if (kind === "airplane") return status === "upcoming" ? 0xc5c8ce : 0x8a90a0;
+  return status === "upcoming" ? 0xb4b8c0 : 0x5c6780;
 }

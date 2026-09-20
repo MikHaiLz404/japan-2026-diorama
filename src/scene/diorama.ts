@@ -43,10 +43,11 @@ export class Diorama {
     this.renderer = new THREE.WebGLRenderer({ antialias: !small, alpha: false });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, small ? 1.5 : 2));
     this.renderer.setSize(host.clientWidth, host.clientHeight);
-    this.renderer.setClearColor(0x2b1d14, 1);
+    this.renderer.setClearColor(0xf3f0ea, 1);
     this.renderer.shadowMap.enabled = !small;
+    if (!small) this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.08;
+    this.renderer.toneMappingExposure = 1.02;
     host.appendChild(this.renderer.domElement);
 
     this.camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 80);
@@ -70,18 +71,19 @@ export class Diorama {
       this.goalTarget.copy(this.controls.target);
     });
 
-    this.scene.fog = new THREE.Fog(0x2b1d14, 14, 28);
-    this.scene.add(new THREE.HemisphereLight(0xfff4e4, 0x3d4a32, 0.95));
-    const key = new THREE.DirectionalLight(0xffe6c7, 1.45);
+    this.scene.fog = new THREE.Fog(0xf3f0ea, 16, 32);
+    this.scene.add(new THREE.HemisphereLight(0xffffff, 0xd4d0c8, 0.88));
+    const key = new THREE.DirectionalLight(0xfff6ec, 1.12);
     key.position.set(4.5, 8, 3.2);
     key.castShadow = !small;
     key.shadow.mapSize.set(1024, 1024);
+    key.shadow.radius = 4;
     key.shadow.camera.left = -7;
     key.shadow.camera.right = 7;
     key.shadow.camera.top = 6;
     key.shadow.camera.bottom = -6;
     this.scene.add(key);
-    const fill = new THREE.DirectionalLight(0xb7d2e0, 0.28);
+    const fill = new THREE.DirectionalLight(0xc5d0e6, 0.38);
     fill.position.set(-5, 3, -4);
     this.scene.add(fill);
 
