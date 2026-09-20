@@ -33,7 +33,7 @@ export function makeRoute(route: RoutePath): THREE.Mesh {
   const material = new THREE.MeshStandardMaterial({
     color: pathColor(route.status, route.type),
     transparent: true,
-    opacity: route.status === "upcoming" ? 0.42 : 0.95,
+    opacity: route.status === "upcoming" ? 0.62 : 0.95,
     roughness: 0.35,
     metalness: route.type === "airplane" ? 0.15 : 0.45,
   });
