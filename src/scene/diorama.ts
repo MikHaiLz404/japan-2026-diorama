@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Selection } from "../data/types";
 import type { PreparedTrip } from "../data/loadTrip";
-import { isSmallScreen, prefersReducedMotion } from "../lib/platform";
+import { isMobileLayout, isSmallScreen, prefersReducedMotion } from "../lib/platform";
 import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
@@ -97,13 +97,15 @@ export class Diorama {
     this.scene.add(makeTray());
     this.scene.add(makeOriginToken());
 
+    const mobile = isMobileLayout();
+
     for (const city of prepared.cities) {
       const block = makeCityBlock(city);
       this.scene.add(block);
       const hit = block.getObjectByName(`hit:${city.id}`);
       if (hit) this.pickables.push(hit);
 
-      if (city.id === "tokyo") {
+      if (city.id === "tokyo" && !mobile) {
         city.plates.forEach((plate, index) => {
           const tile = makeDayPlate(city, plate.date, index, plate.status);
           block.add(tile);
@@ -118,6 +120,10 @@ export class Diorama {
         city.status === "upcoming",
       );
       label.position.set(0, city.size === "lg" ? 1.55 : 0.95, d * 0.02);
+      if (mobile) {
+        label.scale.multiplyScalar(0.72);
+        if (city.status === "upcoming") label.visible = false;
+      }
       block.add(label);
     }
 
