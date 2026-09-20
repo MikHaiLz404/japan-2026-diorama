@@ -30,10 +30,27 @@ const CITY_PAINT: Record<string, MiniaturePalette> = {
   tray: { wall: palette.wood, roof: palette.woodRim, ground: palette.moss, wood: palette.wood, accent: palette.sand },
 };
 
-const MAP_KEYS = ["map", "emissiveMap", "lightMap"] as const;
+const MAP_KEYS = [
+  "map",
+  "normalMap",
+  "roughnessMap",
+  "metalnessMap",
+  "aoMap",
+  "emissiveMap",
+  "bumpMap",
+  "displacementMap",
+  "alphaMap",
+  "lightMap",
+] as const;
 
+/**
+ * True when a material already has an albedo / baseColor map.
+ * Three's GLTFLoader binds glTF `pbrMetallicRoughness.baseColorTexture` to `material.map`.
+ * Other PBR maps also count as textured so vertex paint never covers them.
+ */
 export function hasAlbedoTexture(material: THREE.Material): boolean {
   const record = material as THREE.Material & Record<string, unknown>;
+  if (record.map instanceof THREE.Texture) return true;
   return MAP_KEYS.some((key) => record[key] instanceof THREE.Texture);
 }
 
@@ -129,13 +146,14 @@ function paintGeometry(geometry: THREE.BufferGeometry, kind: MiniatureKind): voi
 }
 
 /**
- * Remeshed city GLBs ship as one gray matte mesh with no maps.
- * Paint vertex colors + ceramic PBR so they read as miniatures without new textures.
+ * Vertex-paint only untextured meshes. If a loaded GLB has albedo /
+ * baseColorTexture (`material.map`) — or any other PBR map — leave it alone.
  */
 export function stylizeUntexturedModel(root: THREE.Object3D, kind: MiniatureKind): void {
   root.traverse((node) => {
     if (!(node instanceof THREE.Mesh)) return;
     const materials = Array.isArray(node.material) ? node.material : [node.material];
+    // Aide/Vodka: never paint over Tripo albedo / baseColor maps.
     if (materials.some((material) => material && hasAlbedoTexture(material))) return;
 
     paintGeometry(node.geometry, kind);

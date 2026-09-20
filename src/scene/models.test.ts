@@ -37,7 +37,17 @@ function sparseCityLikeMesh(vertices = 30_000, triangles = 3_000): THREE.Mesh {
   return new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
 }
 
-function catalogGlbTopology(id: string): { vertices: number; triangles: number } | null {
+type CatalogGlbMeta = {
+  vertices: number;
+  triangles: number;
+  images: number;
+  textures: number;
+  primitives: number;
+  primitivesWithUv: number;
+  materialsWithColorMap: number;
+};
+
+function catalogGlbMeta(id: string): CatalogGlbMeta | null {
   const file = new URL(`../../public/models/${id}.glb`, import.meta.url).pathname;
   if (!existsSync(file)) return null;
   const data = readFileSync(file);
@@ -45,14 +55,30 @@ function catalogGlbTopology(id: string): { vertices: number; triangles: number }
   const jsonLength = data.readUInt32LE(12);
   const json = JSON.parse(data.toString("utf8", 20, 20 + jsonLength).replace(/\0+$/, "")) as {
     accessors?: Array<{ count: number }>;
+    images?: unknown[];
+    textures?: unknown[];
+    materials?: Array<{
+      pbrMetallicRoughness?: { baseColorTexture?: { index?: number } };
+      emissiveTexture?: { index?: number };
+      normalTexture?: { index?: number };
+    }>;
     meshes?: Array<{
-      primitives: Array<{ attributes: { POSITION?: number }; indices?: number; mode?: number }>;
+      primitives: Array<{
+        attributes: { POSITION?: number; TEXCOORD_0?: number };
+        indices?: number;
+        mode?: number;
+        material?: number;
+      }>;
     }>;
   };
   let vertices = 0;
   let triangles = 0;
+  let primitives = 0;
+  let primitivesWithUv = 0;
   for (const mesh of json.meshes ?? []) {
     for (const prim of mesh.primitives) {
+      primitives += 1;
+      if (prim.attributes.TEXCOORD_0 != null) primitivesWithUv += 1;
       const pos = prim.attributes.POSITION;
       if (pos != null) vertices += json.accessors?.[pos]?.count ?? 0;
       const mode = prim.mode ?? 4;
@@ -61,7 +87,18 @@ function catalogGlbTopology(id: string): { vertices: number; triangles: number }
       else if (pos != null) triangles += Math.floor((json.accessors?.[pos]?.count ?? 0) / 3);
     }
   }
-  return { vertices, triangles };
+  const materialsWithColorMap = (json.materials ?? []).filter(
+    (material) => material.pbrMetallicRoughness?.baseColorTexture != null,
+  ).length;
+  return {
+    vertices,
+    triangles,
+    images: json.images?.length ?? 0,
+    textures: json.textures?.length ?? 0,
+    primitives,
+    primitivesWithUv,
+    materialsWithColorMap,
+  };
 }
 
 function stubCity(id: CityBlock["id"], size: CityBlock["size"] = "sm"): CityBlock {
@@ -278,19 +315,21 @@ describe("city glb topology guard", () => {
     expect(isRenderableCityModel(new THREE.Mesh(collapsed))).toBe(false);
   });
 
-  it("would skip the committed tokyo/yokohama remeshes and keep the other city glbs", () => {
-    const skip = new Set(["tokyo", "yokohama"]);
+  it("accepts every committed city glb: dense triangles, UVs, and embedded color maps", () => {
     let seen = 0;
     for (const id of CITY_MODEL_IDS) {
-      const stats = catalogGlbTopology(id);
-      if (!stats || stats.vertices <= 0) continue;
+      const stats = catalogGlbMeta(id);
+      expect(stats, id).toBeTruthy();
+      if (!stats) continue;
       seen += 1;
-      const ratio = stats.triangles / stats.vertices;
-      if (skip.has(id)) {
-        expect(ratio, id).toBeLessThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
-      } else {
-        expect(ratio, id).toBeGreaterThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
-      }
+      expect(stats.vertices, id).toBeGreaterThan(0);
+      expect(stats.triangles, id).toBeGreaterThan(0);
+      expect(stats.triangles / stats.vertices, id).toBeGreaterThan(MIN_CITY_TRIANGLE_VERTEX_RATIO);
+      expect(stats.images, id).toBeGreaterThan(0);
+      expect(stats.textures, id).toBeGreaterThan(0);
+      expect(stats.materialsWithColorMap, id).toBeGreaterThan(0);
+      expect(stats.primitivesWithUv, id).toBeGreaterThan(0);
+      expect(stats.primitivesWithUv, id).toBe(stats.primitives);
     }
     expect(seen).toBe(CITY_MODEL_IDS.length);
   });
@@ -425,5 +464,26 @@ describe("hydrateGltfModels", () => {
     expect(geoSpy).toHaveBeenCalledOnce();
     expect(scene.getObjectByName("gltf:kamakura")).toBeTruthy();
     expect(scene.getObjectByName("procedural:kamakura")).toBeFalsy();
+  });
+
+  it("does not vertex-paint a city glb that already has an albedo map", async () => {
+    const scene = new THREE.Scene();
+    scene.add(makeCityBlock(stubCity("tokyo", "lg")));
+    const map = new THREE.Texture();
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshStandardMaterial({ map });
+
+    await hydrateGltfModels({
+      scene,
+      cities: [stubCity("tokyo", "lg")],
+      shadows: false,
+      load: async () => new THREE.Mesh(geometry, material),
+    });
+
+    expect(scene.getObjectByName("gltf:tokyo")).toBeTruthy();
+    expect(scene.getObjectByName("procedural:tokyo")).toBeFalsy();
+    expect(geometry.getAttribute("color")).toBeUndefined();
+    expect(material.vertexColors).toBe(false);
+    expect(material.map).toBe(map);
   });
 });

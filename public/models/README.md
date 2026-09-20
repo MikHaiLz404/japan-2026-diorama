@@ -4,8 +4,6 @@ Optional glTF 2.0 binaries (`.glb`) for the Japan 2026 tray. The scene still bui
 
 **Missing, empty, or invalid files fall back to the procedural mesh.** Invalid includes corrupt topology (far too few triangles vs vertices, or collapsed/empty geometry). Do not commit placeholder binaries.
 
-`tokyo.glb` and `yokohama.glb` currently fail that check (~30k vertices, ~3k triangles) and stay on the procedural city block until textured re-exports land. The files remain in this folder; the loader skips them instead of showing scattered points.
-
 ## Expected filenames
 
 | File | Used for |
@@ -28,10 +26,18 @@ Served as `/models/{name}.glb`.
 - Sit each city model on y = 0 in its own space. The app recenters XZ, sits the floor on the block, and uniformly scales it to the existing catalog footprint and tray slot.
 - `tray.glb` is scaled to the current wooden base (~11.6 × 9.4) and placed under the city blocks.
 
-## Current files (untextured remesh)
+## Current files (textured Tripo exports)
 
-The committed `*.glb` files were remeshed for size: one `low_poly_matte` material, **no images / textures / vertex colors**. They stay mobile-friendly (~0.7–1.5 MiB each).
+The committed city `*.glb` files are self-contained Tripo meshes with embedded color maps and UVs. Tokyo and Yokohama are real triangle meshes (not the old truncated-index point clouds).
 
-Until new **textured** city GLBs are authored (self-contained, still under a few MiB), the runtime paints stylized PBR + vertex colors in `src/scene/paint.ts` so buildings read as cream/terracotta miniatures instead of flat gray. If a later GLB includes an albedo map, that texture is left as-is.
+The loader keeps those maps. Vertex paint in `src/scene/paint.ts` only runs on untextured materials; any PBR map (`map`, `normalMap`, …) skips stylization. Topology that is empty, collapsed, or far too sparse still falls back to the procedural block.
 
-**Wanted later (not required to run the app, no Tripo login in CI):** per-city GLBs with small baked color maps that match the Liberogic cream tray. Swap the files in this folder; the loader already falls back if a file is missing or invalid.
+| File | Size |
+| --- | ---: |
+| `tokyo.glb` | 920 KiB |
+| `yokohama.glb` | 846 KiB |
+| `kamakura.glb` | 870 KiB |
+| `enoshima.glb` | 831 KiB |
+| `chiba.glb` | 5.74 MiB |
+| `takao.glb` | 5.55 MiB |
+| `kawagoe.glb` | 5.85 MiB |
