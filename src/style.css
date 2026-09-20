@@ -228,16 +228,28 @@ h1 {
   color: var(--upcoming);
 }
 
-.chip.is-selected,
-.day-tab.is-active {
-  background: var(--accent);
-  border-color: var(--accent);
+.chip.is-selected {
+  background: var(--ink);
+  border-color: var(--ink);
   color: #fff;
   box-shadow: var(--shadow);
 }
 
 .chip.is-selected small {
   color: rgba(255, 255, 255, 0.78);
+}
+
+.chip.is-selected.status-today,
+.day-tab.is-active.status-today {
+  background: var(--today);
+  border-color: var(--today);
+  color: #fff;
+}
+
+.day-tab.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
 }
 
 .hint {
@@ -257,7 +269,7 @@ h1 {
   width: 100%;
   max-width: 100%;
   max-height: min(42vh, 520px);
-  padding: 12px 20px calc(20px + var(--safe-bottom));
+  padding: 12px calc(20px + var(--safe-right)) calc(20px + var(--safe-bottom)) calc(20px + var(--safe-left));
   background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--line);
@@ -297,11 +309,15 @@ h1 {
 }
 
 .sheet-kicker {
-  color: var(--accent);
+  color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 11px;
   font-weight: 500;
+}
+
+.sheet-kicker.status-today {
+  color: var(--accent);
 }
 
 #sheet-body {

@@ -143,6 +143,13 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(chips).toMatch(/var\(--safe-right\)/);
   });
 
+  it("keeps the navy accent on today only, not on every selected chip or kicker", () => {
+    expect(firstRule(".chip.status-today")).toMatch(/var\(--today\)/);
+    expect(firstRule(".chip.is-selected")).not.toMatch(/var\(--accent\)|--today/);
+    expect(firstRule(".sheet-kicker")).not.toMatch(/var\(--accent\)|--today/);
+    expect(firstRule(".sheet-kicker.status-today")).toMatch(/var\(--(accent|today)\)/);
+  });
+
   it("softens the WebGL clear color onto the cream canvas without touching the GLTF loader", () => {
     expect(diorama).toMatch(/setClearColor\(\s*0xf[0-9a-f]{5}/i);
     expect(diorama).not.toMatch(/setClearColor\(\s*0x2b1d14/);
