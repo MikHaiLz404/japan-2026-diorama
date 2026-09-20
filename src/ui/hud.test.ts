@@ -7,11 +7,10 @@ function host(): HTMLElement {
 }
 
 describe("HUD meta copy", () => {
-  it("uses compact EN/JP for the live day count", () => {
+  it("uses compact JP-first live day count instead of English-only Day X", () => {
     const el = host();
     renderHudMeta(el, trip, "2026-09-20");
-    expect(el.textContent).toContain("Day 4 / 11");
-    expect(el.textContent).toContain("ライブ");
+    expect(el.textContent).toContain("日程 4 / 11 · ライブ");
     expect(el.textContent).not.toMatch(/Day \d+ of/);
     expect(el.textContent).not.toMatch(/[\u0E00-\u0E7F]/);
   });
