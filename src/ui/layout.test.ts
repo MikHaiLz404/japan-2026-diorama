@@ -202,7 +202,8 @@ describe("Liberogic / Vodka chrome design system", () => {
 
   it("keeps all city labels visible on mobile but scales them down", () => {
     expect(diorama).toMatch(/isMobileLayout\(\)/);
-    expect(diorama).toMatch(/city\.id === "tokyo" && !mobile/);
+    expect(diorama).not.toMatch(/makeDayPlate/);
+    expect(diorama).not.toMatch(/kind === "plate"/);
     expect(diorama).toMatch(/label\.scale\.multiplyScalar\(0\.72\)/);
     expect(diorama).not.toMatch(/label\.visible = false/);
     expect(diorama).toMatch(/city\.status === "upcoming"/);

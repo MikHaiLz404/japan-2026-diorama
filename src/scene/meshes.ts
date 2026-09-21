@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import type { CityBlock, VisitStatus } from "../data/types";
+import type { CityBlock } from "../data/types";
 import { cityColors, palette } from "./palette";
 
 const geo = {
@@ -231,53 +231,6 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
   if (city.size === "lg") addTree(visuals, 0.85, 0.55, true);
 
   return group;
-}
-
-export function makeDayPlate(
-  city: CityBlock,
-  date: string,
-  index: number,
-  status: VisitStatus,
-): THREE.Mesh {
-  const { w, d, h } = platformSize(city.size);
-  const cols = 4;
-  const col = index % cols;
-  const row = Math.floor(index / cols);
-  const plate = new THREE.Mesh(
-    geo.box,
-    mat(status === "upcoming" ? 0xd8dbe0 : palette.ceramic, {
-      emissive: status === "today" ? 0x1a2448 : 0x000000,
-      emissiveIntensity: status === "today" ? 0.08 : 0,
-    }),
-  );
-  const pw = date === "2026-09-18" ? 0.52 : 0.42;
-  const pd = date === "2026-09-18" ? 0.34 : 0.26;
-  const canvas = document.createElement("canvas");
-  canvas.width = 128;
-  canvas.height = 80;
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-    ctx.fillStyle = status === "upcoming" ? "#e4e6ea" : "#f7f6f3";
-    ctx.fillRect(0, 0, 128, 80);
-    ctx.fillStyle = status === "today" ? "#2a3a66" : "#5c6370";
-    ctx.font = "700 28px 'Noto Sans JP', sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(date.slice(5), 64, 40);
-  }
-  plate.material = new THREE.MeshStandardMaterial({
-    map: new THREE.CanvasTexture(canvas),
-    roughness: 0.45,
-    emissive: status === "today" ? 0x1a2448 : 0x000000,
-    emissiveIntensity: status === "today" ? 0.1 : 0,
-  });
-  plate.scale.set(pw, 0.07, pd);
-  plate.position.set(-w * 0.36 + col * 0.48, h + 0.08, d * 0.42 - row * 0.32);
-  plate.castShadow = true;
-  plate.receiveShadow = true;
-  plate.name = `plate:${city.id}:${date}`;
-  plate.userData = { kind: "plate", cityId: city.id, date };
-  return plate;
 }
 
 export function makeOriginToken(): THREE.Group {
