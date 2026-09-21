@@ -1,5 +1,7 @@
 # Integrate with jojo-in-runtime (Works + Logs, iframe)
 
+Portfolio repo: [`MikHaiLz404/my-journey`](https://github.com/MikHaiLz404/my-journey) (live: [jojo-in-runtime.vercel.app](https://jojo-in-runtime.vercel.app)).
+
 Diorama stays a **separate Vite + Three.js deploy**. The portfolio hosts it via **iframe** (option C).
 
 | Surface | Role |
@@ -11,6 +13,8 @@ Live app: `https://japan-2026-diorama.vercel.app/`
 Embed URL: `https://japan-2026-diorama.vercel.app/?embed=1`
 
 `?embed=1` turns on compact chrome and an **Open fullscreen** chip. CSP `frame-ancestors` allows `jojo-in-runtime.vercel.app` (and Vercel previews).
+
+Implementation PR on the portfolio: branch `cursor/japan-diorama-works-logs-429b` in `my-journey` (local Works/Logs fallbacks + `embed_url` iframe).
 
 ---
 
