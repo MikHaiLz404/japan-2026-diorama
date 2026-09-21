@@ -53,7 +53,7 @@ describe("makeRailPaths", () => {
       radii.push(geometry.parameters.radius);
     });
     expect(radii.length).toBeGreaterThan(0);
-    expect(Math.min(...radii)).toBeGreaterThanOrEqual(0.01);
+    expect(Math.min(...radii)).toBeGreaterThanOrEqual(0.028);
   });
 
   it("routes Enoshima–Tokyo through Fujisawa, not a straight chord", () => {
