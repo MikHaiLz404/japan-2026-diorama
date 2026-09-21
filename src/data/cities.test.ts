@@ -2,12 +2,13 @@ import { describe, expect, it } from "vitest";
 import { buildGroundPathSegments, buildRoutePaths, CITY_CATALOG } from "./cities";
 import { trip } from "./loadTrip";
 
-describe("ground path segments", () => {
-  it("skips walks and flights but keeps inter-city rail/bus links", () => {
+describe("rail path segments", () => {
+  it("skips walks, flights, and buses but keeps inter-city rail links", () => {
     const segments = buildGroundPathSegments(trip, "2026-09-20");
     expect(segments.length).toBeGreaterThan(3);
     expect(segments.every((segment) => segment.type !== "walk")).toBe(true);
     expect(segments.every((segment) => segment.type !== "airplane")).toBe(true);
+    expect(segments.every((segment) => segment.type !== "bus")).toBe(true);
     expect(segments.every((segment) => segment.fromCityId !== "bangkok")).toBe(true);
   });
 
@@ -17,6 +18,14 @@ describe("ground path segments", () => {
       [segment.fromCityId, segment.toCityId].sort().join("<->"),
     );
     expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it("includes Enoshima–Tokyo for hub-routed spline rendering", () => {
+    const segments = buildGroundPathSegments(trip, "2026-09-20");
+    const pairs = segments.map((segment) =>
+      [segment.fromCityId, segment.toCityId].sort().join("<->"),
+    );
+    expect(pairs).toContain("enoshima<->tokyo");
   });
 });
 

@@ -233,14 +233,14 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
   return routes;
 }
 
-/** Flat sand/rail segments on the felt — inter-city links only, walks skipped. */
+/** Rail segments on the felt — inter-city train/ferry only; walks and flights skipped. */
 export function buildGroundPathSegments(trip: TripFixture, today: string): GroundPathSegment[] {
   const tz = trip.timezone;
   const seen = new Set<string>();
   const segments: GroundPathSegment[] = [];
 
   for (const hop of trip.transportations) {
-    if (hop.type === "walk" || hop.type === "airplane") continue;
+    if (hop.type === "walk" || hop.type === "airplane" || hop.type === "bus") continue;
     const cities = hopCities(hop);
     if (!cities) continue;
     if (cities.fromCity === ORIGIN_TOKEN.id) continue;
@@ -250,7 +250,7 @@ export function buildGroundPathSegments(trip: TripFixture, today: string): Groun
     seen.add(pairKey);
 
     segments.push({
-      id: `ground:${pairKey}`,
+      id: `rail:${pairKey}`,
       type: hop.type,
       fromCityId: cities.fromCity,
       toCityId: cities.toCity,
