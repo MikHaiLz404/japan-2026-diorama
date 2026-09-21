@@ -205,5 +205,6 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(diorama).toMatch(/city\.id === "tokyo" && !mobile/);
     expect(diorama).toMatch(/label\.scale\.multiplyScalar\(0\.72\)/);
     expect(diorama).not.toMatch(/label\.visible = false/);
+    expect(diorama).toMatch(/city\.status === "upcoming"/);
   });
 });
