@@ -57,7 +57,6 @@ export function makeTray(): THREE.Group {
   const wood = mat(palette.wood, { roughness: 0.82 });
   const rim = mat(palette.woodRim, { roughness: 0.78 });
   const moss = mat(palette.moss, { roughness: 0.95 });
-  const mossDeep = mat(palette.mossDeep, { roughness: 0.96 });
 
   const table = new THREE.Mesh(geo.box, mat(0xe7e2d8, { roughness: 0.92 }));
   table.scale.set(16, 0.2, 13);
@@ -89,19 +88,6 @@ export function makeTray(): THREE.Group {
   felt.position.y = 0.02;
   felt.receiveShadow = true;
   group.add(felt);
-
-  const patches: Array<[number, number, number, number]> = [
-    [-2.4, -1.6, 2.2, 1.6],
-    [2.6, 1.4, 1.8, 1.3],
-    [0.2, 2.1, 1.4, 1.1],
-  ];
-  for (const [x, z, w, d] of patches) {
-    const patch = new THREE.Mesh(geo.box, mossDeep);
-    patch.scale.set(w, 0.03, d);
-    patch.position.set(x, 0.055, z);
-    patch.receiveShadow = true;
-    group.add(patch);
-  }
 
   return group;
 }
