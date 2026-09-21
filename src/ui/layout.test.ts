@@ -200,7 +200,7 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(diorama).toMatch(/new PetalField\(small \? SAKURA_LOOK\.mobileCount : SAKURA_LOOK\.desktopCount\)/);
   });
 
-  it("hides 3D day plates on mobile so date chips do not clutter the tray", () => {
+  it("keeps all city labels visible on mobile but scales them down", () => {
     expect(diorama).toMatch(/isMobileLayout\(\)/);
     expect(diorama).toMatch(/city\.id === "tokyo" && !mobile/);
     expect(diorama).toMatch(/label\.scale\.multiplyScalar\(0\.72\)/);

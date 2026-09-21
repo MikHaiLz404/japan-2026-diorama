@@ -6,3 +6,5 @@ scripts/cache
 .vercel
 .vite
 coverage
+.screenshots/
+.playwright-mcp/

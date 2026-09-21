@@ -54,6 +54,8 @@ export function cityColors(status: VisitStatus): {
 
 export function pathColor(status: VisitStatus, kind: string): number {
   const upcoming = status === "upcoming";
-  if (kind === "airplane") return upcoming ? 0x6d7aa3 : palette.flight;
-  return upcoming ? 0xd98a72 : palette.rail;
+  if (kind === "airplane") return upcoming ? 0x5a6a9a : palette.flight;
+  if (kind === "bus") return upcoming ? 0xe0a070 : 0xd46a38;
+  if (kind === "ferry") return upcoming ? 0x7eb0b8 : palette.water;
+  return upcoming ? 0xe07858 : palette.rail;
 }
