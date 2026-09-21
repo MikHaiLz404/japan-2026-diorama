@@ -11,6 +11,14 @@
       name="description"
       content="旅トレイ Japan 2026 / Trip tray — a tiny miniature diorama of the itinerary."
     />
+    <meta property="og:title" content="Japan 2026 · Diorama" />
+    <meta
+      property="og:description"
+      content="Interactive Three.js trip tray for Japan 2026 — tap a city to zoom into lodging and activities."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://japan-2026-diorama.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Japan 2026 · Diorama</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,6 +31,18 @@
   <body>
     <div id="app">
       <div id="stage" aria-hidden="true"></div>
+
+      <a
+        id="embed-open"
+        class="embed-open"
+        href="https://japan-2026-diorama.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        hidden
+      >
+        全画面で開く
+        <small lang="en">Open fullscreen</small>
+      </a>
 
       <header class="hud">
         <div class="hud-title">

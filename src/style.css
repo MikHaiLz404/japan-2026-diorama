@@ -727,3 +727,71 @@ h1 {
     transform: none;
   }
 }
+
+/* Portfolio iframe embed (`?embed=1` or framed by jojo-in-runtime) */
+html.is-embed .hud-title h1 {
+  font-size: clamp(1.15rem, 3.2vw, 1.55rem);
+}
+
+html.is-embed .eyebrow {
+  font-size: 0.65rem;
+}
+
+html.is-embed .hint {
+  bottom: calc(0.65rem + var(--safe-bottom));
+  font-size: 0.72rem;
+}
+
+.embed-open {
+  position: absolute;
+  top: calc(0.65rem + var(--safe-top));
+  right: calc(0.65rem + var(--safe-right));
+  z-index: 30;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.05rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--lg-rounded-pill);
+  border: 1px solid var(--line);
+  background: var(--hud);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: var(--shadow);
+}
+
+.embed-open[hidden] {
+  display: none !important;
+}
+
+.embed-open small {
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.embed-open:hover,
+.embed-open:focus-visible {
+  border-color: var(--accent);
+  outline: none;
+}
+
+html.is-embed .hud-tools {
+  margin-right: 6.5rem;
+}
+
+@media (max-width: 859px) {
+  html.is-embed .hud-tools {
+    margin-right: 0;
+  }
+
+  .embed-open {
+    top: auto;
+    bottom: calc(5.5rem + var(--safe-bottom));
+    right: calc(0.65rem + var(--safe-right));
+  }
+}

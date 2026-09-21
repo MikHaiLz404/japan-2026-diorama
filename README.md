@@ -100,3 +100,11 @@ npm run refresh-data
 ## Deploy
 
 Connect the repo to Vercel. Framework is a static Vite app; `npm run build` emits `dist/`.
+
+## Embed in jojo-in-runtime
+
+Portfolio integration (Works iframe + separate Logs post) is documented in
+[`docs/jojo-in-runtime-integration.md`](docs/jojo-in-runtime-integration.md).
+
+Embed URL: `https://japan-2026-diorama.vercel.app/?embed=1`  
+(`frame-ancestors` allows `jojo-in-runtime.vercel.app` and Vercel previews.)

@@ -1,5 +1,6 @@
 import "./style.css";
 import { prepareTrip } from "./data/loadTrip";
+import { isEmbedMode, standaloneUrl } from "./lib/embed";
 import { Diorama } from "./scene/diorama";
 import { renderCityChips, renderHudMeta, setCityMenuOpen } from "./ui/hud";
 import { renderSheet } from "./ui/sheet";
@@ -12,9 +13,21 @@ const sheetBody = document.querySelector<HTMLElement>("#sheet-body");
 const chips = document.querySelector<HTMLElement>("#city-chips");
 const hudMeta = document.querySelector<HTMLElement>("#hud-meta");
 const hint = document.querySelector<HTMLElement>("#hint");
+const embedBar = document.querySelector<HTMLAnchorElement>("#embed-open");
 
 if (!stage || !sheet || !sheetBody || !chips || !hudMeta) {
   throw new Error("Diorama shell is missing required DOM nodes.");
+}
+
+const embedded = isEmbedMode();
+if (embedded) {
+  document.documentElement.classList.add("is-embed");
+  if (embedBar) {
+    embedBar.hidden = false;
+    embedBar.href = standaloneUrl();
+  }
+} else if (embedBar) {
+  embedBar.hidden = true;
 }
 
 const stageEl = stage;
