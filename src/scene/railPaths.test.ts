@@ -42,6 +42,20 @@ describe("makeRailPaths", () => {
     expect(nearestHase).toBeLessThan(0.2);
   });
 
+  it("uses rail tubes thick enough to read at diorama zoom", () => {
+    const segments = buildGroundPathSegments(trip, "2026-09-20");
+    const rails = makeRailPaths(segments);
+    const radii: number[] = [];
+    rails.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+      if (!child.name.endsWith(":rail-left") && !child.name.endsWith(":rail-right")) return;
+      const geometry = child.geometry as THREE.TubeGeometry;
+      radii.push(geometry.parameters.radius);
+    });
+    expect(radii.length).toBeGreaterThan(0);
+    expect(Math.min(...radii)).toBeGreaterThanOrEqual(0.01);
+  });
+
   it("routes Enoshima–Tokyo through Fujisawa, not a straight chord", () => {
     const segments = buildGroundPathSegments(trip, "2026-09-20");
     const leg = segments.find(
