@@ -1,14 +1,17 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import type { Selection } from "../data/types";
+import { ORIGIN_TOKEN } from "../data/cities";
 import type { PreparedTrip } from "../data/loadTrip";
 import { isMobileLayout, isSmallScreen, prefersReducedMotion } from "../lib/platform";
+import { makeDecor, type Decor } from "./decor";
 import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
 import { makeRailPaths } from "./railPaths";
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
 import { makeRoute, routeParallelMeta } from "./paths";
 import { PetalField, SAKURA_LOOK } from "./petals";
+import { loadPropAssets } from "./props";
 
 const OVERVIEW = {
   position: new THREE.Vector3(0.15, 11.2, 12.1),
@@ -27,6 +30,7 @@ export class Diorama {
   private readonly goalPos = OVERVIEW.position.clone();
   private readonly goalTarget = OVERVIEW.target.clone();
   private readonly petals: PetalField | null;
+  private readonly decor: Decor;
   private readonly reduced = prefersReducedMotion();
   private pointerDown: { x: number; y: number } | null = null;
   private raf = 0;
@@ -99,6 +103,20 @@ export class Diorama {
     this.scene.add(makeRailPaths(prepared.groundPaths));
     this.scene.add(makeOriginToken());
 
+    const anchors = new Map<string, [number, number]>([[ORIGIN_TOKEN.id, [ORIGIN_TOKEN.tray[0], ORIGIN_TOKEN.tray[1]]]]);
+    for (const city of prepared.cities) anchors.set(city.id, [city.tray[0], city.tray[1]]);
+    this.decor = makeDecor({
+      cities: prepared.cities.map((c) => ({ x: c.tray[0], z: c.tray[1], size: c.size })),
+      routes: prepared.routes.flatMap((r): Array<[number, number, number, number]> => {
+        const a = anchors.get(r.fromCityId);
+        const b = anchors.get(r.toCityId);
+        return a && b ? [[a[0], a[1], b[0], b[1]]] : [];
+      }),
+      origin: { x: ORIGIN_TOKEN.tray[0], z: ORIGIN_TOKEN.tray[1] },
+      small,
+    });
+    this.scene.add(this.decor.group);
+
     const mobile = isMobileLayout();
 
     for (const city of prepared.cities) {
@@ -133,6 +151,14 @@ export class Diorama {
 
     this.petals = this.reduced ? null : new PetalField(small ? SAKURA_LOOK.mobileCount : SAKURA_LOOK.desktopCount);
     if (this.petals) this.scene.add(this.petals.points);
+
+    void loadPropAssets({ signal: this.modelAbort.signal })
+      .then((assets) => {
+        if (!this.disposed && Object.keys(assets).length > 0) this.decor.useProps(assets);
+      })
+      .catch(() => {
+        /* Procedural set dressing stays. */
+      });
 
     void hydrateGltfModels({
       scene: this.scene,
@@ -225,6 +251,7 @@ export class Diorama {
       this.controls.target.copy(this.goalTarget);
       this.animating = false;
     }
+    if (!this.reduced) this.decor.update(this.clock.elapsedTime, delta);
     this.petals?.update(delta);
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
