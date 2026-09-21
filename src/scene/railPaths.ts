@@ -3,13 +3,13 @@ import type { GroundPathSegment, VisitStatus } from "../data/types";
 import { cityById } from "../data/cities";
 import { junctionTray, waypointsForPair } from "./railWaypoints";
 
-const RAIL_Y = 0.072;
-const GAUGE = 0.052;
-const RAIL_RADIUS = 0.0035;
-const SLEEPER_SPACING = 0.1;
-const SLEEPER_LENGTH = 0.082;
-const SLEEPER_HEIGHT = 0.005;
-const SLEEPER_DEPTH = 0.011;
+const RAIL_Y = 0.082;
+const GAUGE = 0.16;
+const RAIL_RADIUS = 0.032;
+const SLEEPER_SPACING = 0.25;
+const SLEEPER_LENGTH = 0.2;
+const SLEEPER_HEIGHT = 0.018;
+const SLEEPER_DEPTH = 0.036;
 const END_TRIM = 0.38;
 const SAMPLE_COUNT = 48;
 
