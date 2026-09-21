@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import type { CityBlock, GroundPathSegment, VisitStatus } from "../data/types";
-import { cityById } from "../data/cities";
+import type { CityBlock, VisitStatus } from "../data/types";
 import { cityColors, palette } from "./palette";
 
 const geo = {
@@ -102,51 +101,6 @@ export function makeTray(): THREE.Group {
     patch.position.set(x, 0.055, z);
     patch.receiveShadow = true;
     group.add(patch);
-  }
-
-  return group;
-}
-
-function trayXZ(cityId: string): [number, number] {
-  const city = cityById(cityId);
-  return city ? city.tray : [0, 0];
-}
-
-/** Flat sand/rail strips on the felt for inter-city links. */
-export function makeGroundPaths(segments: GroundPathSegment[]): THREE.Group {
-  const group = new THREE.Group();
-  group.name = "ground-paths";
-
-  for (const segment of segments) {
-    const [x1, z1] = trayXZ(segment.fromCityId);
-    const [x2, z2] = trayXZ(segment.toCityId);
-    const dx = x2 - x1;
-    const dz = z2 - z1;
-    const length = Math.hypot(dx, dz);
-    if (length < 0.2) continue;
-
-    const isRail = segment.type === "train" || segment.type === "ferry";
-    const color =
-      segment.status === "upcoming"
-        ? isRail
-          ? 0xc9b08a
-          : 0xd8c8aa
-        : isRail
-          ? palette.rail
-          : palette.sand;
-    const material = mat(color, {
-      roughness: isRail ? 0.55 : 0.88,
-      transparent: segment.status === "upcoming",
-      opacity: segment.status === "upcoming" ? 0.55 : 0.92,
-    });
-    const strip = new THREE.Mesh(geo.box, material);
-    const width = isRail ? 0.14 : 0.2;
-    strip.scale.set(length, 0.018, width);
-    strip.position.set((x1 + x2) / 2, 0.065, (z1 + z2) / 2);
-    strip.rotation.y = Math.atan2(dx, dz);
-    strip.receiveShadow = true;
-    strip.name = segment.id;
-    group.add(strip);
   }
 
   return group;
