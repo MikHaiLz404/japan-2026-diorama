@@ -5,7 +5,7 @@ import { ORIGIN_TOKEN } from "../data/cities";
 import type { PreparedTrip } from "../data/loadTrip";
 import { isMobileLayout, isSmallScreen, prefersReducedMotion } from "../lib/platform";
 import { makeDecor, type Decor } from "./decor";
-import { makeCityBlock, makeDayPlate, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
+import { makeCityBlock, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
 import { makeRailPaths } from "./railPaths";
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels } from "./models";
@@ -125,14 +125,6 @@ export class Diorama {
       const hit = block.getObjectByName(`hit:${city.id}`);
       if (hit) this.pickables.push(hit);
 
-      if (city.id === "tokyo" && !mobile) {
-        city.plates.forEach((plate, index) => {
-          const tile = makeDayPlate(city, plate.date, index, plate.status);
-          block.add(tile);
-          this.pickables.push(tile);
-        });
-      }
-
       const { d } = platformSize(city.size);
       const label = makeLabel(
         city.name,
@@ -221,11 +213,7 @@ export class Diorama {
       this.onPick(null);
       return;
     }
-    const data = hit.object.userData as { kind?: string; cityId?: string; date?: string };
-    if (data.kind === "plate" && data.cityId && data.date) {
-      this.onPick({ cityId: data.cityId, date: data.date });
-      return;
-    }
+    const data = hit.object.userData as { cityId?: string };
     if (data.cityId) this.onPick({ cityId: data.cityId });
   };
 
