@@ -16,6 +16,16 @@ Embed URL: `https://japan-2026-diorama.vercel.app/?embed=1`
 
 Implementation PR on the portfolio: branch `cursor/japan-diorama-works-logs-429b` in `my-journey` (local Works/Logs fallbacks + `embed_url` iframe).
 
+### Notion Connections (seed / MCP)
+
+Works + Logs live in the **portfolio CMS** Notion workspace (not the personal trip-plan workspace).
+
+When sharing those databases via **⋯ → Connections → Connect to**:
+
+- Do **not** look for a connection named `cursor`
+- Pick **`Notion MCP`** (the bot Cursor uses for this workspace)
+- If **`Notion MCP` is also missing**, the DB is in a different Notion workspace than the one Cursor authenticated — open Works/Logs in the workspace that powers `jojo-in-runtime`, or seed with the same `NOTION_TOKEN` as that Vercel project and share the DBs with **that** integration’s name instead
+
 ---
 
 ## 1. Works entry
