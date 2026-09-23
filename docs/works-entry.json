@@ -1,0 +1,15 @@
+{
+  "slug": "japan-2026-diorama",
+  "title": "Japan 2026 Diorama",
+  "category": "Interactive",
+  "role": "Creator",
+  "description": "Mobile-first Three.js miniature trip tray for Japan 2026. Tap a city block to zoom into lodging and activities; visited stops stay bright.",
+  "tags": ["THREE.JS", "WEBGL", "TYPESCRIPT", "TRIPSY"],
+  "featured": true,
+  "icon": "travel_explore",
+  "image": "/works/japan-2026-diorama.png",
+  "year": 2026,
+  "embedUrl": "https://japan-2026-diorama.vercel.app/?embed=1",
+  "liveUrl": "https://japan-2026-diorama.vercel.app/",
+  "repoUrl": "https://github.com/MikHaiLz404/japan-2026-diorama"
+}
