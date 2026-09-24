@@ -143,9 +143,9 @@ function hopCities(hop: TripFixture["transportations"][number]): { fromCity: str
   const toLng = hop.arrival.longitude;
   if (fromLat == null || fromLng == null || toLat == null || toLng == null) return null;
 
-  const fromIsBkk = fromLat < 20;
-  const fromCity = fromIsBkk ? ORIGIN_TOKEN.id : nearestCityId(fromLat, fromLng);
-  const toCity = nearestCityId(toLat, toLng);
+  // Anything this far south is Bangkok, on the way out or the way home.
+  const fromCity = fromLat < 20 ? ORIGIN_TOKEN.id : nearestCityId(fromLat, fromLng);
+  const toCity = toLat < 20 ? ORIGIN_TOKEN.id : nearestCityId(toLat, toLng);
   if (fromCity === toCity) return null;
   return { fromCity, toCity };
 }
