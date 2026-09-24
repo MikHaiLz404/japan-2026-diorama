@@ -8,7 +8,7 @@ import { makeDecor, type Decor } from "./decor";
 import { makeCityBlock, makeLabel, makeOriginToken, makeTray, platformSize } from "./meshes";
 import { makeRailPaths } from "./railPaths";
 import { SCENE_LOOK } from "./look";
-import { disposeObject3D, hydrateGltfModels } from "./models";
+import { disposeObject3D, hydrateGltfModels, modelFitSize } from "./models";
 import { makeRoute, routeParallelMeta } from "./paths";
 import { PetalField, SAKURA_LOOK } from "./petals";
 import { loadPropAssets } from "./props";
@@ -21,6 +21,17 @@ const OVERVIEW = {
 /** Distance the desktop overview was tuned at (OrbitControls clamps to this). */
 const OVERVIEW_BASE_DISTANCE = 14;
 const OVERVIEW_MARGIN = 0.9;
+
+/**
+ * Where a placard sits when the default (hanging in front) would cover a neighbour:
+ * Enoshima/Kamakura would cover Yokohama, and Yokohama would cover Tokyo.
+ */
+const LABEL_PLACEMENT: Record<string, "above" | "east"> = {
+  enoshima: "above",
+  kamakura: "above",
+  yokohama: "east",
+  kawagoe: "above",
+};
 
 /**
  * Camera distance that keeps `halfWidth` of content inside the horizontal FOV.
@@ -153,14 +164,25 @@ export class Diorama {
       const hit = block.getObjectByName(`hit:${city.id}`);
       if (hit) this.pickables.push(hit);
 
-      const { d } = platformSize(city.size);
+      const { w, d } = platformSize(city.size);
       const label = makeLabel(
         city.name,
         city.id,
         city.status === "upcoming",
       );
-      // Placard hangs just in front of the block so it stays attached at any tilt.
-      label.position.set(0, 0.12, d * 0.5 + 0.12);
+      const placement = LABEL_PLACEMENT[city.id];
+      if (placement === "above") {
+        // Stands on the back edge, just over the model, so the view south stays clear.
+        label.center.set(0.5, 0);
+        label.position.set(0, modelFitSize(city.size).h * 0.75, -d * 0.5);
+      } else if (placement === "east") {
+        // Beside the block's east edge, level with its top, clear of the city to the south.
+        label.center.set(0, 0.5);
+        label.position.set(w * 0.5 + 0.08, modelFitSize(city.size).h * 0.5, 0);
+      } else {
+        // Placard hangs just in front of the block so it stays attached at any tilt.
+        label.position.set(0, 0.12, d * 0.5 + 0.12);
+      }
       // Portrait overview pulls the camera back, so placards grow to stay legible.
       if (mobile) label.scale.multiplyScalar(1.45);
       block.add(label);
