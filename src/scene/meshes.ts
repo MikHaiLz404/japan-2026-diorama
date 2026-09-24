@@ -17,6 +17,7 @@ export function isSharedGeometry(geometry: THREE.BufferGeometry): boolean {
 }
 
 export function platformSize(size: CityBlock["size"]): { w: number; d: number; h: number } {
+  if (size === "xl") return { w: 3.1, d: 2.5, h: 0.18 };
   if (size === "lg") return { w: 2.35, d: 1.85, h: 0.16 };
   if (size === "md") return { w: 1.35, d: 1.15, h: 0.13 };
   return { w: 1.05, d: 0.92, h: 0.12 };
@@ -194,18 +195,29 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
   });
 
   const footprint: Array<[number, number, number, number, number]> =
-    city.size === "lg"
+    city.size === "xl"
       ? [
-          [-0.7, -0.35, 0.34, 0.32, 0.28],
-          [-0.28, -0.42, 0.22, 0.48, 0.22],
-          [0.18, -0.28, 0.3, 0.26, 0.24],
-          [-0.55, 0.28, 0.26, 0.22, 0.3],
-          [0.05, 0.38, 0.36, 0.2, 0.28],
+          [-1.1, -0.5, 0.34, 0.34, 0.28],
+          [-0.6, -0.72, 0.24, 0.5, 0.22],
+          [-0.05, -0.48, 0.3, 0.28, 0.26],
+          [0.5, -0.6, 0.26, 0.4, 0.22],
+          [-0.92, 0.42, 0.28, 0.26, 0.3],
+          [-0.28, 0.58, 0.38, 0.22, 0.28],
+          [0.32, 0.4, 0.3, 0.3, 0.24],
+          [0.85, 0.1, 0.24, 0.34, 0.22],
         ]
-      : [
-          [-0.22, -0.12, 0.24, 0.22, 0.2],
-          [0.18, 0.1, 0.2, 0.28, 0.18],
-        ];
+      : city.size === "lg"
+        ? [
+            [-0.7, -0.35, 0.34, 0.32, 0.28],
+            [-0.28, -0.42, 0.22, 0.48, 0.22],
+            [0.18, -0.28, 0.3, 0.26, 0.24],
+            [-0.55, 0.28, 0.26, 0.22, 0.3],
+            [0.05, 0.38, 0.36, 0.2, 0.28],
+          ]
+        : [
+            [-0.22, -0.12, 0.24, 0.22, 0.2],
+            [0.18, 0.1, 0.2, 0.28, 0.18],
+          ];
 
   for (const [x, z, bw, bh, bd] of footprint) {
     box(visuals, body, bw, bh, bd, x, h, z);
@@ -214,7 +226,8 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
 
   addLandmark(visuals, city, colors);
   addTree(visuals, -w * 0.38, d * 0.32, city.id === "tokyo" || city.id === "kamakura");
-  if (city.size === "lg") addTree(visuals, 0.85, 0.55, true);
+  if (city.size === "lg" || city.size === "xl") addTree(visuals, 0.85, 0.55, true);
+  if (city.size === "xl") addTree(visuals, w * 0.42, -d * 0.35, false);
 
   return group;
 }

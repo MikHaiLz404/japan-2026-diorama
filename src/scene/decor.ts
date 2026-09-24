@@ -21,10 +21,10 @@ const FIELDS = { x: 3.3, z: 2.55, w: 1.9, d: 1.2 };
 interface Anchor {
   x: number;
   z: number;
-  size: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg" | "xl";
 }
 
-const CITY_KEEP_OUT: Record<Anchor["size"], number> = { lg: 1.75, md: 1.05, sm: 0.8 };
+const CITY_KEEP_OUT: Record<Anchor["size"], number> = { xl: 2.35, lg: 1.75, md: 1.05, sm: 0.8 };
 
 function rng(seed: number) {
   let a = seed >>> 0;

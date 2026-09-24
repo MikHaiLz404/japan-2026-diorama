@@ -95,7 +95,7 @@ export function isRenderableCityModel(root: THREE.Object3D): boolean {
 /** Target box for a city glb — same layout footprint as the procedural block. */
 export function modelFitSize(size: CityBlock["size"]): { w: number; d: number; h: number } {
   const { w, d } = platformSize(size);
-  const h = size === "lg" ? 1.45 : size === "md" ? 0.92 : 0.72;
+  const h = size === "xl" ? 1.7 : size === "lg" ? 1.45 : size === "md" ? 0.92 : 0.72;
   return { w, d, h };
 }
 
