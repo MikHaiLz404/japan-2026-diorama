@@ -728,6 +728,45 @@ h1 {
   }
 }
 
+.loading-pill {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  text-align: center;
+  pointer-events: none;
+  animation: loading-pulse 1.4s ease-in-out infinite;
+}
+
+.loading-pill[hidden] {
+  display: none;
+}
+
+.loading-pill .lang-en {
+  display: block;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+@keyframes loading-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-pill {
+    animation: none;
+  }
+}
+
 /* Portfolio iframe embed (`?embed=1` or framed by jojo-in-runtime) */
 html.is-embed .hud-title h1 {
   font-size: clamp(1.15rem, 3.2vw, 1.55rem);

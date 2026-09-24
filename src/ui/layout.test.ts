@@ -200,11 +200,11 @@ describe("Liberogic / Vodka chrome design system", () => {
     expect(diorama).toMatch(/new PetalField\(small \? SAKURA_LOOK\.mobileCount : SAKURA_LOOK\.desktopCount\)/);
   });
 
-  it("keeps all city labels visible on mobile but scales them down", () => {
+  it("keeps all city labels visible on mobile and enlarges them for the pulled-back overview", () => {
     expect(diorama).toMatch(/isMobileLayout\(\)/);
     expect(diorama).not.toMatch(/makeDayPlate/);
     expect(diorama).not.toMatch(/kind === "plate"/);
-    expect(diorama).toMatch(/label\.scale\.multiplyScalar\(0\.72\)/);
+    expect(diorama).toMatch(/label\.scale\.multiplyScalar\(1\.45\)/);
     expect(diorama).not.toMatch(/label\.visible = false/);
     expect(diorama).toMatch(/city\.status === "upcoming"/);
   });

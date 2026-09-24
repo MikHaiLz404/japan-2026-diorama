@@ -41,3 +41,13 @@ The loader keeps those maps. Vertex paint in `src/scene/paint.ts` only runs on u
 | `chiba.glb` | 5.74 MiB |
 | `takao.glb` | 5.55 MiB |
 | `kawagoe.glb` | 5.85 MiB |
+
+## Compression
+
+All `.glb` files are packed with meshopt geometry + WebP textures (~11MB → ~3.4MB total). After replacing a model, re-run:
+
+```bash
+npx @gltf-transform/cli optimize in.glb out.glb --compress meshopt --texture-compress webp --simplify false
+```
+
+`tryLoadGltf` registers `MeshoptDecoder`, so compressed and uncompressed files both load.

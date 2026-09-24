@@ -41,6 +41,11 @@ export class Diorama {
   private readonly pointer = new THREE.Vector2();
   private readonly clock = new THREE.Clock();
   private readonly pickables: THREE.Object3D[] = [];
+  private readonly routeMeshes: THREE.Mesh[] = [];
+  private paused = false;
+  private visibilityObserver: IntersectionObserver | null = null;
+  /** Resolves once GLB city models and props have loaded (or fallen back). */
+  readonly ready: Promise<void>;
   private readonly goalPos = OVERVIEW.position.clone();
   private readonly overviewPos = OVERVIEW.position.clone();
   private readonly contentHalfWidth: number;
@@ -161,13 +166,17 @@ export class Diorama {
 
     const routeMeta = routeParallelMeta(prepared.routes);
     for (let i = 0; i < prepared.routes.length; i += 1) {
-      this.scene.add(makeRoute(prepared.routes[i], routeMeta[i]));
+      const route = prepared.routes[i];
+      const mesh = makeRoute(route, routeMeta[i]);
+      mesh.userData = { from: route.fromCityId, to: route.toCityId };
+      this.routeMeshes.push(mesh);
+      this.scene.add(mesh);
     }
 
     this.petals = this.reduced ? null : new PetalField(small ? SAKURA_LOOK.mobileCount : SAKURA_LOOK.desktopCount);
     if (this.petals) this.scene.add(this.petals.points);
 
-    void loadPropAssets({ signal: this.modelAbort.signal })
+    const props = loadPropAssets({ signal: this.modelAbort.signal })
       .then((assets) => {
         if (!this.disposed && Object.keys(assets).length > 0) this.decor.useProps(assets);
       })
@@ -175,7 +184,7 @@ export class Diorama {
         /* Procedural set dressing stays. */
       });
 
-    void hydrateGltfModels({
+    const models = hydrateGltfModels({
       scene: this.scene,
       cities: prepared.cities,
       shadows: !small,
@@ -184,13 +193,37 @@ export class Diorama {
       /* Procedural tray/blocks stay in the scene. */
     });
 
+    this.ready = Promise.allSettled([props, models]).then(() => undefined);
+
+    // Stop drawing while the tab is hidden or the iframe is scrolled offscreen (battery).
+    document.addEventListener("visibilitychange", this.onVisibility);
+    if (typeof IntersectionObserver !== "undefined") {
+      this.visibilityObserver = new IntersectionObserver((entries) => {
+        this.setPaused(!entries.some((entry) => entry.isIntersecting));
+      });
+      this.visibilityObserver.observe(host);
+    }
+
     this.renderer.domElement.addEventListener("pointerdown", this.onPointerDown);
     this.renderer.domElement.addEventListener("pointerup", this.onPointerUp);
     window.addEventListener("resize", this.onResize);
     this.tick();
   }
 
+  /** Keep the selected city's legs bright and fade the rest so the web of routes reads. */
+  private highlightRoutes(cityId: string | null) {
+    for (const mesh of this.routeMeshes) {
+      const material = mesh.material as THREE.MeshStandardMaterial;
+      material.userData.baseOpacity ??= material.opacity;
+      const { from, to } = mesh.userData as { from: string; to: string };
+      const active = !cityId || from === cityId || to === cityId;
+      material.opacity = active ? material.userData.baseOpacity : 0.16;
+      mesh.renderOrder = active ? 1 : 0;
+    }
+  }
+
   focus(selection: Selection | null) {
+    this.highlightRoutes(selection?.cityId ?? null);
     if (!selection) {
       this.goalPos.copy(this.overviewPos);
       this.goalTarget.copy(OVERVIEW.target);
@@ -261,13 +294,30 @@ export class Diorama {
     }
   };
 
+  private onVisibility = () => {
+    this.setPaused(document.hidden);
+  };
+
+  private setPaused(paused: boolean) {
+    if (paused === this.paused || this.disposed) return;
+    this.paused = paused;
+    if (paused) {
+      cancelAnimationFrame(this.raf);
+    } else {
+      this.clock.getDelta(); // drop the time spent paused
+      this.tick();
+    }
+  }
+
   private tick = () => {
-    if (this.disposed) return;
+    if (this.disposed || this.paused) return;
     this.raf = requestAnimationFrame(this.tick);
     const delta = Math.min(this.clock.getDelta(), 0.05);
     if (this.animating && !this.reduced) {
-      this.camera.position.lerp(this.goalPos, 0.08);
-      this.controls.target.lerp(this.goalTarget, 0.1);
+      // Per-frame factors tuned at 60fps; scale by delta so slow devices still converge.
+      const frames = delta * 60;
+      this.camera.position.lerp(this.goalPos, 1 - Math.pow(1 - 0.08, frames));
+      this.controls.target.lerp(this.goalTarget, 1 - Math.pow(1 - 0.1, frames));
       if (this.camera.position.distanceTo(this.goalPos) < 0.04) this.animating = false;
     } else if (this.animating && this.reduced) {
       this.camera.position.copy(this.goalPos);
@@ -285,6 +335,8 @@ export class Diorama {
     this.modelAbort.abort();
     cancelAnimationFrame(this.raf);
     window.removeEventListener("resize", this.onResize);
+    document.removeEventListener("visibilitychange", this.onVisibility);
+    this.visibilityObserver?.disconnect();
     this.renderer.domElement.removeEventListener("pointerdown", this.onPointerDown);
     this.renderer.domElement.removeEventListener("pointerup", this.onPointerUp);
     this.controls.dispose();
