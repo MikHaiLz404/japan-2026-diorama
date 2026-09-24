@@ -5,7 +5,7 @@
   "starts_at": "2026-09-17",
   "ends_at": "2026-09-28",
   "timezone": "Asia/Tokyo",
-  "fetched_at": "2026-09-24T11:36:15.570Z",
+  "fetched_at": "2026-09-24T13:34:29.551Z",
   "activities": [
     {
       "id": "4042290",
@@ -876,19 +876,6 @@
       "address": "2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; Landmark Tower เก็บไว้สำหรับจัดวันอื่น",
-      "website": ""
-    },
-    {
-      "id": "4045128",
-      "name": "Mount Takao",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6253,
-      "longitude": 139.2431,
-      "address": "Takaomachi, Hachioji, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "เอา Mount Takao ออกจากแผนวันที่ 26 ก.ย. 2026 แล้ว เพราะไม่น่าได้ไป; เก็บ activity ไว้แบบไม่ผูกวัน เผื่อเปลี่ยนใจภายหลัง",
       "website": ""
     },
     {
@@ -1862,6 +1849,24 @@
       }
     },
     {
+      "id": "3610145",
+      "type": "train",
+      "name": "Fujisawa → Shinjuku",
+      "transport_number": null,
+      "departure_at": "2026-09-24T10:36:00Z",
+      "arrival_at": "2026-09-24T11:36:00Z",
+      "departure": {
+        "name": "Fujisawa Station",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Odakyu Shinjuku",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
       "id": "3610141",
       "type": "train",
       "name": "Fujisawa → Shinjuku",
@@ -1898,19 +1903,19 @@
       }
     },
     {
-      "id": "3610145",
+      "id": "3610471",
       "type": "train",
-      "name": "Fujisawa → Shinjuku",
+      "name": "Shinjuku-nishiguchi → Shin-Okachimachi",
       "transport_number": null,
-      "departure_at": "2026-09-24T10:37:00Z",
-      "arrival_at": null,
+      "departure_at": "2026-09-24T11:45:00Z",
+      "arrival_at": "2026-09-24T12:04:00Z",
       "departure": {
-        "name": "Fujisawa Station",
+        "name": "Shinjuku-nishiguchi Station",
         "latitude": null,
         "longitude": null
       },
       "arrival": {
-        "name": "Odakyu Shinjuku",
+        "name": "Shin-Okachimachi Station",
         "latitude": null,
         "longitude": null
       }
@@ -2165,42 +2170,6 @@
         "name": "Fujisawa Station",
         "latitude": 35.7049026489,
         "longitude": 139.786468506
-      }
-    },
-    {
-      "id": "3581223",
-      "type": "train",
-      "name": "Route placeholder — Mount Takao removed",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Mount Takao",
-        "latitude": 35.6253,
-        "longitude": 139.2431
-      }
-    },
-    {
-      "id": "3581224",
-      "type": "train",
-      "name": "Route placeholder — Takao connection not used",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Mount Takao",
-        "latitude": 35.6253,
-        "longitude": 139.2431
-      },
-      "arrival": {
-        "name": "Ghibli Museum",
-        "latitude": 35.6962,
-        "longitude": 139.5703
       }
     },
     {
