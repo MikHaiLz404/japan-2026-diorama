@@ -67,3 +67,12 @@ describe("route dates", () => {
     expect(flight?.date).toBe("2026-09-17");
   });
 });
+
+describe("flight home", () => {
+  it("lands the return flight on the Bangkok token, not a Japanese city", () => {
+    const flights = buildRoutePaths(trip, "2026-09-24").filter((route) => route.type === "airplane");
+    const home = flights.find((route) => route.date === "2026-09-27");
+    expect(home?.toCityId).toBe("bangkok");
+    expect(home?.fromCityId).toBe("chiba");
+  });
+});

@@ -5,7 +5,7 @@
   "starts_at": "2026-09-17",
   "ends_at": "2026-09-28",
   "timezone": "Asia/Tokyo",
-  "fetched_at": "2026-09-24T13:34:29.551Z",
+  "fetched_at": "2026-09-24T13:59:31.570Z",
   "activities": [
     {
       "id": "4042290",
@@ -708,19 +708,6 @@
       "timezone": "Asia/Tokyo",
       "notes": "เปลี่ยนลำดับล่าสุด: ไป Kamakura ก่อน แล้วค่อยย้อน Enoden มาที่ Kamakura-Kokomae.",
       "website": null
-    },
-    {
-      "id": "4045131",
-      "name": "Kawagoe / Little Edo",
-      "type": "tour",
-      "starts_at": "2026-09-25T00:00:00Z",
-      "ends_at": null,
-      "latitude": 35.9251,
-      "longitude": 139.4858,
-      "address": "Kawagoe, Saitama, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "Greater Tokyo Pass — Day 4",
-      "website": ""
     },
     {
       "id": "4045132",
@@ -1975,6 +1962,24 @@
       }
     },
     {
+      "id": "3610714",
+      "type": "airplane",
+      "name": null,
+      "transport_number": "NH807",
+      "departure_at": "2026-09-27T08:30:00Z",
+      "arrival_at": "2026-09-27T15:15:00Z",
+      "departure": {
+        "name": "NRT",
+        "latitude": 35.772,
+        "longitude": 140.3929
+      },
+      "arrival": {
+        "name": "BKK",
+        "latitude": 13.69,
+        "longitude": 100.7501
+      }
+    },
+    {
       "id": "3581153",
       "type": "walk",
       "name": "",
@@ -2206,42 +2211,6 @@
         "name": "AIRSTAY Aoto #201 (ที่พัก)",
         "latitude": 35.749227,
         "longitude": 139.8583691
-      }
-    },
-    {
-      "id": "3581227",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-25T00:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Kawagoe / Little Edo",
-        "latitude": 35.9251,
-        "longitude": 139.4858
-      }
-    },
-    {
-      "id": "3581228",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-25T05:00:00Z",
-      "departure": {
-        "name": "Kawagoe / Little Edo",
-        "latitude": 35.9251,
-        "longitude": 139.4858
-      },
-      "arrival": {
-        "name": "Warner Bros. Studio Tour Tokyo (Harry Potter)",
-        "latitude": 35.7466,
-        "longitude": 139.6317
       }
     },
     {
