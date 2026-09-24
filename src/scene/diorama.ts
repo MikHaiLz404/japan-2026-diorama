@@ -26,10 +26,11 @@ const OVERVIEW_MARGIN = 0.9;
  * Where a placard sits when the default (hanging in front) would cover a neighbour:
  * Enoshima/Kamakura would cover Yokohama, and Yokohama would cover Tokyo.
  */
-const LABEL_PLACEMENT: Record<string, "above" | "west"> = {
+const LABEL_PLACEMENT: Record<string, "above" | "east"> = {
   enoshima: "above",
   kamakura: "above",
-  yokohama: "west",
+  yokohama: "east",
+  kawagoe: "above",
 };
 
 /**
@@ -174,10 +175,10 @@ export class Diorama {
         // Stands on the back edge, just over the model, so the view south stays clear.
         label.center.set(0.5, 0);
         label.position.set(0, modelFitSize(city.size).h * 0.75, -d * 0.5);
-      } else if (placement === "west") {
-        // Beside the block's west edge, level with its top, clear of the city to the south.
-        label.center.set(1, 0.5);
-        label.position.set(-w * 0.5 - 0.08, modelFitSize(city.size).h * 0.5, 0);
+      } else if (placement === "east") {
+        // Beside the block's east edge, level with its top, clear of the city to the south.
+        label.center.set(0, 0.5);
+        label.position.set(w * 0.5 + 0.08, modelFitSize(city.size).h * 0.5, 0);
       } else {
         // Placard hangs just in front of the block so it stays attached at any tilt.
         label.position.set(0, 0.12, d * 0.5 + 0.12);
