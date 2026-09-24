@@ -57,3 +57,13 @@ describe("dropped stops", () => {
     expect(prepared.groundPaths.some(touchesTakao)).toBe(false);
   });
 });
+
+describe("route dates", () => {
+  it("tags each arc with its day so the tray can show one day's journey", () => {
+    const routes = buildRoutePaths(trip, "2026-09-24");
+    const day = routes.filter((route) => route.date === "2026-09-24");
+    expect(day.some((route) => [route.fromCityId, route.toCityId].includes("kamakura"))).toBe(true);
+    const flight = routes.find((route) => route.type === "airplane");
+    expect(flight?.date).toBe("2026-09-17");
+  });
+});

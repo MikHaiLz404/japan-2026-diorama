@@ -42,6 +42,7 @@ export class Diorama {
   private readonly clock = new THREE.Clock();
   private readonly pickables: THREE.Object3D[] = [];
   private readonly routeMeshes: THREE.Mesh[] = [];
+  private readonly prepared: PreparedTrip;
   private paused = false;
   private visibilityObserver: IntersectionObserver | null = null;
   /** Resolves once GLB city models and props have loaded (or fallen back). */
@@ -66,6 +67,7 @@ export class Diorama {
     onPick: (selection: Selection | null) => void,
   ) {
     this.onPick = onPick;
+    this.prepared = prepared;
     const small = isSmallScreen();
     this.renderer = new THREE.WebGLRenderer({ antialias: !small, alpha: false });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, small ? 1.5 : 2));
@@ -168,7 +170,7 @@ export class Diorama {
     for (let i = 0; i < prepared.routes.length; i += 1) {
       const route = prepared.routes[i];
       const mesh = makeRoute(route, routeMeta[i]);
-      mesh.userData = { from: route.fromCityId, to: route.toCityId };
+      mesh.userData = { from: route.fromCityId, to: route.toCityId, date: route.date };
       this.routeMeshes.push(mesh);
       this.scene.add(mesh);
     }
@@ -193,6 +195,7 @@ export class Diorama {
       /* Procedural tray/blocks stay in the scene. */
     });
 
+    this.showRoutesFor(null);
     this.ready = Promise.allSettled([props, models]).then(() => undefined);
 
     // Stop drawing while the tab is hidden or the iframe is scrolled offscreen (battery).
@@ -210,20 +213,25 @@ export class Diorama {
     this.tick();
   }
 
-  /** Keep the selected city's legs bright and fade the rest so the web of routes reads. */
-  private highlightRoutes(cityId: string | null) {
+  /**
+   * Arcs follow the calendar instead of showing the whole trip at once:
+   * overview → today's legs (every leg once the trip is over, as a recap),
+   * city → legs touching it on its days, city + day → that day's legs.
+   */
+  private showRoutesFor(selection: Selection | null) {
+    const { today, trip, cities } = this.prepared;
+    const live = today >= trip.starts_at && today <= trip.ends_at;
+    const city = selection ? cities.find((c) => c.id === selection.cityId) : undefined;
+    const days = selection?.date ? [selection.date] : city ? city.dates : live ? [today] : null;
     for (const mesh of this.routeMeshes) {
-      const material = mesh.material as THREE.MeshStandardMaterial;
-      material.userData.baseOpacity ??= material.opacity;
-      const { from, to } = mesh.userData as { from: string; to: string };
-      const active = !cityId || from === cityId || to === cityId;
-      material.opacity = active ? material.userData.baseOpacity : 0.16;
-      mesh.renderOrder = active ? 1 : 0;
+      const { from, to, date } = mesh.userData as { from: string; to: string; date: string | null };
+      const touches = !city || selection?.date || from === city.id || to === city.id;
+      mesh.visible = date !== null && Boolean(touches) && (days === null || days.includes(date));
     }
   }
 
   focus(selection: Selection | null) {
-    this.highlightRoutes(selection?.cityId ?? null);
+    this.showRoutesFor(selection);
     if (!selection) {
       this.goalPos.copy(this.overviewPos);
       this.goalTarget.copy(OVERVIEW.target);
