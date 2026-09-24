@@ -196,7 +196,8 @@ export function buildCityBlocks(trip: TripFixture, today: string): CityBlock[] {
       lodging,
       activities,
     };
-  }).filter((city) => city.activities.length > 0 || city.lodging.length > 0);
+    // Undated activities are wishlist items; a city needs a scheduled day or a stay to be on the tray.
+  }).filter((city) => city.dates.length > 0 || city.lodging.length > 0);
 }
 
 export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
