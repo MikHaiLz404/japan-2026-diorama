@@ -59,6 +59,11 @@ function applySelection(next: Selection | null) {
 
 const diorama = new Diorama(stageEl, prepared, applySelection);
 
+const loading = document.querySelector<HTMLElement>("#loading");
+void diorama.ready.then(() => {
+  if (loading) loading.hidden = true;
+});
+
 chipsEl.addEventListener("click", (event) => {
   const toggle = (event.target as HTMLElement).closest<HTMLButtonElement>("#city-menu-toggle");
   if (toggle) {

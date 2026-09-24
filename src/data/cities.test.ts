@@ -45,3 +45,25 @@ describe("geo tray layout", () => {
     expect(ground.every((segment) => segment.type !== "airplane")).toBe(true);
   });
 });
+
+describe("dropped stops", () => {
+  it("keeps a city with only undated activities off the tray, along with its routes", async () => {
+    const { prepareTrip } = await import("./loadTrip");
+    const prepared = prepareTrip(new Date("2026-09-24T03:00:00Z"));
+    expect(prepared.cities.map((city) => city.id)).not.toContain("takao");
+    const touchesTakao = (leg: { fromCityId: string; toCityId: string }) =>
+      leg.fromCityId === "takao" || leg.toCityId === "takao";
+    expect(prepared.routes.some(touchesTakao)).toBe(false);
+    expect(prepared.groundPaths.some(touchesTakao)).toBe(false);
+  });
+});
+
+describe("route dates", () => {
+  it("tags each arc with its day so the tray can show one day's journey", () => {
+    const routes = buildRoutePaths(trip, "2026-09-24");
+    const day = routes.filter((route) => route.date === "2026-09-24");
+    expect(day.some((route) => [route.fromCityId, route.toCityId].includes("kamakura"))).toBe(true);
+    const flight = routes.find((route) => route.type === "airplane");
+    expect(flight?.date).toBe("2026-09-17");
+  });
+});

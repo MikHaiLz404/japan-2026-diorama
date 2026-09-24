@@ -196,7 +196,8 @@ export function buildCityBlocks(trip: TripFixture, today: string): CityBlock[] {
       lodging,
       activities,
     };
-  }).filter((city) => city.activities.length > 0 || city.lodging.length > 0);
+    // Undated activities are wishlist items; a city needs a scheduled day or a stay to be on the tray.
+  }).filter((city) => city.dates.length > 0 || city.lodging.length > 0);
 }
 
 export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
@@ -209,7 +210,10 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
     const cities = hopCities(hop);
     if (!cities) continue;
 
-    const key = `${cities.fromCity}->${cities.toCity}:${hop.type}`;
+    const when = hop.departure_at ?? hop.arrival_at;
+    const date = when ? toDateKey(when, tz) : null;
+    // One arc per leg per day, so each day can show its own journey.
+    const key = `${cities.fromCity}->${cities.toCity}:${hop.type}:${date ?? "undated"}`;
     if (seen.has(key)) continue;
     seen.add(key);
 
@@ -227,6 +231,7 @@ export function buildRoutePaths(trip: TripFixture, today: string): RoutePath[] {
       toCityId: cities.toCity,
       status,
       label,
+      date,
     });
   }
 

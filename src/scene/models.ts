@@ -178,8 +178,14 @@ export async function tryLoadGltf(
     const slash = url.lastIndexOf("/");
     const path = slash >= 0 ? url.slice(0, slash + 1) : "/";
     if (options.parse) return await options.parse(buffer, path);
-    const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
-    gltfLoader ??= new GLTFLoader();
+    if (!gltfLoader) {
+      const [{ GLTFLoader }, { MeshoptDecoder }] = await Promise.all([
+        import("three/addons/loaders/GLTFLoader.js"),
+        import("three/addons/libs/meshopt_decoder.module.js"),
+      ]);
+      // Assets are packed with `gltf-transform optimize --compress meshopt`.
+      gltfLoader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+    }
     const gltf = await gltfLoader.parseAsync(buffer, path);
     return gltf.scene;
   } catch {

@@ -11,12 +11,13 @@ describe("EN/JP overlay copy", () => {
   });
 
   it("names overnight areas from lodging data", () => {
-    const [asakusa, aoto] = trip.lodging;
+    const [asakusa, aoto, misugi] = trip.lodging;
     expect(lodgingAreaName(asakusa)).toBe("Asakusa");
     expect(lodgingAreaName(aoto)).toBe("Aoto");
+    expect(lodgingAreaName(misugi)).toBe("Misugi");
     expect(overnightStayLabel(trip, "2026-09-18")).toBe("Asakusaに宿泊 · Staying in Asakusa");
     expect(overnightStayLabel(trip, "2026-09-19")).toBe("Aotoに宿泊 · Staying in Aoto");
-    expect(overnightStayLabel(trip)).toBe("Asakusa / Aotoに宿泊 · Staying in Asakusa / Aoto");
+    expect(overnightStayLabel(trip)).toBe("Asakusa / Aoto / Misugiに宿泊 · Staying in Asakusa / Aoto / Misugi");
   });
 
   it("titles the activity list as today's stops in EN/JP", () => {
@@ -27,7 +28,7 @@ describe("EN/JP overlay copy", () => {
     expect(host.innerHTML).toContain("今日のスポット");
     expect(host.innerHTML).toContain("Today's stops");
     expect(host.innerHTML).toContain("宿泊 · Lodging");
-    expect(host.innerHTML).toContain("日程 2 / 11 · Day 2 / 11");
+    expect(host.innerHTML).toContain("日程 2 / 12 · Day 2 / 12");
     expect(host.innerHTML).not.toContain("今日のプレート");
     expect(host.innerHTML).not.toContain("Today's plate");
     expect(host.innerHTML).not.toContain("訪問済");
@@ -45,7 +46,7 @@ describe("EN/JP overlay copy", () => {
     expect(host.innerHTML).toMatch(/day-tab status-today is-active/);
     expect(host.innerHTML).toMatch(/day-tab status-visited"/);
 
-    renderSheet(host, trip, yokohama!, { cityId: "yokohama", date: "2026-09-22" });
+    renderSheet(host, trip, yokohama!, { cityId: "yokohama", date: "2026-09-26" });
     expect(host.innerHTML).toMatch(/sheet-kicker status-upcoming/);
     expect(host.innerHTML).toMatch(/day-tab status-upcoming is-active/);
   });

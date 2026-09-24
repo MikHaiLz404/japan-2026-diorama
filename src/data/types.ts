@@ -109,6 +109,8 @@ export interface RoutePath {
   toCityId: string;
   status: VisitStatus;
   label: string;
+  /** Tripsy date key (trip timezone) of the hop; null for unscheduled placeholders. */
+  date: string | null;
 }
 
 export interface GroundPathSegment {
