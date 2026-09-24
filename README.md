@@ -1,6 +1,6 @@
 # Japan 2026 diorama
 
-Mobile-first Three.js miniature tray for the **Japan 2026** trip. Tap a city block to zoom into that day’s plate (lodging + activities). Visited stops stay bright; upcoming ones stay dim. The trip is still live (`2026-09-17`–`2026-09-27`), so status is derived from activity dates vs today in `Asia/Tokyo`.
+Mobile-first Three.js miniature tray for the **Japan 2026** trip. Tap a city block to zoom into that day’s plate (lodging + activities). Visited stops stay bright; upcoming ones stay dim. The trip is still live (`2026-09-17`–`2026-09-28`), so status is derived from activity dates vs today in `Asia/Tokyo`.
 
 Source of truth: **Tripsy trip `1213687`**. Notion is out of scope.
 
@@ -49,7 +49,7 @@ Fixture type: `src/data/types.ts` (`TripFixture`).
   trip_id: "1213687",
   name: "Japan 2026",
   starts_at: "2026-09-17",
-  ends_at: "2026-09-27",
+  ends_at: "2026-09-28",
   timezone: "Asia/Tokyo",
   fetched_at: "ISO-8601",
   activities: [{

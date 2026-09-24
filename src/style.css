@@ -712,7 +712,7 @@ h1 {
 
   .hint {
     left: calc(20px + var(--safe-left));
-    bottom: calc(28px + var(--safe-bottom));
+    bottom: calc(92px + var(--safe-bottom));
   }
 }
 
@@ -738,7 +738,6 @@ html.is-embed .eyebrow {
 }
 
 html.is-embed .hint {
-  bottom: calc(0.65rem + var(--safe-bottom));
   font-size: 0.72rem;
 }
 

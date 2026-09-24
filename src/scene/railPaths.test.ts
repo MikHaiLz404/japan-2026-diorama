@@ -57,7 +57,7 @@ describe("makeRailPaths", () => {
   });
 
   it("routes Enoshima–Tokyo through Fujisawa, not a straight chord", () => {
-    const segments = buildGroundPathSegments(trip, "2026-09-20");
+    const segments = buildGroundPathSegments(trip, "2026-09-24");
     const leg = segments.find(
       (segment) =>
         [segment.fromCityId, segment.toCityId].sort().join("<->") === "enoshima<->tokyo",
@@ -71,9 +71,14 @@ describe("makeRailPaths", () => {
       new THREE.Vector3(0.94, 0, 0.47),
     );
     const directDist = direct.distance();
-    const sample = curve.getPoint(0.35);
+    // Direction-agnostic: the leg may run either way, so check the widest bend.
     const closest = new THREE.Vector3();
-    direct.closestPointToPoint(sample, true, closest);
-    expect(closest.distanceTo(sample)).toBeGreaterThan(directDist * 0.04);
+    let bend = 0;
+    for (let t = 0.1; t <= 0.9; t += 0.05) {
+      const sample = curve.getPoint(t);
+      direct.closestPointToPoint(sample, true, closest);
+      bend = Math.max(bend, closest.distanceTo(sample));
+    }
+    expect(bend).toBeGreaterThan(directDist * 0.04);
   });
 });

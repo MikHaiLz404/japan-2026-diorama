@@ -18,6 +18,20 @@ const OVERVIEW = {
   target: new THREE.Vector3(0.05, 0.2, -0.05),
 };
 
+/** Distance the desktop overview was tuned at (OrbitControls clamps to this). */
+const OVERVIEW_BASE_DISTANCE = 14;
+const OVERVIEW_MARGIN = 0.9;
+
+/**
+ * Camera distance that keeps `halfWidth` of content inside the horizontal FOV.
+ * Wide screens keep the tuned distance; narrow (portrait) screens pull back.
+ */
+export function overviewDistance(aspect: number, vfovDeg: number, halfWidth: number): number {
+  const tanHalf = Math.tan(THREE.MathUtils.degToRad(vfovDeg) / 2);
+  const needed = halfWidth / (Math.max(aspect, 0.1) * tanHalf);
+  return Math.max(OVERVIEW_BASE_DISTANCE, needed);
+}
+
 export class Diorama {
   readonly renderer: THREE.WebGLRenderer;
   private readonly scene = new THREE.Scene();
@@ -28,6 +42,8 @@ export class Diorama {
   private readonly clock = new THREE.Clock();
   private readonly pickables: THREE.Object3D[] = [];
   private readonly goalPos = OVERVIEW.position.clone();
+  private readonly overviewPos = OVERVIEW.position.clone();
+  private readonly contentHalfWidth: number;
   private readonly goalTarget = OVERVIEW.target.clone();
   private readonly petals: PetalField | null;
   private readonly decor: Decor;
@@ -57,16 +73,21 @@ export class Diorama {
     host.appendChild(this.renderer.domElement);
 
     this.camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 80);
-    this.camera.position.copy(OVERVIEW.position);
+    const xs = [ORIGIN_TOKEN.tray[0], ...prepared.cities.map((c) => c.tray[0])];
+    this.contentHalfWidth =
+      Math.max(...xs.map((x) => Math.abs(x - OVERVIEW.target.x))) + OVERVIEW_MARGIN;
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.08;
     this.controls.enablePan = false;
     this.controls.minDistance = 2.4;
-    this.controls.maxDistance = 14;
+    this.controls.maxDistance = OVERVIEW_BASE_DISTANCE;
     this.controls.maxPolarAngle = Math.PI * 0.46;
     this.controls.target.copy(OVERVIEW.target);
+    this.fitOverview();
+    this.camera.position.copy(this.overviewPos);
+    this.goalPos.copy(this.overviewPos);
     this.controls.touches = {
       ONE: THREE.TOUCH.ROTATE,
       TWO: THREE.TOUCH.DOLLY_ROTATE,
@@ -131,8 +152,10 @@ export class Diorama {
         city.id,
         city.status === "upcoming",
       );
-      label.position.set(0, city.size === "lg" ? 1.55 : 0.95, d * 0.02);
-      if (mobile) label.scale.multiplyScalar(0.72);
+      // Placard hangs just in front of the block so it stays attached at any tilt.
+      label.position.set(0, 0.12, d * 0.5 + 0.12);
+      // Portrait overview pulls the camera back, so placards grow to stay legible.
+      if (mobile) label.scale.multiplyScalar(1.45);
       block.add(label);
     }
 
@@ -169,7 +192,7 @@ export class Diorama {
 
   focus(selection: Selection | null) {
     if (!selection) {
-      this.goalPos.copy(OVERVIEW.position);
+      this.goalPos.copy(this.overviewPos);
       this.goalTarget.copy(OVERVIEW.target);
       this.animating = true;
       return;
@@ -183,6 +206,12 @@ export class Diorama {
     this.goalTarget.set(world.x, 0.15, world.z);
     this.goalPos.set(world.x + (compact ? 0.55 : 1.15), lift, world.z + (compact ? 4.1 : 2.35));
     this.animating = true;
+  }
+
+  private fitOverview() {
+    const dist = overviewDistance(this.camera.aspect, this.camera.fov, this.contentHalfWidth);
+    this.overviewPos.copy(OVERVIEW.position).sub(OVERVIEW.target).setLength(dist).add(OVERVIEW.target);
+    this.controls.maxDistance = Math.max(OVERVIEW_BASE_DISTANCE, dist);
   }
 
   nudgeZoom(direction: number) {
@@ -224,6 +253,12 @@ export class Diorama {
     this.camera.aspect = w / h;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(w, h);
+    const wasOverview = this.goalPos.distanceTo(this.overviewPos) < 0.05;
+    this.fitOverview();
+    if (wasOverview) {
+      this.goalPos.copy(this.overviewPos);
+      this.animating = true;
+    }
   };
 
   private tick = () => {

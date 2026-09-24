@@ -21,10 +21,14 @@ export function statusLabel(status: VisitStatus): string {
   return jaEn(COPY.upcoming);
 }
 
+const GENERIC_STAY_WORDS = new Set(["airbnb", "hotel", "hostel", "inn", "stay", "apartment"]);
+
 export function lodgingAreaName(stay: TripLodging): string {
-  const tokens = [...stay.name.replace(/#\d+/g, " ").matchAll(/[A-Za-z][A-Za-z'-]*/g)].map(
-    (match) => match[0],
-  );
+  // "Misugi Airbnb — Direct to Narita/Haneda": the tagline after a dash is not the area.
+  const head = stay.name.split(/\s[—–-]\s/)[0];
+  const tokens = [...head.replace(/#\d+/g, " ").matchAll(/[A-Za-z][A-Za-z'-]*/g)]
+    .map((match) => match[0])
+    .filter((word) => !GENERIC_STAY_WORDS.has(word.toLowerCase()));
   return tokens.at(-1) ?? stay.name;
 }
 

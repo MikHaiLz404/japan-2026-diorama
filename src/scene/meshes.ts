@@ -238,11 +238,11 @@ export function makeLabel(text: string, cityId: string, dim: boolean): THREE.Spr
   const ctx = canvas.getContext("2d");
   if (ctx) {
     ctx.clearRect(0, 0, 256, 96);
-    ctx.fillStyle = dim ? "rgba(255, 255, 255, 0.62)" : "rgba(255, 255, 255, 0.88)";
+    ctx.fillStyle = dim ? "rgba(255, 255, 255, 0.8)" : "rgba(255, 255, 255, 0.92)";
     ctx.beginPath();
     ctx.roundRect(18, 22, 220, 52, 16);
     ctx.fill();
-    ctx.fillStyle = dim ? "#8a8f98" : "#12141a";
+    ctx.fillStyle = dim ? "#4b515c" : "#12141a";
     ctx.font = "600 28px 'Noto Sans JP', sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -254,7 +254,9 @@ export function makeLabel(text: string, cityId: string, dim: boolean): THREE.Spr
     new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false }),
   );
   sprite.scale.set(1.35, 0.5, 1);
-  sprite.center.set(0.5, 0);
+  sprite.center.set(0.5, 1);
+  // Draw after GLB models (some use transparent materials) so neighbours never cover it.
+  sprite.renderOrder = 10;
   sprite.userData = { kind: "city", cityId };
   return sprite;
 }

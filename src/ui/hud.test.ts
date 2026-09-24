@@ -11,7 +11,7 @@ describe("HUD meta copy", () => {
   it("uses compact JP-first live day count instead of English-only Day X", () => {
     const el = host();
     renderHudMeta(el, trip, "2026-09-20");
-    expect(el.textContent).toContain("日程 4 / 11 · ライブ");
+    expect(el.textContent).toContain("日程 4 / 12 · ライブ");
     expect(el.textContent).not.toMatch(/Day \d+ of/);
     expect(el.textContent).not.toMatch(/[\u0E00-\u0E7F]/);
   });
@@ -20,7 +20,7 @@ describe("HUD meta copy", () => {
     const el = host();
     renderHudMeta(el, trip, "2026-09-20");
     expect(el.textContent).toMatch(/Sep 17/);
-    expect(el.textContent).toMatch(/Sep 27/);
+    expect(el.textContent).toMatch(/Sep 28/);
   });
 
   it("uses Starts / 開始 and Wrapped / 終了 outside the trip", () => {

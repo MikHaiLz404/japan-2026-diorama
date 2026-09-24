@@ -3,23 +3,10 @@
   "trip_id": "1213687",
   "name": "Japan 2026",
   "starts_at": "2026-09-17",
-  "ends_at": "2026-09-27",
+  "ends_at": "2026-09-28",
   "timezone": "Asia/Tokyo",
-  "fetched_at": "2026-09-20T13:50:27.590Z",
+  "fetched_at": "2026-09-24T11:36:15.570Z",
   "activities": [
-    {
-      "id": "4037975",
-      "name": "Asakusa Nakamise",
-      "type": "shopping",
-      "starts_at": "2026-09-17T22:15:01Z",
-      "ends_at": "2026-09-17T22:45:01Z",
-      "latitude": 35.7118364,
-      "longitude": 139.7964442,
-      "address": "111-0032, Tokyo Taito, 1-36-3, Asakusa, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": "http://asakusa-nakamise.jp"
-    },
     {
       "id": "4042290",
       "name": "Ume to Hoshi",
@@ -32,6 +19,19 @@
       "timezone": "Asia/Tokyo",
       "notes": "มื้อเช้า 3,740¥",
       "website": "http://www.ume-hoshi.jp"
+    },
+    {
+      "id": "4037975",
+      "name": "Asakusa Nakamise",
+      "type": "shopping",
+      "starts_at": "2026-09-18T01:15:00Z",
+      "ends_at": "2026-09-18T01:45:00Z",
+      "latitude": 35.7118364,
+      "longitude": 139.7964442,
+      "address": "111-0032, Tokyo Taito, 1-36-3, Asakusa, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เดิน Nakamise วันที่ 18 ก.ย. 2026 หลังมาถึงญี่ปุ่น",
+      "website": "http://asakusa-nakamise.jp"
     },
     {
       "id": "4037865",
@@ -264,7 +264,7 @@
       "longitude": 139.7649,
       "address": "〒104-0061 東京都中央区銀座5丁目5-1",
       "timezone": "Asia/Tokyo",
-      "notes": "นั่งเก้าอี้นวด (急速時間) 932¥",
+      "notes": "ซื้อแผ่นแปะนวด 932¥ (ไม่ใช่เก้าอี้นวด)",
       "website": null
     },
     {
@@ -385,147 +385,329 @@
       "website": null
     },
     {
-      "id": "4045120",
-      "name": "Cup Noodles Museum / Minato Mirai",
-      "type": "museum",
-      "starts_at": "2026-09-22T01:00:00Z",
-      "ends_at": null,
-      "latitude": 35.4547,
-      "longitude": 139.6382,
-      "address": "2 Chome-3-4 Shinko, Naka Ward, Yokohama, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "Greater Tokyo Pass — Day 1",
-      "website": ""
-    },
-    {
-      "id": "4045121",
-      "name": "Yokohama Chinatown (lunch)",
-      "type": "restaurant",
-      "starts_at": "2026-09-22T03:30:00Z",
-      "ends_at": null,
-      "latitude": 35.4437,
-      "longitude": 139.6469,
-      "address": "Yamashitacho, Naka Ward, Yokohama, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": ""
-    },
-    {
-      "id": "4045122",
-      "name": "Yamashita Park / Osanbashi",
-      "type": "park",
-      "starts_at": "2026-09-22T05:00:00Z",
-      "ends_at": null,
-      "latitude": 35.4453,
-      "longitude": 139.6503,
-      "address": "279 Yamashitacho, Naka Ward, Yokohama, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": ""
-    },
-    {
-      "id": "4045123",
-      "name": "Red Brick Warehouse",
+      "id": "4063428",
+      "name": "Workman 葛飾立石店 (ซื้อรองเท้ากันน้ำ)",
       "type": "shopping",
-      "starts_at": "2026-09-22T07:00:00Z",
+      "starts_at": "2026-09-21T01:58:00Z",
       "ends_at": null,
-      "latitude": 35.4519,
-      "longitude": 139.6425,
-      "address": "1-1 Shinko, Naka Ward, Yokohama, Japan",
+      "latitude": 35.7412,
+      "longitude": 139.8471,
+      "address": "Tateishi 5-2-5, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": ""
+      "notes": "ซื้อรองเท้ากันน้ำ FC372 防水Fプレジャー ราคา ¥2,500 + ถุงพลาสติก ¥5 = รวม ¥2,505 (จ่ายบัตร Mitsui Sumitomo)",
+      "website": null
     },
     {
-      "id": "4045125",
-      "name": "Landmark Tower (night view)",
-      "type": "tour",
-      "starts_at": "2026-09-22T09:30:00Z",
-      "ends_at": null,
-      "latitude": 35.4546,
-      "longitude": 139.6317,
-      "address": "2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Japan",
+      "id": "4064066",
+      "name": "Lawson 青砥駅北口店 (แวะซื้อของกินระหว่างทางกลับที่พัก)",
+      "type": "foodMarket",
+      "starts_at": "2026-09-21T03:19:00Z",
+      "ends_at": "2026-09-21T03:25:00Z",
+      "latitude": 35.7746,
+      "longitude": 139.8459,
+      "address": "東京都葛飾区青戸3-38-1, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": ""
+      "notes": "แวะ Lawson ใกล้สถานี Aoto ระหว่างเดินกลับที่พักหลังซื้อรองเท้า - Lチキレット ¥259, Lチキレギュラー ¥248, ถุงพลาสติก ¥3 รวม ¥510 (จ่ายบัตร VISA)",
+      "website": null
+    },
+    {
+      "id": "4064528",
+      "name": "ヨークマート 青戸店 (แวะช้อปปิ้ง/ซื้อของ)",
+      "type": "shopping",
+      "starts_at": "2026-09-21T06:44:00Z",
+      "ends_at": "2026-09-21T06:50:00Z",
+      "latitude": 35.7734,
+      "longitude": 139.8468,
+      "address": "〒125-0062 東京都葛飾区青戸2-20-6, Katsushika, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อของสด/ของกินหลายอย่างที่ ยอรกมาร์เกตแล้ว (ผัก, เต้าหู้, ขนมปัง, น้ำแร่, ซอสถั่ว, มิโซซุป, หมูออนเซียง, ข้าวปั้นซูชิ, ฯลฯ) รวม 27 รายการ = ¥7,366 + ถุงช้อปปิ้ง 2 ใบ ¥14 (แยกคิดเงิน) รวมทั้งหมด ¥7,380 จ่ายบัตร VISA",
+      "website": null
+    },
+    {
+      "id": "4065868",
+      "name": "セブン-イレブン 葛飾青戸3丁目店 (แวะซื้อของกิน)",
+      "type": "foodMarket",
+      "starts_at": "2026-09-21T12:19:00Z",
+      "ends_at": "2026-09-21T12:25:00Z",
+      "latitude": 35.7744,
+      "longitude": 139.8462,
+      "address": "東京都葛飾区青戸3丁目34-7, Katsushika, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะ 7-Eleven ตอนกลางคืน - บูริโตแฮมชีส, บูริโตชีสเบิ้ล, เครื่องดื่มแอลกอฮอล์ホロヨイ, กาแฟ Mt.R espresso, โยเกิร์ต Tarami low-cal, ชา Kirin Helsia รวม ¥1,468 จ่ายบัตร VISA Prepaid",
+      "website": null
+    },
+    {
+      "id": "4071248",
+      "name": "Bounce Luggage Storage — ฝากกระเป๋า",
+      "type": "general",
+      "starts_at": "2026-09-22T01:30:00Z",
+      "ends_at": "2026-09-22T01:40:00Z",
+      "latitude": 35.717101,
+      "longitude": 139.79432,
+      "address": "3-9-2 Asakusa, Taito City, Tokyo 111-0032, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ฝาก 2 luggage + 1 bag ช่วงสาย หลังมาจาก Aoto. เวลา ~10:30 JST เป็นประมาณการจาก route เดิม; รับกระเป๋าอีกครั้งช่วง 14:25.",
+      "website": null
+    },
+    {
+      "id": "4066213",
+      "name": "Nakau Kuramaebashi — Lunch",
+      "type": "tour",
+      "starts_at": "2026-09-22T02:00:00Z",
+      "ends_at": "2026-09-22T02:45:00Z",
+      "latitude": 35.70490264892578,
+      "longitude": 139.78646850585938,
+      "address": "Misuji, Taito City, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "มื้อเที่ยง Nakau Kuramaebashi ¥2,030 (2 คน). เวลา ~11:00–11:45 JST เป็นประมาณการเพื่อเรียง timeline.",
+      "website": null
+    },
+    {
+      "id": "4083449",
+      "name": "Bounce Luggage Storage — รับกระเป๋า",
+      "type": "general",
+      "starts_at": "2026-09-22T05:25:00Z",
+      "ends_at": "2026-09-22T05:35:00Z",
+      "latitude": 35.7044,
+      "longitude": 139.792,
+      "address": "1 Chome-1-2 Komagata, Taito City, Tokyo 111-0043, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "รับกระเป๋าประมาณ 14:25 JST แล้วเดินไป Misuji Airbnb.",
+      "website": null
+    },
+    {
+      "id": "4083345",
+      "name": "EN CAFE (แวะก่อนกลับที่พัก)",
+      "type": "cafe",
+      "starts_at": "2026-09-22T05:39:00Z",
+      "ends_at": null,
+      "latitude": 35.7043,
+      "longitude": 139.7908,
+      "address": "Kuramae, Taito-ku, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เวลาจริงที่ผู้ใช้ยืนยัน: 14:39 JST วันที่ 22 ก.ย. 2026. EN CAFE ¥2,830; แวะก่อนกลับเข้าที่พัก. เวลาจบยังไม่ทราบ.",
+      "website": null
+    },
+    {
+      "id": "4083344",
+      "name": "Vegan Ramen UZU Tokyo (มื้อเย็นก่อน teamLab)",
+      "type": "restaurant",
+      "starts_at": "2026-09-22T10:05:00Z",
+      "ends_at": "2026-09-22T10:35:00Z",
+      "latitude": 35.6465,
+      "longitude": 139.7935,
+      "address": "Toyosu, Koto-ku, Tokyo, Japan (ใกล้ teamLab Planets)",
+      "timezone": "Asia/Tokyo",
+      "notes": "เวลาจริงที่ผู้ใช้ยืนยัน: 19:05 JST วันที่ 22 ก.ย. 2026; ราเมนเจ x2 + น้ำ รวม ¥4,800. เวลาจบ 19:35 เป็นประมาณการ.",
+      "website": null
     },
     {
       "id": "4045115",
       "name": "teamLab Planets",
       "type": "museum",
-      "starts_at": "2026-09-22T10:00:00Z",
-      "ends_at": "2026-09-22T13:00:00Z",
+      "starts_at": "2026-09-22T10:40:00Z",
+      "ends_at": "2026-09-22T13:03:00Z",
       "latitude": 35.6465,
       "longitude": 139.793,
       "address": "6 Chome-1-16 Toyosu, Koto-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "✅ Confirmed — นัดกับเล็ก (เพื่อน) เวลา 19:00-22:00 เวลาญี่ปุ่น (ย้ายจาก 20 ก.ย. เพราะฝนตก มาเป็นวันที่ 22 ก.ย. แทน)",
+      "notes": "✅ Visited 22 ก.ย. — ผู้ใช้แจ้งถึงบริเวณ teamLab ประมาณ 18:30, กิน Vegan Ramen UZU เวลา 19:05 ก่อนเข้า; เวลาเข้า teamLab ~19:40 เป็นประมาณการ และออกประมาณ 22:03 JST.",
+      "website": ""
+    },
+    {
+      "id": "4083346",
+      "name": "Matsumoto Kiyoshi Shin-Okachimachi",
+      "type": "pharmacy",
+      "starts_at": "2026-09-23T03:31:00Z",
+      "ends_at": "2026-09-23T03:45:00Z",
+      "latitude": 35.7069,
+      "longitude": 139.7745,
+      "address": "Shin-Okachimachi, Taito-ku, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อของ 2 รายการ (¥768 + ¥426, ใช้คูปอง -¥20) เวลา 12:31 น.",
+      "website": null
+    },
+    {
+      "id": "4076566",
+      "name": "KOFFEE MAMEYA",
+      "type": "cafe",
+      "starts_at": "2026-09-23T04:21:00Z",
+      "ends_at": "2026-09-23T05:15:00Z",
+      "latitude": 35.66834,
+      "longitude": 139.71087,
+      "address": "4 Chome-15-3 Jingumae, Shibuya, Tokyo 150-0001, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "สถานะจริง: ถึง Omotesando ประมาณ 13:21 แล้วไป KOFFEE MAMEYA; ใบเสร็จกาแฟ 14:05; จากนั้นไป Tonkatsu Maisen Aoyama",
+      "website": null
+    },
+    {
+      "id": "4077787",
+      "name": "Tonkatsu Maisen Aoyama",
+      "type": "restaurant",
+      "starts_at": "2026-09-23T05:23:00Z",
+      "ends_at": "2026-09-23T06:15:00Z",
+      "latitude": 35.66848,
+      "longitude": 139.71139,
+      "address": "4-8-5 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ลำดับจริงวันที่ 23 ก.ย. 2026: หลัง KOFFEE MAMEYA มาที่ Tonkatsu Maisen Aoyama แล้วไป MACCHA HOUSE → I’m donut? → IYOSHI COLA",
+      "website": null
+    },
+    {
+      "id": "4076695",
+      "name": "MACCHA HOUSE With Harajuku",
+      "type": "cafe",
+      "starts_at": "2026-09-23T06:00:00Z",
+      "ends_at": "2026-09-23T07:00:00Z",
+      "latitude": 35.6702,
+      "longitude": 139.7028,
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
+      "timezone": "Asia/Tokyo",
+      "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง Tonkatsu Maisen Aoyama มากินชา/น้ำแข็งใส แล้วไป I’m donut? ต่อ; เวลาเป็นค่าประมาณเพื่อจัดลำดับย้อนหลัง",
+      "website": null
+    },
+    {
+      "id": "4076563",
+      "name": "I'm donut? Harajuku",
+      "type": "bakery",
+      "starts_at": "2026-09-23T08:30:00Z",
+      "ends_at": "2026-09-23T09:37:00Z",
+      "latitude": 35.669827,
+      "longitude": 139.7032334,
+      "address": "1-14-24 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง MACCHA HOUSE แล้วไป IYOSHI COLA ต่อ; จบช่วงประมาณ 18:37 JST",
+      "website": null
+    },
+    {
+      "id": "4076564",
+      "name": "IYOSHI COLA Shibuya Jingumae — Craft Cola",
+      "type": "cafe",
+      "starts_at": "2026-09-23T09:38:00Z",
+      "ends_at": "2026-09-23T09:55:00Z",
+      "latitude": 35.6644704,
+      "longitude": 139.7032379,
+      "address": "5-29-12 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง I’m donut? แล้วไป TAKEYA ต่อ; เวลาเป็นค่าประมาณเพื่อจัดลำดับย้อนหลัง",
+      "website": null
+    },
+    {
+      "id": "4076562",
+      "name": "TAKEYA — ตึกม่วง",
+      "type": "shopping",
+      "starts_at": "2026-09-23T10:01:00Z",
+      "ends_at": "2026-09-23T11:45:00Z",
+      "latitude": 35.70744,
+      "longitude": 139.77644,
+      "address": "4-33-2 Taito, Taito City, Tokyo 110-0016, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ไปจริงวันที่ 23 ก.ย. 2026 หลัง IYOSHI COLA. ใบเสร็จ TAKEYA1 ชั้น 3 เวลา 20:36: (1) เครื่องดื่ม Ito En / matcha 190 ml ¥270, (2) ゲルマ樹液足裏シート 30枚 แผ่นแปะฝ่าเท้า 30 แผ่น ¥2,089. รวม 2 รายการ ¥2,359.",
+      "website": null
+    },
+    {
+      "id": "4079377",
+      "name": "Yodobashi Camera Multimedia Ueno",
+      "type": "shopping",
+      "starts_at": "2026-09-23T11:50:00Z",
+      "ends_at": "2026-09-23T12:22:00Z",
+      "latitude": 35.71165,
+      "longitude": 139.77495,
+      "address": "4-10-10 Ueno, Taito City, Tokyo 110-0005, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ไปจริงวันที่ 23 ก.ย. 2026 หลัง TAKEYA. ใบเสร็จ Yodobashi Camera MM Ueno เวลา 21:17: SanDisk รุ่น SDSSDE61-500G จำนวน 1 ชิ้น ราคา ¥31,637. ใบเสร็จระบุเป็นสินค้าปลอดภาษี/ไม่เสียภาษี (非課税対象).",
       "website": ""
     },
     {
       "id": "4045126",
       "name": "Kamakura + Enoden coastal route",
       "type": "tour",
-      "starts_at": "2026-09-23T00:00:00Z",
+      "starts_at": "2026-09-24T00:00:00Z",
       "ends_at": null,
       "latitude": 35.3193,
       "longitude": 139.5466,
       "address": "Kamakura, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "Greater Tokyo Pass — Day 2. วันหยุดญี่ปุ่น คนอาจเยอะ",
+      "notes": "ย้ายจาก 23 ก.ย. มา 24 ก.ย. เพราะมีน้ำท่วมใน Kamakura วันที่ 21 ก.ย.; ยังเก็บแผน Kamakura + Enoden coastal route ไว้",
       "website": ""
     },
     {
       "id": "4045127",
       "name": "Enoshima",
       "type": "tour",
-      "starts_at": "2026-09-23T05:00:00Z",
+      "starts_at": "2026-09-24T05:00:00Z",
       "ends_at": null,
       "latitude": 35.2989,
       "longitude": 139.4803,
       "address": "Enoshima, Fujisawa, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
+      "notes": "ย้ายจาก 23 ก.ย. มา 24 ก.ย. พร้อมแผน Kamakura",
       "website": ""
     },
     {
-      "id": "4045128",
-      "name": "Mount Takao",
-      "type": "tour",
-      "starts_at": "2026-09-23T23:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6253,
-      "longitude": 139.2431,
-      "address": "Takaomachi, Hachioji, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "Greater Tokyo Pass — Day 3",
-      "website": ""
-    },
-    {
-      "id": "4045129",
-      "name": "Ghibli Museum",
-      "type": "museum",
+      "id": "4083131",
+      "name": "Yoridocoro Inamuragasaki",
+      "type": "general",
       "starts_at": "2026-09-24T05:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6962,
-      "longitude": 139.5703,
-      "address": "1 Chome-1-83 Simorenjaku, Mitaka, Tokyo, Japan",
+      "ends_at": "2026-09-24T05:55:00Z",
+      "latitude": 35.306,
+      "longitude": 139.522,
+      "address": "Inamuragasaki, Kamakura, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "⚠️ ไปได้เฉพาะถ้ามี timed ticket",
+      "notes": "กินจริงวันที่ 24 ก.ย. 2026 หลังนั่ง Enoden จาก Fujisawa มาลง Inamuragasaki. ผู้ใช้แจ้งว่าร้านยกเลิก cutoff บ่าย 2 แล้วและได้กินเรียบร้อย. เวลาเป็นประมาณการจากข้อความ ~14:56 JST.",
       "website": ""
     },
     {
-      "id": "4045130",
-      "name": "Kichijoji",
-      "type": "shopping",
-      "starts_at": "2026-09-24T09:00:00Z",
-      "ends_at": null,
-      "latitude": 35.7032,
-      "longitude": 139.5798,
-      "address": "Kichijoji, Musashino, Tokyo, Japan",
+      "id": "4083139",
+      "name": "Kotoku-in — Great Buddha of Kamakura",
+      "type": "general",
+      "starts_at": "2026-09-24T06:50:00Z",
+      "ends_at": "2026-09-24T07:05:00Z",
+      "latitude": 35.3167,
+      "longitude": 139.5357,
+      "address": "4-2-28 Hase, Kamakura, Kanagawa 248-0016, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
+      "notes": "24 ก.ย. 2026: แวะก่อน Hasedera. เวลาเร่งตาม route ช่วงบ่ายเพื่อให้ทันจุดที่ปิดเร็ว.",
       "website": ""
+    },
+    {
+      "id": "4083237",
+      "name": "KANNON COFFEE kamakura",
+      "type": "general",
+      "starts_at": "2026-09-24T07:17:00Z",
+      "ends_at": "2026-09-24T07:20:00Z",
+      "latitude": 35.313,
+      "longitude": 139.5324,
+      "address": "3-10-29 Hase, Kamakura, Kanagawa 248-0016, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ถึง KANNON COFFEE จริงประมาณ 16:17 JST วันที่ 24 ก.ย. 2026; แวะสั้น ๆ ก่อน Hasedera.",
+      "website": null
+    },
+    {
+      "id": "4083233",
+      "name": "Hasedera Temple (วัดฮาเซะเดระ)",
+      "type": "general",
+      "starts_at": "2026-09-24T07:23:00Z",
+      "ends_at": "2026-09-24T07:45:00Z",
+      "latitude": 35.3125,
+      "longitude": 139.5332,
+      "address": "3-11-2 Hase, Kamakura, Kanagawa 248-0016, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ไปต่อหลัง KANNON COFFEE. เป้าคือเข้าก่อน cutoff 16:30; เวลาใน Tripsy เป็นประมาณการตาม route ล่าสุด.",
+      "website": ""
+    },
+    {
+      "id": "4083238",
+      "name": "Kamakura-Kokomae Station",
+      "type": "general",
+      "starts_at": "2026-09-24T08:40:00Z",
+      "ends_at": "2026-09-24T09:00:00Z",
+      "latitude": 35.3067,
+      "longitude": 139.5007,
+      "address": "1-1-25 Koshigoe, Kamakura, Kanagawa 248-0033, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เปลี่ยนลำดับล่าสุด: ไป Kamakura ก่อน แล้วค่อยย้อน Enoden มาที่ Kamakura-Kokomae.",
+      "website": null
     },
     {
       "id": "4045131",
@@ -554,82 +736,316 @@
       "website": ""
     },
     {
-      "id": "4045133",
-      "name": "Gotokuji Temple",
-      "type": "tour",
-      "starts_at": "2026-09-26T00:00:00Z",
-      "ends_at": null,
-      "latitude": 35.6435,
-      "longitude": 139.6469,
-      "address": "2 Chome-24-7 Gotokuji, Setagaya, Tokyo, Japan",
+      "id": "4045120",
+      "name": "Cup Noodles Museum / Minato Mirai",
+      "type": "museum",
+      "starts_at": "2026-09-26T04:00:00Z",
+      "ends_at": "2026-09-26T06:00:00Z",
+      "latitude": 35.4547,
+      "longitude": 139.6382,
+      "address": "2 Chome-3-4 Shinko, Naka Ward, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "Greater Tokyo Pass — Day 5",
+      "notes": "จองจริงวันที่ 26 ก.ย. 2026 เวลา 13:00 — Admission Ticket with MY CUPNOODLES Factory Voucher สำหรับ 2 คน; ให้เป็น fixed point ของวัน",
+      "website": ""
+    },
+    {
+      "id": "4045123",
+      "name": "Red Brick Warehouse",
+      "type": "shopping",
+      "starts_at": "2026-09-26T06:15:00Z",
+      "ends_at": "2026-09-26T07:20:00Z",
+      "latitude": 35.4519,
+      "longitude": 139.6425,
+      "address": "1-1 Shinko, Naka Ward, Yokohama, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ต่อจาก Cup Noodles Museum เดินเที่ยว Red Brick Warehouse / waterfront",
+      "website": ""
+    },
+    {
+      "id": "4045122",
+      "name": "Yamashita Park / Osanbashi",
+      "type": "park",
+      "starts_at": "2026-09-26T07:30:00Z",
+      "ends_at": "2026-09-26T09:00:00Z",
+      "latitude": 35.4453,
+      "longitude": 139.6503,
+      "address": "279 Yamashitacho, Naka Ward, Yokohama, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เดินต่อจาก Red Brick ไป Osanbashi แล้ว Yamashita Park ช่วงเย็น",
+      "website": ""
+    },
+    {
+      "id": "4045121",
+      "name": "Yokohama Chinatown (lunch)",
+      "type": "restaurant",
+      "starts_at": "2026-09-26T09:10:00Z",
+      "ends_at": "2026-09-26T11:00:00Z",
+      "latitude": 35.4437,
+      "longitude": 139.6469,
+      "address": "Yamashitacho, Naka Ward, Yokohama, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "มื้อเย็นที่ Yokohama Chinatown หลังเดิน waterfront แล้วค่อยกลับ Tokyo",
+      "website": ""
+    },
+    {
+      "id": "4059774",
+      "name": "ฝากกระเป๋าที่ Narita Airport (Coin Locker)",
+      "type": "general",
+      "starts_at": "2026-09-27T03:15:00Z",
+      "ends_at": "2026-09-27T03:30:00Z",
+      "latitude": 35.772,
+      "longitude": 140.3929,
+      "address": "Narita International Airport, Chiba, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "Coin locker แบบคิดรายชั่วโมง (Terminal 2 B1F หรือ Terminal 3 2F): เล็ก 300¥ (≤6ชม.) / กลาง 500¥ / ใหญ่ 600¥ — อยู่โซนก่อนผ่านตม. ฝากกระเป๋าไว้ก่อนออกไปเที่ยว Naritasan แล้วค่อยกลับมาเอา",
+      "website": null
+    },
+    {
+      "id": "4059775",
+      "name": "Naritasan Shinshoji Temple + Omotesando Street (เที่ยว + มื้อเที่ยงปลาไหล)",
+      "type": "tour",
+      "starts_at": "2026-09-27T03:45:00Z",
+      "ends_at": "2026-09-27T05:00:00Z",
+      "latitude": 35.7761,
+      "longitude": 140.3163,
+      "address": "1 Narita, Chiba, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "วัดเก่าแก่ 1,000+ ปี เดินถนน Omotesando (ทางเดินสมัยเอโดะ ยาว 800ม.) ระหว่างทางมีร้านปลาไหลย่าง (อุนางิ) ให้ลองทาน ~2,000-4,000¥/คน และร้านเซมเบ้ปิ้งสดให้ชิมด้วย เดินจากสถานี Narita ~10-15 นาที",
+      "website": null
+    },
+    {
+      "id": "4045140",
+      "name": "Narita Airport → Bangkok (return flight)",
+      "type": "publicTransport",
+      "starts_at": "2026-09-27T08:30:00Z",
+      "ends_at": "2026-09-27T15:15:00Z",
+      "latitude": 35.772,
+      "longitude": 140.3929,
+      "address": "Narita International Airport, Chiba, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เที่ยวบินขากลับ: Narita ออก 17:30 น. (เวลาญี่ปุ่น) ถึงกรุงเทพฯ 22:15 น. (เวลาไทย) — เอากระเป๋าคืนจากล็อกเกอร์แล้วเช็คอิน ควรถึงสนามบินก่อนเวลาบิน 3 ชม. (~14:30 น.)",
       "website": ""
     },
     {
       "id": "4045114",
       "name": "Toyosu / Senkyaku Banrai",
       "type": "shopping",
-      "starts_at": "2026-09-26T01:00:00Z",
+      "starts_at": null,
       "ends_at": null,
       "latitude": 35.6455,
       "longitude": 139.7822,
       "address": "Toyosu, Koto-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
+      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; เก็บ Toyosu ไว้เป็นตัวเลือกสำหรับวันอื่น",
       "website": ""
     },
     {
       "id": "4045116",
       "name": "Azabudai Hills",
       "type": "shopping",
-      "starts_at": "2026-09-26T07:30:00Z",
+      "starts_at": null,
       "ends_at": null,
       "latitude": 35.662,
       "longitude": 139.7388,
       "address": "Azabudai, Minato-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
+      "notes": "ตัดออกจากแผนวันที่ 22 ก.ย. เพราะเวลาไม่พอ — ไป Toyosu ตรงแทน",
       "website": ""
     },
     {
       "id": "4045118",
       "name": "Tokyo Tower (night view)",
       "type": "tour",
-      "starts_at": "2026-09-26T10:00:00Z",
+      "starts_at": null,
       "ends_at": null,
       "latitude": 35.6586,
       "longitude": 139.7454,
       "address": "4 Chome-2-8 Shibakoen, Minato-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "",
+      "notes": "ย้าย Tokyo Tower มาเที่ยววันที่ 23 ก.ย. แล้ว จึงเอาออกจากแผนวันที่ 26 ก.ย.",
       "website": ""
     },
     {
-      "id": "4045139",
-      "name": "Light shopping / café near accommodation",
+      "id": "4045125",
+      "name": "Landmark Tower (night view)",
+      "type": "tour",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.4546,
+      "longitude": 139.6317,
+      "address": "2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; Landmark Tower เก็บไว้สำหรับจัดวันอื่น",
+      "website": ""
+    },
+    {
+      "id": "4045128",
+      "name": "Mount Takao",
+      "type": "tour",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6253,
+      "longitude": 139.2431,
+      "address": "Takaomachi, Hachioji, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เอา Mount Takao ออกจากแผนวันที่ 26 ก.ย. 2026 แล้ว เพราะไม่น่าได้ไป; เก็บ activity ไว้แบบไม่ผูกวัน เผื่อเปลี่ยนใจภายหลัง",
+      "website": ""
+    },
+    {
+      "id": "4045130",
+      "name": "Kichijoji",
+      "type": "shopping",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.7032,
+      "longitude": 139.5798,
+      "address": "Kichijoji, Musashino, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; Kichijoji เก็บไว้สำหรับจัดวันอื่น",
+      "website": ""
+    },
+    {
+      "id": "4045133",
+      "name": "Gotokuji Temple",
+      "type": "tour",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6435,
+      "longitude": 139.6469,
+      "address": "2 Chome-24-7 Gotokuji, Setagaya, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ย้ายออกจาก 22 ก.ย. เพื่อไม่ให้ route ย้อนเมือง — รอจัดวันใหม่",
+      "website": ""
+    },
+    {
+      "id": "4076560",
+      "name": "Ueno / Ameyoko",
+      "type": "shopping",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.710364,
+      "longitude": 139.774536,
+      "address": "6-10-7 Ueno, Taito City, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ไม่ได้เป็นจุดแวะแยกในลำดับจริงวันที่ 23 ก.ย.; หลัง IYOSHI COLA ไป TAKEYA — ตึกม่วงโดยตรง",
+      "website": null
+    },
+    {
+      "id": "4076565",
+      "name": "Tokyo Tower",
+      "type": "tour",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.658656,
+      "longitude": 139.745364,
+      "address": "4-2-8 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว เพราะสลับ route เป็น Maisen → donut → cola → shopping → Ueno sushi; เก็บ Tokyo Tower ไว้จัดวันอื่น",
+      "website": null
+    },
+    {
+      "id": "4076583",
+      "name": "Akabanebashi — Tokyo Tower Photo Spot",
+      "type": "general",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6544,
+      "longitude": 139.7447,
+      "address": "Akabanebashi, Minato City, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
+      "website": null
+    },
+    {
+      "id": "4076584",
+      "name": "Shiba Park No.4 — Tokyo Tower Photo Spot",
+      "type": "park",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6579,
+      "longitude": 139.7482,
+      "address": "Shibakoen, Minato City, Tokyo, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
+      "website": null
+    },
+    {
+      "id": "4076585",
+      "name": "Zojoji — Tokyo Tower Photo Spot",
+      "type": "tour",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6574,
+      "longitude": 139.7482,
+      "address": "4-7-35 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
+      "website": null
+    },
+    {
+      "id": "4076702",
+      "name": "Jingumae 1-14-32 2F",
+      "type": "general",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6698,
+      "longitude": 139.7033,
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
+      "timezone": "Asia/Tokyo",
+      "notes": "รายการซ้ำของ MACCHA HOUSE — เอาออกจาก timeline วันที่ 23 ก.ย.; ใช้รายการ MACCHA HOUSE WITH HARAJUKU แทน",
+      "website": null
+    },
+    {
+      "id": "4076703",
+      "name": "MACCHA HOUSE With Harajuku Store",
       "type": "cafe",
-      "starts_at": "2026-09-27T01:00:00Z",
+      "starts_at": null,
       "ends_at": null,
-      "latitude": 35.749227,
-      "longitude": 139.8583691,
-      "address": "Aoto, Katsushika, Tokyo, Japan",
+      "latitude": 35.67003,
+      "longitude": 139.70275,
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
       "timezone": "Asia/Tokyo",
-      "notes": "",
-      "website": ""
+      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
+      "website": null
     },
     {
-      "id": "4045140",
-      "name": "Narita Airport → Bangkok (return flight)",
-      "type": "publicTransport",
-      "starts_at": "2026-09-27T06:00:00Z",
+      "id": "4076708",
+      "name": "MACCHA HOUSE With Harajuku Store",
+      "type": "cafe",
+      "starts_at": null,
       "ends_at": null,
-      "latitude": 35.772,
-      "longitude": 140.3929,
-      "address": "Narita International Airport, Chiba, Japan",
+      "latitude": 35.6699,
+      "longitude": 139.703,
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
       "timezone": "Asia/Tokyo",
-      "notes": "ตามตั๋วที่จองไว้เดิม เผื่อเวลาเก็บกระเป๋า + เดินทางไป Narita",
-      "website": ""
+      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
+      "website": null
+    },
+    {
+      "id": "4076710",
+      "name": "MACCHA HOUSE WITH HARAJUKU",
+      "type": "cafe",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.6697,
+      "longitude": 139.7029,
+      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
+      "timezone": "Asia/Tokyo",
+      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
+      "website": null
+    },
+    {
+      "id": "4077788",
+      "name": "Miura Misaki Port Ueno — ซูชิหน้าล้น",
+      "type": "restaurant",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 35.7117,
+      "longitude": 139.7752,
+      "address": "6 Chome-12-14 Ueno, Taito City, Tokyo 110-0005, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ตัดออกจากแผนวันที่ 23 ก.ย. 2026 — ผู้ใช้แจ้งว่าจะไม่กินซูชิวันนี้",
+      "website": null
     }
   ],
   "lodging": [
@@ -649,10 +1065,22 @@
       "id": "1314816",
       "name": "AIRSTAY Aoto #201",
       "starts_at": "2026-09-19T07:00:01Z",
-      "ends_at": "2026-09-27T02:00:01Z",
+      "ends_at": "2026-09-22T02:00:01Z",
       "latitude": 35.749227,
       "longitude": 139.8583691,
       "address": "125-0062 Tokyo Katsushika, 26-18, Aoto 6-Chōme, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "ย้ายออกจริงวันที่ 22 ก.ย. เพื่อเข้าที่พักใหม่ Misuji; booking เดิมยังถึง 27 ก.ย.",
+      "website": ""
+    },
+    {
+      "id": "1318446",
+      "name": "Misugi Airbnb — Direct to Narita/Haneda",
+      "starts_at": "2026-09-22T06:00:00Z",
+      "ends_at": "2026-09-27T01:00:00Z",
+      "latitude": 35.70490264892578,
+      "longitude": 139.78646850585938,
+      "address": "2-chome-4-10 Misuji, Taito City, Tokyo 111-0055, Japan",
       "timezone": "Asia/Tokyo",
       "notes": null,
       "website": null
@@ -1056,19 +1484,487 @@
       }
     },
     {
-      "id": "3581237",
+      "id": "3589385",
       "type": "train",
       "name": "",
       "transport_number": "",
-      "departure_at": "2026-09-27T01:00:00Z",
-      "arrival_at": "2026-09-27T06:00:00Z",
+      "departure_at": "2026-09-21T01:45:00Z",
+      "arrival_at": "2026-09-21T01:48:00Z",
       "departure": {
-        "name": "Light shopping / café near accommodation",
+        "name": "Aoto Station",
+        "latitude": 35.7458824,
+        "longitude": 139.8563263
+      },
+      "arrival": {
+        "name": "Keisei Tateishi Station",
+        "latitude": 35.7431,
+        "longitude": 139.8472
+      }
+    },
+    {
+      "id": "3589685",
+      "type": "train",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-21T03:10:00Z",
+      "arrival_at": "2026-09-21T03:13:00Z",
+      "departure": {
+        "name": "Keisei Tateishi Station",
+        "latitude": 35.7431,
+        "longitude": 139.8472
+      },
+      "arrival": {
+        "name": "Aoto Station",
+        "latitude": 35.7458824,
+        "longitude": 139.8563263
+      }
+    },
+    {
+      "id": "3591021",
+      "type": "train",
+      "name": "Aoto → Kuramae (ฝากกระเป๋า)",
+      "transport_number": "",
+      "departure_at": "2026-09-22T01:00:00Z",
+      "arrival_at": "2026-09-22T01:30:00Z",
+      "departure": {
+        "name": "AIRSTAY Aoto #201",
         "latitude": 35.749227,
         "longitude": 139.8583691
       },
       "arrival": {
-        "name": "Narita Airport → Bangkok (return flight)",
+        "name": "Bounce Luggage Storage - Kuramae Station",
+        "latitude": 35.7044,
+        "longitude": 139.792
+      }
+    },
+    {
+      "id": "3591023",
+      "type": "train",
+      "name": "Misuji → Toyosu / teamLab area",
+      "transport_number": "",
+      "departure_at": "2026-09-22T08:30:00Z",
+      "arrival_at": "2026-09-22T09:30:00Z",
+      "departure": {
+        "name": "Misugi Airbnb",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
+      },
+      "arrival": {
+        "name": "Toyosu / teamLab Planets area",
+        "latitude": 35.6465,
+        "longitude": 139.793
+      }
+    },
+    {
+      "id": "3591025",
+      "type": "train",
+      "name": "teamLab Planets → Misuji Airbnb",
+      "transport_number": "",
+      "departure_at": "2026-09-22T13:03:00Z",
+      "arrival_at": "2026-09-22T13:50:00Z",
+      "departure": {
+        "name": "teamLab Planets TOKYO",
+        "latitude": 35.6465,
+        "longitude": 139.793
+      },
+      "arrival": {
+        "name": "Misugi Airbnb",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
+      }
+    },
+    {
+      "id": "3601878",
+      "type": "train",
+      "name": "Misuji → KOFFEE MAMEYA",
+      "transport_number": "",
+      "departure_at": "2026-09-23T03:45:00Z",
+      "arrival_at": "2026-09-23T04:21:00Z",
+      "departure": {
+        "name": "Misugi Airbnb / Shin-Okachimachi",
+        "latitude": 35.7049026489,
+        "longitude": 139.786468506
+      },
+      "arrival": {
+        "name": "KOFFEE MAMEYA",
+        "latitude": 35.66834,
+        "longitude": 139.71087
+      }
+    },
+    {
+      "id": "3601879",
+      "type": "walk",
+      "name": "KOFFEE MAMEYA → Tonkatsu Maisen Aoyama",
+      "transport_number": "",
+      "departure_at": "2026-09-23T05:05:00Z",
+      "arrival_at": "2026-09-23T05:20:00Z",
+      "departure": {
+        "name": "KOFFEE MAMEYA",
+        "latitude": 35.66834,
+        "longitude": 139.71087
+      },
+      "arrival": {
+        "name": "Tonkatsu Maisen Aoyama",
+        "latitude": 35.66848,
+        "longitude": 139.71139
+      }
+    },
+    {
+      "id": "3601880",
+      "type": "walk",
+      "name": "Tonkatsu Maisen Aoyama → MACCHA HOUSE With Harajuku",
+      "transport_number": "",
+      "departure_at": "2026-09-23T05:45:00Z",
+      "arrival_at": "2026-09-23T06:00:00Z",
+      "departure": {
+        "name": "Tonkatsu Maisen Aoyama",
+        "latitude": 35.66848,
+        "longitude": 139.71139
+      },
+      "arrival": {
+        "name": "MACCHA HOUSE With Harajuku",
+        "latitude": 35.6702,
+        "longitude": 139.7028
+      }
+    },
+    {
+      "id": "3603555",
+      "type": "walk",
+      "name": "MACCHA HOUSE With Harajuku → I'm donut? Harajuku",
+      "transport_number": "",
+      "departure_at": "2026-09-23T07:00:00Z",
+      "arrival_at": "2026-09-23T08:30:00Z",
+      "departure": {
+        "name": "MACCHA HOUSE With Harajuku",
+        "latitude": 35.6702,
+        "longitude": 139.7028
+      },
+      "arrival": {
+        "name": "I'm donut? Harajuku",
+        "latitude": 35.669827,
+        "longitude": 139.7032334
+      }
+    },
+    {
+      "id": "3601881",
+      "type": "walk",
+      "name": "I'm donut? Harajuku → IYOSHI COLA",
+      "transport_number": "",
+      "departure_at": "2026-09-23T09:37:00Z",
+      "arrival_at": "2026-09-23T09:38:00Z",
+      "departure": {
+        "name": "I'm donut? Harajuku",
+        "latitude": 35.669827,
+        "longitude": 139.7032334
+      },
+      "arrival": {
+        "name": "IYOSHI COLA Shibuya Jingumae",
+        "latitude": 35.6644704,
+        "longitude": 139.7032379
+      }
+    },
+    {
+      "id": "3601882",
+      "type": "train",
+      "name": "IYOSHI COLA → TAKEYA — ตึกม่วง",
+      "transport_number": "",
+      "departure_at": "2026-09-23T09:55:00Z",
+      "arrival_at": "2026-09-23T10:01:00Z",
+      "departure": {
+        "name": "IYOSHI COLA Shibuya Jingumae",
+        "latitude": 35.6644704,
+        "longitude": 139.7032379
+      },
+      "arrival": {
+        "name": "TAKEYA — ตึกม่วง",
+        "latitude": 35.70744,
+        "longitude": 139.77644
+      }
+    },
+    {
+      "id": "3601884",
+      "type": "walk",
+      "name": "TAKEYA — ตึกม่วง → Yodobashi Camera Multimedia Ueno",
+      "transport_number": "",
+      "departure_at": "2026-09-23T11:45:00Z",
+      "arrival_at": "2026-09-23T11:50:00Z",
+      "departure": {
+        "name": "TAKEYA — ตึกม่วง",
+        "latitude": 35.70744,
+        "longitude": 139.77644
+      },
+      "arrival": {
+        "name": "Yodobashi Camera Multimedia Ueno",
+        "latitude": 35.71165,
+        "longitude": 139.77495
+      }
+    },
+    {
+      "id": "3609176",
+      "type": "train",
+      "name": "Misuji → Shinjuku-nishiguchi",
+      "transport_number": "",
+      "departure_at": "2026-09-24T01:40:00Z",
+      "arrival_at": "2026-09-24T02:20:00Z",
+      "departure": {
+        "name": "Misuji Airbnb / Shin-Okachimachi",
+        "latitude": 35.7049026489,
+        "longitude": 139.786468506
+      },
+      "arrival": {
+        "name": "Shinjuku-nishiguchi / Odakyu Shinjuku",
+        "latitude": 35.6938,
+        "longitude": 139.6995
+      }
+    },
+    {
+      "id": "3581220",
+      "type": "train",
+      "name": "Shinjuku → Fujisawa",
+      "transport_number": "",
+      "departure_at": "2026-09-24T02:30:00Z",
+      "arrival_at": "2026-09-24T03:29:00Z",
+      "departure": {
+        "name": "Odakyu Shinjuku",
+        "latitude": 35.6909,
+        "longitude": 139.6996
+      },
+      "arrival": {
+        "name": "Fujisawa",
+        "latitude": 35.3389,
+        "longitude": 139.4874
+      }
+    },
+    {
+      "id": "3609252",
+      "type": "train",
+      "name": "Fujisawa → Inamuragasaki (Enoden)",
+      "transport_number": "",
+      "departure_at": "2026-09-24T03:35:00Z",
+      "arrival_at": "2026-09-24T04:15:00Z",
+      "departure": {
+        "name": "Fujisawa",
+        "latitude": 35.3389,
+        "longitude": 139.4874
+      },
+      "arrival": {
+        "name": "Inamuragasaki Station",
+        "latitude": 35.3064,
+        "longitude": 139.5226
+      }
+    },
+    {
+      "id": "3581221",
+      "type": "train",
+      "name": "Kamakura → Enoshima (Enoden)",
+      "transport_number": "",
+      "departure_at": "2026-09-24T04:30:00Z",
+      "arrival_at": "2026-09-24T06:00:00Z",
+      "departure": {
+        "name": "Kamakura",
+        "latitude": 35.3193,
+        "longitude": 139.5466
+      },
+      "arrival": {
+        "name": "Enoshima",
+        "latitude": 35.2989,
+        "longitude": 139.4803
+      }
+    },
+    {
+      "id": "3609454",
+      "type": "train",
+      "name": "Inamuragasaki → Hase → Kotoku-in",
+      "transport_number": "",
+      "departure_at": "2026-09-24T06:00:00Z",
+      "arrival_at": "2026-09-24T06:20:00Z",
+      "departure": {
+        "name": "Inamuragasaki Station",
+        "latitude": 35.3064,
+        "longitude": 139.5226
+      },
+      "arrival": {
+        "name": "Kotoku-in (Great Buddha of Kamakura)",
+        "latitude": 35.3167,
+        "longitude": 139.5357
+      }
+    },
+    {
+      "id": "3609505",
+      "type": "walk",
+      "name": "Kotoku-in → KANNON COFFEE",
+      "transport_number": null,
+      "departure_at": "2026-09-24T07:08:00Z",
+      "arrival_at": "2026-09-24T07:17:00Z",
+      "departure": {
+        "name": "Kotoku-in",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "KANNON COFFEE kamakura",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3609550",
+      "type": "walk",
+      "name": "KANNON COFFEE → Hasedera",
+      "transport_number": null,
+      "departure_at": "2026-09-24T07:20:00Z",
+      "arrival_at": "2026-09-24T07:23:00Z",
+      "departure": {
+        "name": "KANNON COFFEE kamakura",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Hasedera Temple",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3609509",
+      "type": "train",
+      "name": "KANNON COFFEE → Hase Station → Kamakura",
+      "transport_number": null,
+      "departure_at": "2026-09-24T07:45:00Z",
+      "arrival_at": "2026-09-24T07:55:00Z",
+      "departure": {
+        "name": "KANNON COFFEE kamakura",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Kamakura Station",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3609602",
+      "type": "train",
+      "name": "Kamakura → Kamakura-Kokomae",
+      "transport_number": null,
+      "departure_at": "2026-09-24T08:20:00Z",
+      "arrival_at": "2026-09-24T08:40:00Z",
+      "departure": {
+        "name": "Kamakura Station",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Kamakura-Kokomae Station",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3610141",
+      "type": "train",
+      "name": "Fujisawa → Shinjuku",
+      "transport_number": null,
+      "departure_at": "2026-09-24T10:37:00Z",
+      "arrival_at": null,
+      "departure": {
+        "name": "Fujisawa Station",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Odakyu Shinjuku",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3610142",
+      "type": "train",
+      "name": "Fujisawa → Shinjuku",
+      "transport_number": null,
+      "departure_at": "2026-09-24T10:37:00Z",
+      "arrival_at": null,
+      "departure": {
+        "name": "Fujisawa Station",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Odakyu Shinjuku",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3610145",
+      "type": "train",
+      "name": "Fujisawa → Shinjuku",
+      "transport_number": null,
+      "departure_at": "2026-09-24T10:37:00Z",
+      "arrival_at": null,
+      "departure": {
+        "name": "Fujisawa Station",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Odakyu Shinjuku",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3586797",
+      "type": "train",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-27T02:10:00Z",
+      "arrival_at": "2026-09-27T03:15:00Z",
+      "departure": {
+        "name": "Aoto Station",
+        "latitude": 35.7458824,
+        "longitude": 139.8563263
+      },
+      "arrival": {
+        "name": "Narita Airport Station",
+        "latitude": 35.772,
+        "longitude": 140.3929
+      }
+    },
+    {
+      "id": "3586798",
+      "type": "train",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-27T03:30:00Z",
+      "arrival_at": "2026-09-27T03:45:00Z",
+      "departure": {
+        "name": "Narita Airport Station",
+        "latitude": 35.772,
+        "longitude": 140.3929
+      },
+      "arrival": {
+        "name": "Narita Station",
+        "latitude": 35.7767,
+        "longitude": 140.3183
+      }
+    },
+    {
+      "id": "3586799",
+      "type": "train",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-27T05:00:00Z",
+      "arrival_at": "2026-09-27T05:15:00Z",
+      "departure": {
+        "name": "Narita Station",
+        "latitude": 35.7767,
+        "longitude": 140.3183
+      },
+      "arrival": {
+        "name": "Narita Airport Station",
         "latitude": 35.772,
         "longitude": 140.3929
       }
@@ -1236,96 +2132,6 @@
       }
     },
     {
-      "id": "3581214",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-22T01:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Cup Noodles Museum / Minato Mirai",
-        "latitude": 35.4547,
-        "longitude": 139.6382
-      }
-    },
-    {
-      "id": "3581215",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-22T03:30:00Z",
-      "departure": {
-        "name": "Cup Noodles Museum / Minato Mirai",
-        "latitude": 35.4547,
-        "longitude": 139.6382
-      },
-      "arrival": {
-        "name": "Yokohama Chinatown (lunch)",
-        "latitude": 35.4437,
-        "longitude": 139.6469
-      }
-    },
-    {
-      "id": "3581216",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-22T05:00:00Z",
-      "departure": {
-        "name": "Yokohama Chinatown (lunch)",
-        "latitude": 35.4437,
-        "longitude": 139.6469
-      },
-      "arrival": {
-        "name": "Yamashita Park / Osanbashi",
-        "latitude": 35.4453,
-        "longitude": 139.6503
-      }
-    },
-    {
-      "id": "3581217",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-22T07:00:00Z",
-      "departure": {
-        "name": "Yamashita Park / Osanbashi",
-        "latitude": 35.4453,
-        "longitude": 139.6503
-      },
-      "arrival": {
-        "name": "Red Brick Warehouse",
-        "latitude": 35.4519,
-        "longitude": 139.6425
-      }
-    },
-    {
-      "id": "3581218",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-22T09:30:00Z",
-      "departure": {
-        "name": "Red Brick Warehouse",
-        "latitude": 35.4519,
-        "longitude": 139.6425
-      },
-      "arrival": {
-        "name": "Landmark Tower (night view)",
-        "latitude": 35.4546,
-        "longitude": 139.6317
-      }
-    },
-    {
       "id": "3581219",
       "type": "train",
       "name": "",
@@ -1344,66 +2150,30 @@
       }
     },
     {
-      "id": "3581220",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-23T00:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Kamakura + Enoden coastal route",
-        "latitude": 35.3193,
-        "longitude": 139.5466
-      }
-    },
-    {
-      "id": "3581221",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-23T05:00:00Z",
-      "departure": {
-        "name": "Kamakura + Enoden coastal route",
-        "latitude": 35.3193,
-        "longitude": 139.5466
-      },
-      "arrival": {
-        "name": "Enoshima",
-        "latitude": 35.2989,
-        "longitude": 139.4803
-      }
-    },
-    {
       "id": "3581222",
       "type": "train",
-      "name": "",
+      "name": "Enoshima → Fujisawa",
       "transport_number": "",
       "departure_at": null,
-      "arrival_at": null,
+      "arrival_at": "2026-09-24T09:59:00Z",
       "departure": {
         "name": "Enoshima",
         "latitude": 35.2989,
         "longitude": 139.4803
       },
       "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
+        "name": "Fujisawa Station",
+        "latitude": 35.7049026489,
+        "longitude": 139.786468506
       }
     },
     {
       "id": "3581223",
       "type": "train",
-      "name": "",
+      "name": "Route placeholder — Mount Takao removed",
       "transport_number": "",
       "departure_at": null,
-      "arrival_at": "2026-09-23T23:00:00Z",
+      "arrival_at": null,
       "departure": {
         "name": "AIRSTAY Aoto #201 (ที่พัก)",
         "latitude": 35.749227,
@@ -1418,10 +2188,10 @@
     {
       "id": "3581224",
       "type": "train",
-      "name": "",
+      "name": "Route placeholder — Takao connection not used",
       "transport_number": "",
       "departure_at": null,
-      "arrival_at": "2026-09-24T05:00:00Z",
+      "arrival_at": null,
       "departure": {
         "name": "Mount Takao",
         "latitude": 35.6253,
@@ -1629,6 +2399,24 @@
         "name": "AIRSTAY Aoto #201 (ที่พัก)",
         "latitude": 35.749227,
         "longitude": 139.8583691
+      }
+    },
+    {
+      "id": "3591022",
+      "type": "walk",
+      "name": "Kuramae → Misuji Airbnb (รับกระเป๋าแล้วไป check-in)",
+      "transport_number": "",
+      "departure_at": null,
+      "arrival_at": null,
+      "departure": {
+        "name": "Bounce Luggage Storage - Kuramae Station",
+        "latitude": 35.7044,
+        "longitude": 139.792
+      },
+      "arrival": {
+        "name": "Misugi Airbnb",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
       }
     }
   ]
