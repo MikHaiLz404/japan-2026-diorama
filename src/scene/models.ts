@@ -99,6 +99,66 @@ export function modelFitSize(size: CityBlock["size"]): { w: number; d: number; h
   return { w, d, h };
 }
 
+/**
+ * Tokyo's "xl" tile got bigger specifically to make room for real landmark
+ * clusters (see PROJECT notes) — the generic downtown skyline (`tokyo.glb`)
+ * now only fills a smaller core box, and four quadrant slots around it hold
+ * the neighbourhood landmark models. Each is independently optional; missing
+ * ones just leave that quadrant empty rather than blocking the others.
+ */
+export const TOKYO_CORE_FIT_SIZE = { w: 1.55, d: 1.2, h: 1.55 } as const;
+
+export interface TokyoLandmarkSpec {
+  id: string;
+  x: number;
+  z: number;
+  w: number;
+  d: number;
+  h: number;
+}
+
+export const TOKYO_LANDMARKS: TokyoLandmarkSpec[] = [
+  { id: "tokyo-asakusa", x: 0.95, z: -0.75, w: 1.5, d: 1.15, h: 1.3 },
+  { id: "tokyo-shibuya", x: -0.95, z: -0.75, w: 1.5, d: 1.15, h: 1.2 },
+  { id: "tokyo-ginza", x: -0.95, z: 0.75, w: 1.5, d: 1.15, h: 1.15 },
+  { id: "tokyo-toyosu", x: 0.95, z: 0.75, w: 1.5, d: 1.15, h: 1.1 },
+];
+
+export function tokyoLandmarkUrl(id: string): string {
+  return `/models/props/${id}.glb`;
+}
+
+/** Load whichever Tokyo landmark GLBs exist and drop each into its quadrant of the city block. */
+export async function loadTokyoLandmarks(options: {
+  block: THREE.Object3D;
+  shadows: boolean;
+  signal?: AbortSignal;
+  load?: GltfLoadFn;
+}): Promise<void> {
+  const load = options.load ?? tryLoadGltf;
+  const { block, shadows, signal } = options;
+  await Promise.all(
+    TOKYO_LANDMARKS.map(async (spec) => {
+      try {
+        const loaded = await loadIfActive(load, tokyoLandmarkUrl(spec.id), signal);
+        if (!loaded) return;
+        if (signal?.aborted) {
+          disposeObject3D(loaded);
+          return;
+        }
+        const fitted = fitModelToBox(loaded, spec);
+        fitted.name = `landmark:${spec.id}`;
+        fitted.position.x = spec.x;
+        fitted.position.z = spec.z;
+        prepareLoadedModel(fitted, shadows);
+        block.add(fitted);
+      } catch {
+        /* Leave this quadrant empty. */
+      }
+    }),
+  );
+}
+
 const MAP_KEYS = [
   "map",
   "normalMap",
@@ -306,7 +366,10 @@ export async function hydrateGltfModels(options: {
           disposeObject3D(loaded);
           return;
         }
-        const fitted = fitModelToBox(loaded, modelFitSize(city.size));
+        // Tokyo's "xl" tile reserves its outer quadrants for landmark clusters,
+        // so the generic skyline only fills a smaller core box, not the full tile.
+        const fitBox = city.id === "tokyo" ? TOKYO_CORE_FIT_SIZE : modelFitSize(city.size);
+        const fitted = fitModelToBox(loaded, fitBox);
         fitted.name = `gltf:${city.id}`;
         prepareLoadedModel(fitted, shadows);
         stylizeUntexturedModel(fitted, city.id);
@@ -327,4 +390,11 @@ export async function hydrateGltfModels(options: {
       }
     }),
   );
+
+  const tokyoBlock = scene.getObjectByName("city:tokyo");
+  if (tokyoBlock && !signal?.aborted) {
+    await loadTokyoLandmarks({ block: tokyoBlock, shadows, signal, load }).catch(() => {
+      /* Landmark quadrants just stay empty. */
+    });
+  }
 }

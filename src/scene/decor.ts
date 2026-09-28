@@ -24,7 +24,7 @@ interface Anchor {
   size: "sm" | "md" | "lg" | "xl";
 }
 
-const CITY_KEEP_OUT: Record<Anchor["size"], number> = { xl: 2.35, lg: 1.75, md: 1.05, sm: 0.8 };
+const CITY_KEEP_OUT: Record<Anchor["size"], number> = { xl: 2.7, lg: 1.75, md: 1.05, sm: 0.8 };
 
 function rng(seed: number) {
   let a = seed >>> 0;

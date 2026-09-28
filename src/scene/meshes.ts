@@ -17,7 +17,7 @@ export function isSharedGeometry(geometry: THREE.BufferGeometry): boolean {
 }
 
 export function platformSize(size: CityBlock["size"]): { w: number; d: number; h: number } {
-  if (size === "xl") return { w: 3.1, d: 2.5, h: 0.18 };
+  if (size === "xl") return { w: 3.6, d: 2.9, h: 0.2 };
   if (size === "lg") return { w: 2.35, d: 1.85, h: 0.16 };
   if (size === "md") return { w: 1.35, d: 1.15, h: 0.13 };
   return { w: 1.05, d: 0.92, h: 0.12 };
