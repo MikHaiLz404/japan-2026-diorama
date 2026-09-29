@@ -76,7 +76,7 @@ export interface CityCatalogEntry {
   lng: number;
   /** Stylized tray coordinates (x, z), projected from lat/lng. */
   tray: [number, number];
-  size: "lg" | "md" | "sm";
+  size: "xl" | "lg" | "md" | "sm";
   landmark: "skytree" | "tower" | "torii" | "island" | "hall" | "peak" | "kura";
 }
 
@@ -93,7 +93,7 @@ export interface CityBlock {
   name: string;
   nameJa: string;
   tray: [number, number];
-  size: "lg" | "md" | "sm";
+  size: "xl" | "lg" | "md" | "sm";
   landmark: CityCatalogEntry["landmark"];
   status: VisitStatus;
   dates: string[];

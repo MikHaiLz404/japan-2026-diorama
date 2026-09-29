@@ -20,7 +20,7 @@ const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
     nameJa: "東京",
     lat: 35.6812,
     lng: 139.7671,
-    size: "lg",
+    size: "xl",
     landmark: "skytree",
   },
   {
@@ -81,11 +81,24 @@ const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
 
 const TRAY_BY_ID = projectGeoToTray(CITY_DEFINITIONS);
 
+/**
+ * Hand-tuned nudges applied after the geo-projection so Tokyo's bigger "xl"
+ * footprint (see `platformSize`) clears its neighbours. Tokyo shifts into the
+ * open space west/north of it (vacated by the unrendered Takao/Kawagoe), and
+ * Chiba/Yokohama ease outward slightly to keep separation comfortable.
+ */
+const TRAY_NUDGE: Record<string, [number, number]> = {
+  tokyo: [-0.7, 0.35],
+  chiba: [0.35, 0],
+  yokohama: [0, -0.25],
+};
+
 /** Stylized tray layout — lat/lng projected onto the felt, not a GIS basemap. */
-export const CITY_CATALOG: CityCatalogEntry[] = CITY_DEFINITIONS.map((city) => ({
-  ...city,
-  tray: TRAY_BY_ID.get(city.id) ?? [0, 0],
-}));
+export const CITY_CATALOG: CityCatalogEntry[] = CITY_DEFINITIONS.map((city) => {
+  const [x, z] = TRAY_BY_ID.get(city.id) ?? [0, 0];
+  const [dx, dz] = TRAY_NUDGE[city.id] ?? [0, 0];
+  return { ...city, tray: [x + dx, z + dz] as [number, number] };
+});
 
 export const ORIGIN_TOKEN = {
   id: "bangkok",
