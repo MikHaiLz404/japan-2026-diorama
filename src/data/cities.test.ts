@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCityBlocks, buildGroundPathSegments, buildRoutePaths, CITY_CATALOG } from "./cities";
+import { buildCityBlocks, buildGroundPathSegments, buildRoutePaths, CITY_CATALOG, ORIGIN_TOKEN } from "./cities";
 import { trip } from "./loadTrip";
 
 describe("rail path segments", () => {
@@ -30,12 +30,31 @@ describe("rail path segments", () => {
 });
 
 describe("geo tray layout", () => {
-  it("derives tray positions from lat/lng for every catalog city", () => {
+  it("places every catalog city inside the tray", () => {
     for (const city of CITY_CATALOG) {
-      expect(city.tray[0]).not.toBe(0);
+      expect(Number.isFinite(city.tray[0]) && Number.isFinite(city.tray[1])).toBe(true);
       expect(Math.abs(city.tray[0])).toBeLessThan(5);
       expect(Math.abs(city.tray[1])).toBeLessThan(4);
     }
+  });
+
+  it("is a north-up map with Tokyo at the centre of the screen", () => {
+    const at = (id: string) => CITY_CATALOG.find((city) => city.id === id)!.tray;
+    const tokyo = at("tokyo");
+    expect(tokyo[0]).toBeCloseTo(0, 5);
+    // -z is the top of the screen: north of Tokyo is up, south is down.
+    expect(at("kawagoe")[1]).toBeLessThan(tokyo[1]);
+    for (const south of ["yokohama", "haneda", "kamakura", "enoshima"]) {
+      expect(at(south)[1], south).toBeGreaterThan(tokyo[1]);
+    }
+    // East is right, west is left.
+    expect(at("narita")[0]).toBeGreaterThan(tokyo[0]);
+    expect(at("yokohama")[0]).toBeLessThan(tokyo[0]);
+    expect(at("enoshima")[0]).toBeLessThan(at("kamakura")[0]);
+    expect(at("haneda")[0]).toBeGreaterThan(at("yokohama")[0]);
+    // Bangkok is far to the south-west: bottom-left corner.
+    expect(ORIGIN_TOKEN.tray[0]).toBeLessThan(-4);
+    expect(ORIGIN_TOKEN.tray[1]).toBeGreaterThan(2);
   });
 
   it("builds ribbon routes separately from ground segments", () => {

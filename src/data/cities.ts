@@ -100,29 +100,32 @@ const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
 const TRAY_BY_ID = projectGeoToTray(CITY_DEFINITIONS);
 
 /**
- * Hand-tuned nudges applied after the geo-projection so Tokyo's bigger "xl"
- * footprint (see `platformSize`) clears its neighbours. Tokyo shifts into the
- * open space west/north of it (vacated by the unrendered Takao/Kawagoe), and
- * Chiba/Yokohama ease outward slightly to keep separation comfortable.
+ * The tray is a north-up map with Tokyo at the centre (see `geoTrayTransform`). Tokyo's "xl"
+ * tile is far bigger than the real distances allow neighbours, so the cities around it get
+ * hand-placed slots that keep their true compass bearing from Tokyo (Yokohama SW, Haneda SE,
+ * Kamakura and Enoshima further SW along the coast, Narita far east) without overlapping.
+ * Cities not listed here (Chiba, Takao, Kawagoe) keep their projected position.
  */
-const TRAY_NUDGE: Record<string, [number, number]> = {
-  tokyo: [-0.7, 0.35],
-  chiba: [0.35, 0],
-  yokohama: [0, -0.25],
+const TRAY_SLOTS: Record<string, [number, number]> = {
+  narita: [3.75, -0.85],
+  haneda: [1.2, 2.3],
+  yokohama: [-0.75, 2.05],
+  kamakura: [-2.05, 2.4],
+  enoshima: [-3.1, 2.4],
 };
 
-/** Stylized tray layout — lat/lng projected onto the felt, not a GIS basemap. */
+/** Stylized tray layout — north up, lat/lng projected onto the felt, not a GIS basemap. */
 export const CITY_CATALOG: CityCatalogEntry[] = CITY_DEFINITIONS.map((city) => {
-  const [x, z] = TRAY_BY_ID.get(city.id) ?? [0, 0];
-  const [dx, dz] = TRAY_NUDGE[city.id] ?? [0, 0];
-  return { ...city, tray: [x + dx, z + dz] as [number, number] };
+  const [x, z] = TRAY_SLOTS[city.id] ?? TRAY_BY_ID.get(city.id) ?? [0, 0];
+  return { ...city, tray: [x, z] as [number, number] };
 });
 
 export const ORIGIN_TOKEN = {
   id: "bangkok",
   name: "Bangkok",
   nameJa: "BKK",
-  tray: [-4.35, 2.55] as [number, number],
+  /** Bangkok lies far to the south-west, so its airport token sits in the bottom-left corner. */
+  tray: [-4.4, 2.6] as [number, number],
 };
 
 const CITY_BY_ID = new Map(CITY_CATALOG.map((city) => [city.id, city]));

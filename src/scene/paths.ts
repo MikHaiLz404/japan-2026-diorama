@@ -124,9 +124,13 @@ export function makeRoute(route: RoutePath, options: RouteRenderOptions): THREE.
   let from = trayPoint(route.fromCityId);
   let to = trayPoint(route.toCityId);
 
-  if (route.fromCityId === ORIGIN_TOKEN.id) {
-    to.x -= 0.85;
-    to.z += 0.35;
+  const fromOrigin = route.fromCityId === ORIGIN_TOKEN.id;
+  if (fromOrigin || route.toCityId === ORIGIN_TOKEN.id) {
+    // International legs stop at the edge of the Japanese tile, on the side facing Bangkok.
+    const japan = fromOrigin ? to : from;
+    const home = fromOrigin ? from : to;
+    const gap = Math.min(0.6, japan.distanceTo(home) * 0.3);
+    japan.addScaledVector(home.clone().sub(japan).setY(0).normalize(), gap);
   } else {
     ({ from, to } = routeOffset(from, to, options));
   }
