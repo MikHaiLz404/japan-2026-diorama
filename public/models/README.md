@@ -45,9 +45,11 @@ The loader keeps those maps. Vertex paint in `src/scene/paint.ts` only runs on u
 | `takao.glb` | 5.55 MiB |
 | `kawagoe.glb` | 5.85 MiB |
 
-## Airports (`haneda.glb`, `narita.glb`)
+## Airports (`haneda.glb`, `narita.glb`, `bangkok.glb`)
 
-Generated in Tripo3D (text to 3D), then reduced for the tray: the raw exports are ~1.95M triangles and ~60 MB, and texture seams block glTF-transform's simplifier. They were decimated to 30k triangles with MeshLab quadric edge collapse, with the texture baked to per-vertex colors (`COLOR_0`) and normals kept, then packed with `gltf-transform optimize --compress meshopt --simplify false` (~160 KB each). Because they carry vertex colors instead of a texture map, `topology` tests that require embedded textures skip them. Do not commit the raw Tripo exports.
+Generated in Tripo3D (text to 3D), then run through Tripo's **Retopology** (Triangle, Smart Mesh, 15,000 polygons) and exported as GLB with a 2k texture. Raw text-to-3D exports are ~1.95M triangles / ~60 MB and can't be simplified afterwards without losing thin parts (plane wings) or scrambling the UVs, so always retopologize inside Tripo first. Then pack with `gltf-transform optimize --compress meshopt --texture-compress webp --texture-size 1024 --simplify false` (~0.6-0.7 MB each). Do not commit the raw exports.
+
+`bangkok.glb` is Suvarnabhumi and replaces the procedural airport at the Bangkok origin token (it is not a catalog city).
 
 ## Compression
 

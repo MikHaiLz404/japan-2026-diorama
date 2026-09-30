@@ -319,9 +319,7 @@ describe("city glb topology guard", () => {
 
   it("accepts every committed city glb: dense triangles, UVs, and embedded color maps", () => {
     let seen = 0;
-    // Airports have no Tripo export; they render from the procedural airport landmark.
-    const withGlb = CITY_MODEL_IDS.filter((id) => !["haneda", "narita"].includes(id));
-    for (const id of withGlb) {
+    for (const id of [...CITY_MODEL_IDS, "bangkok"]) {
       const stats = catalogGlbMeta(id);
       expect(stats, id).toBeTruthy();
       if (!stats) continue;
@@ -335,7 +333,7 @@ describe("city glb topology guard", () => {
       expect(stats.primitivesWithUv, id).toBeGreaterThan(0);
       expect(stats.primitivesWithUv, id).toBe(stats.primitives);
     }
-    expect(seen).toBe(withGlb.length);
+    expect(seen).toBe(CITY_MODEL_IDS.length + 1);
   });
 });
 
