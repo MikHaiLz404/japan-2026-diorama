@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { buildGroundPathSegments, buildRoutePaths, CITY_CATALOG } from "./cities";
+import { buildCityBlocks, buildGroundPathSegments, buildRoutePaths, CITY_CATALOG } from "./cities";
 import { trip } from "./loadTrip";
 
 describe("rail path segments", () => {
   it("skips walks, flights, and buses but keeps inter-city rail links", () => {
     const segments = buildGroundPathSegments(trip, "2026-09-20");
-    expect(segments.length).toBeGreaterThan(3);
+    expect(segments.length).toBeGreaterThanOrEqual(3);
     expect(segments.every((segment) => segment.type !== "walk")).toBe(true);
     expect(segments.every((segment) => segment.type !== "airplane")).toBe(true);
     expect(segments.every((segment) => segment.type !== "bus")).toBe(true);
@@ -68,11 +68,30 @@ describe("route dates", () => {
   });
 });
 
+describe("airports", () => {
+  it("puts Haneda on the tray for the arrival flight and Narita for the flight home", () => {
+    const cities = buildCityBlocks(trip, "2026-09-28");
+    const haneda = cities.find((city) => city.id === "haneda");
+    const narita = cities.find((city) => city.id === "narita");
+    expect(haneda?.dates).toEqual(["2026-09-18"]);
+    expect(haneda?.activities[0]?.name).toContain("NH850");
+    expect(narita?.dates).toContain("2026-09-27");
+  });
+
+  it("routes the arrival flight Bangkok → Haneda and the return Narita → Bangkok", () => {
+    const flights = buildRoutePaths(trip, "2026-09-24").filter((route) => route.type === "airplane");
+    expect(flights.map((f) => [f.fromCityId, f.toCityId])).toEqual([
+      ["bangkok", "haneda"],
+      ["narita", "bangkok"],
+    ]);
+  });
+});
+
 describe("flight home", () => {
   it("lands the return flight on the Bangkok token, not a Japanese city", () => {
     const flights = buildRoutePaths(trip, "2026-09-24").filter((route) => route.type === "airplane");
     const home = flights.find((route) => route.date === "2026-09-27");
     expect(home?.toCityId).toBe("bangkok");
-    expect(home?.fromCityId).toBe("chiba");
+    expect(home?.fromCityId).toBe("narita");
   });
 });

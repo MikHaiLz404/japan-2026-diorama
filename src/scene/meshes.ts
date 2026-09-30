@@ -151,6 +151,16 @@ function addLandmark(parent: THREE.Group, city: CityBlock, colors: ReturnType<ty
     box(parent, roof, 0.78, 0.06, 0.42, 0, 0.22, 0.05);
     return;
   }
+  if (city.landmark === "airport") {
+    // Runway strip with centre dashes, a low terminal and a control tower.
+    box(parent, mat(0x4a4d54), 0.95, 0.02, 0.16, 0, 0, 0.3);
+    for (const x of [-0.3, 0, 0.3]) box(parent, mat(0xf4f1ea), 0.14, 0.022, 0.03, x, 0, 0.3);
+    box(parent, body, 0.6, 0.12, 0.2, -0.05, 0, -0.18);
+    box(parent, roof, 0.66, 0.04, 0.24, -0.05, 0.12, -0.18);
+    box(parent, body, 0.06, 0.4, 0.06, 0.34, 0, -0.18);
+    box(parent, roof, 0.14, 0.07, 0.14, 0.34, 0.4, -0.18);
+    return;
+  }
   if (city.landmark === "peak") {
     const peak = new THREE.Mesh(geo.cone, mat(0x7d8a6a));
     peak.scale.set(0.7, 0.55, 0.7);
@@ -219,9 +229,11 @@ export function makeCityBlock(city: CityBlock): THREE.Group {
             [0.18, 0.1, 0.2, 0.28, 0.18],
           ];
 
-  for (const [x, z, bw, bh, bd] of footprint) {
-    box(visuals, body, bw, bh, bd, x, h, z);
-    box(visuals, roof, bw + 0.06, 0.06, bd + 0.06, x, h + bh, z);
+  if (city.landmark !== "airport") {
+    for (const [x, z, bw, bh, bd] of footprint) {
+      box(visuals, body, bw, bh, bd, x, h, z);
+      box(visuals, roof, bw + 0.06, 0.06, bd + 0.06, x, h + bh, z);
+    }
   }
 
   addLandmark(visuals, city, colors);

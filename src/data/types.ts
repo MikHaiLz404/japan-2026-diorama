@@ -77,7 +77,7 @@ export interface CityCatalogEntry {
   /** Stylized tray coordinates (x, z), projected from lat/lng. */
   tray: [number, number];
   size: "xl" | "lg" | "md" | "sm";
-  landmark: "skytree" | "tower" | "torii" | "island" | "hall" | "peak" | "kura";
+  landmark: "skytree" | "tower" | "torii" | "island" | "hall" | "peak" | "kura" | "airport";
 }
 
 export interface DayPlate {

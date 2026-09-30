@@ -11,6 +11,7 @@ export const RAIL_JUNCTIONS = {
   hase: { name: "Hase", lat: 35.3122, lng: 139.5362 },
   shichirigahama: { name: "Shichirigahama", lat: 35.306, lng: 139.51 },
   fujisawa: { name: "Fujisawa", lat: 35.3389, lng: 139.4879 },
+  funabashi: { name: "Keisei Funabashi", lat: 35.7017, lng: 139.9862 },
 } as const;
 
 export type RailJunctionId = keyof typeof RAIL_JUNCTIONS;
@@ -27,6 +28,8 @@ export const ROUTE_WAYPOINTS: Record<string, RouteDef> = {
   "tokyo<->yokohama": { anchor: "tokyo", waypoints: ["shinagawa"] },
   "kamakura<->tokyo": { anchor: "tokyo", waypoints: ["shinagawa", "ofuna"] },
   "chiba<->tokyo": { anchor: "tokyo", waypoints: ["makuhari"] },
+  "haneda<->tokyo": { anchor: "tokyo", waypoints: ["shinagawa"] },
+  "narita<->tokyo": { anchor: "tokyo", waypoints: ["funabashi"] },
   "takao<->tokyo": { anchor: "tokyo", waypoints: ["shinjuku"] },
   "kawagoe<->tokyo": { anchor: "tokyo", waypoints: ["ikebukuro"] },
   /** Return leg — via Fujisawa & JR hubs, never a direct chord. */

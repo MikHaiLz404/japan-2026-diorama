@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { palette } from "./palette";
 
-export type MiniatureKind = "tray" | "tokyo" | "yokohama" | "kamakura" | "enoshima" | "chiba" | "takao" | "kawagoe" | string;
+export type MiniatureKind = "tray" | "tokyo" | "yokohama" | "kamakura" | "enoshima" | "chiba" | "takao" | "kawagoe" | "haneda" | "narita" | string;
 
 type MiniaturePalette = {
   wall: number;
@@ -27,6 +27,8 @@ const CITY_PAINT: Record<string, MiniaturePalette> = {
   chiba: { wall: 0xf2e4cf, roof: 0x6d3a32, ground: 0x73825a, wood: 0x8a5a38, accent: 0xc4a15a },
   takao: { wall: 0xc5c4a2, roof: 0x4a5a38, ground: 0x3f5a38, wood: 0x6a4a32, accent: 0x8a9a62 },
   kawagoe: { wall: 0xf3e6d4, roof: 0x4a3228, ground: 0x6e7a50, wood: 0x5c3a24, accent: 0xc08a54 },
+  haneda: { wall: 0xe8e6e0, roof: 0x4a5a6a, ground: 0x8a8f86, wood: 0x6e6a60, accent: 0x7ea8b0 },
+  narita: { wall: 0xeae6dc, roof: 0x5a4a44, ground: 0x7d8560, wood: 0x6e6a60, accent: 0xc45a3a },
   tray: { wall: palette.wood, roof: palette.woodRim, ground: palette.moss, wood: palette.wood, accent: palette.sand },
 };
 

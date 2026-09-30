@@ -77,6 +77,24 @@ const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
     size: "sm",
     landmark: "kura",
   },
+  {
+    id: "haneda",
+    name: "Haneda",
+    nameJa: "羽田",
+    lat: 35.5494,
+    lng: 139.7798,
+    size: "sm",
+    landmark: "airport",
+  },
+  {
+    id: "narita",
+    name: "Narita",
+    nameJa: "成田",
+    lat: 35.772,
+    lng: 140.3929,
+    size: "md",
+    landmark: "airport",
+  },
 ];
 
 const TRAY_BY_ID = projectGeoToTray(CITY_DEFINITIONS);
@@ -163,15 +181,56 @@ function hopCities(hop: TripFixture["transportations"][number]): { fromCity: str
   return { fromCity, toCity };
 }
 
+/**
+ * A flight touches down at (or leaves from) an airport tile even when Tripsy has no
+ * stop logged there, so give each airport its own day for the flight endpoints.
+ */
+function airportFlightStops(trip: TripFixture, existing: Map<string, TripActivity[]>): TripActivity[] {
+  const tz = trip.timezone;
+  const stops: TripActivity[] = [];
+  const endpoints = trip.transportations
+    .filter((hop) => hop.type === "airplane")
+    .flatMap((hop) => [
+      { hop, point: hop.departure, at: hop.departure_at, role: "departs" },
+      { hop, point: hop.arrival, at: hop.arrival_at, role: "arrives" },
+    ]);
+
+  for (const { hop, point, at, role } of endpoints) {
+    if (!at || point.latitude == null || point.longitude == null || point.latitude < 20) continue;
+    const city = cityById(nearestCityId(point.latitude, point.longitude));
+    if (city?.landmark !== "airport") continue;
+
+    const date = toDateKey(at, tz);
+    const covered = [...(existing.get(city.id) ?? []), ...stops].some(
+      (stop) => stop.starts_at && nearestCityId(stop.latitude, stop.longitude) === city.id && toDateKey(stop.starts_at, tz) === date,
+    );
+    if (covered) continue;
+
+    stops.push({
+      id: `flight:${hop.id}:${role}`,
+      name: `${city.name} Airport (${point.name}) — ${hop.transport_number || "flight"} ${role}`,
+      type: "publicTransport",
+      starts_at: at,
+      ends_at: null,
+      latitude: point.latitude,
+      longitude: point.longitude,
+      timezone: tz,
+    });
+  }
+  return stops;
+}
+
 export function buildCityBlocks(trip: TripFixture, today: string): CityBlock[] {
   const tz = trip.timezone;
   const grouped = new Map<string, TripActivity[]>();
-  for (const activity of trip.activities) {
+  const place = (activity: TripActivity) => {
     const cityId = nearestCityId(activity.latitude, activity.longitude);
     const list = grouped.get(cityId) ?? [];
     list.push(activity);
     grouped.set(cityId, list);
-  }
+  };
+  trip.activities.forEach(place);
+  airportFlightStops(trip, grouped).forEach(place);
 
   return CITY_CATALOG.map((catalog) => {
     const activities = (grouped.get(catalog.id) ?? []).sort((a, b) =>
