@@ -3,9 +3,9 @@
   "trip_id": "1213687",
   "name": "Japan 2026",
   "starts_at": "2026-09-17",
-  "ends_at": "2026-09-28",
+  "ends_at": "2026-09-27",
   "timezone": "Asia/Tokyo",
-  "fetched_at": "2026-09-24T13:59:31.570Z",
+  "fetched_at": "2026-09-29T15:16:37.739Z",
   "activities": [
     {
       "id": "4042290",
@@ -87,7 +87,7 @@
     },
     {
       "id": "4044047",
-      "name": "Mangetsu 浅草もんじゃ 満月 (dinner with พีท)",
+      "name": "Mangetsu 浅草もんじゃ 満月",
       "type": "restaurant",
       "starts_at": "2026-09-18T10:00:00Z",
       "ends_at": null,
@@ -113,7 +113,7 @@
     },
     {
       "id": "4048182",
-      "name": "ฝากกระเป๋าที่โรงแรม + แวะ Sensō-ji (รอบ 2)",
+      "name": "Sensō-ji (รอบ 2)",
       "type": "tour",
       "starts_at": "2026-09-19T01:00:00Z",
       "ends_at": null,
@@ -161,7 +161,7 @@
       "address": "Your Elm Aoto (青砥駅構内ショッピングセンター), Aoto Station, Katsushika, Tokyo",
       "timezone": "Asia/Tokyo",
       "notes": "ราเมงโชยุ สไตล์ฮิดะ ทาคะยามะ อยู่ในห้าง Your Elm Aoto ติดกับสถานี (นอกประตูตั๋ว)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4052921",
@@ -174,7 +174,7 @@
       "address": "東京都葛飾区青戸3-36-1",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อเครื่องเขียน (ตัวจับสมุด x2 + fortune sticker) ก่อนไปกินราเมงที่เดียวกัน (Your Elm Aoto)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4048991",
@@ -191,7 +191,7 @@
     },
     {
       "id": "4049530",
-      "name": "福徳神社 (Fukutoku Jinja / Mebuki Inari) - ขอพรล็อตเตอรี่",
+      "name": "福徳神社 (Fukutoku Jinja / Mebuki Inari)",
       "type": "tour",
       "starts_at": "2026-09-19T07:30:00Z",
       "ends_at": "2026-09-19T08:00:00Z",
@@ -200,7 +200,7 @@
       "address": "〒103-0022 東京都中央区日本橋室町2-4-14",
       "timezone": "Asia/Tokyo",
       "notes": "ศาลเจ้าดังเรื่องขอพรถูกล็อตเตอรี่ (宝くじ) ใกล้สถานี Mitsukoshimae ทางออก A6 เดิน 1 นาที | ทำบุญรวม 2 คน 100¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4049631",
@@ -213,7 +213,7 @@
       "address": "〒103-0022 東京都中央区日本橋室町2-2-1",
       "timezone": "Asia/Tokyo",
       "notes": "เดินเล่นช้อปปิ้ง/ร้านอาหารในย่านนี่โฮมบาชิ อยู่ติดกับ 福徳神社 เลย",
-      "website": null
+      "website": ""
     },
     {
       "id": "4049754",
@@ -226,7 +226,7 @@
       "address": "〒103-0022 東京都中央区日本橋室町1-12-15 日本橋ムロホンビル3",
       "timezone": "Asia/Tokyo",
       "notes": "ร้านกาแฟเก่าแก่ของ Nihonbashi ใกล้สถานี Mitsukoshimae",
-      "website": null
+      "website": ""
     },
     {
       "id": "4037863",
@@ -252,7 +252,7 @@
       "address": "〒104-0061 東京都中央区銀座5丁目7-7 銀座ワシントンビル",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อกระโปรงมิดี 1 ตัว (1,290¥) + เสื้อยืดกราฟิก 3 ตัว (1,490¥ x3) รวม 5,760¥ หักภาษีคืนเหลือ 5,237¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4051253",
@@ -265,7 +265,7 @@
       "address": "〒104-0061 東京都中央区銀座5丁目5-1",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อแผ่นแปะนวด 932¥ (ไม่ใช่เก้าอี้นวด)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4051256",
@@ -278,7 +278,7 @@
       "address": "東京都葛飾区青戸2-1-1",
       "timezone": "Asia/Tokyo",
       "notes": "น้ำ สลัด แซนวิช เครื่องดื่ม 1,270¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4057163",
@@ -291,7 +291,7 @@
       "address": "東京都葛飾区青戸3丁目36-1 ユアエルム青戸",
       "timezone": "Asia/Tokyo",
       "notes": "มื้อแรกของวัน ก่อนขึ้นรถ (จ่ายเงินสด): 月見バーガー 590¥ + タルタルチキンバーガー 440¥ + メロンソーダ M 180¥ + ポテト M 170¥ รวม 1,380¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045135",
@@ -317,7 +317,7 @@
       "address": "Shimokitazawa, Setagaya, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อร่มกันแดด 2 คัน (日傘折遮光エアライトユニセックス 4,290¥ + 日傘折遮光ドームワイドスカラ 4,400¥) รวม 8,690¥ ทักช์ฟรีเหลือจ่าย 7,900¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4057762",
@@ -330,11 +330,11 @@
       "address": "〒155-0031 東京都世田谷区北沢3丁目19-20 reload1-1",
       "timezone": "Asia/Tokyo",
       "notes": "อิส抹茶ラテ (Iced Matcha Latte) 880¥ + コールドブリュー (Cold Brew) 850¥",
-      "website": null
+      "website": ""
     },
     {
       "id": "4057860",
-      "name": "OGAWA COFFEE LABORATORY 下北沢店 (ซื้อเมล็ดกาแฟ)",
+      "name": "OGAWA COFFEE LABORATORY 下北沢店",
       "type": "shopping",
       "starts_at": "2026-09-20T07:42:00Z",
       "ends_at": "2026-09-20T07:50:00Z",
@@ -343,11 +343,24 @@
       "address": "〒155-0031 東京都世田谷区北沢3丁目19-20 reload1-1",
       "timezone": "Asia/Tokyo",
       "notes": "เมล็ดกาแฟ ブラジル ハイーニャ 100g 1,180¥ + ถุงกระดาษ (เล็ก) 20¥",
-      "website": null
+      "website": ""
+    },
+    {
+      "id": "4089447",
+      "name": "OGAWA COFFEE LABORATORY 下北沢店 (สลิปที่ 2)",
+      "type": "cafe",
+      "starts_at": "2026-09-20T07:42:25Z",
+      "ends_at": null,
+      "latitude": 35.6613,
+      "longitude": 139.6683,
+      "address": "東京都世田谷区北沢 (下北沢店)",
+      "timezone": "Asia/Tokyo",
+      "notes": "สลิปบัตร VISA Prepaid SCB แยกต่างหาก 16:42 JST ¥1,200 (คนละใบกับรายการ OGAWA COFFEE ¥2,930 ที่บันทึกไว้ก่อนหน้า — น่าจะเป็นการจ่ายแยกบิล/แยกรอบ)",
+      "website": ""
     },
     {
       "id": "4056558",
-      "name": "SHOLAYERED Shibuya Scramble Square (5F) - ซื้อน้ำหอม",
+      "name": "SHOLAYERED Shibuya Scramble Square (5F)",
       "type": "shopping",
       "starts_at": "2026-09-20T09:00:00Z",
       "ends_at": null,
@@ -360,7 +373,7 @@
     },
     {
       "id": "4058391",
-      "name": "มื้อเย็น - Gourmand Market KINOKUNIYA 紀ノ国屋 (B1F) Shibuya Scramble Square",
+      "name": "Gourmand Market KINOKUNIYA 紀の国屋 (B1F) Shibuya Scramble Square",
       "type": "foodMarket",
       "starts_at": "2026-09-20T10:30:00Z",
       "ends_at": null,
@@ -373,7 +386,7 @@
     },
     {
       "id": "4058936",
-      "name": "7-Eleven 青砂駅前店 (แวะก่อนเข้าบ้าน)",
+      "name": "7-Eleven 青砂駅前店",
       "type": "shopping",
       "starts_at": "2026-09-20T12:33:00Z",
       "ends_at": null,
@@ -382,11 +395,11 @@
       "address": "Aoto 2-1-1, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อก่อนเข้าที่พัก: ขนมซานริโอ 180¥ + ลิ้นที่ปิ้งเกลือเค็ม 338¥ + ชาเอิร์ลเกรย์ไม่หวาน 600ml 108¥ + เครื่องดื่มชูกำลัง Monster Guava 213¥ + ข้าวกล่องไก่ทอด 648¥ + ข้าวปั้นสาหร่ายวากาเม 148¥ + กรรไกรตัดเล็บ M 648¥ รวม ¥2,477",
-      "website": null
+      "website": ""
     },
     {
       "id": "4063428",
-      "name": "Workman 葛飾立石店 (ซื้อรองเท้ากันน้ำ)",
+      "name": "Workman 葛飾立石店",
       "type": "shopping",
       "starts_at": "2026-09-21T01:58:00Z",
       "ends_at": null,
@@ -395,11 +408,11 @@
       "address": "Tateishi 5-2-5, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อรองเท้ากันน้ำ FC372 防水Fプレジャー ราคา ¥2,500 + ถุงพลาสติก ¥5 = รวม ¥2,505 (จ่ายบัตร Mitsui Sumitomo)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4064066",
-      "name": "Lawson 青砥駅北口店 (แวะซื้อของกินระหว่างทางกลับที่พัก)",
+      "name": "Lawson 青砥駅北口店",
       "type": "foodMarket",
       "starts_at": "2026-09-21T03:19:00Z",
       "ends_at": "2026-09-21T03:25:00Z",
@@ -408,11 +421,11 @@
       "address": "東京都葛飾区青戸3-38-1, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "แวะ Lawson ใกล้สถานี Aoto ระหว่างเดินกลับที่พักหลังซื้อรองเท้า - Lチキレット ¥259, Lチキレギュラー ¥248, ถุงพลาสติก ¥3 รวม ¥510 (จ่ายบัตร VISA)",
-      "website": null
+      "website": ""
     },
     {
       "id": "4064528",
-      "name": "ヨークマート 青戸店 (แวะช้อปปิ้ง/ซื้อของ)",
+      "name": "ヨークマート 青戸店",
       "type": "shopping",
       "starts_at": "2026-09-21T06:44:00Z",
       "ends_at": "2026-09-21T06:50:00Z",
@@ -421,11 +434,11 @@
       "address": "〒125-0062 東京都葛飾区青戸2-20-6, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อของสด/ของกินหลายอย่างที่ ยอรกมาร์เกตแล้ว (ผัก, เต้าหู้, ขนมปัง, น้ำแร่, ซอสถั่ว, มิโซซุป, หมูออนเซียง, ข้าวปั้นซูชิ, ฯลฯ) รวม 27 รายการ = ¥7,366 + ถุงช้อปปิ้ง 2 ใบ ¥14 (แยกคิดเงิน) รวมทั้งหมด ¥7,380 จ่ายบัตร VISA",
-      "website": null
+      "website": ""
     },
     {
       "id": "4065868",
-      "name": "セブン-イレブン 葛飾青戸3丁目店 (แวะซื้อของกิน)",
+      "name": "セブン-イレブン 葛飾青戸３丁目店",
       "type": "foodMarket",
       "starts_at": "2026-09-21T12:19:00Z",
       "ends_at": "2026-09-21T12:25:00Z",
@@ -434,7 +447,7 @@
       "address": "東京都葛飾区青戸3丁目34-7, Katsushika, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "แวะ 7-Eleven ตอนกลางคืน - บูริโตแฮมชีส, บูริโตชีสเบิ้ล, เครื่องดื่มแอลกอฮอล์ホロヨイ, กาแฟ Mt.R espresso, โยเกิร์ต Tarami low-cal, ชา Kirin Helsia รวม ¥1,468 จ่ายบัตร VISA Prepaid",
-      "website": null
+      "website": ""
     },
     {
       "id": "4071248",
@@ -447,11 +460,11 @@
       "address": "3-9-2 Asakusa, Taito City, Tokyo 111-0032, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ฝาก 2 luggage + 1 bag ช่วงสาย หลังมาจาก Aoto. เวลา ~10:30 JST เป็นประมาณการจาก route เดิม; รับกระเป๋าอีกครั้งช่วง 14:25.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4066213",
-      "name": "Nakau Kuramaebashi — Lunch",
+      "name": "Nakau Kuramaebashi",
       "type": "tour",
       "starts_at": "2026-09-22T02:00:00Z",
       "ends_at": "2026-09-22T02:45:00Z",
@@ -460,7 +473,7 @@
       "address": "Misuji, Taito City, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "มื้อเที่ยง Nakau Kuramaebashi ¥2,030 (2 คน). เวลา ~11:00–11:45 JST เป็นประมาณการเพื่อเรียง timeline.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4083449",
@@ -473,11 +486,11 @@
       "address": "1 Chome-1-2 Komagata, Taito City, Tokyo 111-0043, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "รับกระเป๋าประมาณ 14:25 JST แล้วเดินไป Misuji Airbnb.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4083345",
-      "name": "EN CAFE (แวะก่อนกลับที่พัก)",
+      "name": "EN CAFE",
       "type": "cafe",
       "starts_at": "2026-09-22T05:39:00Z",
       "ends_at": null,
@@ -486,11 +499,11 @@
       "address": "Kuramae, Taito-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "เวลาจริงที่ผู้ใช้ยืนยัน: 14:39 JST วันที่ 22 ก.ย. 2026. EN CAFE ¥2,830; แวะก่อนกลับเข้าที่พัก. เวลาจบยังไม่ทราบ.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4083344",
-      "name": "Vegan Ramen UZU Tokyo (มื้อเย็นก่อน teamLab)",
+      "name": "Vegan Ramen UZU Tokyo",
       "type": "restaurant",
       "starts_at": "2026-09-22T10:05:00Z",
       "ends_at": "2026-09-22T10:35:00Z",
@@ -499,7 +512,7 @@
       "address": "Toyosu, Koto-ku, Tokyo, Japan (ใกล้ teamLab Planets)",
       "timezone": "Asia/Tokyo",
       "notes": "เวลาจริงที่ผู้ใช้ยืนยัน: 19:05 JST วันที่ 22 ก.ย. 2026; ราเมนเจ x2 + น้ำ รวม ¥4,800. เวลาจบ 19:35 เป็นประมาณการ.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4045115",
@@ -525,7 +538,7 @@
       "address": "Shin-Okachimachi, Taito-ku, Tokyo, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ซื้อของ 2 รายการ (¥768 + ¥426, ใช้คูปอง -¥20) เวลา 12:31 น.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4076566",
@@ -538,7 +551,7 @@
       "address": "4 Chome-15-3 Jingumae, Shibuya, Tokyo 150-0001, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "สถานะจริง: ถึง Omotesando ประมาณ 13:21 แล้วไป KOFFEE MAMEYA; ใบเสร็จกาแฟ 14:05; จากนั้นไป Tonkatsu Maisen Aoyama",
-      "website": null
+      "website": ""
     },
     {
       "id": "4077787",
@@ -551,7 +564,7 @@
       "address": "4-8-5 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ลำดับจริงวันที่ 23 ก.ย. 2026: หลัง KOFFEE MAMEYA มาที่ Tonkatsu Maisen Aoyama แล้วไป MACCHA HOUSE → I’m donut? → IYOSHI COLA",
-      "website": null
+      "website": ""
     },
     {
       "id": "4076695",
@@ -564,7 +577,20 @@
       "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
       "timezone": "Asia/Tokyo",
       "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง Tonkatsu Maisen Aoyama มากินชา/น้ำแข็งใส แล้วไป I’m donut? ต่อ; เวลาเป็นค่าประมาณเพื่อจัดลำดับย้อนหลัง",
-      "website": null
+      "website": ""
+    },
+    {
+      "id": "4089371",
+      "name": "MACCHA HOUSE 抹茶館 原宿",
+      "type": "cafe",
+      "starts_at": "2026-09-23T07:13:00Z",
+      "ends_at": null,
+      "latitude": 35.6702,
+      "longitude": 139.7038,
+      "address": "東京都渋谷区神宮前一丁目14番30号",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะร้านมัทฉะที่ฮาราจูกุ 16:13 JST: かき氷セット ¥1,800 + 上別儀 ¥1,100 = ¥2,900 (คน 2) จ่ายด้วย VISA",
+      "website": ""
     },
     {
       "id": "4076563",
@@ -577,7 +603,7 @@
       "address": "1-14-24 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง MACCHA HOUSE แล้วไป IYOSHI COLA ต่อ; จบช่วงประมาณ 18:37 JST",
-      "website": null
+      "website": ""
     },
     {
       "id": "4076564",
@@ -590,7 +616,7 @@
       "address": "5-29-12 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ร้านที่ไปจริงวันที่ 23 ก.ย. 2026: หลัง I’m donut? แล้วไป TAKEYA ต่อ; เวลาเป็นค่าประมาณเพื่อจัดลำดับย้อนหลัง",
-      "website": null
+      "website": ""
     },
     {
       "id": "4076562",
@@ -603,7 +629,7 @@
       "address": "4-33-2 Taito, Taito City, Tokyo 110-0016, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ไปจริงวันที่ 23 ก.ย. 2026 หลัง IYOSHI COLA. ใบเสร็จ TAKEYA1 ชั้น 3 เวลา 20:36: (1) เครื่องดื่ม Ito En / matcha 190 ml ¥270, (2) ゲルマ樹液足裏シート 30枚 แผ่นแปะฝ่าเท้า 30 แผ่น ¥2,089. รวม 2 รายการ ¥2,359.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4079377",
@@ -632,6 +658,19 @@
       "website": ""
     },
     {
+      "id": "4089366",
+      "name": "おむสび処 ほんのり屋 藤沢店",
+      "type": "bakery",
+      "starts_at": "2026-09-24T03:46:00Z",
+      "ends_at": null,
+      "latitude": 35.3389,
+      "longitude": 139.491,
+      "address": "神奈川県藤沢市藤沢75 JR藤沢駅構内改札外",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะซื้อข้าวปั้นที่สถานีฟูจิซาวะ 12:46 JST ก่อนไป Kamakura/Enoshima: いくらむสび ¥370 + 焼鮭明太と国産高菜むすび ¥270 = ¥640 จ่ายด้วยบัตร VISA Prepaid SCB",
+      "website": ""
+    },
+    {
       "id": "4045127",
       "name": "Enoshima",
       "type": "tour",
@@ -648,13 +687,13 @@
       "id": "4083131",
       "name": "Yoridocoro Inamuragasaki",
       "type": "general",
-      "starts_at": "2026-09-24T05:00:00Z",
+      "starts_at": "2026-09-24T05:59:00Z",
       "ends_at": "2026-09-24T05:55:00Z",
       "latitude": 35.306,
       "longitude": 139.522,
       "address": "Inamuragasaki, Kamakura, Kanagawa, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "กินจริงวันที่ 24 ก.ย. 2026 หลังนั่ง Enoden จาก Fujisawa มาลง Inamuragasaki. ผู้ใช้แจ้งว่าร้านยกเลิก cutoff บ่าย 2 แล้วและได้กินเรียบร้อย. เวลาเป็นประมาณการจากข้อความ ~14:56 JST.",
+      "notes": "ยอดจริงจากใบเสร็จ 14:59 JST: さばみりん定食 ¥1,920 + きんめだい定食 ¥2,500 + アップルジュース(S) ¥300 + ICEゆず茶 ¥520 + こだわり卵 ¥220 = ¥5,460 (VISA) — โต๊ะ 10, 2 ท่าน",
       "website": ""
     },
     {
@@ -681,7 +720,7 @@
       "address": "3-10-29 Hase, Kamakura, Kanagawa 248-0016, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "ถึง KANNON COFFEE จริงประมาณ 16:17 JST วันที่ 24 ก.ย. 2026; แวะสั้น ๆ ก่อน Hasedera.",
-      "website": null
+      "website": ""
     },
     {
       "id": "4083233",
@@ -707,19 +746,136 @@
       "address": "1-1-25 Koshigoe, Kamakura, Kanagawa 248-0033, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "เปลี่ยนลำดับล่าสุด: ไป Kamakura ก่อน แล้วค่อยย้อน Enoden มาที่ Kamakura-Kokomae.",
+      "website": ""
+    },
+    {
+      "id": "4089689",
+      "name": "焼肉屋さかい 新宿歌舞伎町店",
+      "type": "restaurant",
+      "starts_at": "2026-09-24T13:21:00Z",
+      "ends_at": null,
+      "latitude": 35.695,
+      "longitude": 139.7025,
+      "address": "東京都新宿区歌舞伎町1-17-12 第1浅川ビル4F",
+      "timezone": "Asia/Tokyo",
+      "notes": "มื้อดึกยากินิกุ 22:21 JST: หมู 4 สายพันธุ์ทาเระ, เนื้อสันในทาเระ, วากิวคาลบิ/เกลือ, ข้าว, ซุปสาหร่าย, บะหมี่เย็นเลมอน, โคล่า, ฮาบอล ฯลฯ รวม ¥8,591 บัตรเครดิต",
+      "website": ""
+    },
+    {
+      "id": "4089365",
+      "name": "セブン-イレブン 新御徒町駅前店",
+      "type": "foodMarket",
+      "starts_at": "2026-09-24T14:05:00Z",
+      "ends_at": null,
+      "latitude": 35.702,
+      "longitude": 139.7825,
+      "address": "東京都台東区小島2-21-16",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะซื้อของกลับที่พัก 23:05 JST: Biore สกินแคร์โฟมล้างหน้า ¥468 + น้ำอิโรฮาสุ 2L ¥131 = ¥655 จ่ายด้วย PASMO (คงเหลือ ¥1,847)",
+      "website": ""
+    },
+    {
+      "id": "4089372",
+      "name": "スーパーマーケットヤマザキ 三筋店",
+      "type": "foodMarket",
+      "starts_at": "2026-09-25T02:46:00Z",
+      "ends_at": null,
+      "latitude": 35.7048,
+      "longitude": 139.7889,
+      "address": "東京都台東区三筋 (三筋店)",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะซูเปอร์ยามาซากิ 11:46 JST: ハムポテト&たまごサンド ¥350 (ลด10%) + お〜いお茶濃い茶 ¥109 + TULLY'S COFFEE ¥129 + ถุง ¥4 = รวม ¥601 จ่ายด้วยบัตรเครดิต",
+      "website": ""
+    },
+    {
+      "id": "4087533",
+      "name": "Warner Bros. Studio Tour Tokyo – The Making of Harry Potter",
+      "type": "amusementPark",
+      "starts_at": "2026-09-25T05:00:01Z",
+      "ends_at": "2026-09-25T10:00:01Z",
+      "latitude": 35.7453891,
+      "longitude": 139.6452641,
+      "address": "179-0074, 東京都 練馬区, 春日町1丁目1-7, 日本",
+      "timezone": "Asia/Tokyo",
+      "notes": "",
+      "website": "https://www.wbstudiotour.jp"
+    },
+    {
+      "id": "4089434",
+      "name": "THE FOOD HALL (Warner Bros. Studio Tour Tokyo)",
+      "type": "restaurant",
+      "starts_at": "2026-09-25T05:01:00Z",
+      "ends_at": null,
+      "latitude": 35.7469,
+      "longitude": 139.6528,
+      "address": "東京都練馬区春日町1丁目 (WB Studio Tour Tokyo)",
+      "timezone": "Asia/Tokyo",
+      "notes": "มื้อกลางวันธีมแฮรี่พอตเตอร์ 14:01 JST: 9と3/4番線 ¥2,300 + ฮาโลวีนเบอร์เกอร์ ¥2,500 + สลิธีรินดริงก์ ¥750 + ฮัฟเฟิลพัฟดริงก์ ¥750 = ¥6,300 บัตรเครดิต Verifone",
+      "website": ""
+    },
+    {
+      "id": "4095750",
+      "name": "Butterbeer Bar",
+      "type": "restaurant",
+      "starts_at": "2026-09-25T08:22:00Z",
+      "ends_at": null,
+      "latitude": 35.745183,
+      "longitude": 139.6460909,
+      "address": "1-1-7 Kasugacho, Nerima City, Tokyo, Japan (Warner Bros. Studio Tour Tokyo)",
+      "timezone": "Asia/Tokyo",
+      "notes": "バタービール (Butterbeer) ¥1,280 + (A)フローズンバタービール (Frozen Butterbeer) ¥1,400 รวม ¥2,680 จ่ายเงินสด ¥10,000 ทอน ¥7,320 เวลา 17:22 น. (โต๊ะที่ 381)",
       "website": null
     },
     {
-      "id": "4045132",
-      "name": "Warner Bros. Studio Tour Tokyo (Harry Potter)",
-      "type": "tour",
-      "starts_at": "2026-09-25T05:00:00Z",
+      "id": "4089433",
+      "name": "Warner Bros. Studio Tour Tokyo — ร้านของที่ระลึก",
+      "type": "shopping",
+      "starts_at": "2026-09-25T09:18:00Z",
       "ends_at": null,
-      "latitude": 35.7466,
-      "longitude": 139.6317,
-      "address": "1 Chome-1-7 Toshimaen, Nerima, Tokyo, Japan",
+      "latitude": 35.7469,
+      "longitude": 139.6528,
+      "address": "東京都練馬区春日町1丁目 (WB Studio Tour Tokyo)",
       "timezone": "Asia/Tokyo",
-      "notes": "✅ Confirmed — Booking Reference 2661205, 2 adult tickets, 25 Sep 2026 14:00, ¥14,000 (จากอีเมลยืนยันการจอง)",
+      "notes": "ของที่ระลึก 18:18 JST: 分霊箱コレクション ¥990 + Luggage Tag ¥1,500 + Passport Holder ¥3,000 = ¥5,490 บัตรเครดิต",
+      "website": ""
+    },
+    {
+      "id": "4089436",
+      "name": "マツモトキヨシ 新御徒町店 — ของใช้ tax-free",
+      "type": "pharmacy",
+      "starts_at": "2026-09-25T11:57:00Z",
+      "ends_at": null,
+      "latitude": 35.702,
+      "longitude": 139.7825,
+      "address": "東京都台東区 新御徒町店",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อของใช้ (ปลอดภาษี) 20:57 JST: โลชั่น Curel, ที่ตัดเล็บ, Rohto Vita4, เสื้อชั้นใน, มิสต์เย็น, IE Pro FD ฯลฯ รวม ¥8,608 บัตรเครดิต",
+      "website": ""
+    },
+    {
+      "id": "4089437",
+      "name": "マツモトキヨシ 新御徒町店 — แผ่นรีเฟรชเท้า",
+      "type": "pharmacy",
+      "starts_at": "2026-09-25T12:00:00Z",
+      "ends_at": null,
+      "latitude": 35.702,
+      "longitude": 139.7825,
+      "address": "東京都台東区 新御徒町店",
+      "timezone": "Asia/Tokyo",
+      "notes": "แวะซื้อแผ่นรีเฟรชเท้า 21:00 JST ¥657 บัตรเครดิต (แยกบิลจากรายการก่อนหน้า 3 นาที)",
+      "website": ""
+    },
+    {
+      "id": "4089435",
+      "name": "スーパーマーケットヤマザキ 三筋店 (ซื้อของสด)",
+      "type": "foodMarket",
+      "starts_at": "2026-09-25T13:41:00Z",
+      "ends_at": null,
+      "latitude": 35.7048,
+      "longitude": 139.7889,
+      "address": "東京都台東区三筋 (三筋店)",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อของสด/บะหมี่/เครื่องปรุง 22:41 JST รวม 17 รายการ = ¥4,860 บัตรเครดิต",
       "website": ""
     },
     {
@@ -736,6 +892,19 @@
       "website": ""
     },
     {
+      "id": "4095762",
+      "name": "麺ロード (NOODLES BAZAAR, Cup Noodles Museum)",
+      "type": "foodMarket",
+      "starts_at": "2026-09-26T05:51:00Z",
+      "ends_at": null,
+      "latitude": 35.4547,
+      "longitude": 139.6382,
+      "address": "2 Chome-3-4 Shinko, Naka Ward, Yokohama, Japan (Cup Noodles Museum)",
+      "timezone": "Asia/Tokyo",
+      "notes": "ซื้อบะหมี่ที่โซน NOODLES BAZAAR ーワールド麺ロードー ในพิพิธภัณฑ์ Cup Noodles Museum ¥1,450 จ่ายบัตร VISA Debit เวลา 14:51 น.",
+      "website": null
+    },
+    {
       "id": "4045123",
       "name": "Red Brick Warehouse",
       "type": "shopping",
@@ -749,34 +918,47 @@
       "website": ""
     },
     {
-      "id": "4045122",
-      "name": "Yamashita Park / Osanbashi",
-      "type": "park",
-      "starts_at": "2026-09-26T07:30:00Z",
-      "ends_at": "2026-09-26T09:00:00Z",
-      "latitude": 35.4453,
-      "longitude": 139.6503,
-      "address": "279 Yamashitacho, Naka Ward, Yokohama, Japan",
+      "id": "4095760",
+      "name": "横濱たちばな亭 赤レンガ倉庫店",
+      "type": "restaurant",
+      "starts_at": "2026-09-26T06:47:00Z",
+      "ends_at": null,
+      "latitude": 35.4519,
+      "longitude": 139.6425,
+      "address": "横浜市中区新港1-1-2横浜赤れんが倉庫2号館1F, Yokohama, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "เดินต่อจาก Red Brick ไป Osanbashi แล้ว Yamashita Park ช่วงเย็น",
+      "notes": "オムレツライス＆ハンバーグ (Omurice & Hamburg) ¥1,700 (รวมภาษี ¥154) จ่ายบัตรเครดิต เวลา 15:47 น. (端末取引ID: 5359)",
+      "website": null
+    },
+    {
+      "id": "4089699",
+      "name": "Cosmo World (Cosmo Clock 21)",
+      "type": "amusementPark",
+      "starts_at": "2026-09-26T09:00:00Z",
+      "ends_at": "2026-09-26T07:00:00Z",
+      "latitude": 35.4548,
+      "longitude": 139.6363,
+      "address": "2 Chome-8-1 Shinko, Naka Ward, Yokohama, Kanagawa, Japan",
+      "timezone": "Asia/Tokyo",
+      "notes": "แทรกระหว่าง Cup Noodles Museum กับ Red Brick Warehouse — สวนสนุกริมน้ำ มีชิงช้าสวรรค์ Cosmo Clock 21 จุดถ่ายรูปเด่นของ Minato Mirai",
       "website": ""
     },
     {
-      "id": "4045121",
-      "name": "Yokohama Chinatown (lunch)",
-      "type": "restaurant",
-      "starts_at": "2026-09-26T09:10:00Z",
-      "ends_at": "2026-09-26T11:00:00Z",
-      "latitude": 35.4437,
-      "longitude": 139.6469,
-      "address": "Yamashitacho, Naka Ward, Yokohama, Japan",
+      "id": "4094847",
+      "name": "NewDays ND横浜中央店",
+      "type": "foodMarket",
+      "starts_at": "2026-09-26T11:35:00Z",
+      "ends_at": null,
+      "latitude": 35.4658,
+      "longitude": 139.6217,
+      "address": "横浜市西区高島2-16-1 (ND横浜中央店)",
       "timezone": "Asia/Tokyo",
-      "notes": "มื้อเย็นที่ Yokohama Chinatown หลังเดิน waterfront แล้วค่อยกลับ Tokyo",
-      "website": ""
+      "notes": "แวะซื้อของกินที่สถานีโยโกฮาม่า 20:35 JST: ข้าวปั้นบ๊วยคิชู ¥178 + ข้าวปั้นวาซาบิสาหร่าย ¥225 + Tully's กาแฟคิลิมันจาโร ¥168 + お〜いお茶緑茶 ¥127 = ¥698 บัตรเครดิต",
+      "website": null
     },
     {
       "id": "4059774",
-      "name": "ฝากกระเป๋าที่ Narita Airport (Coin Locker)",
+      "name": "Narita Airport (Coin Locker)",
       "type": "general",
       "starts_at": "2026-09-27T03:15:00Z",
       "ends_at": "2026-09-27T03:30:00Z",
@@ -785,19 +967,45 @@
       "address": "Narita International Airport, Chiba, Japan",
       "timezone": "Asia/Tokyo",
       "notes": "Coin locker แบบคิดรายชั่วโมง (Terminal 2 B1F หรือ Terminal 3 2F): เล็ก 300¥ (≤6ชม.) / กลาง 500¥ / ใหญ่ 600¥ — อยู่โซนก่อนผ่านตม. ฝากกระเป๋าไว้ก่อนออกไปเที่ยว Naritasan แล้วค่อยกลับมาเอา",
+      "website": ""
+    },
+    {
+      "id": "4100272",
+      "name": "GINDACO Highball Sakaba 成田駅前店",
+      "type": "restaurant",
+      "starts_at": "2026-09-27T03:58:00Z",
+      "ends_at": null,
+      "latitude": 35.777,
+      "longitude": 140.3183,
+      "address": "千葉県成田市花崎814-5",
+      "timezone": "Asia/Tokyo",
+      "notes": "ใบเสร็จ 27 ก.ย. 2026 12:58 น. โต๊ะ 8 สำหรับ 2 ท่าน\nรายการ (รวมภาษี): Blue Lychee Soda ¥528, Adult Lemon Squash ¥528, ยากิโซบะซอส ¥748, ทาโกะยากิ 6 ลูก ¥627, ข้าวปั้นห่อเนื้อ (เพลน) ¥396, เต้าหู้เย็นอาโอะซะชิโสะ ¥418\nรวม ¥3,245 (ภาษี 10% ¥295) จ่ายบัตรเครดิต รวม 6 รายการ\nพิกัดเป็นค่าประมาณ",
       "website": null
     },
     {
-      "id": "4059775",
-      "name": "Naritasan Shinshoji Temple + Omotesando Street (เที่ยว + มื้อเที่ยงปลาไหล)",
-      "type": "tour",
-      "starts_at": "2026-09-27T03:45:00Z",
-      "ends_at": "2026-09-27T05:00:00Z",
-      "latitude": 35.7761,
-      "longitude": 140.3163,
-      "address": "1 Narita, Chiba, Japan",
+      "id": "4100331",
+      "name": "和カフェ 珈琲庵 (Wa Cafe Kohi-an)",
+      "type": "cafe",
+      "starts_at": "2026-09-27T05:00:00Z",
+      "ends_at": null,
+      "latitude": 35.7767,
+      "longitude": 140.3186,
+      "address": "千葉県成田市花崎町839-35",
       "timezone": "Asia/Tokyo",
-      "notes": "วัดเก่าแก่ 1,000+ ปี เดินถนน Omotesando (ทางเดินสมัยเอโดะ ยาว 800ม.) ระหว่างทางมีร้านปลาไหลย่าง (อุนางิ) ให้ลองทาน ~2,000-4,000¥/คน และร้านเซมเบ้ปิ้งสดให้ชิมด้วย เดินจากสถานี Narita ~10-15 นาที",
+      "notes": "ใบเสร็จบัตรเครดิต 27 ก.ย. 2026 14:00 น. ยอดรวม ¥1,550 จ่าย VISA Debit (ไม่ระบุรายการสินค้าบนใบเสร็จ) โทร 0476-23-6388\nเวลาเปิด (จากเว็บ Narinavi): จ-ส 8:00-20:00, อาทิตย์/วันหยุด 9:00-19:00 ปิดไม่แน่นอน\nพิกัดเป็นค่าประมาณ",
+      "website": null
+    },
+    {
+      "id": "4100928",
+      "name": "Fa-So-La AKIHABARA (Duty Free) 南ウイング3F",
+      "type": "shopping",
+      "starts_at": "2026-09-27T07:01:00Z",
+      "ends_at": null,
+      "latitude": 35.7647,
+      "longitude": 140.386,
+      "address": "千葉県成田市古込字古込1-1 (Narita Airport Terminal 1, South Wing 3F)",
+      "timezone": "Asia/Tokyo",
+      "notes": "ใบเสร็จดิวตี้ฟรี 27 ก.ย. 2026 16:01 น.\nซื้อ: MagGo Power Bank 10000 (แบตสำรอง) จำนวน 1 ชิ้น ¥9,081 (ราคาปลอดภาษี ไม่มี VAT)\nโทร 0120-191-625 / +81-476-33-1917\nสินค้าปลอดภาษีไม่รับคืนหรือแลกเปลี่ยน",
       "website": null
     },
     {
@@ -814,212 +1022,30 @@
       "website": ""
     },
     {
-      "id": "4045114",
-      "name": "Toyosu / Senkyaku Banrai",
-      "type": "shopping",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6455,
-      "longitude": 139.7822,
-      "address": "Toyosu, Koto-ku, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; เก็บ Toyosu ไว้เป็นตัวเลือกสำหรับวันอื่น",
-      "website": ""
-    },
-    {
-      "id": "4045116",
-      "name": "Azabudai Hills",
-      "type": "shopping",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.662,
-      "longitude": 139.7388,
-      "address": "Azabudai, Minato-ku, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "ตัดออกจากแผนวันที่ 22 ก.ย. เพราะเวลาไม่พอ — ไป Toyosu ตรงแทน",
-      "website": ""
-    },
-    {
-      "id": "4045118",
-      "name": "Tokyo Tower (night view)",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6586,
-      "longitude": 139.7454,
-      "address": "4 Chome-2-8 Shibakoen, Minato-ku, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "ย้าย Tokyo Tower มาเที่ยววันที่ 23 ก.ย. แล้ว จึงเอาออกจากแผนวันที่ 26 ก.ย.",
-      "website": ""
-    },
-    {
-      "id": "4045125",
-      "name": "Landmark Tower (night view)",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.4546,
-      "longitude": 139.6317,
-      "address": "2 Chome-2-1 Minatomirai, Nishi Ward, Yokohama, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; Landmark Tower เก็บไว้สำหรับจัดวันอื่น",
-      "website": ""
-    },
-    {
-      "id": "4045130",
-      "name": "Kichijoji",
-      "type": "shopping",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.7032,
-      "longitude": 139.5798,
-      "address": "Kichijoji, Musashino, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. 2026; Kichijoji เก็บไว้สำหรับจัดวันอื่น",
-      "website": ""
-    },
-    {
-      "id": "4045133",
-      "name": "Gotokuji Temple",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6435,
-      "longitude": 139.6469,
-      "address": "2 Chome-24-7 Gotokuji, Setagaya, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "ย้ายออกจาก 22 ก.ย. เพื่อไม่ให้ route ย้อนเมือง — รอจัดวันใหม่",
-      "website": ""
-    },
-    {
-      "id": "4076560",
-      "name": "Ueno / Ameyoko",
-      "type": "shopping",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.710364,
-      "longitude": 139.774536,
-      "address": "6-10-7 Ueno, Taito City, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "ไม่ได้เป็นจุดแวะแยกในลำดับจริงวันที่ 23 ก.ย.; หลัง IYOSHI COLA ไป TAKEYA — ตึกม่วงโดยตรง",
-      "website": null
-    },
-    {
-      "id": "4076565",
-      "name": "Tokyo Tower",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.658656,
-      "longitude": 139.745364,
-      "address": "4-2-8 Shibakoen, Minato City, Tokyo 105-0011, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว เพราะสลับ route เป็น Maisen → donut → cola → shopping → Ueno sushi; เก็บ Tokyo Tower ไว้จัดวันอื่น",
-      "website": null
-    },
-    {
-      "id": "4076583",
-      "name": "Akabanebashi — Tokyo Tower Photo Spot",
+      "id": "4087309",
+      "name": "Tosei Hotel COCONE Asakusa",
       "type": "general",
       "starts_at": null,
       "ends_at": null,
-      "latitude": 35.6544,
-      "longitude": 139.7447,
-      "address": "Akabanebashi, Minato City, Tokyo, Japan",
+      "latitude": 35.7166134,
+      "longitude": 139.7982815,
+      "address": "111-0032, 東京都 台東区, 浅草3丁目26-10, 日本",
       "timezone": "Asia/Tokyo",
-      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
-      "website": null
+      "notes": "",
+      "website": "https://tosei-hotel.co.jp/asakusa/"
     },
     {
-      "id": "4076584",
-      "name": "Shiba Park No.4 — Tokyo Tower Photo Spot",
-      "type": "park",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6579,
-      "longitude": 139.7482,
-      "address": "Shibakoen, Minato City, Tokyo, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
-      "website": null
-    },
-    {
-      "id": "4076585",
-      "name": "Zojoji — Tokyo Tower Photo Spot",
-      "type": "tour",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6574,
-      "longitude": 139.7482,
-      "address": "4-7-35 Shibakoen, Minato City, Tokyo 105-0011, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "Photo spot Tokyo Tower — เอาออกจากแผนวันที่ 23 ก.ย. ชั่วคราว; เก็บไว้จัดวันอื่นพร้อม Tokyo Tower",
-      "website": null
-    },
-    {
-      "id": "4076702",
-      "name": "Jingumae 1-14-32 2F",
+      "id": "4087320",
+      "name": "Misugi Airbnb — Direct to Narita/Haneda",
       "type": "general",
       "starts_at": null,
       "ends_at": null,
-      "latitude": 35.6698,
-      "longitude": 139.7033,
-      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
+      "latitude": 35.70490264892578,
+      "longitude": 139.78646850585938,
+      "address": "2-chome-4-10 Misuji, Taito City, Tokyo 111-0055, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": "รายการซ้ำของ MACCHA HOUSE — เอาออกจาก timeline วันที่ 23 ก.ย.; ใช้รายการ MACCHA HOUSE WITH HARAJUKU แทน",
-      "website": null
-    },
-    {
-      "id": "4076703",
-      "name": "MACCHA HOUSE With Harajuku Store",
-      "type": "cafe",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.67003,
-      "longitude": 139.70275,
-      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
-      "timezone": "Asia/Tokyo",
-      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
-      "website": null
-    },
-    {
-      "id": "4076708",
-      "name": "MACCHA HOUSE With Harajuku Store",
-      "type": "cafe",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6699,
-      "longitude": 139.703,
-      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
-      "timezone": "Asia/Tokyo",
-      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
-      "website": null
-    },
-    {
-      "id": "4076710",
-      "name": "MACCHA HOUSE WITH HARAJUKU",
-      "type": "cafe",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.6697,
-      "longitude": 139.7029,
-      "address": "Japan, 〒150-0001 Tokyo, Shibuya, Jingumae, 1 Chome−14−32 2F",
-      "timezone": "Asia/Tokyo",
-      "notes": "รายการซ้ำของ MACCHA HOUSE; เอาออกจาก timeline วันที่ 23 ก.ย. ใช้รายการ MACCHA HOUSE หลักแทน",
-      "website": null
-    },
-    {
-      "id": "4077788",
-      "name": "Miura Misaki Port Ueno — ซูชิหน้าล้น",
-      "type": "restaurant",
-      "starts_at": null,
-      "ends_at": null,
-      "latitude": 35.7117,
-      "longitude": 139.7752,
-      "address": "6 Chome-12-14 Ueno, Taito City, Tokyo 110-0005, Japan",
-      "timezone": "Asia/Tokyo",
-      "notes": "ตัดออกจากแผนวันที่ 23 ก.ย. 2026 — ผู้ใช้แจ้งว่าจะไม่กินซูชิวันนี้",
-      "website": null
+      "notes": "",
+      "website": ""
     }
   ],
   "lodging": [
@@ -1056,8 +1082,8 @@
       "longitude": 139.78646850585938,
       "address": "2-chome-4-10 Misuji, Taito City, Tokyo 111-0055, Japan",
       "timezone": "Asia/Tokyo",
-      "notes": null,
-      "website": null
+      "notes": "",
+      "website": ""
     }
   ],
   "transportations": [
@@ -1767,7 +1793,7 @@
       "id": "3609505",
       "type": "walk",
       "name": "Kotoku-in → KANNON COFFEE",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T07:08:00Z",
       "arrival_at": "2026-09-24T07:17:00Z",
       "departure": {
@@ -1785,7 +1811,7 @@
       "id": "3609550",
       "type": "walk",
       "name": "KANNON COFFEE → Hasedera",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T07:20:00Z",
       "arrival_at": "2026-09-24T07:23:00Z",
       "departure": {
@@ -1803,7 +1829,7 @@
       "id": "3609509",
       "type": "train",
       "name": "KANNON COFFEE → Hase Station → Kamakura",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T07:45:00Z",
       "arrival_at": "2026-09-24T07:55:00Z",
       "departure": {
@@ -1821,7 +1847,7 @@
       "id": "3609602",
       "type": "train",
       "name": "Kamakura → Kamakura-Kokomae",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T08:20:00Z",
       "arrival_at": "2026-09-24T08:40:00Z",
       "departure": {
@@ -1839,45 +1865,9 @@
       "id": "3610145",
       "type": "train",
       "name": "Fujisawa → Shinjuku",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T10:36:00Z",
       "arrival_at": "2026-09-24T11:36:00Z",
-      "departure": {
-        "name": "Fujisawa Station",
-        "latitude": null,
-        "longitude": null
-      },
-      "arrival": {
-        "name": "Odakyu Shinjuku",
-        "latitude": null,
-        "longitude": null
-      }
-    },
-    {
-      "id": "3610141",
-      "type": "train",
-      "name": "Fujisawa → Shinjuku",
-      "transport_number": null,
-      "departure_at": "2026-09-24T10:37:00Z",
-      "arrival_at": null,
-      "departure": {
-        "name": "Fujisawa Station",
-        "latitude": null,
-        "longitude": null
-      },
-      "arrival": {
-        "name": "Odakyu Shinjuku",
-        "latitude": null,
-        "longitude": null
-      }
-    },
-    {
-      "id": "3610142",
-      "type": "train",
-      "name": "Fujisawa → Shinjuku",
-      "transport_number": null,
-      "departure_at": "2026-09-24T10:37:00Z",
-      "arrival_at": null,
       "departure": {
         "name": "Fujisawa Station",
         "latitude": null,
@@ -1893,7 +1883,7 @@
       "id": "3610471",
       "type": "train",
       "name": "Shinjuku-nishiguchi → Shin-Okachimachi",
-      "transport_number": null,
+      "transport_number": "",
       "departure_at": "2026-09-24T11:45:00Z",
       "arrival_at": "2026-09-24T12:04:00Z",
       "departure": {
@@ -1905,6 +1895,42 @@
         "name": "Shin-Okachimachi Station",
         "latitude": null,
         "longitude": null
+      }
+    },
+    {
+      "id": "3612910",
+      "type": "train",
+      "name": "Warner Bros.",
+      "transport_number": "",
+      "departure_at": "2026-09-25T03:20:01Z",
+      "arrival_at": "2026-09-25T04:25:24Z",
+      "departure": {
+        "name": "Misugi Airbnb — Direct to Narita/Haneda",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
+      },
+      "arrival": {
+        "name": "Warner Bros. Studio Tour Tokyo – The Making of Harry Potter",
+        "latitude": 35.7453891,
+        "longitude": 139.6452641
+      }
+    },
+    {
+      "id": "3614940",
+      "type": "subway",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-09-25T10:15:01Z",
+      "arrival_at": "2026-09-25T11:24:24Z",
+      "departure": {
+        "name": "Warner Bros. Studio Tour Tokyo – The Making of Harry Potter",
+        "latitude": 35.7453891,
+        "longitude": 139.6452641
+      },
+      "arrival": {
+        "name": "Misugi Airbnb — Direct to Narita/Haneda",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
       }
     },
     {
@@ -1948,15 +1974,15 @@
       "type": "train",
       "name": "",
       "transport_number": "",
-      "departure_at": "2026-09-27T05:00:00Z",
-      "arrival_at": "2026-09-27T05:15:00Z",
+      "departure_at": "2026-09-27T05:39:00Z",
+      "arrival_at": null,
       "departure": {
-        "name": "Narita Station",
+        "name": "Keisei Narita Station",
         "latitude": 35.7767,
         "longitude": 140.3183
       },
       "arrival": {
-        "name": "Narita Airport Station",
+        "name": "Narita Airport Terminal 1 Station",
         "latitude": 35.772,
         "longitude": 140.3929
       }
@@ -1964,7 +1990,7 @@
     {
       "id": "3610714",
       "type": "airplane",
-      "name": null,
+      "name": "",
       "transport_number": "NH807",
       "departure_at": "2026-09-27T08:30:00Z",
       "arrival_at": "2026-09-27T15:15:00Z",
@@ -2106,60 +2132,6 @@
       }
     },
     {
-      "id": "3581212",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-21T01:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Tokyo Game Show @ Makuhari Messe",
-        "latitude": 35.6478,
-        "longitude": 140.0328
-      }
-    },
-    {
-      "id": "3581213",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Tokyo Game Show @ Makuhari Messe",
-        "latitude": 35.6478,
-        "longitude": 140.0328
-      },
-      "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      }
-    },
-    {
-      "id": "3581219",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Landmark Tower (night view)",
-        "latitude": 35.4546,
-        "longitude": 139.6317
-      },
-      "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      }
-    },
-    {
       "id": "3581222",
       "type": "train",
       "name": "Enoshima → Fujisawa",
@@ -2178,168 +2150,6 @@
       }
     },
     {
-      "id": "3581225",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-24T09:00:00Z",
-      "departure": {
-        "name": "Ghibli Museum",
-        "latitude": 35.6962,
-        "longitude": 139.5703
-      },
-      "arrival": {
-        "name": "Kichijoji",
-        "latitude": 35.7032,
-        "longitude": 139.5798
-      }
-    },
-    {
-      "id": "3581226",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Kichijoji",
-        "latitude": 35.7032,
-        "longitude": 139.5798
-      },
-      "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      }
-    },
-    {
-      "id": "3581229",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Warner Bros. Studio Tour Tokyo (Harry Potter)",
-        "latitude": 35.7466,
-        "longitude": 139.6317
-      },
-      "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      }
-    },
-    {
-      "id": "3581230",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-26T00:00:00Z",
-      "departure": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      },
-      "arrival": {
-        "name": "Gotokuji Temple",
-        "latitude": 35.6435,
-        "longitude": 139.6469
-      }
-    },
-    {
-      "id": "3581231",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-26T02:00:00Z",
-      "departure": {
-        "name": "Gotokuji Temple",
-        "latitude": 35.6435,
-        "longitude": 139.6469
-      },
-      "arrival": {
-        "name": "Shimokitazawa",
-        "latitude": 35.6613,
-        "longitude": 139.6676
-      }
-    },
-    {
-      "id": "3581233",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-26T04:00:00Z",
-      "departure": {
-        "name": "Shimokitazawa",
-        "latitude": 35.6613,
-        "longitude": 139.6676
-      },
-      "arrival": {
-        "name": "Harajuku / Omotesando",
-        "latitude": 35.6702,
-        "longitude": 139.7027
-      }
-    },
-    {
-      "id": "3581234",
-      "type": "walk",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-26T06:00:00Z",
-      "departure": {
-        "name": "Harajuku / Omotesando",
-        "latitude": 35.6702,
-        "longitude": 139.7027
-      },
-      "arrival": {
-        "name": "Shibuya / Miyashita Park",
-        "latitude": 35.6598,
-        "longitude": 139.7016
-      }
-    },
-    {
-      "id": "3581235",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": "2026-09-26T08:00:00Z",
-      "departure": {
-        "name": "Shibuya / Miyashita Park",
-        "latitude": 35.6598,
-        "longitude": 139.7016
-      },
-      "arrival": {
-        "name": "Nakameguro",
-        "latitude": 35.6443,
-        "longitude": 139.6989
-      }
-    },
-    {
-      "id": "3581236",
-      "type": "train",
-      "name": "",
-      "transport_number": "",
-      "departure_at": null,
-      "arrival_at": null,
-      "departure": {
-        "name": "Nakameguro",
-        "latitude": 35.6443,
-        "longitude": 139.6989
-      },
-      "arrival": {
-        "name": "AIRSTAY Aoto #201 (ที่พัก)",
-        "latitude": 35.749227,
-        "longitude": 139.8583691
-      }
-    },
-    {
       "id": "3591022",
       "type": "walk",
       "name": "Kuramae → Misuji Airbnb (รับกระเป๋าแล้วไป check-in)",
@@ -2355,6 +2165,78 @@
         "name": "Misugi Airbnb",
         "latitude": 35.70490264892578,
         "longitude": 139.78646850585938
+      }
+    },
+    {
+      "id": "3612829",
+      "type": "walk",
+      "name": "",
+      "transport_number": "",
+      "departure_at": null,
+      "arrival_at": null,
+      "departure": {
+        "name": "Super Yamazaki Misuji Store",
+        "latitude": 35.7055091,
+        "longitude": 139.787242
+      },
+      "arrival": {
+        "name": "Misugi Airbnb — Direct to Narita/Haneda",
+        "latitude": 35.70490264892578,
+        "longitude": 139.78646850585938
+      }
+    },
+    {
+      "id": "3615623",
+      "type": "bus",
+      "name": "",
+      "transport_number": "",
+      "departure_at": null,
+      "arrival_at": null,
+      "departure": {
+        "name": "Cup Noodles Museum / Minato Mirai",
+        "latitude": 35.4547,
+        "longitude": 139.6382
+      },
+      "arrival": {
+        "name": "Red Brick Warehouse",
+        "latitude": 35.4519,
+        "longitude": 139.6425
+      }
+    },
+    {
+      "id": "3620964",
+      "type": "train",
+      "name": "รถไฟจาก Yokohama กลับที่พัก",
+      "transport_number": null,
+      "departure_at": null,
+      "arrival_at": null,
+      "departure": {
+        "name": "Departure",
+        "latitude": null,
+        "longitude": null
+      },
+      "arrival": {
+        "name": "Arrival",
+        "latitude": null,
+        "longitude": null
+      }
+    },
+    {
+      "id": "3624518",
+      "type": "train",
+      "name": "Kuramae → Minato Mirai",
+      "transport_number": "",
+      "departure_at": null,
+      "arrival_at": "2026-09-26T03:30:00Z",
+      "departure": {
+        "name": "Kuramae Station",
+        "latitude": 35.7044,
+        "longitude": 139.792
+      },
+      "arrival": {
+        "name": "Minato Mirai Station",
+        "latitude": 35.4573,
+        "longitude": 139.6323
       }
     }
   ]
