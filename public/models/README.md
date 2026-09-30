@@ -17,6 +17,7 @@ Optional glTF 2.0 binaries (`.glb`) for the Japan 2026 tray. The scene still bui
 | `kawagoe.glb` | Kawagoe |
 | `haneda.glb` | Haneda Airport tile |
 | `narita.glb` | Narita Airport tile |
+| `bangkok.glb` | Suvarnabhumi (BKK) origin token, fitted to 1.5 × 1.25 × 0.95 at the Bangkok token |
 | `tray.glb` | Wooden tray (optional) |
 
 Served as `/models/{name}.glb`.

@@ -4,12 +4,12 @@ import { cityById } from "../data/cities";
 import { junctionTray, waypointsForPair } from "./railWaypoints";
 
 const RAIL_Y = 0.082;
-const GAUGE = 0.16;
-const RAIL_RADIUS = 0.032;
-const SLEEPER_SPACING = 0.25;
-const SLEEPER_LENGTH = 0.2;
-const SLEEPER_HEIGHT = 0.018;
-const SLEEPER_DEPTH = 0.036;
+const GAUGE = 0.1;
+const RAIL_RADIUS = 0.016;
+const SLEEPER_SPACING = 0.3;
+const SLEEPER_LENGTH = 0.13;
+const SLEEPER_HEIGHT = 0.012;
+const SLEEPER_DEPTH = 0.022;
 const END_TRIM = 0.38;
 const SAMPLE_COUNT = 48;
 
@@ -91,8 +91,8 @@ function railMaterial(status: VisitStatus, bronze: boolean): THREE.MeshStandardM
     color: upcoming ? (bronze ? 0xc89870 : 0xc8ccd4) : bronze ? RAIL_BRONZE : RAIL_SILVER,
     metalness: 0.74,
     roughness: 0.26,
-    transparent: upcoming,
-    opacity: upcoming ? 0.58 : 0.96,
+    transparent: true,
+    opacity: upcoming ? 0.42 : 0.7,
   });
 }
 
@@ -102,8 +102,8 @@ function sleeperMaterial(status: VisitStatus): THREE.MeshStandardMaterial {
     color: upcoming ? 0x6a5848 : SLEEPER_WOOD,
     roughness: 0.92,
     metalness: 0.02,
-    transparent: upcoming,
-    opacity: upcoming ? 0.52 : 0.82,
+    transparent: true,
+    opacity: upcoming ? 0.36 : 0.55,
   });
 }
 

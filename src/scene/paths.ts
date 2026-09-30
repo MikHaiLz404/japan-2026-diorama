@@ -42,6 +42,84 @@ function routeOffset(
   };
 }
 
+/** Thin, faint lines at rest; a day pick thickens, saturates and lights them up. */
+export const ROUTE_LOOK = {
+  flightRadius: 0.011,
+  groundRadius: 0.014,
+  /** Extra tube radius at full emphasis (pushed out along the tube normal). */
+  emphasisThickness: 0.004,
+  faintAlpha: 0.34,
+  strongAlpha: 0.92,
+  /** How much of the line colour is washed toward white when idle. */
+  faintWash: 0.4,
+  growSeconds: 1.1,
+  /** Pulse laps per second and the length of its fading tail. */
+  pulseSpeed: 0.28,
+  pulseTail: 9,
+  fadeSeconds: 0.35,
+} as const;
+
+const ROUTE_VERTEX = /* glsl */ `
+  uniform float uEmphasis;
+  uniform float uThickness;
+  varying float vProgress;
+  void main() {
+    vProgress = uv.x;
+    vec3 displaced = position + normal * uThickness * uEmphasis;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+  }
+`;
+
+const ROUTE_FRAGMENT = /* glsl */ `
+  uniform vec3 uColor;
+  uniform float uEmphasis;
+  uniform float uGrow;
+  uniform float uTime;
+  uniform float uFaintAlpha;
+  uniform float uStrongAlpha;
+  uniform float uFaintWash;
+  uniform float uPulseSpeed;
+  uniform float uPulseTail;
+  uniform float uPulseAmount;
+  varying float vProgress;
+  void main() {
+    if (vProgress > uGrow) discard;
+
+    vec3 faint = mix(uColor, vec3(1.0), uFaintWash);
+    vec3 color = mix(faint, uColor, uEmphasis);
+    float alpha = mix(uFaintAlpha, uStrongAlpha, uEmphasis);
+
+    // Bright growing tip while the line is still drawing in.
+    float tip = (1.0 - smoothstep(0.0, 0.06, uGrow - vProgress)) * step(uGrow, 0.999) * uEmphasis;
+    // A light that laps the line, fading behind its head.
+    float behind = fract(uTime * uPulseSpeed - vProgress);
+    float pulse = exp(-behind * uPulseTail) * uPulseAmount * uEmphasis;
+
+    color = mix(color, vec3(1.0, 0.97, 0.9), clamp(pulse * 0.75 + tip * 0.6, 0.0, 0.85));
+    alpha = clamp(alpha + pulse * 0.25 + tip * 0.2, 0.0, 1.0);
+
+    gl_FragColor = vec4(color, alpha);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+  }
+`;
+
+export interface RouteAnimation {
+  /** 0 = faint idle line, 1 = picked-day highlight. */
+  emphasis: number;
+  targetEmphasis: number;
+  /** 0..1 how much of the line has been drawn. */
+  grow: number;
+}
+
+function routeAnimation(mesh: THREE.Mesh): RouteAnimation {
+  return (mesh.userData as { anim: RouteAnimation }).anim;
+}
+
+function routeUniforms(mesh: THREE.Mesh): Record<string, THREE.IUniform> {
+  return (mesh.material as THREE.ShaderMaterial).uniforms;
+}
+
 export function makeRoute(route: RoutePath, options: RouteRenderOptions): THREE.Mesh {
   let from = trayPoint(route.fromCityId);
   let to = trayPoint(route.toCityId);
@@ -59,22 +137,64 @@ export function makeRoute(route: RoutePath, options: RouteRenderOptions): THREE.
   mid.y += lift;
 
   const curve = new THREE.QuadraticBezierCurve3(from, mid, to);
-  const radius = isFlight ? 0.024 : 0.036;
-  const geometry = new THREE.TubeGeometry(curve, isFlight ? 32 : 20, radius, 6, false);
-  const color = pathColor(route.status, route.type);
-  const material = new THREE.MeshStandardMaterial({
-    color,
+  const radius = isFlight ? ROUTE_LOOK.flightRadius : ROUTE_LOOK.groundRadius;
+  const geometry = new THREE.TubeGeometry(curve, isFlight ? 48 : 32, radius, 5, false);
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      uColor: { value: new THREE.Color(pathColor(route.status, route.type)) },
+      uEmphasis: { value: 0 },
+      uGrow: { value: 1 },
+      uTime: { value: 0 },
+      uThickness: { value: ROUTE_LOOK.emphasisThickness },
+      uFaintAlpha: { value: ROUTE_LOOK.faintAlpha },
+      uStrongAlpha: { value: ROUTE_LOOK.strongAlpha },
+      uFaintWash: { value: ROUTE_LOOK.faintWash },
+      uPulseSpeed: { value: ROUTE_LOOK.pulseSpeed },
+      uPulseTail: { value: ROUTE_LOOK.pulseTail },
+      uPulseAmount: { value: 1 },
+    },
+    vertexShader: ROUTE_VERTEX,
+    fragmentShader: ROUTE_FRAGMENT,
     transparent: true,
-    opacity: route.status === "upcoming" ? 0.72 : 0.98,
-    roughness: isFlight ? 0.28 : 0.32,
-    metalness: isFlight ? 0.22 : 0.5,
-    emissive: route.status === "today" ? color : 0x000000,
-    emissiveIntensity: route.status === "today" ? 0.08 : 0,
+    depthWrite: false,
+    side: THREE.DoubleSide,
   });
   const tube = new THREE.Mesh(geometry, material);
-  tube.castShadow = true;
   tube.name = `route:${route.id}`;
+  tube.renderOrder = 2;
+  tube.userData = { anim: { emphasis: 0, targetEmphasis: 0, grow: 1 } satisfies RouteAnimation };
   return tube;
+}
+
+/**
+ * Mark a route as picked (grow in + light loop) or idle (faint, fully drawn).
+ * `restart` replays the draw-in even when the route was already picked.
+ */
+export function setRouteEmphasis(mesh: THREE.Mesh, emphasized: boolean, restart: boolean): void {
+  const anim = routeAnimation(mesh);
+  const wasEmphasized = anim.targetEmphasis > 0.5;
+  anim.targetEmphasis = emphasized ? 1 : 0;
+  if (emphasized && (!wasEmphasized || restart)) anim.grow = 0;
+  if (!emphasized) anim.grow = 1;
+}
+
+/** Advance grow / fade / pulse. With reduced motion, states snap and the light stays still. */
+export function updateRoute(mesh: THREE.Mesh, delta: number, elapsed: number, reduced: boolean): void {
+  const anim = routeAnimation(mesh);
+  if (reduced) {
+    anim.grow = 1;
+    anim.emphasis = anim.targetEmphasis;
+  } else {
+    anim.grow = Math.min(1, anim.grow + delta / ROUTE_LOOK.growSeconds);
+    const step = delta / ROUTE_LOOK.fadeSeconds;
+    anim.emphasis += Math.sign(anim.targetEmphasis - anim.emphasis) * Math.min(step, Math.abs(anim.targetEmphasis - anim.emphasis));
+  }
+  const uniforms = routeUniforms(mesh);
+  // Ease-out so the line races out and settles into place.
+  uniforms.uGrow.value = 1 - Math.pow(1 - anim.grow, 3);
+  uniforms.uEmphasis.value = anim.emphasis;
+  uniforms.uTime.value = elapsed;
+  uniforms.uPulseAmount.value = reduced ? 0 : 1;
 }
 
 /** Count parallel routes per unordered city pair for ribbon fan-out. */

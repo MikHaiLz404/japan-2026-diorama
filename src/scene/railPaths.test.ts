@@ -42,7 +42,7 @@ describe("makeRailPaths", () => {
     expect(nearestHase).toBeLessThan(0.2);
   });
 
-  it("uses rail tubes thick enough to read at diorama zoom", () => {
+  it("keeps rail tubes slim but still readable at diorama zoom", () => {
     const segments = buildGroundPathSegments(trip, "2026-09-20");
     const rails = makeRailPaths(segments);
     const radii: number[] = [];
@@ -53,7 +53,8 @@ describe("makeRailPaths", () => {
       radii.push(geometry.parameters.radius);
     });
     expect(radii.length).toBeGreaterThan(0);
-    expect(Math.min(...radii)).toBeGreaterThanOrEqual(0.028);
+    expect(Math.min(...radii)).toBeGreaterThanOrEqual(0.012);
+    expect(Math.max(...radii)).toBeLessThanOrEqual(0.02);
   });
 
   it("routes Enoshima–Tokyo through Fujisawa, not a straight chord", () => {
