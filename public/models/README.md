@@ -51,6 +51,17 @@ Generated in Tripo3D (text to 3D), then run through Tripo's **Retopology** (Tria
 
 `bangkok.glb` is Suvarnabhumi and replaces the procedural airport at the Bangkok origin token (it is not a catalog city).
 
+## Optimizing a new export
+
+Drop the Tripo GLB in `scripts/raw/` (gitignored, so a raw 60 MB file can never be committed) and run:
+
+```bash
+npm run optimize-models                       # every .glb in scripts/raw/
+npm run optimize-models -- path/to/x.glb --as haneda --texture-size 2048
+```
+
+The output goes to `public/models/<name>.glb` (`*_lowpoly` / `_raw` suffixes are dropped, `tokyo-*` names go to `props/`). It warns when a model is far past ~40k triangles or ~1.5 MB.
+
 ## Compression
 
 All `.glb` files are packed with meshopt geometry + WebP textures (~11MB → ~3.4MB total). After replacing a model, re-run:

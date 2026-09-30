@@ -8,7 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "refresh-data": "node scripts/refresh-trip.mjs"
+    "refresh-data": "node scripts/refresh-trip.mjs",
+    "optimize-models": "node scripts/optimize-models.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

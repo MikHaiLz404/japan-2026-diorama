@@ -8,3 +8,4 @@ scripts/cache
 coverage
 .screenshots/
 .playwright-mcp/
+scripts/raw/
