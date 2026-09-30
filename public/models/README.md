@@ -15,6 +15,8 @@ Optional glTF 2.0 binaries (`.glb`) for the Japan 2026 tray. The scene still bui
 | `chiba.glb` | Chiba |
 | `takao.glb` | Takao |
 | `kawagoe.glb` | Kawagoe |
+| `haneda.glb` | Haneda Airport tile |
+| `narita.glb` | Narita Airport tile |
 | `tray.glb` | Wooden tray (optional) |
 
 Served as `/models/{name}.glb`.
@@ -41,6 +43,10 @@ The loader keeps those maps. Vertex paint in `src/scene/paint.ts` only runs on u
 | `chiba.glb` | 5.74 MiB |
 | `takao.glb` | 5.55 MiB |
 | `kawagoe.glb` | 5.85 MiB |
+
+## Airports (`haneda.glb`, `narita.glb`)
+
+Generated in Tripo3D (text to 3D), then reduced for the tray: the raw exports are ~1.95M triangles and ~60 MB, and texture seams block glTF-transform's simplifier. They were decimated to 30k triangles with MeshLab quadric edge collapse, with the texture baked to per-vertex colors (`COLOR_0`) and normals kept, then packed with `gltf-transform optimize --compress meshopt --simplify false` (~160 KB each). Because they carry vertex colors instead of a texture map, `topology` tests that require embedded textures skip them. Do not commit the raw Tripo exports.
 
 ## Compression
 
