@@ -1,5 +1,5 @@
 {
-  "name": "japan-2026-diorama",
+  "name": "japan-2026-replay",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,9 +9,11 @@
     "preview": "vite preview",
     "test": "vitest run",
     "refresh-data": "node scripts/refresh-trip.mjs",
-    "optimize-models": "node scripts/optimize-models.mjs"
+    "build-routes": "node scripts/build-routes.mjs",
+    "fetch-scramble": "node scripts/fetch-scramble.mjs"
   },
   "dependencies": {
+    "maplibre-gl": "4.7.1",
     "three": "^0.180.0"
   },
   "devDependencies": {

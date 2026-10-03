@@ -1,148 +1,67 @@
-const EARTH_KM = 6371;
-const KM_PER_DEG_LAT = 111.32;
+import type { LngLat } from "../data/types";
 
-function toRad(deg: number): number {
-  return (deg * Math.PI) / 180;
+const EARTH_RADIUS_M = 6371000;
+const RAD = Math.PI / 180;
+
+/** Equirectangular distance in meters — accurate to well under 1 % at trip scale (< 100 km). */
+export function distance(a: LngLat, b: LngLat): number {
+  const x = (b[0] - a[0]) * RAD * Math.cos(((a[1] + b[1]) / 2) * RAD);
+  const y = (b[1] - a[1]) * RAD;
+  return Math.hypot(x, y) * EARTH_RADIUS_M;
 }
 
-function kmPerDegLng(lat: number): number {
-  return KM_PER_DEG_LAT * Math.cos(toRad(lat));
+export function pathLength(points: LngLat[]): number {
+  let total = 0;
+  for (let i = 1; i < points.length; i++) total += distance(points[i - 1], points[i]);
+  return total;
 }
 
-export function haversineKm(
-  lat1: number,
-  lng1: number,
-  lat2: number,
-  lng2: number,
-): number {
-  const dLat = toRad(lat2 - lat1);
-  const dLng = toRad(lng2 - lng1);
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
-  return 2 * EARTH_KM * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-/** Local km offsets from an anchor: x = east, z = north (the tray flips z so north is up). */
-export function latLngToLocalKm(
-  lat: number,
-  lng: number,
-  anchorLat: number,
-  anchorLng: number,
-): { x: number; z: number } {
-  return {
-    x: (lng - anchorLng) * kmPerDegLng(anchorLat),
-    z: (lat - anchorLat) * KM_PER_DEG_LAT,
-  };
-}
-
-export interface TrayBounds {
-  minX: number;
-  maxX: number;
-  minZ: number;
-  maxZ: number;
-}
-
-export interface GeoProjectable {
-  id: string;
-  lat: number;
-  lng: number;
-}
-
-/** Default felt play area inside the wooden rim (see `makeTray`). */
-export const DEFAULT_TRAY_BOUNDS: TrayBounds = {
-  minX: -4.35,
-  maxX: 4.35,
-  minZ: -3.35,
-  maxZ: 3.05,
-};
-
-export interface GeoTrayTransform {
-  /** Tray (x, z) for a lat/lng: east is +x, north is -z (top of the screen). */
-  project(lat: number, lng: number): [number, number];
-  scale: number;
-}
-
-/**
- * Map orientation for the tray: north is the top of the screen (-z), east is right (+x),
- * and the anchor (Tokyo) sits at the centre of the play area. The scale is the largest
- * that still fits every city on its side of the anchor.
- */
-export function geoTrayTransform(
-  cities: GeoProjectable[],
-  anchorId = "tokyo",
-  bounds: TrayBounds = DEFAULT_TRAY_BOUNDS,
-): GeoTrayTransform {
-  const anchor = cities.find((city) => city.id === anchorId) ?? cities[0];
-  const locals = cities.map((city) => latLngToLocalKm(city.lat, city.lng, anchor.lat, anchor.lng));
-  const reachX = Math.max(0.001, ...locals.map((point) => Math.abs(point.x)));
-  const reachZ = Math.max(0.001, ...locals.map((point) => Math.abs(point.z)));
-  const halfW = (bounds.maxX - bounds.minX) / 2;
-  const halfD = (bounds.maxZ - bounds.minZ) / 2;
-  const scale = Math.min(halfW / reachX, halfD / reachZ) * 0.88;
-  const centerX = (bounds.minX + bounds.maxX) / 2;
-  const centerZ = (bounds.minZ + bounds.maxZ) / 2;
-  return {
-    scale,
-    project(lat, lng) {
-      const local = latLngToLocalKm(lat, lng, anchor.lat, anchor.lng);
-      return [centerX + local.x * scale, centerZ - local.z * scale];
-    },
-  };
-}
-
-/**
- * Project lat/lng cities onto the stylized tray (north up, anchor at the centre),
- * then nudge overlaps apart. The anchor never moves.
- */
-export function projectGeoToTray<T extends GeoProjectable>(
-  cities: T[],
-  anchorId = "tokyo",
-  bounds: TrayBounds = DEFAULT_TRAY_BOUNDS,
-  minSeparation = 1.55,
-): Map<string, [number, number]> {
-  const anchor = cities.find((city) => city.id === anchorId) ?? cities[0];
-  const { project } = geoTrayTransform(cities, anchor.id, bounds);
-
-  const tray = new Map<string, [number, number]>();
-  for (const city of cities) tray.set(city.id, project(city.lat, city.lng));
-
-  const ids = [...tray.keys()];
-  for (let pass = 0; pass < 12; pass += 1) {
-    let moved = false;
-    for (let i = 0; i < ids.length; i += 1) {
-      for (let j = i + 1; j < ids.length; j += 1) {
-        const a = tray.get(ids[i])!;
-        const b = tray.get(ids[j])!;
-        const dx = b[0] - a[0];
-        const dz = b[1] - a[1];
-        const dist = Math.hypot(dx, dz);
-        if (dist >= minSeparation || dist < 1e-6) continue;
-        const push = (minSeparation - dist) / 2;
-        const nx = dx / dist;
-        const nz = dz / dist;
-        const aFixed = ids[i] === anchor.id;
-        const bFixed = ids[j] === anchor.id;
-        if (!aFixed) {
-          a[0] -= nx * push * (bFixed ? 2 : 1);
-          a[1] -= nz * push * (bFixed ? 2 : 1);
-        }
-        if (!bFixed) {
-          b[0] += nx * push * (aFixed ? 2 : 1);
-          b[1] += nz * push * (aFixed ? 2 : 1);
-        }
-        moved = true;
-      }
+/** Point at fraction t (0…1) along a polyline, measured by length. */
+export function along(points: LngLat[], t: number): LngLat {
+  if (points.length === 1 || t <= 0) return points[0];
+  if (t >= 1) return points[points.length - 1];
+  let remaining = pathLength(points) * t;
+  for (let i = 1; i < points.length; i++) {
+    const [a, b] = [points[i - 1], points[i]];
+    const d = distance(a, b);
+    if (remaining <= d) {
+      const f = d ? remaining / d : 0;
+      return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
     }
-    if (!moved) break;
+    remaining -= d;
   }
+  return points[points.length - 1];
+}
 
-  for (const [id, [x, z]] of tray) {
-    tray.set(id, [
-      Math.min(bounds.maxX, Math.max(bounds.minX, x)),
-      Math.min(bounds.maxZ, Math.max(bounds.minZ, z)),
-    ]);
+/** The polyline truncated at fraction t. */
+export function slicePath(points: LngLat[], t: number): LngLat[] {
+  if (t >= 1) return points;
+  const out: LngLat[] = [points[0]];
+  let remaining = pathLength(points) * t;
+  for (let i = 1; i < points.length; i++) {
+    const d = distance(points[i - 1], points[i]);
+    if (remaining <= d) {
+      out.push(along([points[i - 1], points[i]], d ? remaining / d : 0));
+      break;
+    }
+    out.push(points[i]);
+    remaining -= d;
   }
+  return out;
+}
 
-  return tray;
+/** Gentle quadratic arc between two points — the fallback when no real rail/road geometry exists. */
+export function arc(a: LngLat, b: LngLat, segments = 40): LngLat[] {
+  const [x0, y0] = a;
+  const [x1, y1] = b;
+  const dx = x1 - x0;
+  const dy = y1 - y0;
+  if (Math.hypot(dx, dy) < 1e-4) return [a, b];
+  const cx = (x0 + x1) / 2 - dy * 0.18;
+  const cy = (y0 + y1) / 2 + dx * 0.18;
+  return Array.from({ length: segments + 1 }, (_, i) => {
+    const t = i / segments;
+    const u = 1 - t;
+    return [u * u * x0 + 2 * u * t * cx + t * t * x1, u * u * y0 + 2 * u * t * cy + t * t * y1] as LngLat;
+  });
 }

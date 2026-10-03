@@ -1,16 +1,21 @@
 # Integrate with jojo-in-runtime (Works + Logs, iframe)
 
+> **2026-10 — renamed to Japan 2026 Replay.** The Three.js diorama was replaced by a 3D map with a trip replay.
+> The old diorama is kept at git tag `diorama-v1`; the existing Logs post about the diorama stays as history
+> (its slug `japan-2026-diorama` is unchanged). The Works entry, live URL and embed URL below now point at the replay.
+
+
 Portfolio repo: [`MikHaiLz404/my-journey`](https://github.com/MikHaiLz404/my-journey) (live: [jojo-in-runtime.vercel.app](https://jojo-in-runtime.vercel.app)).
 
-Diorama stays a **separate Vite + Three.js deploy**. The portfolio hosts it via **iframe** (option C).
+The trip map stays a **separate Vite + MapLibre + three.js deploy**. The portfolio hosts it via **iframe** (option C).
 
 | Surface | Role |
 | ------- | ---- |
 | **Works** | Project card + detail page with full-bleed iframe of the live tray |
 | **Logs** | Separate write-up (Thai ok) about building / using the tray — link back to the Work |
 
-Live app: `https://japan-2026-diorama.vercel.app/`  
-Embed URL: `https://japan-2026-diorama.vercel.app/?embed=1`
+Live app: `https://japan-2026-replay.vercel.app/`  
+Embed URL: `https://japan-2026-replay.vercel.app/?embed=1`
 
 `?embed=1` turns on compact chrome and an **Open fullscreen** chip. CSP `frame-ancestors` allows `jojo-in-runtime.vercel.app` (and Vercel previews).
 
@@ -34,8 +39,8 @@ Add a project next to Nice to Z You / Invictus. Suggested fields:
 
 ```ts
 {
-  slug: "japan-2026-diorama",
-  title: "Japan 2026 Diorama",
+  slug: "japan-2026-replay",
+  title: "Japan 2026 Replay",
   category: "Interactive", // or "Web" — add filter chip if Works only has Game / TV Series
   role: "Creator",
   description:
@@ -43,11 +48,11 @@ Add a project next to Nice to Z You / Invictus. Suggested fields:
   tags: ["THREE.JS", "WEBGL", "TYPESCRIPT", "TRIPSY"],
   featured: true,
   icon: "travel_explore",
-  image: "/works/japan-2026-diorama.png", // screenshot or cover art
+  image: "/works/japan-2026-replay.png", // screenshot or cover art
   year: 2026,
-  embedUrl: "https://japan-2026-diorama.vercel.app/?embed=1",
-  liveUrl: "https://japan-2026-diorama.vercel.app/",
-  repoUrl: "https://github.com/MikHaiLz404/japan-2026-diorama",
+  embedUrl: "https://japan-2026-replay.vercel.app/?embed=1",
+  liveUrl: "https://japan-2026-replay.vercel.app/",
+  repoUrl: "https://github.com/MikHaiLz404/japan-2026-replay",
 }
 ```
 
@@ -59,8 +64,8 @@ Works already iframes media (YouTube). For WebGL, use a tall frame — not a sho
 <section className="mb-16">
   <div className="relative w-full h-[min(78vh,720px)] rounded-xl overflow-hidden border border-primary/20 bg-surface-container">
     <iframe
-      src="https://japan-2026-diorama.vercel.app/?embed=1"
-      title="Japan 2026 Diorama"
+      src="https://japan-2026-replay.vercel.app/?embed=1"
+      title="Japan 2026 Replay"
       className="absolute inset-0 h-full w-full border-0"
       allow="fullscreen"
       loading="lazy"
@@ -70,7 +75,7 @@ Works already iframes media (YouTube). For WebGL, use a tall frame — not a sho
   <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-secondary">
     Interactive · tap a city ·{" "}
     <a
-      href="https://japan-2026-diorama.vercel.app/"
+      href="https://japan-2026-replay.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="text-primary hover:underline"
@@ -94,7 +99,7 @@ Publish a Log (Notion → site, same pipeline as other logs). Suggested meta:
 - **Title (TH):** `ทำถาดทริปญี่ปุ่น 2026 เป็นไดโอราม่า Three.js`
 - **Category:** Tech (or Personal)
 - **Cover:** screenshot of the tray
-- **Canonical Work:** `/works/japan-2026-diorama`
+- **Canonical Work:** `/works/japan-2026-replay`
 
 ### Draft body (Thai)
 
@@ -105,9 +110,9 @@ Publish a Log (Notion → site, same pipeline as other logs). Suggested meta:
 สถานที่ที่ผ่านแล้วสว่าง ที่ยังไม่ถึงจะจาง ข้อมูลดึงจาก Tripsy แล้ว bake เป็น fixture
 
 ฝั่งพอร์ตโฟลิโอใส่ไว้ใน Works เป็น iframe
-เปิดเต็มจอได้ที่ https://japan-2026-diorama.vercel.app/
+เปิดเต็มจอได้ที่ https://japan-2026-replay.vercel.app/
 
-โค้ด: https://github.com/MikHaiLz404/japan-2026-diorama
+โค้ด: https://github.com/MikHaiLz404/japan-2026-replay
 ```
 
 ---
@@ -116,7 +121,7 @@ Publish a Log (Notion → site, same pipeline as other logs). Suggested meta:
 
 | Repo | Owns |
 | ---- | ---- |
-| `japan-2026-diorama` | 3D scene, Tripsy refresh, `?embed=1`, CSP |
+| `japan-2026-replay` | 3D map + replay, Tripsy refresh, `?embed=1`, CSP |
 | `jojo-in-runtime` | Works card/detail, Logs post, iframe host chrome |
 
 Do not merge the Three.js app into the Next.js monorepo for v1 — WebGL wants its own full viewport and build.
@@ -127,6 +132,6 @@ Do not merge the Three.js app into the Next.js monorepo for v1 — WebGL wants i
 
 1. Add Works project + cover image under `/public/works/`
 2. Detail page renders the iframe snippet above
-3. Publish Logs post; link to `/works/japan-2026-diorama`
+3. Publish Logs post; link to `/works/japan-2026-replay`
 4. Preview on a `*.vercel.app` deploy — CSP already allows Vercel preview hosts
 5. Smoke-test mobile: orbit / pinch / city menu inside the iframe

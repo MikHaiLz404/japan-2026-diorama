@@ -1,86 +1,64 @@
 <!doctype html>
-<html lang="ja">
+<html lang="th" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#f9f7f7" />
-    <meta
-      name="description"
-      content="旅トレイ Japan 2026 / Trip tray — a tiny miniature diorama of the itinerary."
-    />
-    <meta property="og:title" content="Japan 2026 · Diorama" />
-    <meta
-      property="og:description"
-      content="Interactive Three.js trip tray for Japan 2026 — tap a city to zoom into lodging and activities."
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1c2130" />
+    <meta name="description" content="Japan 2026 Replay — a 3D map of the trip with real-sun lighting and a day-by-day replay." />
+    <meta property="og:title" content="Japan 2026 Replay" />
+    <meta property="og:description" content="Replay the Japan 2026 trip on a 3D map: real rail routes, landmarks and the light of each hour." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://japan-2026-diorama.vercel.app/" />
+    <meta property="og:url" content="https://japan-2026-replay.vercel.app/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Japan 2026 · Diorama</title>
+    <title>Japan 2026 Replay</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <div id="app">
-      <div id="stage" aria-hidden="true"></div>
+    <div id="map" role="application" aria-label="แผนที่ทริปญี่ปุ่น 3 มิติ"></div>
+    <div id="badges"></div>
 
-      <a
-        id="embed-open"
-        class="embed-open"
-        href="https://japan-2026-diorama.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        hidden
-      >
-        全画面で開く
-        <small lang="en">Open fullscreen</small>
-      </a>
+    <a id="embed-open" class="embed-open" href="https://japan-2026-replay.vercel.app/" target="_blank" rel="noopener noreferrer" hidden>
+      เปิดเต็มจอ ↗
+    </a>
 
-      <header class="hud">
-        <div class="hud-title">
-          <p class="eyebrow">旅トレイ <span lang="en" class="lang-en">Trip tray</span></p>
+    <div id="clock" role="status" aria-live="off"><span class="ico" aria-hidden="true">☾</span><span class="txt"></span></div>
+
+    <aside id="panel" aria-label="แผนการเดินทาง">
+      <div id="grip" role="button" tabindex="0" aria-label="ขยายหรือย่อรายการ" aria-expanded="true"><span></span></div>
+      <header>
+        <div class="titles">
           <h1>Japan 2026</h1>
-          <p id="hud-meta" class="hud-meta"></p>
+          <div class="sub">17–27 ก.ย. · Tokyo · Kamakura · Yokohama · Narita</div>
         </div>
-        <div class="hud-tools">
-          <button type="button" id="zoom-out" class="icon-btn" aria-label="ズームアウト / Zoom out">−</button>
-          <button type="button" id="zoom-in" class="icon-btn" aria-label="ズームイン / Zoom in">+</button>
-          <button type="button" id="reset-view" class="text-btn" aria-label="リセット / Reset">
-            リセット
-            <small lang="en">Reset</small>
-          </button>
-        </div>
-      </header>
-
-      <p id="loading" class="loading-pill" role="status">
-        模型を読み込み中…
-        <span lang="en" class="lang-en">Loading models…</span>
-      </p>
-
-      <nav id="city-chips" class="city-nav" aria-label="都市 / Cities"></nav>
-
-      <p id="hint" class="hint">
-        街をタップ · ドラッグで回転
-        <span lang="en" class="lang-en">Tap a city · drag to orbit</span>
-      </p>
-
-      <section id="sheet" class="sheet" aria-live="polite" hidden>
-        <div class="sheet-handle" aria-hidden="true"></div>
-        <button type="button" id="sheet-close" class="sheet-close" aria-label="閉じる / Close">
-          閉じる
-          <small lang="en">Close</small>
+        <button id="play-trip" type="button" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>เล่นทริป
         </button>
-        <div id="sheet-body"></div>
-      </section>
+      </header>
+      <nav id="days" aria-label="เลือกวัน"></nav>
+      <div id="list"></div>
+    </aside>
+
+    <div id="fabs">
+      <button class="fab" id="orbit" type="button" aria-pressed="false" aria-label="หมุนรอบจุดกลาง" title="หมุนรอบจุดกลาง">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 0 6.9 8.2h-2.1A5 5 0 1 1 12 7v3l4-4-4-4z" /></svg>
+      </button>
+      <button class="fab" id="pitch" type="button" aria-label="สลับ 2D หรือ 3D">2D</button>
     </div>
+
+    <section id="playbar" hidden aria-label="เล่นทริปย้อนหลัง">
+      <div id="pb-now"><span class="ic"></span><span class="t"><span class="ttl"></span><span class="sub"></span></span></div>
+      <div class="row">
+        <button id="pb-prev" type="button" aria-label="จุดก่อนหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z" /></svg></button>
+        <button id="pb-play" type="button" class="primary" aria-label="เล่น"></button>
+        <button id="pb-next" type="button" aria-label="จุดถัดไป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z" /></svg></button>
+        <div class="track"><div id="ticks"></div><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="ตำแหน่งในทริป" /></div>
+        <button id="pb-speed" type="button" aria-label="ความเร็ว">1×</button>
+        <button id="pb-close" type="button" aria-label="ออกจากโหมดเล่นทริป"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z" /></svg></button>
+      </div>
+    </section>
+
+    <div id="daycard" aria-hidden="true"><span class="w"></span><span class="d"></span><span class="c"></span></div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
