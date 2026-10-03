@@ -1,8 +1,11 @@
 import * as THREE from "three";
-import { CITY_CATALOG } from "../data/cities";
+import { CITY_CATALOG, ORIGIN_TOKEN } from "../data/cities";
 import type { CityBlock } from "../data/types";
 import { isSharedGeometry, platformSize } from "./meshes";
 import { stylizeUntexturedModel } from "./paint";
+
+/** Footprint the home-airport (Suvarnabhumi) model is fitted to; it sits at the Bangkok token. */
+export const ORIGIN_MODEL_FIT_SIZE = { w: 1.5, d: 1.25, h: 0.95 } as const;
 
 /** Catalog city ids → `/models/{id}.glb`. */
 export const CITY_MODEL_IDS = CITY_CATALOG.map((city) => city.id);
@@ -324,6 +327,38 @@ async function loadIfActive(
   return loaded;
 }
 
+/** Swap the procedural Bangkok token for `/models/bangkok.glb` when that file loads. */
+export async function loadOriginModel(options: {
+  scene: THREE.Scene;
+  shadows: boolean;
+  signal?: AbortSignal;
+  load?: GltfLoadFn;
+}): Promise<void> {
+  const { scene, shadows, signal } = options;
+  const load = options.load ?? tryLoadGltf;
+  const loaded = await loadIfActive(load, cityModelUrl(ORIGIN_TOKEN.id), signal);
+  if (!loaded) return;
+  if (!isRenderableCityModel(loaded)) {
+    disposeObject3D(loaded);
+    return;
+  }
+  const token = scene.getObjectByName(`origin:${ORIGIN_TOKEN.id}`);
+  if (!token || signal?.aborted) {
+    disposeObject3D(loaded);
+    return;
+  }
+  const fitted = fitModelToBox(loaded, ORIGIN_MODEL_FIT_SIZE);
+  fitted.name = `gltf:${ORIGIN_TOKEN.id}`;
+  prepareLoadedModel(fitted, shadows);
+  stylizeUntexturedModel(fitted, ORIGIN_TOKEN.id);
+  const procedural = token.getObjectByName(`procedural:${ORIGIN_TOKEN.id}`);
+  if (procedural) {
+    token.remove(procedural);
+    disposeObject3D(procedural);
+  }
+  token.add(fitted);
+}
+
 export async function hydrateGltfModels(options: {
   scene: THREE.Scene;
   cities: Array<Pick<CityBlock, "id" | "size">>;
@@ -390,6 +425,10 @@ export async function hydrateGltfModels(options: {
       }
     }),
   );
+
+  await loadOriginModel({ scene, shadows, signal, load }).catch(() => {
+    /* The procedural airport token stays. */
+  });
 
   const tokyoBlock = scene.getObjectByName("city:tokyo");
   if (tokyoBlock && !signal?.aborted) {

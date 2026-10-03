@@ -42,10 +42,14 @@ describe("geo helpers", () => {
     const takao = tray.get("takao")!;
     const kawagoe = tray.get("kawagoe")!;
 
-    expect(yokohama[1]).toBeLessThan(tokyo[1]);
+    // North is the top of the screen (-z): south of Tokyo has the larger z.
+    expect(yokohama[1]).toBeGreaterThan(tokyo[1]);
+    expect(kawagoe[1]).toBeLessThan(tokyo[1]);
     expect(chiba[0]).toBeGreaterThan(tokyo[0]);
     expect(takao[0]).toBeLessThan(tokyo[0]);
-    expect(kawagoe[1]).toBeGreaterThan(tokyo[1]);
+    // Tokyo is the anchor: it sits at the centre of the play area.
+    expect(tokyo[0]).toBeCloseTo((DEFAULT_TRAY_BOUNDS.minX + DEFAULT_TRAY_BOUNDS.maxX) / 2, 5);
+    expect(tokyo[1]).toBeCloseTo((DEFAULT_TRAY_BOUNDS.minZ + DEFAULT_TRAY_BOUNDS.maxZ) / 2, 5);
 
     const ids = CITY_CATALOG.map((city) => city.id);
     for (let i = 0; i < ids.length; i += 1) {

@@ -128,6 +128,8 @@ describe("gltf model paths", () => {
       "chiba",
       "takao",
       "kawagoe",
+      "haneda",
+      "narita",
     ]);
     expect(cityModelUrl("tokyo")).toBe("/models/tokyo.glb");
     expect(TRAY_MODEL_URL).toBe("/models/tray.glb");
@@ -317,7 +319,7 @@ describe("city glb topology guard", () => {
 
   it("accepts every committed city glb: dense triangles, UVs, and embedded color maps", () => {
     let seen = 0;
-    for (const id of CITY_MODEL_IDS) {
+    for (const id of [...CITY_MODEL_IDS, "bangkok"]) {
       const stats = catalogGlbMeta(id);
       expect(stats, id).toBeTruthy();
       if (!stats) continue;
@@ -331,7 +333,7 @@ describe("city glb topology guard", () => {
       expect(stats.primitivesWithUv, id).toBeGreaterThan(0);
       expect(stats.primitivesWithUv, id).toBe(stats.primitives);
     }
-    expect(seen).toBe(CITY_MODEL_IDS.length);
+    expect(seen).toBe(CITY_MODEL_IDS.length + 1);
   });
 });
 

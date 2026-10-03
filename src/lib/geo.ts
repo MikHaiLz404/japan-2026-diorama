@@ -23,7 +23,7 @@ export function haversineKm(
   return 2 * EARTH_KM * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-/** Local km offsets from an anchor: x = east, z = north (tray +Z). */
+/** Local km offsets from an anchor: x = east, z = north (the tray flips z so north is up). */
 export function latLngToLocalKm(
   lat: number,
   lng: number,
@@ -57,9 +57,43 @@ export const DEFAULT_TRAY_BOUNDS: TrayBounds = {
   maxZ: 3.05,
 };
 
+export interface GeoTrayTransform {
+  /** Tray (x, z) for a lat/lng: east is +x, north is -z (top of the screen). */
+  project(lat: number, lng: number): [number, number];
+  scale: number;
+}
+
 /**
- * Project lat/lng cities onto the stylized tray.
- * Uses Tokyo as anchor, uniform scale to fit bounds, then nudges overlaps apart.
+ * Map orientation for the tray: north is the top of the screen (-z), east is right (+x),
+ * and the anchor (Tokyo) sits at the centre of the play area. The scale is the largest
+ * that still fits every city on its side of the anchor.
+ */
+export function geoTrayTransform(
+  cities: GeoProjectable[],
+  anchorId = "tokyo",
+  bounds: TrayBounds = DEFAULT_TRAY_BOUNDS,
+): GeoTrayTransform {
+  const anchor = cities.find((city) => city.id === anchorId) ?? cities[0];
+  const locals = cities.map((city) => latLngToLocalKm(city.lat, city.lng, anchor.lat, anchor.lng));
+  const reachX = Math.max(0.001, ...locals.map((point) => Math.abs(point.x)));
+  const reachZ = Math.max(0.001, ...locals.map((point) => Math.abs(point.z)));
+  const halfW = (bounds.maxX - bounds.minX) / 2;
+  const halfD = (bounds.maxZ - bounds.minZ) / 2;
+  const scale = Math.min(halfW / reachX, halfD / reachZ) * 0.88;
+  const centerX = (bounds.minX + bounds.maxX) / 2;
+  const centerZ = (bounds.minZ + bounds.maxZ) / 2;
+  return {
+    scale,
+    project(lat, lng) {
+      const local = latLngToLocalKm(lat, lng, anchor.lat, anchor.lng);
+      return [centerX + local.x * scale, centerZ - local.z * scale];
+    },
+  };
+}
+
+/**
+ * Project lat/lng cities onto the stylized tray (north up, anchor at the centre),
+ * then nudge overlaps apart. The anchor never moves.
  */
 export function projectGeoToTray<T extends GeoProjectable>(
   cities: T[],
@@ -68,39 +102,10 @@ export function projectGeoToTray<T extends GeoProjectable>(
   minSeparation = 1.55,
 ): Map<string, [number, number]> {
   const anchor = cities.find((city) => city.id === anchorId) ?? cities[0];
-  const locals = cities.map((city) => ({
-    id: city.id,
-    ...latLngToLocalKm(city.lat, city.lng, anchor.lat, anchor.lng),
-  }));
-
-  let minX = Infinity;
-  let maxX = -Infinity;
-  let minZ = Infinity;
-  let maxZ = -Infinity;
-  for (const point of locals) {
-    minX = Math.min(minX, point.x);
-    maxX = Math.max(maxX, point.x);
-    minZ = Math.min(minZ, point.z);
-    maxZ = Math.max(maxZ, point.z);
-  }
-
-  const spanX = Math.max(maxX - minX, 0.001);
-  const spanZ = Math.max(maxZ - minZ, 0.001);
-  const usableW = bounds.maxX - bounds.minX;
-  const usableD = bounds.maxZ - bounds.minZ;
-  const scale = Math.min(usableW / spanX, usableD / spanZ) * 0.88;
-  const centerX = (bounds.minX + bounds.maxX) / 2;
-  const centerZ = (bounds.minZ + bounds.maxZ) / 2;
-  const geoCenterX = (minX + maxX) / 2;
-  const geoCenterZ = (minZ + maxZ) / 2;
+  const { project } = geoTrayTransform(cities, anchor.id, bounds);
 
   const tray = new Map<string, [number, number]>();
-  for (const point of locals) {
-    tray.set(point.id, [
-      centerX + (point.x - geoCenterX) * scale,
-      centerZ + (point.z - geoCenterZ) * scale,
-    ]);
-  }
+  for (const city of cities) tray.set(city.id, project(city.lat, city.lng));
 
   const ids = [...tray.keys()];
   for (let pass = 0; pass < 12; pass += 1) {
@@ -116,10 +121,16 @@ export function projectGeoToTray<T extends GeoProjectable>(
         const push = (minSeparation - dist) / 2;
         const nx = dx / dist;
         const nz = dz / dist;
-        a[0] -= nx * push;
-        a[1] -= nz * push;
-        b[0] += nx * push;
-        b[1] += nz * push;
+        const aFixed = ids[i] === anchor.id;
+        const bFixed = ids[j] === anchor.id;
+        if (!aFixed) {
+          a[0] -= nx * push * (bFixed ? 2 : 1);
+          a[1] -= nz * push * (bFixed ? 2 : 1);
+        }
+        if (!bFixed) {
+          b[0] += nx * push * (aFixed ? 2 : 1);
+          b[1] += nz * push * (aFixed ? 2 : 1);
+        }
         moved = true;
       }
     }

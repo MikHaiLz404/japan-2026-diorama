@@ -77,34 +77,55 @@ const CITY_DEFINITIONS: Omit<CityCatalogEntry, "tray">[] = [
     size: "sm",
     landmark: "kura",
   },
+  {
+    id: "haneda",
+    name: "Haneda",
+    nameJa: "羽田",
+    lat: 35.5494,
+    lng: 139.7798,
+    size: "sm",
+    landmark: "airport",
+  },
+  {
+    id: "narita",
+    name: "Narita",
+    nameJa: "成田",
+    lat: 35.772,
+    lng: 140.3929,
+    size: "md",
+    landmark: "airport",
+  },
 ];
 
 const TRAY_BY_ID = projectGeoToTray(CITY_DEFINITIONS);
 
 /**
- * Hand-tuned nudges applied after the geo-projection so Tokyo's bigger "xl"
- * footprint (see `platformSize`) clears its neighbours. Tokyo shifts into the
- * open space west/north of it (vacated by the unrendered Takao/Kawagoe), and
- * Chiba/Yokohama ease outward slightly to keep separation comfortable.
+ * The tray is a north-up map with Tokyo at the centre (see `geoTrayTransform`). Tokyo's "xl"
+ * tile is far bigger than the real distances allow neighbours, so the cities around it get
+ * hand-placed slots that keep their true compass bearing from Tokyo (Yokohama SW, Haneda SE,
+ * Kamakura and Enoshima further SW along the coast, Narita far east) without overlapping.
+ * Cities not listed here (Chiba, Takao, Kawagoe) keep their projected position.
  */
-const TRAY_NUDGE: Record<string, [number, number]> = {
-  tokyo: [-0.7, 0.35],
-  chiba: [0.35, 0],
-  yokohama: [0, -0.25],
+const TRAY_SLOTS: Record<string, [number, number]> = {
+  narita: [3.75, -0.85],
+  haneda: [1.2, 2.3],
+  yokohama: [-0.75, 2.05],
+  kamakura: [-2.05, 2.4],
+  enoshima: [-3.1, 2.4],
 };
 
-/** Stylized tray layout — lat/lng projected onto the felt, not a GIS basemap. */
+/** Stylized tray layout — north up, lat/lng projected onto the felt, not a GIS basemap. */
 export const CITY_CATALOG: CityCatalogEntry[] = CITY_DEFINITIONS.map((city) => {
-  const [x, z] = TRAY_BY_ID.get(city.id) ?? [0, 0];
-  const [dx, dz] = TRAY_NUDGE[city.id] ?? [0, 0];
-  return { ...city, tray: [x + dx, z + dz] as [number, number] };
+  const [x, z] = TRAY_SLOTS[city.id] ?? TRAY_BY_ID.get(city.id) ?? [0, 0];
+  return { ...city, tray: [x, z] as [number, number] };
 });
 
 export const ORIGIN_TOKEN = {
   id: "bangkok",
   name: "Bangkok",
   nameJa: "BKK",
-  tray: [-4.35, 2.55] as [number, number],
+  /** Bangkok lies far to the south-west, so its airport token sits in the bottom-left corner. */
+  tray: [-4.4, 2.6] as [number, number],
 };
 
 const CITY_BY_ID = new Map(CITY_CATALOG.map((city) => [city.id, city]));
@@ -163,15 +184,56 @@ function hopCities(hop: TripFixture["transportations"][number]): { fromCity: str
   return { fromCity, toCity };
 }
 
+/**
+ * A flight touches down at (or leaves from) an airport tile even when Tripsy has no
+ * stop logged there, so give each airport its own day for the flight endpoints.
+ */
+function airportFlightStops(trip: TripFixture, existing: Map<string, TripActivity[]>): TripActivity[] {
+  const tz = trip.timezone;
+  const stops: TripActivity[] = [];
+  const endpoints = trip.transportations
+    .filter((hop) => hop.type === "airplane")
+    .flatMap((hop) => [
+      { hop, point: hop.departure, at: hop.departure_at, role: "departs" },
+      { hop, point: hop.arrival, at: hop.arrival_at, role: "arrives" },
+    ]);
+
+  for (const { hop, point, at, role } of endpoints) {
+    if (!at || point.latitude == null || point.longitude == null || point.latitude < 20) continue;
+    const city = cityById(nearestCityId(point.latitude, point.longitude));
+    if (city?.landmark !== "airport") continue;
+
+    const date = toDateKey(at, tz);
+    const covered = [...(existing.get(city.id) ?? []), ...stops].some(
+      (stop) => stop.starts_at && nearestCityId(stop.latitude, stop.longitude) === city.id && toDateKey(stop.starts_at, tz) === date,
+    );
+    if (covered) continue;
+
+    stops.push({
+      id: `flight:${hop.id}:${role}`,
+      name: `${city.name} Airport (${point.name}) — ${hop.transport_number || "flight"} ${role}`,
+      type: "publicTransport",
+      starts_at: at,
+      ends_at: null,
+      latitude: point.latitude,
+      longitude: point.longitude,
+      timezone: tz,
+    });
+  }
+  return stops;
+}
+
 export function buildCityBlocks(trip: TripFixture, today: string): CityBlock[] {
   const tz = trip.timezone;
   const grouped = new Map<string, TripActivity[]>();
-  for (const activity of trip.activities) {
+  const place = (activity: TripActivity) => {
     const cityId = nearestCityId(activity.latitude, activity.longitude);
     const list = grouped.get(cityId) ?? [];
     list.push(activity);
     grouped.set(cityId, list);
-  }
+  };
+  trip.activities.forEach(place);
+  airportFlightStops(trip, grouped).forEach(place);
 
   return CITY_CATALOG.map((catalog) => {
     const activities = (grouped.get(catalog.id) ?? []).sort((a, b) =>

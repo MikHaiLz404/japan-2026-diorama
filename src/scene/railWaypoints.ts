@@ -1,5 +1,5 @@
 import { CITY_CATALOG } from "../data/cities";
-import { latLngToLocalKm } from "../lib/geo";
+import { geoTrayTransform } from "../lib/geo";
 
 /** Real junction / Enoden stops projected onto the tray (same transform as cities). */
 export const RAIL_JUNCTIONS = {
@@ -11,6 +11,7 @@ export const RAIL_JUNCTIONS = {
   hase: { name: "Hase", lat: 35.3122, lng: 139.5362 },
   shichirigahama: { name: "Shichirigahama", lat: 35.306, lng: 139.51 },
   fujisawa: { name: "Fujisawa", lat: 35.3389, lng: 139.4879 },
+  funabashi: { name: "Keisei Funabashi", lat: 35.7017, lng: 139.9862 },
 } as const;
 
 export type RailJunctionId = keyof typeof RAIL_JUNCTIONS;
@@ -27,6 +28,8 @@ export const ROUTE_WAYPOINTS: Record<string, RouteDef> = {
   "tokyo<->yokohama": { anchor: "tokyo", waypoints: ["shinagawa"] },
   "kamakura<->tokyo": { anchor: "tokyo", waypoints: ["shinagawa", "ofuna"] },
   "chiba<->tokyo": { anchor: "tokyo", waypoints: ["makuhari"] },
+  "haneda<->tokyo": { anchor: "tokyo", waypoints: ["shinagawa"] },
+  "narita<->tokyo": { anchor: "tokyo", waypoints: ["funabashi"] },
   "takao<->tokyo": { anchor: "tokyo", waypoints: ["shinjuku"] },
   "kawagoe<->tokyo": { anchor: "tokyo", waypoints: ["ikebukuro"] },
   /** Return leg — via Fujisawa & JR hubs, never a direct chord. */
@@ -38,61 +41,16 @@ export const ROUTE_WAYPOINTS: Record<string, RouteDef> = {
 
 let trayByJunction: Map<RailJunctionId, [number, number]> | null = null;
 
-function projectionTransform(): {
-  anchorLat: number;
-  anchorLng: number;
-  scale: number;
-  centerX: number;
-  centerZ: number;
-  geoCenterX: number;
-  geoCenterZ: number;
-} {
-  const anchor = CITY_CATALOG.find((city) => city.id === "tokyo") ?? CITY_CATALOG[0];
-  const locals = CITY_CATALOG.map((city) =>
-    latLngToLocalKm(city.lat, city.lng, anchor.lat, anchor.lng),
-  );
-
-  let minX = Infinity;
-  let maxX = -Infinity;
-  let minZ = Infinity;
-  let maxZ = -Infinity;
-  for (const point of locals) {
-    minX = Math.min(minX, point.x);
-    maxX = Math.max(maxX, point.x);
-    minZ = Math.min(minZ, point.z);
-    maxZ = Math.max(maxZ, point.z);
-  }
-
-  const spanX = Math.max(maxX - minX, 0.001);
-  const spanZ = Math.max(maxZ - minZ, 0.001);
-  const usableW = 4.35 - -4.35;
-  const usableD = 3.05 - -3.35;
-  const scale = Math.min(usableW / spanX, usableD / spanZ) * 0.88;
-
-  return {
-    anchorLat: anchor.lat,
-    anchorLng: anchor.lng,
-    scale,
-    centerX: 0,
-    centerZ: -0.15,
-    geoCenterX: (minX + maxX) / 2,
-    geoCenterZ: (minZ + maxZ) / 2,
-  };
-}
-
 export function junctionTray(id: RailJunctionId): [number, number] {
   if (!trayByJunction) {
-    const t = projectionTransform();
+    // Same transform as the cities (north up, Tokyo at the centre).
+    const { project } = geoTrayTransform(CITY_CATALOG);
     trayByJunction = new Map();
     for (const [jid, junction] of Object.entries(RAIL_JUNCTIONS) as [
       RailJunctionId,
       (typeof RAIL_JUNCTIONS)[RailJunctionId],
     ][]) {
-      const local = latLngToLocalKm(junction.lat, junction.lng, t.anchorLat, t.anchorLng);
-      trayByJunction.set(jid, [
-        t.centerX + (local.x - t.geoCenterX) * t.scale,
-        t.centerZ + (local.z - t.geoCenterZ) * t.scale,
-      ]);
+      trayByJunction.set(jid, project(junction.lat, junction.lng));
     }
   }
   return trayByJunction.get(id) ?? [0, 0];

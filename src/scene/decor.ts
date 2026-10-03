@@ -13,10 +13,12 @@ const FELT_Y = 0.06;
 /** Usable felt area inside the tray lip. */
 const BOUNDS = { x0: -4.85, x1: 4.85, z0: -3.7, z1: 3.7 };
 
-const SEA = { x: -3.45, z: -2.85, w: 2.5, d: 1.55 };
-const PEAK = { x: 3.95, z: -2.95 };
-const POND = { x: 1.95, z: 2.55, rx: 0.62, rz: 0.42 };
-const FIELDS = { x: 3.3, z: 2.55, w: 1.9, d: 1.2 };
+// North is the top of the screen: Tokyo Bay lies south-east of Tokyo, Mt. Fuji to the
+// west-south-west, and the fields and Ueno's pond to the north.
+const SEA = { x: 3.2, z: 2.5, w: 2.5, d: 1.55 };
+const PEAK = { x: -4.05, z: 0.55 };
+const POND = { x: 1.7, z: -2.6, rx: 0.62, rz: 0.42 };
+const FIELDS = { x: 3.3, z: -2.55, w: 1.9, d: 1.2 };
 
 interface Anchor {
   x: number;

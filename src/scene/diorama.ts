@@ -9,7 +9,7 @@ import { makeCityBlock, makeLabel, makeOriginToken, makeTray, platformSize } fro
 import { makeRailPaths } from "./railPaths";
 import { SCENE_LOOK } from "./look";
 import { disposeObject3D, hydrateGltfModels, modelFitSize } from "./models";
-import { makeRoute, routeParallelMeta } from "./paths";
+import { makeRoute, routeParallelMeta, setRouteEmphasis, updateRoute } from "./paths";
 import { PetalField, SAKURA_LOOK } from "./petals";
 import { loadPropAssets } from "./props";
 
@@ -23,14 +23,12 @@ const OVERVIEW_BASE_DISTANCE = 14;
 const OVERVIEW_MARGIN = 0.9;
 
 /**
- * Where a placard sits when the default (hanging in front) would cover a neighbour:
- * Enoshima/Kamakura would cover Yokohama, and Yokohama would cover Tokyo.
+ * Where a placard sits when the default (hanging in front) would cover a neighbour.
+ * With north up, Tokyo's front placard would land on Yokohama and Haneda to its south,
+ * so it stands beside Tokyo's west edge, the open side, instead.
  */
-const LABEL_PLACEMENT: Record<string, "above" | "east"> = {
-  enoshima: "above",
-  kamakura: "above",
-  yokohama: "east",
-  kawagoe: "above",
+const LABEL_PLACEMENT: Record<string, "above" | "east" | "west"> = {
+  tokyo: "west",
 };
 
 /**
@@ -53,6 +51,7 @@ export class Diorama {
   private readonly clock = new THREE.Clock();
   private readonly pickables: THREE.Object3D[] = [];
   private readonly routeMeshes: THREE.Mesh[] = [];
+  private routeSelectionKey = "";
   private readonly prepared: PreparedTrip;
   private paused = false;
   private visibilityObserver: IntersectionObserver | null = null;
@@ -179,6 +178,10 @@ export class Diorama {
         // Beside the block's east edge, level with its top, clear of the city to the south.
         label.center.set(0, 0.5);
         label.position.set(w * 0.5 + 0.08, modelFitSize(city.size).h * 0.5, 0);
+      } else if (placement === "west") {
+        // Beside the block's west edge, level with its top.
+        label.center.set(1, 0.5);
+        label.position.set(-w * 0.5 - 0.08, modelFitSize(city.size).h * 0.5, 0);
       } else {
         // Placard hangs just in front of the block so it stays attached at any tilt.
         label.position.set(0, 0.12, d * 0.5 + 0.12);
@@ -192,7 +195,7 @@ export class Diorama {
     for (let i = 0; i < prepared.routes.length; i += 1) {
       const route = prepared.routes[i];
       const mesh = makeRoute(route, routeMeta[i]);
-      mesh.userData = { from: route.fromCityId, to: route.toCityId, date: route.date };
+      Object.assign(mesh.userData, { from: route.fromCityId, to: route.toCityId, date: route.date });
       this.routeMeshes.push(mesh);
       this.scene.add(mesh);
     }
@@ -245,10 +248,15 @@ export class Diorama {
     const live = today >= trip.starts_at && today <= trip.ends_at;
     const city = selection ? cities.find((c) => c.id === selection.cityId) : undefined;
     const days = selection?.date ? [selection.date] : city ? city.dates : live ? [today] : null;
+    // Only a picked day lights its legs up; everything else stays a faint thread.
+    const selectionKey = selection ? `${selection.cityId}|${selection.date ?? ""}` : "";
+    const restart = selectionKey !== this.routeSelectionKey;
+    this.routeSelectionKey = selectionKey;
     for (const mesh of this.routeMeshes) {
       const { from, to, date } = mesh.userData as { from: string; to: string; date: string | null };
       const touches = !city || selection?.date || from === city.id || to === city.id;
       mesh.visible = date !== null && Boolean(touches) && (days === null || days.includes(date));
+      setRouteEmphasis(mesh, mesh.visible && Boolean(selection?.date), restart);
     }
   }
 
@@ -356,6 +364,9 @@ export class Diorama {
     }
     if (!this.reduced) this.decor.update(this.clock.elapsedTime, delta);
     this.petals?.update(delta);
+    for (const mesh of this.routeMeshes) {
+      if (mesh.visible) updateRoute(mesh, delta, this.clock.elapsedTime, this.reduced);
+    }
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   };
