@@ -1,7 +1,8 @@
-export type ActivityKind = string;
+/** Shape of src/data/japan-2026.json, written by scripts/refresh-trip.mjs from Tripsy. */
 export type TransportKind =
   | "airplane"
   | "train"
+  | "subway"
   | "bus"
   | "walk"
   | "car"
@@ -18,11 +19,12 @@ export interface GeoPoint {
 export interface TripActivity {
   id: string;
   name: string;
-  type: ActivityKind;
+  /** Tripsy activity_type slug, e.g. restaurant, cafe, shopping, tour. */
+  type: string;
   starts_at: string | null;
   ends_at: string | null;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
   address?: string | null;
   timezone: string;
   notes?: string | null;
@@ -32,10 +34,10 @@ export interface TripActivity {
 export interface TripLodging {
   id: string;
   name: string;
-  starts_at: string;
-  ends_at: string;
-  latitude: number;
-  longitude: number;
+  starts_at: string | null;
+  ends_at: string | null;
+  latitude: number | null;
+  longitude: number | null;
   address?: string | null;
   timezone: string;
   notes?: string | null;
@@ -66,62 +68,12 @@ export interface TripFixture {
   transportations: TripTransport[];
 }
 
-export type VisitStatus = "visited" | "today" | "upcoming";
-
-export interface CityCatalogEntry {
+/** One entry of src/data/routes.json, written by scripts/build-routes.mjs. */
+export interface RouteGeometry {
+  /** Tripsy transportation id. */
   id: string;
-  name: string;
-  nameJa: string;
-  lat: number;
-  lng: number;
-  /** Stylized tray coordinates (x, z), projected from lat/lng. */
-  tray: [number, number];
-  size: "xl" | "lg" | "md" | "sm";
-  landmark: "skytree" | "tower" | "torii" | "island" | "hall" | "peak" | "kura" | "airport";
+  mode: "rail" | "road";
+  coords: [number, number][];
 }
 
-export interface DayPlate {
-  cityId: string;
-  date: string;
-  status: VisitStatus;
-  activities: TripActivity[];
-  lodging: TripLodging[];
-}
-
-export interface CityBlock {
-  id: string;
-  name: string;
-  nameJa: string;
-  tray: [number, number];
-  size: "xl" | "lg" | "md" | "sm";
-  landmark: CityCatalogEntry["landmark"];
-  status: VisitStatus;
-  dates: string[];
-  plates: DayPlate[];
-  lodging: TripLodging[];
-  activities: TripActivity[];
-}
-
-export interface RoutePath {
-  id: string;
-  type: TransportKind;
-  fromCityId: string;
-  toCityId: string;
-  status: VisitStatus;
-  label: string;
-  /** Tripsy date key (trip timezone) of the hop; null for unscheduled placeholders. */
-  date: string | null;
-}
-
-export interface GroundPathSegment {
-  id: string;
-  type: TransportKind;
-  fromCityId: string;
-  toCityId: string;
-  status: VisitStatus;
-}
-
-export interface Selection {
-  cityId: string;
-  date?: string;
-}
+export type LngLat = [number, number];

@@ -1,63 +1,50 @@
-import { describe, expect, it } from "vitest";
-import { CITY_CATALOG } from "../data/cities";
-import {
-  DEFAULT_TRAY_BOUNDS,
-  haversineKm,
-  latLngToLocalKm,
-  projectGeoToTray,
-} from "./geo";
+import { describe, expect, test } from "vitest";
+import { along, arc, distance, pathLength, slicePath } from "./geo";
+import type { LngLat } from "../data/types";
 
-describe("geo helpers", () => {
-  it("computes haversine distance in km", () => {
-    const km = haversineKm(35.6812, 139.7671, 35.4437, 139.638);
-    expect(km).toBeGreaterThan(25);
-    expect(km).toBeLessThan(35);
+const asakusa: LngLat = [139.7966, 35.7115];
+const skytree: LngLat = [139.8107, 35.7101];
+
+describe("distance", () => {
+  test("Asakusa Station to Tokyo Skytree is about 1.3 km", () => {
+    expect(distance(asakusa, skytree)).toBeGreaterThan(1200);
+    expect(distance(asakusa, skytree)).toBeLessThan(1350);
   });
 
-  it("maps east/north offsets from an anchor", () => {
-    const tokyo = latLngToLocalKm(35.6812, 139.7671, 35.6812, 139.7671);
-    expect(tokyo.x).toBeCloseTo(0, 5);
-    expect(tokyo.z).toBeCloseTo(0, 5);
+  test("is zero for the same point", () => {
+    expect(distance(asakusa, asakusa)).toBe(0);
+  });
+});
 
-    const chiba = latLngToLocalKm(35.6478, 140.0328, 35.6812, 139.7671);
-    expect(chiba.x).toBeGreaterThan(0);
-    expect(chiba.z).toBeLessThan(0);
+describe("along / slicePath", () => {
+  const line: LngLat[] = [[0, 0], [0.001, 0], [0.002, 0]];
+
+  test("halfway along a two-segment line lands on the middle vertex", () => {
+    const [x, y] = along(line, 0.5);
+    expect(x).toBeCloseTo(0.001, 6);
+    expect(y).toBe(0);
   });
 
-  it("projects catalog cities into tray bounds with readable spacing", () => {
-    const tray = projectGeoToTray(CITY_CATALOG);
-    expect(tray.size).toBe(CITY_CATALOG.length);
+  test("clamps outside 0…1", () => {
+    expect(along(line, -1)).toEqual(line[0]);
+    expect(along(line, 2)).toEqual(line[2]);
+  });
 
-    for (const city of CITY_CATALOG) {
-      const [x, z] = tray.get(city.id)!;
-      expect(x).toBeGreaterThanOrEqual(DEFAULT_TRAY_BOUNDS.minX);
-      expect(x).toBeLessThanOrEqual(DEFAULT_TRAY_BOUNDS.maxX);
-      expect(z).toBeGreaterThanOrEqual(DEFAULT_TRAY_BOUNDS.minZ);
-      expect(z).toBeLessThanOrEqual(DEFAULT_TRAY_BOUNDS.maxZ);
-    }
+  test("slicePath keeps the length proportional to t", () => {
+    const part = slicePath(line, 0.25);
+    expect(pathLength(part) / pathLength(line)).toBeCloseTo(0.25, 5);
+    expect(slicePath(line, 1)).toBe(line);
+  });
+});
 
-    const tokyo = tray.get("tokyo")!;
-    const yokohama = tray.get("yokohama")!;
-    const chiba = tray.get("chiba")!;
-    const takao = tray.get("takao")!;
-    const kawagoe = tray.get("kawagoe")!;
+describe("arc", () => {
+  test("starts and ends at the endpoints", () => {
+    const a = arc(asakusa, skytree);
+    expect(a[0][0]).toBeCloseTo(asakusa[0], 9);
+    expect(a.at(-1)![1]).toBeCloseTo(skytree[1], 9);
+  });
 
-    // North is the top of the screen (-z): south of Tokyo has the larger z.
-    expect(yokohama[1]).toBeGreaterThan(tokyo[1]);
-    expect(kawagoe[1]).toBeLessThan(tokyo[1]);
-    expect(chiba[0]).toBeGreaterThan(tokyo[0]);
-    expect(takao[0]).toBeLessThan(tokyo[0]);
-    // Tokyo is the anchor: it sits at the centre of the play area.
-    expect(tokyo[0]).toBeCloseTo((DEFAULT_TRAY_BOUNDS.minX + DEFAULT_TRAY_BOUNDS.maxX) / 2, 5);
-    expect(tokyo[1]).toBeCloseTo((DEFAULT_TRAY_BOUNDS.minZ + DEFAULT_TRAY_BOUNDS.maxZ) / 2, 5);
-
-    const ids = CITY_CATALOG.map((city) => city.id);
-    for (let i = 0; i < ids.length; i += 1) {
-      for (let j = i + 1; j < ids.length; j += 1) {
-        const a = tray.get(ids[i])!;
-        const b = tray.get(ids[j])!;
-        expect(Math.hypot(a[0] - b[0], a[1] - b[1])).toBeGreaterThan(1.2);
-      }
-    }
+  test("collapses to a straight pair for coincident points", () => {
+    expect(arc(asakusa, asakusa)).toHaveLength(2);
   });
 });

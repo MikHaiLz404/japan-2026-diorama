@@ -20,8 +20,8 @@ describe("isEmbedMode", () => {
 
 describe("standaloneUrl", () => {
   it("strips the embed query param", () => {
-    expect(standaloneUrl("https://japan-2026-diorama.vercel.app/?embed=1")).toBe(
-      "https://japan-2026-diorama.vercel.app/",
+    expect(standaloneUrl("https://japan-2026-replay.vercel.app/?embed=1")).toBe(
+      "https://japan-2026-replay.vercel.app/",
     );
   });
 });

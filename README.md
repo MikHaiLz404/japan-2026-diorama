@@ -1,8 +1,13 @@
-# Japan 2026 diorama
+# Japan 2026 Replay
 
-Mobile-first Three.js miniature tray for the **Japan 2026** trip. Tap a city block to zoom into that day’s plate (lodging + activities). Visited stops stay bright; upcoming ones stay dim. The trip is still live (`2026-09-17`–`2026-09-28`), so status is derived from activity dates vs today in `Asia/Tokyo`.
+A 3D map of the **Japan 2026** trip (17–27 Sep 2026). Pick a day or press **เล่นทริป** to replay the trip stop by stop:
+the camera follows the real rail lines, and the map is lit by the real sun at each moment — bright at noon, golden at
+sunset, city lights at night. Landmarks the trip reached are modelled in three.js with Apple Maps–style badges.
 
-Source of truth: **Tripsy trip `1213687`**. Notion is out of scope.
+Source of truth: **Tripsy trip `1213687`**. Receipt-accurate times live in Notion and are kept in sync into Tripsy
+(a receipt's time is when a visit *ended*; start times are shifted back from it).
+
+The earlier Three.js diorama is kept at git tag `diorama-v1`.
 
 ## Setup
 
@@ -11,100 +16,62 @@ npm install
 npm run dev
 ```
 
-Build:
-
 ```bash
-npm run build
-npm run preview
+npm test          # vitest: geo, trip shaping, sun, palette, landmarks, replay timeline
+npm run build     # tsc --noEmit && vite build
 ```
 
-Tests (date / city / visit status):
-
-```bash
-npm test
-```
-
-No API keys are required. The app reads the committed fixture at `src/data/japan-2026.json`.
+No API keys are required. Basemap tiles come from [OpenFreeMap](https://openfreemap.org), terrain from the AWS
+terrarium DEM.
 
 ## Stack
 
 - Vite + TypeScript
-- three.js (vanilla, no R3F)
+- [MapLibre GL JS](https://maplibre.org) 4 — basemap, POIs, routes, replay trail
+- three.js — landmark models in a MapLibre custom layer
 - Static Vercel deploy (`vercel.json` → `dist`)
+
+## Layout
+
+```text
+src/
+  data/      trip.ts (fixture → stops, legs, days), japan-2026.json, routes.json, scramble.json
+  map/       style (palettes), sun, lighting, landmarks + builders + landmarkLayer, tripLayers, scramble
+  replay/    timeline (pure, tested) + player (camera / trail)
+  ui/        panel (day strip, list, mobile sheet), playbar (replay controls, clock, day card)
+  lib/       geo, embed, motion
+```
 
 ## Interaction
 
-- One-finger orbit, pinch or `+` / `−` to zoom, **リセット / Reset** to reset
-- Tap a city block, day tile, desktop chip, or the mobile city menu (no hover-only targets). The menu stays anchored to the bottom so the open list does not cover the tray.
-- Mobile: detail opens as a bottom sheet
-- Small screens: fewer blossom particles, no shadow maps, capped pixel ratio
+- **Day strip** — tap a day (mouse wheel / drag / ←→ also scroll it); the map dims other days and fits the day
+- **เล่นทริป** — replay with play/pause, previous/next stop, scrubber with day ticks, 1×/2×/4×; Space / Esc
+- Tap a landmark badge or list row to fly there; ⟳ orbits, 2D/3D toggles pitch
+- Mobile: the panel is a bottom sheet with three snap points
+- The camera can't zoom out past the Kantō trip area (`minZoom` 8.5 + `maxBounds`)
 
-## Tripsy data shape
+## Data
 
-Fixture type: `src/data/types.ts` (`TripFixture`).
+Only what actually happened is shown: undated Tripsy entries (dropped plans) are ignored, and a landmark appears only
+if a dated stop is within 400 m of it or named after it.
 
-```ts
-{
-  source: "tripsy",
-  trip_id: "1213687",
-  name: "Japan 2026",
-  starts_at: "2026-09-17",
-  ends_at: "2026-09-28",
-  timezone: "Asia/Tokyo",
-  fetched_at: "ISO-8601",
-  activities: [{
-    id, name, type,           // type is the Tripsy activity_type slug
-    starts_at, ends_at,       // UTC ISO-8601; display in activity.timezone
-    latitude, longitude,
-    address?, timezone, notes?, website?
-  }],
-  lodging: [{
-    id, name, starts_at, ends_at,
-    latitude, longitude, address?, timezone, notes?, website?
-  }],
-  transportations: [{
-    id, type,                 // airplane | train | bus | walk | …
-    name?, transport_number?,
-    departure_at?, arrival_at?,
-    departure: { name, latitude, longitude },
-    arrival: { name, latitude, longitude }
-  }]
-}
-```
+### Refresh trip data
 
-City blocks are **stylized diorama tiles**, not GIS. Activities are assigned to the nearest catalog city (Tokyo, Yokohama, Kamakura, Enoshima, Chiba, Takao, Kawagoe). Train/flight ribbons only draw between different cities (walks stay off the tray).
+1. Use the Tripsy MCP for trip `1213687` (`tripsy_trips_show`, `tripsy_activities_list`, `tripsy_hostings_list`,
+   `tripsy_transportations_list`) and save the JSON envelopes to `scripts/cache/` as `trip.json`, `activities.json`,
+   `hostings.json`, `transportations.json`
+2. `npm run refresh-data` → `src/data/japan-2026.json`
+3. `npm run build-routes` → `src/data/routes.json` (snaps train legs to OSM rail via Overpass — cached in
+   `scripts/cache/rail.json` — and bus legs to roads via OSRM; anything implausible falls back to an arc)
 
-## Refresh trip data
-
-The demo always runs from the fixture. When the itinerary changes:
-
-1. In Cursor, call Tripsy MCP for trip `1213687`:
-   - `tripsy_trips_show`
-   - `tripsy_activities_list`
-   - `tripsy_hostings_list`
-   - `tripsy_transportations_list`
-2. Save the raw JSON envelopes to `scripts/cache/` as `trip.json`, `activities.json`, `hostings.json`, `transportations.json`
-3. Run `npm run refresh-data`
-
-Optional live fetch (not used by `dev`/`build`):
-
-```bash
-TRIPSY_API_BASE=https://example.invalid/ \
-TRIPSY_API_TOKEN=… \
-TRIP_ID=1213687 \
-npm run refresh-data
-```
-
-`scripts/refresh-trip.mjs` maps MCP/API fields into the fixture. Owner emails and other account metadata are stripped.
+`npm run fetch-scramble` re-pulls the Shibuya crosswalk geometry from OSM (rarely needed).
 
 ## Deploy
 
-Connect the repo to Vercel. Framework is a static Vite app; `npm run build` emits `dist/`.
+Static Vite app on Vercel; `npm run build` emits `dist/`.
 
 ## Embed in jojo-in-runtime
 
-Portfolio integration (Works iframe + separate Logs post) is documented in
+`https://japan-2026-replay.vercel.app/?embed=1` — compact chrome plus an **Open fullscreen** link.
+`frame-ancestors` allows `jojo-in-runtime.vercel.app` and Vercel previews. See
 [`docs/jojo-in-runtime-integration.md`](docs/jojo-in-runtime-integration.md).
-
-Embed URL: `https://japan-2026-diorama.vercel.app/?embed=1`  
-(`frame-ancestors` allows `jojo-in-runtime.vercel.app` and Vercel previews.)
