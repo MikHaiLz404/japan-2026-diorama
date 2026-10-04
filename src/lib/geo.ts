@@ -1,4 +1,5 @@
 import type { LngLat } from "../data/types";
+import type { BoundingBox } from "../trips/types";
 
 const EARTH_RADIUS_M = 6371000;
 const RAD = Math.PI / 180;
@@ -65,3 +66,6 @@ export function arc(a: LngLat, b: LngLat, segments = 40): LngLat[] {
     return [u * u * x0 + 2 * u * t * cx + t * t * x1, u * u * y0 + 2 * u * t * cy + t * t * y1] as LngLat;
   });
 }
+
+/** Strictly inside the box. */
+export const inBox = ([lng, lat]: LngLat, b: BoundingBox): boolean => lng > b.west && lng < b.east && lat > b.south && lat < b.north;

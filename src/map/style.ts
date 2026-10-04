@@ -85,6 +85,8 @@ export function paintFor(p: Palette, highlight: BuildingHighlights): Record<stri
     "basemap-poi": { "text-color": p.poi, "text-halo-color": p.halo },
     "place-minor": { "text-color": p.place, "text-halo-color": p.halo },
     "place-city": { "text-color": p.city, "text-halo-color": p.halo },
+    // Trip place names (src/map/placeLabels.ts) — same palette as city labels; dimming is done with opacity.
+    places: { "text-color": p.city, "text-halo-color": p.halo },
   };
 }
 

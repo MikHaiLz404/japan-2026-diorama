@@ -3,19 +3,19 @@ import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
 import { buildTrip, type Stop } from "../data/trip";
 import type { LngLat } from "../data/types";
 import { standaloneUrl } from "../lib/embed";
+import { inBox } from "../lib/geo";
 import { PALETTES, buildStyle } from "../map/style";
 import { buildingHighlights, hiddenBuildings, visitedLandmarks, type Landmark } from "../map/landmarks";
 import { createLandmarkLayer } from "../map/landmarkLayer";
 import { createLighting } from "../map/lighting";
 import { addTripLayers, clearTrail, focusDay } from "../map/tripLayers";
+import { addPlaceLabels, placePoints } from "../map/placeLabels";
 import { buildTimeline } from "../replay/timeline";
 import { createPlayer } from "../replay/player";
 import { ALL_DAYS, markDay, markStop, mountDays, mountSheet, renderList, stopCard } from "../ui/panel";
 import { mountPlaybar, setClock, showDayCard } from "../ui/playbar";
 import { paddedBounds, toLngLatPair, tripExtent } from "../trips/frame";
-import type { BoundingBox, TripConfig } from "../trips/types";
-
-const inBox = ([lng, lat]: LngLat, b: BoundingBox) => lng > b.west && lng < b.east && lat > b.south && lat < b.north;
+import type { TripConfig } from "../trips/types";
 
 export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): void {
   const trip = buildTrip(config.fixture, config.routes);
@@ -82,8 +82,10 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     map.setLayoutProperty("hillshade", "visibility", want ? "visible" : "none");
   }
 
+  let placeLabels: ReturnType<typeof addPlaceLabels> = { setClock: () => {} };
   map.once("style.load", () => {
     addTripLayers(map, trip);
+    placeLabels = addPlaceLabels(map, placePoints(config.places, stops));
     map.addLayer(landmarkLayer.layer);
     config.extras?.(map);
     map.on("click", "stops", (e) => openStop(stops.find((s) => s.id === e.features?.[0]?.properties?.id), false));
@@ -161,6 +163,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     const s = state.seg;
     bar.update(state, info);
     lighting.apply(state.clock);
+    placeLabels.setClock(state.clock);
     head.classList.toggle("hidden", s.kind === "jump" && state.u < 0.97);
     head.dataset.mode = s.kind === "move" ? s.leg.kind : s.kind;
     headMarker.setLngLat(state.pos);
@@ -206,6 +209,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     bar.show(false);
     headMarker.remove();
     clearTrail(map);
+    placeLabels.setClock(new Date());
     sheet.set("half");
     selectDay(lastDay ?? currentDay, false);
   }
