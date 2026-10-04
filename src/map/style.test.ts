@@ -24,7 +24,8 @@ describe("buildStyle", () => {
 
   test("every palette-driven layer exists in the style", () => {
     const style = buildStyle(PALETTES.day, [], []);
-    const ids = new Set(style.layers.map((l) => l.id));
+    // Trip layers added after the style loads (src/map/placeLabels.ts) are relit too.
+    const ids = new Set([...style.layers.map((l) => l.id), "places"]);
     for (const id of Object.keys(paintFor(PALETTES.day, []))) expect(ids.has(id)).toBe(true);
   });
 
