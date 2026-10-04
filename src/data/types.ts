@@ -1,4 +1,4 @@
-/** Shape of src/data/japan-2026.json, written by scripts/refresh-trip.mjs from Tripsy. */
+/** Shape of src/trips/<slug>/trip.json, written by scripts/refresh-trip.mjs from Tripsy. */
 export type TransportKind =
   | "airplane"
   | "train"
@@ -68,7 +68,7 @@ export interface TripFixture {
   transportations: TripTransport[];
 }
 
-/** One entry of src/data/routes.json, written by scripts/build-routes.mjs. */
+/** One entry of src/trips/<slug>/routes.json, written by scripts/build-routes.mjs. */
 export interface RouteGeometry {
   /** Tripsy transportation id. */
   id: string;

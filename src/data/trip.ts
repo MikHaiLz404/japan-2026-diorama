@@ -4,8 +4,6 @@
 import { arc, distance } from "../lib/geo";
 import type { LngLat, RouteGeometry, TripFixture } from "./types";
 
-export const TZ = "Asia/Tokyo";
-
 export type Category =
   | "food" | "cafe" | "shop" | "sight" | "museum" | "park" | "stay" | "transit" | "health" | "misc";
 
@@ -55,21 +53,33 @@ export interface Leg {
 }
 
 export interface Trip {
+  /** IANA timezone the trip happened in; all day/time labels use it. */
+  timezone: string;
   stops: Stop[];
   legs: Leg[];
   days: string[];
 }
 
-const dayFormat = new Intl.DateTimeFormat("en-CA", { timeZone: TZ });
-const timeFormat = new Intl.DateTimeFormat("th-TH", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
-const weekdayFormat = new Intl.DateTimeFormat("th-TH", { weekday: "short", timeZone: TZ });
+const formatters = new Map<string, Intl.DateTimeFormat>();
+function formatter(locale: string, options: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
+  const key = `${locale}|${JSON.stringify(options)}`;
+  if (!formatters.has(key)) formatters.set(key, new Intl.DateTimeFormat(locale, options));
+  return formatters.get(key)!;
+}
 
 /** Trip-local calendar day (YYYY-MM-DD) of a UTC timestamp. */
-export const dayOf = (iso: string): string => dayFormat.format(new Date(iso));
-export const timeOf = (iso: string): string => timeFormat.format(new Date(iso));
-export function dayParts(day: string): { weekday: string; date: number } {
-  const noon = new Date(`${day}T12:00:00+09:00`);
-  return { weekday: weekdayFormat.format(noon), date: noon.getDate() };
+export const dayOf = (iso: string, timeZone: string): string => formatter("en-CA", { timeZone }).format(new Date(iso));
+export const timeOf = (iso: string, timeZone: string): string =>
+  formatter("th-TH", { timeZone, hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+
+/** Weekday / day / month labels of a calendar day (YYYY-MM-DD) — independent of any timezone. */
+export function dayParts(day: string): { weekday: string; date: number; month: string } {
+  const noon = new Date(`${day}T12:00:00Z`);
+  return {
+    weekday: formatter("th-TH", { weekday: "short", timeZone: "UTC" }).format(noon),
+    date: noon.getUTCDate(),
+    month: formatter("th-TH", { month: "short", timeZone: "UTC" }).format(noon),
+  };
 }
 
 const THAI = /[฀-๿]/;
@@ -100,6 +110,7 @@ const ESTIMATE_KMH = 35;
 const IGNORED_LEG_KINDS = new Set(["walk", "airplane"]);
 
 export function buildTrip(fixture: TripFixture, routes: RouteGeometry[]): Trip {
+  const tz = fixture.timezone;
   const places = [
     ...fixture.activities.map((a) => ({ ...a, type: a.type })),
     ...fixture.lodging.map((l) => ({ ...l, type: "lodging" })),
@@ -112,8 +123,8 @@ export function buildTrip(fixture: TripFixture, routes: RouteGeometry[]): Trip {
       label: mapLabel(p.name),
       type: p.type,
       cat: categoryOf(p.type),
-      day: dayOf(p.starts_at!),
-      time: timeOf(p.starts_at!),
+      day: dayOf(p.starts_at!, tz),
+      time: timeOf(p.starts_at!, tz),
       iso: p.starts_at!,
       end: p.ends_at,
       lngLat: [p.longitude!, p.latitude!] as LngLat,
@@ -136,7 +147,7 @@ export function buildTrip(fixture: TripFixture, routes: RouteGeometry[]): Trip {
       id: t.id,
       kind: t.type,
       name: t.name || `${t.departure.name} → ${t.arrival.name}`,
-      day: dayOf(iso),
+      day: dayOf(iso, tz),
       iso,
       arrive: t.arrival_at ?? null,
       coords: real && real.coords.length > 1 ? real.coords : arc(from, to),
@@ -145,5 +156,5 @@ export function buildTrip(fixture: TripFixture, routes: RouteGeometry[]): Trip {
   }
 
   const days = [...new Set(stops.map((s) => s.day))].sort();
-  return { stops, legs, days };
+  return { timezone: tz, stops, legs, days };
 }

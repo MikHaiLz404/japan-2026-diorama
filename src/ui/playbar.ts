@@ -1,26 +1,27 @@
 // Replay controls, clock pill and the day card.
-import { dayParts, TZ } from "../data/trip";
+import { dayParts } from "../data/trip";
 import { glyphSvg } from "../map/icons";
 import type { PhaseWeights } from "../map/sun";
 import type { ReplayState, Segment } from "../replay/timeline";
 
 const $ = <T extends Element = HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
-const clockFormat = new Intl.DateTimeFormat("th-TH", {
-  timeZone: TZ, weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit",
-});
-export const formatClock = (d: Date) => clockFormat.format(d);
+export function formatClock(date: Date, timeZone: string): string {
+  return new Intl.DateTimeFormat("th-TH", {
+    timeZone, weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit",
+  }).format(date);
+}
 
-export function setClock(date: Date, weights: PhaseWeights): void {
+export function setClock(date: Date, weights: PhaseWeights, timeZone: string): void {
   $("#clock .ico").textContent = weights.day > 0.5 ? "☀︎" : weights.dusk > 0.4 ? "◐" : "☾";
-  $("#clock .txt").textContent = formatClock(date);
+  $("#clock .txt").textContent = formatClock(date, timeZone);
 }
 
 const DAY_CARD_MS = 1900;
 let cardTimer = 0;
 export function showDayCard(day: string, place: string): void {
   const card = $("#daycard");
-  const { weekday, date } = dayParts(day);
-  $("#daycard .d").textContent = `${date} ก.ย.`;
+  const { weekday, date, month } = dayParts(day);
+  $("#daycard .d").textContent = `${date} ${month}`;
   $("#daycard .w").textContent = weekday;
   $("#daycard .c").textContent = place;
   card.classList.add("show");
@@ -37,8 +38,9 @@ export interface Playbar {
   update(state: ReplayState, info: { playing: boolean }): void;
 }
 
-export function mountPlaybar({ total, segs, onToggle, onSeek, onStep, onSpeed, onClose }: {
+export function mountPlaybar({ total, segs, timeZone, onToggle, onSeek, onStep, onSpeed, onClose }: {
   total: number;
+  timeZone: string;
   segs: Segment[];
   onToggle: () => void;
   onSeek: (t: number) => void;
@@ -85,7 +87,7 @@ export function mountPlaybar({ total, segs, onToggle, onSeek, onStep, onSpeed, o
       icon.style.background = s.kind === "stop" ? `var(--${s.stop.cat})` : s.kind === "move" ? "var(--transit)" : "var(--misc)";
       icon.innerHTML = glyphSvg(glyph);
       $("#pb-now .ttl").textContent = title;
-      $("#pb-now .sub").textContent = formatClock(state.clock);
+      $("#pb-now .sub").textContent = formatClock(state.clock, timeZone);
     },
   };
 }

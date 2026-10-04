@@ -1,24 +1,25 @@
 import { describe, expect, test } from "vitest";
-import { LANDMARKS, buildingHighlights, hiddenBuildings, visitedLandmarks } from "./landmarks";
+import { buildingHighlights, hiddenBuildings, visitedLandmarks } from "./landmarks";
+import { LANDMARKS } from "../trips/japan-2026/landmarks";
 import type { LngLat } from "../data/types";
 
 const stop = (name: string, lngLat: LngLat) => ({ name, lngLat });
 
 describe("visitedLandmarks", () => {
   test("a stop next to a landmark counts as a visit", () => {
-    const ids = visitedLandmarks([stop("Tokyo Skytree", [139.8107, 35.7101])]).map((l) => l.id);
+    const ids = visitedLandmarks([stop("Tokyo Skytree", [139.8107, 35.7101])], LANDMARKS).map((l) => l.id);
     expect(ids).toContain("skytree");
     expect(ids).not.toContain("daibutsu");
   });
 
   test("a far pin still counts when the stop is named after the landmark", () => {
     const toyosu: LngLat = [139.793, 35.6465]; // Tripsy's teamLab pin, ~440 m from the venue
-    expect(visitedLandmarks([stop("Vegan Ramen UZU Tokyo", toyosu)]).map((l) => l.id)).not.toContain("teamlab");
-    expect(visitedLandmarks([stop("teamLab Planets", toyosu)]).map((l) => l.id)).toContain("teamlab");
+    expect(visitedLandmarks([stop("Vegan Ramen UZU Tokyo", toyosu)], LANDMARKS).map((l) => l.id)).not.toContain("teamlab");
+    expect(visitedLandmarks([stop("teamLab Planets", toyosu)], LANDMARKS).map((l) => l.id)).toContain("teamlab");
   });
 
   test("no stops means no landmarks", () => {
-    expect(visitedLandmarks([])).toEqual([]);
+    expect(visitedLandmarks([], LANDMARKS)).toEqual([]);
   });
 });
 

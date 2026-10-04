@@ -4,20 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#1c2130" />
-    <meta name="description" content="Japan 2026 Replay — a 3D map of the trip with real-sun lighting and a day-by-day replay." />
-    <meta property="og:title" content="Japan 2026 Replay" />
-    <meta property="og:description" content="Replay the Japan 2026 trip on a 3D map: real rail routes, landmarks and the light of each hour." />
+    <meta name="description" content="Trip Replay — 3D maps of my trips with real-sun lighting and a day-by-day replay." />
+    <meta property="og:title" content="Trip Replay" />
+    <meta property="og:description" content="Replay each trip on a 3D map: real rail routes, landmarks and the light of each hour." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://japan-2026-replay.vercel.app/" />
+    <meta property="og:url" content="https://trip-replay.vercel.app/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Japan 2026 Replay</title>
+    <title>Trip Replay</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
-    <div id="map" role="application" aria-label="แผนที่ทริปญี่ปุ่น 3 มิติ"></div>
+    <main id="home" hidden>
+      <header class="home-head">
+        <p class="home-eyebrow">Trip Replay</p>
+        <h1>ทริปของ Jojo</h1>
+        <p class="home-sub">เลือกทริปเพื่อดูแผนที่ 3 มิติ แสงตามเวลาจริง และเล่นทริปย้อนหลังทีละจุด</p>
+      </header>
+      <nav id="trip-cards" class="trip-cards" aria-label="ทริปทั้งหมด"></nav>
+    </main>
+
+    <div id="map" role="application" aria-label="แผนที่ทริป 3 มิติ"></div>
     <div id="badges"></div>
 
-    <a id="embed-open" class="embed-open" href="https://japan-2026-replay.vercel.app/" target="_blank" rel="noopener noreferrer" hidden>
+    <a id="embed-open" class="embed-open" href="https://trip-replay.vercel.app/" target="_blank" rel="noopener noreferrer" hidden>
       เปิดเต็มจอ ↗
     </a>
 
@@ -27,8 +36,9 @@
       <div id="grip" role="button" tabindex="0" aria-label="ขยายหรือย่อรายการ" aria-expanded="true"><span></span></div>
       <header>
         <div class="titles">
-          <h1>Japan 2026</h1>
-          <div class="sub">17–27 ก.ย. · Tokyo · Kamakura · Yokohama · Narita</div>
+          <a class="back" href="/">← ทริปทั้งหมด</a>
+          <h1></h1>
+          <div class="sub"></div>
         </div>
         <button id="play-trip" type="button" disabled>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>เล่นทริป
@@ -58,6 +68,8 @@
     </section>
 
     <div id="daycard" aria-hidden="true"><span class="w"></span><span class="d"></span><span class="c"></span></div>
+
+    <div id="fatal" hidden role="alert">โหลดทริปไม่สำเร็จ ลองรีเฟรชหน้าอีกครั้ง</div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
