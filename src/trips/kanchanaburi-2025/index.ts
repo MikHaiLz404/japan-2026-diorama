@@ -13,6 +13,11 @@ const config: TripConfig = {
   landmarks: [],
   // Western Kanchanaburi hills around the dam.
   hilly: [{ west: 98.9, south: 14.0, east: 99.6, north: 14.7 }],
+  places: [
+    { name: "Bangkok", box: { west: 100.35, south: 13.55, east: 100.85, north: 13.95 } },
+    { name: "Kanchanaburi", box: { west: 99.45, south: 13.9, east: 99.7, north: 14.1 } },
+    { name: "Srinagarind Dam", box: { west: 99.05, south: 14.2, east: 99.3, north: 14.55 } },
+  ],
 };
 
 export default config;

@@ -14,7 +14,7 @@ export interface PlacePoint {
 }
 
 /** Places fade out once stop labels take over at street level. */
-const MAX_ZOOM = 12.5;
+const DEFAULT_MAX_ZOOM = 12.5;
 const UPCOMING_OPACITY = 0.4;
 
 /** One label per place the trip actually visited, at the centre of its box. */
@@ -29,7 +29,9 @@ export function placePoints(places: { name: string; box: BoundingBox }[] | undef
 export const reachedFilter = (now: Date): ExpressionSpecification => ["<=", ["get", "first"], now.getTime()];
 
 /** Adds the place layer; the returned `setClock` re-dims it, touching the style only when a place is newly reached. */
-export function addPlaceLabels(map: MapLibreMap, points: PlacePoint[]): { setClock: (now: Date) => void } {
+export function addPlaceLabels(
+  map: MapLibreMap, points: PlacePoint[], maxZoom = DEFAULT_MAX_ZOOM,
+): { setClock: (now: Date) => void } {
   if (!points.length) return { setClock: () => {} };
   map.addSource("places", {
     type: "geojson",
@@ -39,7 +41,7 @@ export function addPlaceLabels(map: MapLibreMap, points: PlacePoint[]): { setClo
     },
   });
   map.addLayer({
-    id: "places", type: "symbol", source: "places", maxzoom: MAX_ZOOM,
+    id: "places", type: "symbol", source: "places", maxzoom: maxZoom,
     layout: {
       "text-field": ["get", "name"],
       "text-font": ["Noto Sans Bold"],
@@ -50,7 +52,9 @@ export function addPlaceLabels(map: MapLibreMap, points: PlacePoint[]): { setClo
     },
     // Colours follow the sun with the rest of the basemap (see paintFor in style.ts).
     paint: { "text-halo-width": 1.6 },
-  });
+    // Below the stop icons: symbols are placed top layer first, so stops claim their spot before these labels
+    // (which would otherwise hide them), while the basemap labels further down still give way.
+  }, map.getLayer("stops") ? "stops" : undefined);
 
   let reachedCount = -1;
   const setClock = (now: Date) => {

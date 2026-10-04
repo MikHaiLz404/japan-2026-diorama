@@ -39,8 +39,13 @@ export interface TripConfig {
    * get fake hills — only list genuinely hilly areas.
    */
   hilly?: BoundingBox[];
-  /** Area names for the replay's day card. */
+  /**
+   * Named areas: labelled on the map and shown on the replay's day card. Names must be Latin script — the
+   * map's glyphs have no Thai.
+   */
   places?: { name: string; box: BoundingBox }[];
+  /** Zoom where place labels give way to stop labels. Default 12.5; raise it for a trip that fits in one district. */
+  placesMaxZoom?: number;
   /** Trip-specific map extras (e.g. animated crosswalks), added after the base layers. */
   extras?: (map: MapLibreMap) => void;
 }

@@ -13,6 +13,11 @@ const config: TripConfig = {
   landmarks: [],
   // Khao Yai / Wang Nam Khiao hills — real terrain, no towers, so 3D terrain is safe.
   hilly: [{ west: 101.15, south: 14.2, east: 102.0, north: 14.85 }],
+  places: [
+    { name: "Pak Chong", box: { west: 101.38, south: 14.68, east: 101.43, north: 14.73 } },
+    { name: "Khao Yai", box: { west: 101.2, south: 14.5, east: 101.5, north: 14.67 } },
+    { name: "Lapin Hill", box: { west: 101.58, south: 14.67, east: 101.65, north: 14.72 } },
+  ],
 };
 
 export default config;
