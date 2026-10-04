@@ -6,6 +6,7 @@ import { standaloneUrl } from "../lib/embed";
 import { inBox } from "../lib/geo";
 import { PALETTES, buildStyle } from "../map/style";
 import { buildingHighlights, hiddenBuildings, visitedLandmarks, type Landmark } from "../map/landmarks";
+import { prefetchTiles } from "../map/prefetch";
 import { createLandmarkLayer } from "../map/landmarkLayer";
 import { createLighting } from "../map/lighting";
 import { addTripLayers, clearTrail, focusDay } from "../map/tripLayers";
@@ -105,11 +106,19 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
   let currentDay = ALL_DAYS;
   let popup: maplibregl.Popup | null = null;
 
+  /** Warm the tiles of the day the reader is most likely to open next (the first day from the overview). */
+  function prefetchNextDay(day: string) {
+    const order = [...new Set(stops.map((s) => s.day))];
+    const next = day === ALL_DAYS ? order[0] : order[order.indexOf(day) + 1];
+    if (next) prefetchTiles(map, stops.filter((s) => s.day === next));
+  }
+
   function selectDay(day: string, fly = true) {
     currentDay = day;
     markDay(day);
     focusDay(map, day);
     renderList({ day, stops, landmarks, onStop: (s) => openStop(s), onLandmark: flyToLandmark });
+    prefetchNextDay(day);
     if (day === ALL_DAYS) {
       lighting.goTo(overviewClock, { animate: fly });
       if (fly && config.overview) map.flyTo({ ...config.overview, duration: 2200 });

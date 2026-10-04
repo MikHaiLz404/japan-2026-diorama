@@ -97,7 +97,7 @@ export function renderList({ day, stops, landmarks, onStop, onLandmark }: {
   list.replaceChildren();
   const stopRow = (s: Stop) => {
     const r = row(`<span class="ic" style="background:var(--${s.cat})">${glyphSvg(s.cat)}</span>`, s.name,
-      [s.time, CATEGORY_LABEL[s.cat]].filter(Boolean).join(" · "), () => onStop(s));
+      CATEGORY_LABEL[s.cat], () => onStop(s));
     r.dataset.stop = s.id;
     return r;
   };
@@ -139,7 +139,7 @@ export function stopCard(s: Stop): HTMLElement {
   h.textContent = s.name;
   const p = document.createElement("p");
   const { weekday, date, month } = dayParts(s.day);
-  p.textContent = `${weekday} ${date} ${month}${s.time ? ` · ${s.time}` : ""}`;
+  p.textContent = `${weekday} ${date} ${month}`;
   const tag = document.createElement("span");
   tag.className = "tag";
   tag.style.setProperty("--cat", `var(--${s.cat})`);
