@@ -1,4 +1,4 @@
-// Real-sun lighting: one clock drives the basemap palette, sky, extrusion light, 3D models and UI theme.
+// Real-sun lighting: one clock drives the basemap palette, sky, extrusion light, and 3D models. The UI theme is not touched: it follows the system.
 //
 // Replay compresses hours into a second (a walk from 16:30 to 19:00, a whole night), so painting the clock
 // directly strobes day → night → day. The clock only sets a *target*; the light eases toward it.
@@ -12,9 +12,6 @@ const DEG = 180 / Math.PI;
 /** Time constant of the light easing; ~95 % settled after 3τ. */
 const EASE_SECONDS = 0.9;
 const SETTLED = 0.004;
-/** Hysteresis so the UI theme can't flip-flop around dusk. */
-const THEME_TO_LIGHT = 0.62;
-const THEME_TO_DARK = 0.42;
 /** Weight steps below this are not worth a style update. */
 const PAINT_STEPS = 60;
 const CLOCK_TWEEN_MS = 1400;
@@ -46,7 +43,6 @@ export function createLighting(
   let settleRaf = 0;
   let last = 0;
   let isReady = false;
-  let theme = document.documentElement.dataset.theme ?? "dark";
 
   function paint(weights: PhaseWeights) {
     landmarks.setLighting({ sunDir: sunVector(sun!), weights });
@@ -69,13 +65,6 @@ export function createLighting(
       color: weights.dusk > 0.5 ? "#ffd2b8" : weights.night > 0.6 ? "#d4dcff" : "#ffffff",
       intensity: 0.38 * weights.night + 0.3 * weights.dusk + 0.16 * weights.day,
     });
-    const next = theme === "dark"
-      ? (weights.day > THEME_TO_LIGHT ? "light" : "dark")
-      : (weights.day < THEME_TO_DARK ? "dark" : "light");
-    if (next !== theme) {
-      theme = next;
-      document.documentElement.dataset.theme = theme;
-    }
   }
 
   function settle(now: number) {
