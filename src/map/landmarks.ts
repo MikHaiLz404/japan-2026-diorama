@@ -51,8 +51,6 @@ export const LANDMARKS: Landmark[] = [
   { id: "cosmoclock", name: "Cosmo Clock 21", at: [139.63677, 35.45539], top: 118, rank: 0, icon: "wheel", build: B.cosmoClock,
     rotate: 2.1, hide: [363854124] },
   { id: "redbrick", name: "Red Brick Warehouse", at: [139.64292, 35.4524], top: 22, rank: 1, icon: "brick", tint: "#b9553c", osm: [72998296] },
-  { id: "naritasan", name: "Naritasan Shinshō-ji", at: [140.31855, 35.78559], top: 32, scale: 1.6, rank: 0, icon: "pagoda",
-    build: () => B.pagoda(3, 9, 7.5), hide: [149192594], match: /naritasan|shinsho-?ji/i },
 ];
 
 const VISIT_RADIUS_M = 400;
