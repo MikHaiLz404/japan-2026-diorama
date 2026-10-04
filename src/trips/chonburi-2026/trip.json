@@ -1,0 +1,633 @@
+{
+  "source": "tripsy",
+  "trip_id": "1019591",
+  "name": "Chonburi",
+  "starts_at": "2026-02-22",
+  "ends_at": "2026-02-22",
+  "timezone": "Asia/Bangkok",
+  "fetched_at": "2026-10-04T03:36:15.004Z",
+  "activities": [
+    {
+      "id": "3223107",
+      "name": "Somphop Khao Tom Pla (Na Kaeng)",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3695177,
+      "longitude": 100.987004,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223108",
+      "name": "Phonthipha Fried Crab Cake",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.370231,
+      "longitude": 100.9870714,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223109",
+      "name": "Pungto",
+      "type": "bakery",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3702636,
+      "longitude": 100.9870717,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223110",
+      "name": "Na Chon",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2864731,
+      "longitude": 100.9716759,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223111",
+      "name": "Jib Seafood",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3457032,
+      "longitude": 100.9642657,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223113",
+      "name": "Jay Ple Restaurant (Won Beach)",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2680732,
+      "longitude": 100.9429508,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223114",
+      "name": "Yum Won Saep",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2697447,
+      "longitude": 100.9252264,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223115",
+      "name": "喜多郎寿し シラチャ店kitaro sushi sriracha",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.166997,
+      "longitude": 100.9282115,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223116",
+      "name": "Nomisuke Ramen",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2732198,
+      "longitude": 100.9220166,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223117",
+      "name": "Institute of Marine Science",
+      "type": "general",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2848718,
+      "longitude": 100.9248992,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223118",
+      "name": "Four Dining Grill and Bar",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2945341,
+      "longitude": 100.9121963,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223119",
+      "name": "ป้าอ่อน ซอยก๊วน",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3685476,
+      "longitude": 100.9874365,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223120",
+      "name": "OH Lock 33 Seafood",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3193511,
+      "longitude": 100.9197,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223121",
+      "name": "KO AUN Dim Sum",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3348865,
+      "longitude": 100.9320045,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223122",
+      "name": "ร้านลี้เซ่งหลี",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.366842,
+      "longitude": 100.9882879,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223123",
+      "name": "ร้านสุมหัว",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2796229,
+      "longitude": 100.9325121,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223125",
+      "name": "Thai Traditional Steamed Cup",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3235737,
+      "longitude": 100.9434627,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223126",
+      "name": "Lung Shall Kitchen",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 12.9199538,
+      "longitude": 100.9415117,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223127",
+      "name": "Nong Mon Market",
+      "type": "general",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2812943,
+      "longitude": 100.9357708,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223128",
+      "name": "Jarin Bangsaen Restaurant",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2845169,
+      "longitude": 100.9175131,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223129",
+      "name": "Mongkol Farm",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3210215,
+      "longitude": 100.9204231,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223131",
+      "name": "Khao Lam Mae Khai Toon Klao",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.275314,
+      "longitude": 100.9358661,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223132",
+      "name": "Khao Lam Mae Niyom",
+      "type": "shopping",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.272779,
+      "longitude": 100.9321761,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223133",
+      "name": "MossTea",
+      "type": "cafe",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2838179,
+      "longitude": 100.9371841,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223134",
+      "name": "Click Cafe",
+      "type": "cafe",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2834505,
+      "longitude": 100.9155249,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223135",
+      "name": "ข้าวต้ม เจ๊เตียง",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.3003599,
+      "longitude": 100.899454,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223136",
+      "name": "แม่เจริญ Maejaroen",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2788714,
+      "longitude": 100.9362422,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223137",
+      "name": "Sourcream Factory Bangsaen Toshin",
+      "type": "bakery",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.2927393,
+      "longitude": 100.9256954,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229139",
+      "name": "Krua Ban Pa Boon 3",
+      "type": "restaurant",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": null,
+      "latitude": 13.1564393,
+      "longitude": 100.9776612,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223143",
+      "name": "Lumpini Park Riverside Rama 3",
+      "type": "general",
+      "starts_at": "2026-02-22T00:00:01Z",
+      "ends_at": "2026-02-22T00:30:01Z",
+      "latitude": 13.6791775,
+      "longitude": 100.5277887,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229143",
+      "name": "Krua Ban Pa Boon 2",
+      "type": "restaurant",
+      "starts_at": "2026-02-22T04:44:01Z",
+      "ends_at": "2026-02-22T06:00:01Z",
+      "latitude": 12.9832613,
+      "longitude": 100.9308093,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229506",
+      "name": "Gim Brewing Room",
+      "type": "cafe",
+      "starts_at": "2026-02-22T06:10:01Z",
+      "ends_at": "2026-02-22T06:30:01Z",
+      "latitude": 12.968616,
+      "longitude": 100.8981014,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229491",
+      "name": "Institute of Marine Science",
+      "type": "museum",
+      "starts_at": "2026-02-22T07:30:01Z",
+      "ends_at": "2026-02-22T09:00:01Z",
+      "latitude": 13.2848718,
+      "longitude": 100.9248992,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3223130",
+      "name": "Open House Café オープンハウスカフェ",
+      "type": "restaurant",
+      "starts_at": "2026-02-22T09:30:01Z",
+      "ends_at": "2026-02-22T11:00:01Z",
+      "latitude": 13.301089,
+      "longitude": 100.9046183,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229958",
+      "name": "Wang Mook Seafood Restaurant",
+      "type": "restaurant",
+      "starts_at": "2026-02-22T11:00:01Z",
+      "ends_at": "2026-02-22T12:40:01Z",
+      "latitude": 13.3163324,
+      "longitude": 100.9046207,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "3229076",
+      "name": "Nong Mon Market",
+      "type": "general",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 13.2812943,
+      "longitude": 100.9357708,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    }
+  ],
+  "lodging": [
+    {
+      "id": "1086622",
+      "name": "Cozy Blu hotel Suvarnabhumi",
+      "starts_at": "2026-02-21T17:00:01Z",
+      "ends_at": "2026-02-21T17:00:01Z",
+      "latitude": 13.7088164,
+      "longitude": 100.7166766,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1086222",
+      "name": "Cozy Blu hotel Suvarnabhumi",
+      "starts_at": null,
+      "ends_at": null,
+      "latitude": 13.7088164,
+      "longitude": 100.7166766,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    }
+  ],
+  "transportations": [
+    {
+      "id": "2955103",
+      "type": "roadtrip",
+      "name": "รับนิ่ม",
+      "transport_number": "",
+      "departure_at": "2026-02-22T01:45:01Z",
+      "arrival_at": "2026-02-22T02:24:32Z",
+      "departure": {
+        "name": "Lumpini Park Riverside Rama 3",
+        "latitude": 13.6791775,
+        "longitude": 100.5277887
+      },
+      "arrival": {
+        "name": "Cozy Blu hotel Suvarnabhumi",
+        "latitude": 13.7088164,
+        "longitude": 100.7166766
+      }
+    },
+    {
+      "id": "2955107",
+      "type": "roadtrip",
+      "name": "มื้อแรก",
+      "transport_number": "",
+      "departure_at": "2026-02-22T02:48:01Z",
+      "arrival_at": "2026-02-22T04:14:04Z",
+      "departure": {
+        "name": "Cozy Blu hotel Suvarnabhumi",
+        "latitude": 13.7088164,
+        "longitude": 100.7166766
+      },
+      "arrival": {
+        "name": "Krua Ban Pa Boon 2",
+        "latitude": 12.9832613,
+        "longitude": 100.9308093
+      }
+    },
+    {
+      "id": "2956278",
+      "type": "roadtrip",
+      "name": "Gum brewing room",
+      "transport_number": "",
+      "departure_at": "2026-02-22T06:00:01Z",
+      "arrival_at": "2026-02-22T06:10:01Z",
+      "departure": {
+        "name": "Krua Ban Pa Boon 2",
+        "latitude": 12.9832613,
+        "longitude": 100.9308093
+      },
+      "arrival": {
+        "name": "Gum brewing room",
+        "latitude": 12.9832613,
+        "longitude": 100.9308093
+      }
+    },
+    {
+      "id": "2956264",
+      "type": "roadtrip",
+      "name": "Institute of Marine Science",
+      "transport_number": "",
+      "departure_at": "2026-02-22T06:35:01Z",
+      "arrival_at": "2026-02-22T07:29:53Z",
+      "departure": {
+        "name": "Gum brewing room",
+        "latitude": 12.9832613,
+        "longitude": 100.9308093
+      },
+      "arrival": {
+        "name": "Institute of Marine Science",
+        "latitude": 13.2848718,
+        "longitude": 100.9248992
+      }
+    },
+    {
+      "id": "2956663",
+      "type": "roadtrip",
+      "name": "",
+      "transport_number": "",
+      "departure_at": "2026-02-22T09:00:01Z",
+      "arrival_at": "2026-02-22T09:30:00Z",
+      "departure": {
+        "name": "Institute of Marine Science",
+        "latitude": 12.9832613,
+        "longitude": 100.9308093
+      },
+      "arrival": {
+        "name": "Open House Café オープンハウスカフェ",
+        "latitude": 13.301089,
+        "longitude": 100.9046183
+      }
+    },
+    {
+      "id": "2956747",
+      "type": "roadtrip",
+      "name": "Wang Mook Seafood",
+      "transport_number": "",
+      "departure_at": "2026-02-22T11:00:01Z",
+      "arrival_at": "2026-02-22T11:13:06Z",
+      "departure": {
+        "name": "Open House Café オープンハウスカフェ",
+        "latitude": 13.301089,
+        "longitude": 100.9046183
+      },
+      "arrival": {
+        "name": "Wang Mook Seafood Restaurant",
+        "latitude": 13.3163324,
+        "longitude": 100.9046207
+      }
+    },
+    {
+      "id": "2956884",
+      "type": "roadtrip",
+      "name": "ส่งนิ่ม",
+      "transport_number": "",
+      "departure_at": "2026-02-22T12:42:01Z",
+      "arrival_at": "2026-02-22T14:05:02Z",
+      "departure": {
+        "name": "Wang Mook Seafood Restaurant",
+        "latitude": 13.3163324,
+        "longitude": 100.9046207
+      },
+      "arrival": {
+        "name": "Cozy Blu hotel Suvarnabhumi",
+        "latitude": 13.7088164,
+        "longitude": 100.7166766
+      }
+    }
+  ]
+}

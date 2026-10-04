@@ -3,7 +3,7 @@
  * Snap each transport leg in src/trips/<slug>/trip.json onto real geometry → src/trips/<slug>/routes.json
  *
  *   trains / subways: shortest path over the OSM rail network (Overpass, cached in scripts/cache/rail.json)
- *   buses:            OSRM driving route (router.project-osrm.org)
+ *   buses / car trips: OSRM driving route (router.project-osrm.org)
  *
  * Legs that fail or detour implausibly are left out; the app draws a gentle arc for those.
  * Run after `npm run refresh-data`:  npm run build-routes -- --trip <slug>
@@ -22,7 +22,7 @@ const USER_AGENT = "trip-replay (https://github.com/MikHaiLz404)";
 /** Rail network bbox: every leg endpoint plus this margin (degrees). */
 const BBOX_MARGIN_DEG = 0.05;
 const RAIL_KINDS = new Set(["train", "subway"]);
-const ROAD_KINDS = new Set(["bus"]);
+const ROAD_KINDS = new Set(["bus", "car", "roadtrip"]);
 const SNAP_RADIUS_M = 1500;
 const TRANSFER_RADIUS_M = 120;
 /** Station transfers cost extra so paths prefer staying on one line. */

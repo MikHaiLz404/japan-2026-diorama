@@ -25,15 +25,15 @@ export interface TripConfig {
   fixture: TripFixture;
   routes: RouteGeometry[];
   landmarks: Landmark[];
-  /** Where the map opens before anything is selected. */
-  start: CameraPose;
-  /** The "ทั้งหมด" view. */
-  overview: CameraPose;
-  /** Clock (ISO) for the overview — sets the opening light. */
-  overviewClock: string;
-  /** The camera can't pan or zoom out past this. */
-  bounds: [LngLat, LngLat];
-  minZoom: number;
+  /** Where the map opens before anything is selected. Default: the overview. */
+  start?: CameraPose;
+  /** The "ทั้งหมด" view. Default: fit every stop and leg. */
+  overview?: CameraPose;
+  /** Clock (ISO) for the overview — sets the opening light. Default: the first stop's time. */
+  overviewClock?: string;
+  /** The camera can't pan or zoom out past this. Default: the trip's extent plus a margin. */
+  bounds?: [LngLat, LngLat];
+  minZoom?: number;
   /**
    * Regions where 3D terrain is switched on. The free DEM is a surface model, so flat cities with towers
    * get fake hills — only list genuinely hilly areas.

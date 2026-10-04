@@ -1,0 +1,91 @@
+{
+  "source": "tripsy",
+  "trip_id": "811618",
+  "name": "เขาใหญ่ 2025",
+  "starts_at": "2025-07-18",
+  "ends_at": "2025-07-20",
+  "timezone": "Asia/Bangkok",
+  "fetched_at": "2026-10-04T03:36:15.110Z",
+  "activities": [
+    {
+      "id": "2531557",
+      "name": "Jumbo Jumps Co.",
+      "type": "general",
+      "starts_at": "2025-07-18T00:30:01Z",
+      "ends_at": null,
+      "latitude": 13.7604885,
+      "longitude": 100.5679778,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "2531565",
+      "name": "Lotus’s Pak Chong-Khaoyai",
+      "type": "foodMarket",
+      "starts_at": "2025-07-18T03:30:01Z",
+      "ends_at": "2025-07-18T04:00:01Z",
+      "latitude": 14.661724,
+      "longitude": 101.3928628,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "2531566",
+      "name": "Makro Food Service PakChong-Khaoyai",
+      "type": "foodMarket",
+      "starts_at": "2025-07-18T05:00:01Z",
+      "ends_at": "2025-07-18T05:30:01Z",
+      "latitude": 14.6495221,
+      "longitude": 101.4085929,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "2531580",
+      "name": "Ban Tha Chang Spring",
+      "type": "tour",
+      "starts_at": "2025-07-18T06:00:01Z",
+      "ends_at": "2025-07-18T06:30:01Z",
+      "latitude": 14.5479302,
+      "longitude": 101.4199419,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "2531573",
+      "name": "Million Stars Pool-villa @วังน้ำเขียว",
+      "type": "general",
+      "starts_at": "2025-07-18T08:00:01Z",
+      "ends_at": "2025-07-20T04:00:01Z",
+      "latitude": 14.3774268,
+      "longitude": 101.8687182,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "2531579",
+      "name": "Curf cafe เคิร์ฟคาเฟ่",
+      "type": "cafe",
+      "starts_at": "2025-07-20T04:40:01Z",
+      "ends_at": "2025-07-20T05:10:01Z",
+      "latitude": 14.3812441,
+      "longitude": 101.7547602,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    }
+  ],
+  "lodging": [],
+  "transportations": []
+}

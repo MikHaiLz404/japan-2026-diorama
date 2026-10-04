@@ -105,6 +105,15 @@ export function mapLabel(name: string): string {
 const hasPoint = (lat: number | null | undefined, lng: number | null | undefined) =>
   Number.isFinite(lat) && Number.isFinite(lng);
 
+/**
+ * Tripsy pins an entry to a day without a time as local midnight (00:00) with no end, or an end equal to the start.
+ * Those are "places we might go" lists, not visits — a real visit has a time.
+ */
+export function isDayPlaceholder(startsAt: string, endsAt: string | null | undefined, timeZone: string): boolean {
+  const localTime = formatter("en-GB", { timeZone, hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(startsAt));
+  return localTime === "00:00" && (!endsAt || endsAt === startsAt);
+}
+
 /** Average speed used to estimate a leg's missing departure/arrival time. */
 const ESTIMATE_KMH = 35;
 const IGNORED_LEG_KINDS = new Set(["walk", "airplane"]);
@@ -116,7 +125,7 @@ export function buildTrip(fixture: TripFixture, routes: RouteGeometry[]): Trip {
     ...fixture.lodging.map((l) => ({ ...l, type: "lodging" })),
   ];
   const stops: Stop[] = places
-    .filter((p) => p.starts_at && hasPoint(p.latitude, p.longitude))
+    .filter((p) => p.starts_at && hasPoint(p.latitude, p.longitude) && !isDayPlaceholder(p.starts_at, p.ends_at, tz))
     .map((p) => ({
       id: p.id,
       name: p.name,

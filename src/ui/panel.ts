@@ -95,23 +95,32 @@ export function renderList({ day, stops, landmarks, onStop, onLandmark }: {
 }): void {
   const list = $("#list");
   list.replaceChildren();
-  if (day === ALL_DAYS) {
+  const stopRow = (s: Stop) => {
+    const r = row(`<span class="ic" style="background:var(--${s.cat})">${glyphSvg(s.cat)}</span>`, s.name,
+      [s.time, CATEGORY_LABEL[s.cat]].filter(Boolean).join(" · "), () => onStop(s));
+    r.dataset.stop = s.id;
+    return r;
+  };
+  const daySection = (d: string, items: Stop[]) => {
+    const { weekday, date, month } = dayParts(d);
+    list.append(section(`${weekday} ${date} ${month} · ${items.length} จุด`), ...items.map(stopRow));
+  };
+
+  if (day !== ALL_DAYS) {
+    daySection(day, stops.filter((s) => s.day === day));
+    return;
+  }
+  const shown = landmarks.filter((l) => !l.quiet);
+  if (shown.length) {
     list.append(section("Landmarks 3D"));
-    for (const lm of landmarks.filter((l) => !l.quiet)) {
+    for (const lm of shown) {
       list.append(row(`<span class="lm">${ICONS[lm.icon]}</span>`, lm.name, "แตะเพื่อบินไปดู", () => onLandmark(lm)));
     }
     list.append(section(`${stops.length} จุดในทริป`));
     return;
   }
-  const items = stops.filter((s) => s.day === day);
-  const { weekday, date, month } = dayParts(day);
-  list.append(section(`${weekday} ${date} ${month} · ${items.length} จุด`));
-  for (const s of items) {
-    const r = row(`<span class="ic" style="background:var(--${s.cat})">${glyphSvg(s.cat)}</span>`, s.name,
-      [s.time, CATEGORY_LABEL[s.cat]].filter(Boolean).join(" · "), () => onStop(s));
-    r.dataset.stop = s.id;
-    list.append(r);
-  }
+  // No landmarks (most small trips): the overview lists every stop, day by day.
+  for (const d of [...new Set(stops.map((s) => s.day))]) daySection(d, stops.filter((s) => s.day === d));
 }
 
 export function markStop(id: string): void {

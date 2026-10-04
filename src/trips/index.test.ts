@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { TRIPS, findTrip, slugFromPath, tripsByDate } from "./index";
+import { buildTrip } from "../data/trip";
 
 describe("trip registry", () => {
   test("slugs are unique and URL-safe", () => {
@@ -13,9 +14,13 @@ describe("trip registry", () => {
       const config = await summary.load();
       expect(config.slug).toBe(summary.slug);
       expect(config.fixture.activities.length).toBeGreaterThan(0);
-      const [[west, south], [east, north]] = config.bounds;
-      expect(west).toBeLessThan(east);
-      expect(south).toBeLessThan(north);
+      // Every listed trip must have at least one real (dated, timed) stop to show.
+      expect(buildTrip(config.fixture, config.routes).stops.length).toBeGreaterThan(0);
+      if (config.bounds) {
+        const [[west, south], [east, north]] = config.bounds;
+        expect(west).toBeLessThan(east);
+        expect(south).toBeLessThan(north);
+      }
     }
   });
 
