@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 /**
- * Snap each transport leg in src/data/japan-2026.json onto real geometry → src/data/routes.json
+ * Snap each transport leg in src/trips/<slug>/trip.json onto real geometry → src/trips/<slug>/routes.json
  *
  *   trains / subways: shortest path over the OSM rail network (Overpass, cached in scripts/cache/rail.json)
  *   buses:            OSRM driving route (router.project-osrm.org)
  *
  * Legs that fail or detour implausibly are left out; the app draws a gentle arc for those.
- * Run after `npm run refresh-data`:  npm run build-routes
+ * Run after `npm run refresh-data`:  npm run build-routes -- --trip <slug>
  */
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { tripPaths } from "./lib/trip-args.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const fixtureFile = join(root, "src/data/japan-2026.json");
-const railCache = join(root, "scripts/cache/rail.json");
-const outFile = join(root, "src/data/routes.json");
-const USER_AGENT = "japan-2026-replay (https://github.com/MikHaiLz404)";
+const trip = tripPaths();
+const fixtureFile = trip.fixture;
+const railCache = join(trip.cache, "rail.json");
+const outFile = join(trip.dir, "routes.json");
+const USER_AGENT = "trip-replay (https://github.com/MikHaiLz404)";
 
-const RAIL_BBOX = "35.28,139.45,35.81,140.42"; // Enoshima … Narita
-const RAIL_QUERY = `[out:json][timeout:180];way["railway"~"^(rail|subway|light_rail|monorail|narrow_gauge|tram)$"]["service"!~"yard|siding|spur|crossover"](${RAIL_BBOX});(._;>;);out skel qt;`;
+/** Rail network bbox: every leg endpoint plus this margin (degrees). */
+const BBOX_MARGIN_DEG = 0.05;
 const RAIL_KINDS = new Set(["train", "subway"]);
 const ROAD_KINDS = new Set(["bus"]);
 const SNAP_RADIUS_M = 1500;
@@ -38,13 +38,21 @@ const dist = (a, b) => {
 };
 const length = (pts) => pts.slice(1).reduce((sum, p, i) => sum + dist(pts[i], p), 0);
 
-async function loadRail() {
+function railQuery(legs) {
+  const lats = legs.flatMap((t) => [t.departure.latitude, t.arrival.latitude]);
+  const lngs = legs.flatMap((t) => [t.departure.longitude, t.arrival.longitude]);
+  const bbox = [Math.min(...lats) - BBOX_MARGIN_DEG, Math.min(...lngs) - BBOX_MARGIN_DEG,
+    Math.max(...lats) + BBOX_MARGIN_DEG, Math.max(...lngs) + BBOX_MARGIN_DEG].map((v) => v.toFixed(3)).join(",");
+  return `[out:json][timeout:180];way["railway"~"^(rail|subway|light_rail|monorail|narrow_gauge|tram)$"]["service"!~"yard|siding|spur|crossover"](${bbox});(._;>;);out skel qt;`;
+}
+
+async function loadRail(legs) {
   if (!existsSync(railCache)) {
     console.log("Fetching OSM rail network from Overpass (one-off, ~10 MB)…");
     const res = await fetch("https://overpass-api.de/api/interpreter", {
       method: "POST",
       headers: { "User-Agent": USER_AGENT, "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ data: RAIL_QUERY }),
+      body: new URLSearchParams({ data: railQuery(legs) }),
     });
     if (!res.ok) throw new Error(`Overpass ${res.status}: ${(await res.text()).slice(0, 200)}`);
     await mkdir(dirname(railCache), { recursive: true });
@@ -213,7 +221,8 @@ const fixture = JSON.parse(await readFile(fixtureFile, "utf8"));
 const legs = fixture.transportations.filter((t) =>
   (RAIL_KINDS.has(t.type) || ROAD_KINDS.has(t.type))
   && Number.isFinite(t.departure.latitude) && Number.isFinite(t.arrival.latitude));
-const graph = legs.some((t) => RAIL_KINDS.has(t.type)) ? buildRailGraph(await loadRail()) : null;
+const railLegs = legs.filter((t) => RAIL_KINDS.has(t.type));
+const graph = railLegs.length ? buildRailGraph(await loadRail(railLegs)) : null;
 
 const out = [];
 for (const t of legs) {

@@ -21,7 +21,7 @@ export function isEmbedMode(
 }
 
 export function standaloneUrl(
-  href = typeof window !== "undefined" ? window.location.href : "https://japan-2026-replay.vercel.app/",
+  href = typeof window !== "undefined" ? window.location.href : "https://trip-replay.vercel.app/",
 ): string {
   const url = new URL(href);
   url.searchParams.delete("embed");

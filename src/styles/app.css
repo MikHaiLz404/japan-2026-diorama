@@ -198,3 +198,30 @@ body.playing-mode #fabs{bottom:120px}
 .embed-open:hover{background:var(--accent);color:#fff}
 .embed-open[hidden]{display:none}
 body.embed #clock{display:none}
+
+/* ---------- home: trip cards ---------- */
+body.home{overflow:auto;background:radial-gradient(120% 80% at 80% -10%,#3a3f6b 0%,transparent 55%),
+  radial-gradient(90% 70% at 0% 110%,#243b55 0%,transparent 60%),var(--bg)}
+body.home #map,body.home #badges,body.home #clock,body.home #panel,body.home #fabs,body.home #daycard{display:none}
+body:not(.trip) #map{visibility:hidden}
+#home{max-width:880px;margin:0 auto;padding:clamp(40px,8vw,96px) 20px 64px}
+#home[hidden]{display:none}
+.home-eyebrow{margin:0;font:700 12px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+#home h1{margin:8px 0 10px;font-size:clamp(32px,6vw,52px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.home-sub{margin:0 0 36px;max-width:52ch;color:var(--ink-2);font-size:15px;line-height:1.6}
+.trip-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.trip-card{position:relative;display:flex;flex-direction:column;gap:6px;min-height:170px;padding:20px 20px 18px;border-radius:20px;
+  background:var(--glass);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink);text-decoration:none;
+  backdrop-filter:blur(24px) saturate(1.5);-webkit-backdrop-filter:blur(24px) saturate(1.5);overflow:hidden;
+  transition:transform .25s var(--ease-spring),border-color .2s}
+.trip-card::after{content:"";position:absolute;inset:auto -30% -60% auto;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(10,132,255,.35),transparent 70%);pointer-events:none}
+.trip-card:hover{transform:translateY(-3px);border-color:rgba(10,132,255,.55)}
+.trip-card:active{transform:scale(.98)}
+.trip-dates{font:600 12px var(--font);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.trip-title{font-size:26px;font-weight:750;letter-spacing:-.01em}
+.trip-areas{font-size:13px;color:var(--ink-2);line-height:1.5}
+.trip-open{margin-top:auto;font:650 13px var(--font);color:var(--accent)}
+#panel .back{display:inline-block;margin-bottom:4px;font:600 12px var(--font);color:var(--ink-2);text-decoration:none}
+#panel .back:hover{color:var(--accent)}
+body.embed #panel .back{display:none}

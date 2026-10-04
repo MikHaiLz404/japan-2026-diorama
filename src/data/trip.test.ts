@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { buildTrip, categoryOf, dayOf, mapLabel } from "./trip";
+import { buildTrip, categoryOf, dayOf, dayParts, mapLabel } from "./trip";
 import type { TripFixture } from "./types";
 
 const base: TripFixture = {
@@ -10,9 +10,16 @@ const activity = (id: string, starts_at: string | null, extra = {}) => ({
   id, name: `A${id}`, type: "restaurant", starts_at, ends_at: null, latitude: 35.7, longitude: 139.8, timezone: "Asia/Tokyo", ...extra,
 });
 
-describe("dayOf", () => {
-  test("uses the Tokyo calendar day, not UTC", () => {
-    expect(dayOf("2026-09-17T21:30:00Z")).toBe("2026-09-18");
+describe("dayOf / dayParts", () => {
+  test("uses the trip's calendar day, not UTC", () => {
+    expect(dayOf("2026-09-17T21:30:00Z", "Asia/Tokyo")).toBe("2026-09-18");
+    expect(dayOf("2026-09-17T21:30:00Z", "Asia/Bangkok")).toBe("2026-09-18");
+    expect(dayOf("2026-09-17T15:30:00Z", "Asia/Bangkok")).toBe("2026-09-17");
+  });
+
+  test("dayParts labels a calendar day regardless of timezone", () => {
+    expect(dayParts("2026-09-24")).toMatchObject({ date: 24, weekday: "พฤหัส" });
+    expect(dayParts("2026-09-24").month).toBe("ก.ย.");
   });
 });
 

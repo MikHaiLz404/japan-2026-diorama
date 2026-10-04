@@ -1,9 +1,8 @@
 // Shibuya scramble: the real OSM crosswalks drawn as zebra lines (draped on terrain), plus pedestrians who
 // flood across on the scramble phase of a ~40 s signal cycle.
 import type { ExpressionSpecification, GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
-import crosswalks from "../data/scramble.json";
-import { along, distance } from "../lib/geo";
-import type { LngLat } from "../data/types";
+import { along, distance } from "../../lib/geo";
+import type { LngLat } from "../../data/types";
 
 const CENTER: LngLat = [139.70048, 35.65952];
 const WALK_SECONDS = 14;
@@ -30,8 +29,9 @@ function seeded(seed: number) {
   };
 }
 
-export function addScramble(map: MapLibreMap): () => void {
-  const walks = (crosswalks as LngLat[][]).filter((w) => w.length > 1);
+/** `crosswalks`: OSM crossing polylines from ./scramble.json (refresh with `npm run fetch-scramble`). */
+export function addScramble(map: MapLibreMap, crosswalks: LngLat[][]): () => void {
+  const walks = crosswalks.filter((w) => w.length > 1);
   map.addSource("zebra", {
     type: "geojson",
     data: { type: "FeatureCollection", features: walks.map((c) => ({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: c } })) },

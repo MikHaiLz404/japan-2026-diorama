@@ -104,8 +104,8 @@ export function renderList({ day, stops, landmarks, onStop, onLandmark }: {
     return;
   }
   const items = stops.filter((s) => s.day === day);
-  const { weekday, date } = dayParts(day);
-  list.append(section(`${weekday} ${date} ก.ย. · ${items.length} จุด`));
+  const { weekday, date, month } = dayParts(day);
+  list.append(section(`${weekday} ${date} ${month} · ${items.length} จุด`));
   for (const s of items) {
     const r = row(`<span class="ic" style="background:var(--${s.cat})">${glyphSvg(s.cat)}</span>`, s.name,
       [s.time, CATEGORY_LABEL[s.cat]].filter(Boolean).join(" · "), () => onStop(s));
@@ -129,8 +129,8 @@ export function stopCard(s: Stop): HTMLElement {
   const h = document.createElement("h3");
   h.textContent = s.name;
   const p = document.createElement("p");
-  const { weekday, date } = dayParts(s.day);
-  p.textContent = `${weekday} ${date} ก.ย.${s.time ? ` · ${s.time}` : ""}`;
+  const { weekday, date, month } = dayParts(s.day);
+  p.textContent = `${weekday} ${date} ${month}${s.time ? ` · ${s.time}` : ""}`;
   const tag = document.createElement("span");
   tag.className = "tag";
   tag.style.background = `var(--${s.cat})`;

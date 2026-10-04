@@ -1,29 +1,26 @@
 #!/usr/bin/env node
 /**
- * Refresh src/data/japan-2026.json from Tripsy dumps.
+ * Refresh src/trips/<slug>/trip.json from Tripsy dumps.
  *
- * Local demo never needs a token. To refresh:
- *   1. In Cursor, use Tripsy MCP (trip id 1213687):
- *        tripsy_trips_show
- *        tripsy_activities_list
- *        tripsy_hostings_list
- *        tripsy_transportations_list
- *   2. Save the raw MCP JSON envelopes to scripts/cache/:
+ * The app never needs a token. To refresh a trip:
+ *   1. Use the Tripsy MCP for the trip's Tripsy id:
+ *        tripsy_trips_show, tripsy_activities_list, tripsy_hostings_list, tripsy_transportations_list
+ *   2. Save the JSON envelopes to scripts/cache/<slug>/:
  *        trip.json, activities.json, hostings.json, transportations.json
- *   3. npm run refresh-data
+ *   3. npm run refresh-data -- --trip <slug>
  *
  * Optional live pull (not required for build/dev):
- *   TRIPSY_API_BASE=... TRIPSY_API_TOKEN=... TRIP_ID=1213687 npm run refresh-data
+ *   TRIPSY_API_BASE=... TRIPSY_API_TOKEN=... npm run refresh-data -- --trip <slug> --tripsy-id <id>
  */
 
+import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { flag, tripPaths } from "./lib/trip-args.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const cacheDir = join(root, "scripts/cache");
-const outFile = join(root, "src/data/japan-2026.json");
-const tripId = process.env.TRIP_ID ?? "1213687";
+const { slug, cache: cacheDir, fixture: outFile } = tripPaths({ mustExist: false });
+const previous = existsSync(outFile) ? JSON.parse(await readFile(outFile, "utf8")) : null;
+const tripId = flag("tripsy-id") ?? previous?.trip_id;
 
 function unwrap(payload) {
   if (payload?.data?.results) return payload.data.results;
@@ -42,7 +39,7 @@ function compactActivity(row) {
     latitude: row.latitude,
     longitude: row.longitude,
     address: row.address ? String(row.address).replaceAll("\n", ", ") : null,
-    timezone: row.timezone ?? "Asia/Tokyo",
+    timezone: row.timezone ?? tripTimezone,
     notes: row.notes ?? null,
     website: row.website ?? null,
   };
@@ -57,7 +54,7 @@ function compactLodging(row) {
     latitude: row.latitude,
     longitude: row.longitude,
     address: row.address ? String(row.address).replaceAll("\n", ", ") : null,
-    timezone: row.timezone ?? "Asia/Tokyo",
+    timezone: row.timezone ?? tripTimezone,
     notes: row.notes ?? null,
     website: row.website ?? null,
   };
@@ -92,6 +89,7 @@ async function fetchLive() {
   const base = process.env.TRIPSY_API_BASE;
   const token = process.env.TRIPSY_API_TOKEN;
   if (!base || !token) return null;
+  if (!tripId) throw new Error("Live fetch needs --tripsy-id <id> for a new trip");
   const headers = { Authorization: `Bearer ${token}`, Accept: "application/json" };
   const get = async (path) => {
     const res = await fetch(new URL(path, base), { headers });
@@ -132,20 +130,22 @@ Checked:
   - ${cacheDir}/hostings.json
   - ${cacheDir}/transportations.json
 
-The committed fixture at src/data/japan-2026.json is enough to run locally.
+The committed fixture at src/trips/<slug>/trip.json is enough to run locally.
 To refresh from Tripsy MCP, dump those four JSON files into scripts/cache/ and re-run.
 `);
   process.exit(0);
 }
 
 const trip = unwrap(raw.trip);
+// Every day/time label in the app uses this, so it must be the trip's local zone.
+const tripTimezone = trip.timezone ?? previous?.timezone ?? "UTC";
 const fixture = {
   source: "tripsy",
   trip_id: String(trip.id ?? tripId),
-  name: trip.name ?? "Japan 2026",
+  name: trip.name ?? previous?.name ?? slug,
   starts_at: String(trip.starts_at).slice(0, 10),
   ends_at: String(trip.ends_at).slice(0, 10),
-  timezone: "Asia/Tokyo",
+  timezone: tripTimezone,
   fetched_at: new Date().toISOString(),
   activities: unwrap(raw.activities).map(compactActivity),
   lodging: unwrap(raw.hostings).map(compactLodging),

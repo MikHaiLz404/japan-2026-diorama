@@ -1,8 +1,8 @@
 import { describe, expect, test } from "vitest";
 import { buildTimeline, dayStart, stateAt, stopStart, trailAt } from "./timeline";
 import { buildTrip, type Stop } from "../data/trip";
-import fixture from "../data/japan-2026.json";
-import routes from "../data/routes.json";
+import fixture from "../trips/japan-2026/trip.json";
+import routes from "../trips/japan-2026/routes.json";
 import type { RouteGeometry, TripFixture } from "../data/types";
 
 const stop = (id: string, iso: string, lngLat: [number, number], extra: Partial<Stop> = {}): Stop => ({
