@@ -12,9 +12,9 @@ describe("visitedLandmarks", () => {
   });
 
   test("a far pin still counts when the stop is named after the landmark", () => {
-    const omotesando: LngLat = [140.3163, 35.7761]; // ~1 km from the pagoda
-    expect(visitedLandmarks([stop("Narita Airport", omotesando)]).map((l) => l.id)).not.toContain("naritasan");
-    expect(visitedLandmarks([stop("Naritasan Shinshoji Temple", omotesando)]).map((l) => l.id)).toContain("naritasan");
+    const toyosu: LngLat = [139.793, 35.6465]; // Tripsy's teamLab pin, ~440 m from the venue
+    expect(visitedLandmarks([stop("Vegan Ramen UZU Tokyo", toyosu)]).map((l) => l.id)).not.toContain("teamlab");
+    expect(visitedLandmarks([stop("teamLab Planets", toyosu)]).map((l) => l.id)).toContain("teamlab");
   });
 
   test("no stops means no landmarks", () => {
