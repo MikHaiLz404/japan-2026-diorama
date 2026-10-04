@@ -13,7 +13,7 @@ const DEG = 180 / Math.PI;
 const EASE_SECONDS = 0.9;
 const SETTLED = 0.004;
 /** Weight steps below this are not worth a style update. */
-const PAINT_STEPS = 60;
+const PAINT_STEPS = 12;
 const CLOCK_TWEEN_MS = 1400;
 
 export interface Lighting {
@@ -43,12 +43,19 @@ export function createLighting(
   let settleRaf = 0;
   let last = 0;
   let isReady = false;
+  let deferred = false;
 
   function paint(weights: PhaseWeights) {
     landmarks.setLighting({ sunDir: sunVector(sun!), weights });
     if (!isReady) return;
     const signature = [weights.night, weights.dusk, weights.day].map((w) => Math.round(w * PAINT_STEPS)).join();
     if (signature === applied) return;
+    // Repainting the whole basemap mid-flight stutters; hold the look until the camera lands. Replay moves the
+    // camera constantly, so it keeps painting.
+    if (map.isMoving() && !document.body.classList.contains("playing-mode")) {
+      deferred = true;
+      return;
+    }
     applied = signature;
     const palette = blendPalette(weights);
     for (const [layerId, props] of Object.entries(paintFor(palette, highlight))) {
@@ -66,6 +73,12 @@ export function createLighting(
       intensity: 0.38 * weights.night + 0.3 * weights.dusk + 0.16 * weights.day,
     });
   }
+
+  map.on("moveend", () => {
+    if (!deferred || !shown) return;
+    deferred = false;
+    paint(shown);
+  });
 
   function settle(now: number) {
     const dt = Math.min(0.1, (now - last) / 1000);
