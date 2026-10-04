@@ -85,7 +85,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
   let placeLabels: ReturnType<typeof addPlaceLabels> = { setClock: () => {} };
   map.once("style.load", () => {
     addTripLayers(map, trip);
-    placeLabels = addPlaceLabels(map, placePoints(config.places, stops));
+    placeLabels = addPlaceLabels(map, placePoints(config.places, stops), config.placesMaxZoom);
     map.addLayer(landmarkLayer.layer);
     config.extras?.(map);
     map.on("click", "stops", (e) => openStop(stops.find((s) => s.id === e.features?.[0]?.properties?.id), false));
