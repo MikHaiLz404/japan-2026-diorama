@@ -1,0 +1,25 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-04T04:06:07Z"
+  },
+  "title": "Moss & Mist",
+  "namespace": "MossMist",
+  "libraries": [],
+  "sections": {},
+  "groups": [],
+  "assetGroups": {},
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Jojo",
+    "at": "2026-10-04T20:00:00Z",
+    "via": "Claude (Cowork)",
+    "note": "Coffee, gamepad, film aligned with the versions already live on the site"
+  }
+}

@@ -1,0 +1,127 @@
+/* Moss & Mist tokens. Generated from tokens.json; edit that file, not this one.
+   Theme: set data-theme="light" or "dark" on <html>. With no attribute, follows prefers-color-scheme. */
+:root,
+[data-theme="light"] {
+  --cloud-dancer: #f0eee9;
+  --black: #141116;
+  --background: #f0eee9;
+  --surface: #faf9f6;
+  --surface-muted: #e6e3dc;
+  --separator: #d9d5cc;
+  --ink: #141116;
+  --ink-muted: #4a454f;
+  --ink-subtle: #625d68;
+  --green: #17724a;
+  --on-green: #ffffff;
+  --green-soft: #e0ede5;
+  --purple: #5b33a8;
+  --on-purple: #ffffff;
+  --purple-soft: #e7e0f5;
+  --marigold: #f2b03d;
+  --on-marigold: #141116;
+  --marigold-soft: #fbebc7;
+  --marigold-text: #8a5a00;
+  --error: #b8264f;
+  --on-error: #ffffff;
+  --error-soft: #f9dde5;
+  --data-1: #17724a;
+  --data-2: #5b33a8;
+  --data-3: #c98500;
+  --data-4: #2a78d6;
+  --data-5: #c2410c;
+  --data-seq-1: #e0ede5;
+  --data-seq-2: #b4d8c3;
+  --data-seq-3: #7dbb98;
+  --data-seq-4: #3f9468;
+  --data-seq-5: #17724a;
+  --data-seq-6: #0d4a2f;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --cloud-dancer: #f0eee9;
+  --black: #141116;
+  --background: #141116;
+  --surface: #1e1b22;
+  --surface-muted: #37323f;
+  --separator: #4a4452;
+  --ink: #f0eee9;
+  --ink-muted: #b4afba;
+  --ink-subtle: #a39eaa;
+  --green: #5fd08a;
+  --on-green: #141116;
+  --green-soft: #1b3a2b;
+  --purple: #b79bff;
+  --on-purple: #141116;
+  --purple-soft: #2c2347;
+  --marigold: #f5be55;
+  --on-marigold: #141116;
+  --marigold-soft: #3a2e14;
+  --marigold-text: #f5be55;
+  --error: #ff7fa0;
+  --on-error: #141116;
+  --error-soft: #431f2c;
+  --data-1: #3da566;
+  --data-2: #8b6ce0;
+  --data-3: #bd8a20;
+  --data-4: #4388d8;
+  --data-5: #d46f3d;
+  --data-seq-1: #1b3a2b;
+  --data-seq-2: #245a3d;
+  --data-seq-3: #2f7a50;
+  --data-seq-4: #47a06b;
+  --data-seq-5: #5fd08a;
+  --data-seq-6: #a5ebc0;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --cloud-dancer: #f0eee9;
+    --black: #141116;
+    --background: #141116;
+    --surface: #1e1b22;
+    --surface-muted: #37323f;
+    --separator: #4a4452;
+    --ink: #f0eee9;
+    --ink-muted: #b4afba;
+    --ink-subtle: #a39eaa;
+    --green: #5fd08a;
+    --on-green: #141116;
+    --green-soft: #1b3a2b;
+    --purple: #b79bff;
+    --on-purple: #141116;
+    --purple-soft: #2c2347;
+    --marigold: #f5be55;
+    --on-marigold: #141116;
+    --marigold-soft: #3a2e14;
+    --marigold-text: #f5be55;
+    --error: #ff7fa0;
+    --on-error: #141116;
+    --error-soft: #431f2c;
+    --data-1: #3da566;
+    --data-2: #8b6ce0;
+    --data-3: #bd8a20;
+    --data-4: #4388d8;
+    --data-5: #d46f3d;
+    --data-seq-1: #1b3a2b;
+    --data-seq-2: #245a3d;
+    --data-seq-3: #2f7a50;
+    --data-seq-4: #47a06b;
+    --data-seq-5: #5fd08a;
+    --data-seq-6: #a5ebc0;
+    color-scheme: dark;
+  }
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --font-headline: "Space Grotesk", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-sans: "Inter", "IBM Plex Sans Thai", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", "IBM Plex Sans Thai", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+/* Type styles (family, size/line-height, weight): display 48px/52px 700; heading-1 32px/40px 700; heading-2 24px/32px 600; heading-3 18px/26px 600; body 16px/24px 400; small 14px/20px 400; caption 12px/16px 500; mono 13px/20px 400 */

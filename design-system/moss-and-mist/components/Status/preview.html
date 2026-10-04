@@ -1,0 +1,50 @@
+<!-- @dsCard group="Status" height=640 subtitle="Success, warning, error and info" -->
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0}
+body{background:var(--background);font-family:var(--font-sans)}
+.grid{display:grid;grid-template-columns:1fr 1fr}
+.pane{background:var(--background);color:var(--ink);padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-3)}
+.label{margin:0;font:500 12px/16px var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-subtle)}
+.cap{margin:var(--space-2) 0 0;font:500 12px/16px var(--font-sans);color:var(--ink-muted)}
+.note{display:flex;gap:var(--space-3);align-items:flex-start;padding:var(--space-3);border-radius:var(--radius-md)}
+.note svg{flex:none;width:20px;height:20px;margin-top:2px}
+.note h4{margin:0;font:600 14px/20px var(--font-sans);color:var(--ink)}
+.note p{margin:2px 0 0;font:400 14px/20px var(--font-sans);color:var(--ink-muted)}
+.s{background:var(--green-soft)}.s svg{color:var(--green)}
+.w{background:var(--marigold-soft)}.w svg{color:var(--marigold-text)}
+.e{background:var(--error-soft)}.e svg{color:var(--error)}
+.ib{background:var(--surface-muted)}.ib svg{color:var(--ink)}
+.field{display:flex;flex-direction:column;gap:4px}
+.input{border:2px solid var(--error);background:var(--surface);color:var(--ink);border-radius:var(--radius-md);padding:10px 12px;font:400 16px/24px var(--font-sans)}
+.err{display:flex;gap:6px;align-items:center;font:500 12px/16px var(--font-sans);color:var(--error)}
+.err svg{width:16px;height:16px}
+.row{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.pill{display:inline-flex;gap:4px;align-items:center;font:600 12px/16px var(--font-sans);padding:4px 10px;border-radius:9999px}
+.pill svg{width:16px;height:16px}
+.p-e{background:var(--error);color:var(--on-error)}
+.p-w{background:var(--marigold);color:var(--on-marigold)}
+.btn{border:0;border-radius:var(--radius-md);padding:10px 16px;font:600 14px/20px var(--font-sans);background:var(--error);color:var(--on-error)}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" vector-effect="non-scaling-stroke"/><path d="M12 11v6" vector-effect="non-scaling-stroke"/><path d="M12 7.5h.01" vector-effect="non-scaling-stroke"/></g></symbol><symbol id="warning" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4L3 20h18z" vector-effect="non-scaling-stroke"/><path d="M12 10v4" vector-effect="non-scaling-stroke"/><path d="M12 17h.01" vector-effect="non-scaling-stroke"/></g></symbol><symbol id="x-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" vector-effect="non-scaling-stroke"/><path d="M9 9l6 6" vector-effect="non-scaling-stroke"/><path d="M15 9l-6 6" vector-effect="non-scaling-stroke"/></g></symbol><symbol id="check-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" vector-effect="non-scaling-stroke"/><path d="M8 12.5l3 3 5-6" vector-effect="non-scaling-stroke"/></g></symbol></svg>
+<div class="grid">
+<div class="pane" data-theme="light">
+<p class="label">Light</p>
+<div class="note s"><svg><use href="#check-circle"/></svg><div><h4>Saved</h4><p>Your changes are in. Success is green with a check.</p></div></div>
+<div class="note w"><svg><use href="#warning"/></svg><div><h4>Storage almost full</h4><p>Warning is marigold with a triangle.</p></div></div>
+<div class="note e"><svg><use href="#x-circle"/></svg><div><h4>Upload failed</h4><p>Error is raspberry with a cross.</p></div></div>
+<div class="note ib"><svg><use href="#info"/></svg><div><h4>New export format</h4><p>Info is neutral grey with an i.</p></div></div>
+<div class="field"><div class="input">name@</div><div class="err"><svg><use href="#x-circle"/></svg>Enter a full email address</div></div>
+<div class="row"><span class="pill p-e"><svg><use href="#x-circle"/></svg>Failed</span><span class="pill p-w"><svg><use href="#warning"/></svg>Check</span><button class="btn">Delete</button></div>
+</div>
+<div class="pane" data-theme="dark">
+<p class="label">Dark</p>
+<div class="note s"><svg><use href="#check-circle"/></svg><div><h4>Saved</h4><p>Your changes are in. Success is green with a check.</p></div></div>
+<div class="note w"><svg><use href="#warning"/></svg><div><h4>Storage almost full</h4><p>Warning is marigold with a triangle.</p></div></div>
+<div class="note e"><svg><use href="#x-circle"/></svg><div><h4>Upload failed</h4><p>Error is raspberry with a cross.</p></div></div>
+<div class="note ib"><svg><use href="#info"/></svg><div><h4>New export format</h4><p>Info is neutral grey with an i.</p></div></div>
+<div class="field"><div class="input">name@</div><div class="err"><svg><use href="#x-circle"/></svg>Enter a full email address</div></div>
+<div class="row"><span class="pill p-e"><svg><use href="#x-circle"/></svg>Failed</span><span class="pill p-w"><svg><use href="#warning"/></svg>Check</span><button class="btn">Delete</button></div>
+</div>
+</div></body></html>
