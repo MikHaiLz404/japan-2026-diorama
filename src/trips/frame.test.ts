@@ -20,12 +20,13 @@ describe("tripExtent", () => {
 });
 
 describe("paddedBounds", () => {
-  test("grows by a fraction of the span", () => {
-    const [[w, s], [e, n]] = paddedBounds({ west: 100, south: 13, east: 101, north: 14 });
-    expect(w).toBeCloseTo(99);
-    expect(e).toBeCloseTo(102);
-    expect(s).toBeCloseTo(12);
-    expect(n).toBeCloseTo(15);
+  test("grows every side by a multiple of the larger span", () => {
+    // 1.3° wide, 0.9° tall — like Khao Yai 2025. A phone screen is tall, so latitude needs room too.
+    const [[w, s], [e, n]] = paddedBounds({ west: 100.5, south: 13.7, east: 101.8, north: 14.6 });
+    expect(w).toBeCloseTo(100.5 - 3.9);
+    expect(e).toBeCloseTo(101.8 + 3.9);
+    expect(s).toBeCloseTo(13.7 - 3.9);
+    expect(n).toBeCloseTo(14.6 + 3.9);
   });
 
   test("a single-spot trip still gets a minimum margin", () => {

@@ -25,13 +25,12 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
   const highlight = buildingHighlights(landmarks);
   const extent = toLngLatPair(tripExtent(trip));
   const overviewClock = new Date(config.overviewClock ?? stops[0]?.iso ?? trip.legs[0].iso);
+  /**
+   * fitBounds padding. MapLibre adds the map padding (side panel / bottom sheet) on top of this itself — adding it
+   * here too made the phone fit taller than the screen, and MapLibre then skips the fit silently.
+   */
   const FIT_PADDING = 70;
   const OVERVIEW_PITCH = 45;
-  /** fitBounds padding that also clears the side panel / bottom sheet (map padding alone isn't applied to fits). */
-  const fitPadding = () => {
-    const p = map.getPadding();
-    return { top: p.top + FIT_PADDING, bottom: p.bottom + FIT_PADDING, left: p.left + FIT_PADDING, right: p.right + FIT_PADDING };
-  };
   const placeOf = (p: LngLat) => config.places?.find((place) => inBox(p, place.box))?.name ?? "";
 
   document.title = `${config.title} · Trip Replay`;
@@ -94,7 +93,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     map.on("moveend", updateTerrain);
     updateTerrain();
     // Re-fit once the side panel / sheet padding is applied, so nothing opens hidden behind it.
-    if (!config.start && !config.overview) map.fitBounds(extent, { padding: fitPadding(), pitch: OVERVIEW_PITCH, duration: 0 });
+    if (!config.start && !config.overview) map.fitBounds(extent, { padding: FIT_PADDING, pitch: OVERVIEW_PITCH, duration: 0 });
     lighting.ready();
     // Compact attribution starts expanded on small screens; keep it as the (i) button until tapped.
     document.querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show");
@@ -114,7 +113,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     if (day === ALL_DAYS) {
       lighting.goTo(overviewClock, { animate: fly });
       if (fly && config.overview) map.flyTo({ ...config.overview, duration: 2200 });
-      else if (fly) map.fitBounds(extent, { padding: fitPadding(), pitch: OVERVIEW_PITCH, bearing: 0, duration: 2200 });
+      else if (fly) map.fitBounds(extent, { padding: FIT_PADDING, pitch: OVERVIEW_PITCH, bearing: 0, duration: 2200 });
       return;
     }
     const items = stops.filter((s) => s.day === day);
@@ -122,7 +121,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     lighting.goTo(new Date(items[0].iso), { animate: fly });
     if (!fly) return;
     const bounds = items.reduce((b, s) => b.extend(s.lngLat), new maplibregl.LngLatBounds(items[0].lngLat, items[0].lngLat));
-    map.fitBounds(bounds, { padding: fitPadding(), maxZoom: 15.6, pitch: 58, bearing: map.getBearing(), duration: 2000 });
+    map.fitBounds(bounds, { padding: FIT_PADDING, maxZoom: 15.6, pitch: 58, bearing: map.getBearing(), duration: 2000 });
   }
 
   function openStop(s: Stop | undefined, fly = true) {

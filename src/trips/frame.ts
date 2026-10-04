@@ -4,11 +4,12 @@ import type { LngLat } from "../data/types";
 import type { BoundingBox } from "./types";
 
 /**
- * Extra room around the trip's extent, as a fraction of its span (at least MIN_PAD_DEG). Generous on purpose:
- * the desktop panel covers ~400 px on the left, and a tight pan limit would stop the camera from shifting far
- * enough to show the westernmost stop beside it.
+ * Extra room on every side of the trip's extent, as a multiple of its larger span (at least MIN_PAD_DEG).
+ * Generous on purpose: maxBounds also caps how far the camera can zoom out, and a tall phone screen tilted to
+ * 45° sees far more than the extent — a tight limit clamps the zoom and leaves the outer stops off-screen. It
+ * also lets the camera shift far enough to show the westernmost stop beside the desktop panel.
  */
-const PAD_FRACTION = 1;
+const PAD_FRACTION = 3;
 const MIN_PAD_DEG = 0.15;
 
 export function tripExtent({ stops, legs }: Pick<Trip, "stops" | "legs">): BoundingBox {
@@ -21,9 +22,8 @@ export function tripExtent({ stops, legs }: Pick<Trip, "stops" | "legs">): Bound
 
 /** The extent grown on every side — used as the pan/zoom-out limit. */
 export function paddedBounds(box: BoundingBox): [LngLat, LngLat] {
-  const padLng = Math.max((box.east - box.west) * PAD_FRACTION, MIN_PAD_DEG);
-  const padLat = Math.max((box.north - box.south) * PAD_FRACTION, MIN_PAD_DEG);
-  return [[box.west - padLng, box.south - padLat], [box.east + padLng, box.north + padLat]];
+  const pad = Math.max(Math.max(box.east - box.west, box.north - box.south) * PAD_FRACTION, MIN_PAD_DEG);
+  return [[box.west - pad, box.south - pad], [box.east + pad, box.north + pad]];
 }
 
 export const toLngLatPair = (box: BoundingBox): [LngLat, LngLat] => [[box.west, box.south], [box.east, box.north]];
