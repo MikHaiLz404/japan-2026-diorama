@@ -1,0 +1,123 @@
+{
+  "source": "tripsy",
+  "trip_id": "555873",
+  "name": "Lapin Hill Pool Villa Khaoyai",
+  "starts_at": "2022-10-15",
+  "ends_at": "2022-10-19",
+  "timezone": "Asia/Bangkok",
+  "fetched_at": "2026-10-04T03:36:15.423Z",
+  "activities": [
+    {
+      "id": "1908965",
+      "name": "Wat Khao Kacha",
+      "type": "general",
+      "starts_at": "2022-10-15T05:00:00Z",
+      "ends_at": "2022-10-15T08:00:00Z",
+      "latitude": 14.717723,
+      "longitude": 101.402247,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1908968",
+      "name": "ร้านอาหารแม่ไฝปลาเผา",
+      "type": "restaurant",
+      "starts_at": "2022-10-15T05:00:00Z",
+      "ends_at": "2022-10-15T06:00:00Z",
+      "latitude": 14.7075122,
+      "longitude": 101.4051129,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1908970",
+      "name": "Waterside House",
+      "type": "restaurant",
+      "starts_at": "2022-10-15T05:00:00Z",
+      "ends_at": null,
+      "latitude": 14.6972059,
+      "longitude": 101.4102332,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1908966",
+      "name": "Khao Yai Art Museum",
+      "type": "museum",
+      "starts_at": "2022-10-16T03:00:00Z",
+      "ends_at": "2022-10-16T04:00:00Z",
+      "latitude": 14.5528818,
+      "longitude": 101.4334951,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1908969",
+      "name": "PB Valley Khaoyai Winery",
+      "type": "general",
+      "starts_at": "2022-10-16T04:00:00Z",
+      "ends_at": "2022-10-16T06:00:00Z",
+      "latitude": 14.6323164,
+      "longitude": 101.2323241,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    },
+    {
+      "id": "1908967",
+      "name": "Pak Chong Night Market",
+      "type": "shopping",
+      "starts_at": "2022-10-16T11:00:00Z",
+      "ends_at": "2022-10-16T12:00:00Z",
+      "latitude": 14.7047595,
+      "longitude": 101.4137164,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    }
+  ],
+  "lodging": [
+    {
+      "id": "614412",
+      "name": "Lapin Hill Pool Villa Khaoyai - ลาแปง ฮิลล์ พูล วิลล่า เขาใหญ่",
+      "starts_at": "2022-10-15T10:00:00Z",
+      "ends_at": "2022-10-19T05:00:00Z",
+      "latitude": 14.6953396,
+      "longitude": 101.6189399,
+      "address": null,
+      "timezone": "Asia/Bangkok",
+      "notes": null,
+      "website": null
+    }
+  ],
+  "transportations": [
+    {
+      "id": "1614458",
+      "type": "roadtrip",
+      "name": "",
+      "transport_number": "",
+      "departure_at": null,
+      "arrival_at": "2022-10-15T05:00:00Z",
+      "departure": {
+        "name": "Muban Ban Buathong Soi 18/6",
+        "latitude": 13.8990149,
+        "longitude": 100.3994836
+      },
+      "arrival": {
+        "name": "Lapin Hill Pool Villa Khaoyai - ลาแปง ฮิลล์ พูล วิลล่า เขาใหญ่",
+        "latitude": 14.6953396,
+        "longitude": 101.6189399
+      }
+    }
+  ]
+}

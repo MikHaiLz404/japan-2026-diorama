@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { buildTrip, categoryOf, dayOf, dayParts, mapLabel } from "./trip";
+import { buildTrip, categoryOf, dayOf, dayParts, isDayPlaceholder, mapLabel } from "./trip";
 import type { TripFixture } from "./types";
 
 const base: TripFixture = {
@@ -86,5 +86,26 @@ describe("buildTrip", () => {
       }],
     }, []);
     expect(new Date(trip.legs[0].iso).getTime()).toBeLessThan(new Date("2026-09-26T03:30:00Z").getTime());
+  });
+});
+
+describe("isDayPlaceholder", () => {
+  test("local midnight with no end, or an end equal to the start, is a wishlist entry", () => {
+    expect(isDayPlaceholder("2026-02-21T17:00:01Z", null, "Asia/Bangkok")).toBe(true);
+    expect(isDayPlaceholder("2025-01-11T17:00:01Z", "2025-01-11T17:00:01Z", "Asia/Bangkok")).toBe(true);
+  });
+
+  test("a timed visit, or a midnight visit with a real end, is kept", () => {
+    expect(isDayPlaceholder("2026-02-22T04:44:01Z", null, "Asia/Bangkok")).toBe(false);
+    expect(isDayPlaceholder("2026-02-21T17:00:01Z", "2026-02-21T19:00:00Z", "Asia/Bangkok")).toBe(false);
+    expect(isDayPlaceholder("2026-09-24T00:00:00Z", null, "Asia/Tokyo")).toBe(false); // 09:00 in Tokyo
+  });
+
+  test("buildTrip drops placeholders", () => {
+    const trip = buildTrip({
+      ...base, timezone: "Asia/Bangkok",
+      activities: [activity("wish", "2026-02-21T17:00:01Z"), activity("real", "2026-02-22T04:44:01Z")],
+    }, []);
+    expect(trip.stops.map((s) => s.id)).toEqual(["real"]);
   });
 });
