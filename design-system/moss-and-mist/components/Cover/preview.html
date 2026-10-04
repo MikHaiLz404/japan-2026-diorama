@@ -1,0 +1,30 @@
+<!-- @dsCard height=300 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0}
+body{background:var(--background)}
+.cover{position:relative;width:960px;height:300px;overflow:hidden}
+.cover svg{position:absolute;left:0;top:0}
+.t{rx:var(--radius-lg);ry:var(--radius-lg)}
+.green{fill:var(--green)}.ink{fill:var(--ink)}.purple{fill:var(--purple)}.purple-soft{fill:var(--purple-soft)}.green-soft{fill:var(--green-soft)}.marigold{fill:var(--marigold)}
+.copy{position:absolute;left:40px;bottom:36px;width:400px}
+.name{margin:0;font-family:var(--font-sans);font-weight:700;font-size:96px;line-height:.95;color:var(--ink)}
+.tag{margin:10px 0 0;font-family:var(--font-sans);font-size:14px;line-height:20px;color:var(--ink-muted)}
+</style></head>
+<body>
+<div class="cover">
+<svg width="960" height="300" viewBox="0 0 960 300" aria-hidden="true">
+<!-- Derivation
+blocks: green 272x120 (the action colour, widest), ink 128x120 (black block), purple 128x120 (the spark), a purple-soft tint, and a marigold 128x120 tile as the warm relief.
+arrangement: a modular 3-column grid right of x=480 with 16px gaps, the green tile merged two-wide on the top row, ink at its right; purple, purple-soft, marigold along the bottom row.
+pattern: geometric and modular, so tiles cut by the radius scale, one merged two-wide like the cards would be.
+steps and radii: 16 and 24 spacing, every tile radius-lg 20. -->
+<rect class="t green" x="504" y="24" width="272" height="120"/>
+<rect class="t ink" x="792" y="24" width="128" height="120"/>
+<rect class="t purple" x="504" y="160" width="128" height="120"/>
+<rect class="t purple-soft" x="648" y="160" width="128" height="120"/>
+<rect class="t marigold" x="792" y="160" width="128" height="120"/>
+</svg>
+<div class="copy"><h1 class="name">Moss &amp;<br>Mist</h1><p class="tag">Cloud Dancer ground. Green, purple, marigold, black.</p></div>
+</div>
+</body></html>

@@ -12,7 +12,8 @@ export function formatClock(date: Date, timeZone: string): string {
 }
 
 export function setClock(date: Date, weights: PhaseWeights, timeZone: string): void {
-  $("#clock .ico").textContent = weights.day > 0.5 ? "☀︎" : weights.dusk > 0.4 ? "◐" : "☾";
+  const icon = weights.day > 0.5 ? "sun" : weights.dusk > 0.4 ? "contrast" : "moon";
+  $("#clock .ico use").setAttribute("href", `#i-${icon}`);
   $("#clock .txt").textContent = formatClock(date, timeZone);
 }
 
@@ -29,8 +30,8 @@ export function showDayCard(day: string, place: string): void {
   cardTimer = window.setTimeout(() => card.classList.remove("show"), DAY_CARD_MS);
 }
 
-const PLAY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-const PAUSE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
+const PLAY_ICON = '<svg class="mm-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const PAUSE_ICON = '<svg class="mm-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
 const SPEEDS = [1, 2, 4];
 
 export interface Playbar {

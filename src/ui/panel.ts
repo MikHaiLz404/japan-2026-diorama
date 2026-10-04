@@ -142,7 +142,7 @@ export function stopCard(s: Stop): HTMLElement {
   p.textContent = `${weekday} ${date} ${month}${s.time ? ` · ${s.time}` : ""}`;
   const tag = document.createElement("span");
   tag.className = "tag";
-  tag.style.background = `var(--${s.cat})`;
+  tag.style.setProperty("--cat", `var(--${s.cat})`);
   tag.textContent = CATEGORY_LABEL[s.cat];
   div.append(h, p, tag);
   return div;
@@ -184,7 +184,7 @@ export function mountSheet(onResize: (visiblePx: number) => void, initial: Sheet
     state = next;
     y = s[next];
     panel.style.height = `${s.height}px`;
-    panel.style.transition = animate && !prefersReducedMotion() ? "transform .32s cubic-bezier(.2,.9,.25,1)" : "none";
+    panel.style.transition = animate && !prefersReducedMotion() ? "transform 320ms cubic-bezier(.2,0,0,1)" : "none";
     panel.style.transform = `translateY(${y}px)`;
     grip.setAttribute("aria-expanded", String(next !== "peek"));
     onResize(visible());

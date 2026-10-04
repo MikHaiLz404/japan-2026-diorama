@@ -13,7 +13,7 @@ export const TRIPS: TripSummary[] = [
   },
   {
     slug: "chonburi-2026",
-    title: "Chonburi",
+    title: "Chonburi 2026",
     dates: "22 ก.พ. 2026",
     areas: ["บางแสน", "พัทยา"],
     startsAt: "2026-02-22",

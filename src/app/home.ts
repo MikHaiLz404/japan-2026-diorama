@@ -14,7 +14,7 @@ export function renderHome(trips: TripSummary[], { embed }: { embed: boolean }):
       <span class="trip-dates"></span>
       <span class="trip-title"></span>
       <span class="trip-areas"></span>
-      <span class="trip-open" aria-hidden="true">เปิดแผนที่ →</span>`;
+      <span class="trip-open" aria-hidden="true">เปิดแผนที่<svg class="mm-ico"><use href="#i-arrow-right" /></svg></span>`;
     card.querySelector(".trip-dates")!.textContent = trip.dates;
     card.querySelector(".trip-title")!.textContent = trip.title;
     card.querySelector(".trip-areas")!.textContent = trip.areas.join(" · ");

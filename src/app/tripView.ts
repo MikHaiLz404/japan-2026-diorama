@@ -45,7 +45,7 @@ export function mountTrip(config: TripConfig, { embed }: { embed: boolean }): vo
     container: "map",
     style: buildStyle(PALETTES.night, hiddenBuildings(landmarks), highlight),
     ...(config.start ?? config.overview ?? { bounds: extent, fitBoundsOptions: { padding: FIT_PADDING }, pitch: OVERVIEW_PITCH }),
-    maxPitch: 78,
+    maxPitch: 70, // steeper views pull in far more distant tiles; the app itself never goes past 66
     maxBounds: config.bounds ?? paddedBounds(tripExtent(trip)),
     ...(config.minZoom != null ? { minZoom: config.minZoom } : {}),
     attributionControl: {
